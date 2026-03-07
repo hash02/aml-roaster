@@ -1,0 +1,54 @@
+name: 🔥 AML Roaster — Scheduled Scan
+
+on:
+  schedule:
+    # Run every 30 minutes — GitHub Actions uses UTC
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    # Manual trigger for testing
+
+permissions:
+  contents: write
+
+jobs:
+  roast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: 🔥 Run AML Roaster
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+        run: python roaster.py
+
+      - name: 📊 Check for new reports
+        id: check
+        run: |
+          if [[ -n $(git status reports/ --porcelain) ]]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 💾 Commit and push reports
+        if: steps.check.outputs.has_changes == 'true'
+        run: |
+          git config user.name "AML Roaster Bot"
+          git config user.email "roaster@hash02.dev"
+          git add reports/
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
+          git commit -m "🔥 Roaster report — ${TIMESTAMP}"
+          git push
