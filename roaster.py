@@ -54,6 +54,14 @@ OFAC_ADDRESSES = {
 ETHERSCAN_API = "https://api.etherscan.io/api"
 ETHERSCAN_KEY = os.environ.get("ETHERSCAN_API_KEY", "")
 
+# Fallback: Public Ethereum RPC (if Etherscan is rate-limited on GitHub Actions IPs)
+PUBLIC_RPC_ENDPOINTS = [
+    "https://eth.llamarpc.com",
+    "https://rpc.ankr.com/eth",
+    "https://ethereum-rpc.publicnode.com",
+    "https://1rpc.io/eth",
+]
+
 # Groq (free LLM)
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 GROQ_BASE_URL = "https://api.groq.com/openai/v1"
@@ -98,29 +106,78 @@ def etherscan_get(params: dict, timeout: int = 15):
         params["apikey"] = ETHERSCAN_KEY
     try:
         r = requests.get(ETHERSCAN_API, params=params, timeout=timeout)
-        return r.json()
+        data = r.json()
+        # Log errors from Etherscan
+        if data.get("status") == "0" and data.get("message") != "No transactions found":
+            print(f"[WARN] Etherscan API error: {data.get('result', data.get('message', 'unknown'))}")
+        return data
     except Exception as e:
         print(f"[ERROR] Etherscan API call failed: {e}")
         return {}
 
 
+def rpc_call(method: str, params: list = None) -> dict:
+    """Call Ethereum JSON-RPC directly (fallback when Etherscan fails)."""
+    payload = {
+        "jsonrpc": "2.0",
+        "method": method,
+        "params": params or [],
+        "id": 1,
+    }
+    for rpc_url in PUBLIC_RPC_ENDPOINTS:
+        try:
+            r = requests.post(rpc_url, json=payload, timeout=10)
+            data = r.json()
+            if "result" in data and data["result"] is not None:
+                return data
+        except Exception:
+            continue
+    print(f"[ERROR] All RPC endpoints failed for {method}")
+    return {}
+
+
 def get_latest_block() -> int:
-    """Get the latest Ethereum block number."""
+    """Get the latest Ethereum block number. Tries Etherscan first, then RPC fallback."""
+    # Try Etherscan
     data = etherscan_get({"module": "proxy", "action": "eth_blockNumber"})
     try:
-        return int(data["result"], 16)
+        block = int(data["result"], 16)
+        if block > 0:
+            print(f"[INFO] Latest block from Etherscan: {block}")
+            return block
     except (KeyError, ValueError, TypeError):
+        pass
+
+    # Fallback to public RPC
+    print("[INFO] Etherscan failed, trying public RPC...")
+    data = rpc_call("eth_blockNumber")
+    try:
+        block = int(data["result"], 16)
+        print(f"[INFO] Latest block from RPC: {block}")
+        return block
+    except (KeyError, ValueError, TypeError):
+        print("[ERROR] Could not get latest block from any source")
         return 0
 
 
 def get_block_transactions(block_num: int) -> list:
-    """Get all transactions from a specific block."""
+    """Get all transactions from a specific block. Etherscan first, then RPC fallback."""
+    # Try Etherscan
     data = etherscan_get({
         "module": "proxy",
         "action": "eth_getBlockByNumber",
         "tag": hex(block_num),
         "boolean": "true",
     })
+    try:
+        txs = data["result"]["transactions"]
+        if txs is not None:
+            return txs
+    except (KeyError, TypeError):
+        pass
+
+    # Fallback to public RPC
+    data = rpc_call("eth_getBlockByNumber", [hex(block_num), True])
     try:
         return data["result"]["transactions"] or []
     except (KeyError, TypeError):
@@ -157,19 +214,29 @@ def get_wallet_info(address: str) -> dict:
         "is_contract": False,
     }
 
-    # Get balance
+    # Get balance (Etherscan → RPC fallback)
     data = etherscan_get({"module": "account", "action": "balance", "address": address, "tag": "latest"})
     try:
         info["balance_eth"] = int(data["result"]) / 1e18
     except (KeyError, ValueError, TypeError):
-        pass
+        # RPC fallback for balance
+        rpc_data = rpc_call("eth_getBalance", [address, "latest"])
+        try:
+            info["balance_eth"] = int(rpc_data["result"], 16) / 1e18
+        except (KeyError, ValueError, TypeError):
+            pass
 
-    # Get tx count
+    # Get tx count (Etherscan → RPC fallback)
     data = etherscan_get({"module": "proxy", "action": "eth_getTransactionCount", "address": address, "tag": "latest"})
     try:
         info["tx_count"] = int(data["result"], 16)
     except (KeyError, ValueError, TypeError):
-        pass
+        # RPC fallback for tx count
+        rpc_data = rpc_call("eth_getTransactionCount", [address, "latest"])
+        try:
+            info["tx_count"] = int(rpc_data["result"], 16)
+        except (KeyError, ValueError, TypeError):
+            pass
 
     # Get first and last tx to calculate wallet age
     data = etherscan_get({
@@ -196,24 +263,67 @@ def get_wallet_info(address: str) -> dict:
     except (KeyError, ValueError, TypeError, IndexError):
         pass
 
-    # Check if contract
+    # Check if contract (Etherscan → RPC fallback)
     data = etherscan_get({"module": "proxy", "action": "eth_getCode", "address": address, "tag": "latest"})
     try:
         code = data.get("result", "0x")
-        info["is_contract"] = code != "0x" and len(code) > 2
-    except (KeyError, TypeError):
-        pass
+        if code and code != "0x":
+            info["is_contract"] = len(code) > 2
+        else:
+            raise ValueError("empty code")
+    except (KeyError, TypeError, ValueError):
+        rpc_data = rpc_call("eth_getCode", [address, "latest"])
+        try:
+            code = rpc_data.get("result", "0x")
+            info["is_contract"] = code != "0x" and len(code) > 2
+        except (KeyError, TypeError):
+            pass
 
     return info
 
 
 def get_eth_price() -> float:
-    """Get current ETH price in USD."""
+    """Get current ETH price in USD. Tries Etherscan, then CoinGecko fallback."""
+    # Try Etherscan first
     data = etherscan_get({"module": "stats", "action": "ethprice"})
     try:
-        return float(data["result"]["ethusd"])
+        price = float(data["result"]["ethusd"])
+        if price > 0:
+            print(f"[INFO] ETH price from Etherscan: ${price:,.2f}")
+            return price
     except (KeyError, ValueError, TypeError):
-        return 0.0
+        pass
+
+    # Fallback: CoinGecko free API (no key needed, generous rate limit)
+    print("[INFO] Etherscan price failed, trying CoinGecko...")
+    try:
+        r = requests.get(
+            "https://api.coingecko.com/api/v3/simple/price",
+            params={"ids": "ethereum", "vs_currencies": "usd"},
+            timeout=10,
+        )
+        price = float(r.json()["ethereum"]["usd"])
+        if price > 0:
+            print(f"[INFO] ETH price from CoinGecko: ${price:,.2f}")
+            return price
+    except Exception as e:
+        print(f"[WARN] CoinGecko failed: {e}")
+
+    # Fallback 2: DeFi Llama (another free option)
+    try:
+        r = requests.get(
+            "https://coins.llama.fi/prices/current/coingecko:ethereum",
+            timeout=10,
+        )
+        price = float(r.json()["coins"]["coingecko:ethereum"]["price"])
+        if price > 0:
+            print(f"[INFO] ETH price from DeFi Llama: ${price:,.2f}")
+            return price
+    except Exception as e:
+        print(f"[WARN] DeFi Llama failed: {e}")
+
+    print("[ERROR] Could not get ETH price from any source")
+    return 0.0
 
 
 def wei_to_eth(wei_value) -> float:
