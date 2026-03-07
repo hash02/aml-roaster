@@ -50,9 +50,10 @@ OFAC_ADDRESSES = {
     "0xa7e5d5a720f06526557c513402f2e6b5fa20b008": "Lazarus Group (OFAC)",
 }
 
-# Etherscan API
-ETHERSCAN_API = "https://api.etherscan.io/api"
+# Etherscan API V2 (V1 deprecated Aug 2025 — must use V2 with chainid)
+ETHERSCAN_API = "https://api.etherscan.io/v2/api"
 ETHERSCAN_KEY = os.environ.get("ETHERSCAN_API_KEY", "")
+ETHERSCAN_CHAINID = "1"  # Ethereum mainnet
 
 # Fallback: Public Ethereum RPC (if Etherscan is rate-limited on GitHub Actions IPs)
 PUBLIC_RPC_ENDPOINTS = [
@@ -101,7 +102,8 @@ THRESHOLDS = {
 # ─── Blockchain Data Layer ───────────────────────────────────────────────────
 
 def etherscan_get(params: dict, timeout: int = 15):
-    """Helper — make Etherscan API call with optional key."""
+    """Helper — make Etherscan API V2 call with chainid and optional key."""
+    params["chainid"] = ETHERSCAN_CHAINID
     if ETHERSCAN_KEY:
         params["apikey"] = ETHERSCAN_KEY
     try:
