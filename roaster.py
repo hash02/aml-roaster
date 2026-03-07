@@ -198,6 +198,23 @@ def get_normal_transactions(address: str, start_block: int, end_block: int) -> l
     return result if isinstance(result, list) else []
 
 
+def get_token_transfers(address: str, start_block: int, end_block: int) -> list:
+    """
+    Get ERC-20 token transfers for an address within a block range.
+    This catches USDT, DAI, USDC, etc. flowing through mixers — invisible to normal tx scanning.
+    """
+    data = etherscan_get({
+        "module": "account",
+        "action": "tokentx",
+        "address": address,
+        "startblock": start_block,
+        "endblock": end_block,
+        "sort": "desc",
+    })
+    result = data.get("result", [])
+    return result if isinstance(result, list) else []
+
+
 def get_wallet_info(address: str) -> dict:
     """
     Profile a wallet — balance, tx count, first/last tx.
@@ -517,6 +534,67 @@ def rule_exchange_avoidance(receiver: str) -> dict | None:
     return None
 
 
+def rule_stablecoin_mixing(token_transfers: list, receiver_addr: str) -> dict | None:
+    """
+    RULE: Stablecoin deposits to mixer/sanctioned addresses.
+    Catches USDT/DAI/USDC flowing through Tornado Cash stablecoin pools.
+    This is the gap Phone Claude identified — ETH-only scanning misses token layering.
+    """
+    if not token_transfers:
+        return None
+
+    addr_info = WATCHED_ADDRESSES.get(receiver_addr.lower())
+    if not addr_info:
+        return None
+
+    # Known stablecoins (by symbol)
+    stablecoin_symbols = {"USDT", "USDC", "DAI", "BUSD", "TUSD", "FRAX"}
+
+    stable_transfers = []
+    for tx in token_transfers:
+        symbol = tx.get("tokenSymbol", "").upper()
+        if symbol in stablecoin_symbols:
+            try:
+                decimals = int(tx.get("tokenDecimal", "18"))
+                value = int(tx.get("value", "0")) / (10 ** decimals)
+                if value > 0:
+                    stable_transfers.append({"symbol": symbol, "value": value, "from": tx.get("from", "")})
+            except (ValueError, TypeError):
+                continue
+
+    if not stable_transfers:
+        return None
+
+    total_usd = sum(t["value"] for t in stable_transfers)
+    symbols_seen = set(t["symbol"] for t in stable_transfers)
+    unique_senders = len(set(t["from"].lower() for t in stable_transfers))
+
+    # Round-number detection (100, 1000, 10000 — classic denomination layering)
+    round_count = sum(1 for t in stable_transfers if t["value"] in (10, 50, 100, 500, 1000, 5000, 10000))
+
+    detail = (
+        f"{len(stable_transfers)} stablecoin transfer(s) to {addr_info['label']}: "
+        f"${total_usd:,.0f} total ({', '.join(symbols_seen)}) from {unique_senders} unique sender(s)"
+    )
+    if round_count > 0:
+        detail += f" — {round_count} round-number amount(s) (denomination layering)"
+
+    # Score: base 80 for stablecoin mixing + bonus for round numbers + bonus for multiple senders
+    score = 80
+    if round_count >= 2:
+        score += 20  # Classic layering denomination pattern
+    if unique_senders >= 3:
+        score += 20  # Multiple sources converging = structuring
+    if total_usd >= 10000:
+        score += 30  # Big money through a mixer
+
+    return {
+        "rule": "stablecoin_mixing",
+        "score": score,
+        "detail": detail,
+    }
+
+
 def compute_risk_score(rules_triggered: list) -> tuple:
     """
     Compute composite risk score and level from triggered rules.
@@ -538,10 +616,13 @@ def compute_risk_score(rules_triggered: list) -> tuple:
 
 # ─── Scanner (applies all rules to live data) ───────────────────────────────
 
-def scan_recent_blocks(num_blocks: int = 50) -> list:
+def scan_recent_blocks(num_blocks: int = 200) -> list:
     """
     Scan recent blocks for suspicious transactions.
     Applies the full AML engine rule set to each finding.
+
+    Default 200 blocks (~25-30 min) to match the 30-min cron interval.
+    Scans BOTH native ETH transfers AND ERC-20 token transfers.
     """
     findings = []
     latest = get_latest_block()
@@ -549,91 +630,160 @@ def scan_recent_blocks(num_blocks: int = 50) -> list:
         print("[ERROR] Could not determine latest block. Aborting scan.")
         return findings
 
+    start_block = latest - num_blocks + 1
     eth_price = get_eth_price() or 2000.0
     print(f"[SCAN] Latest block: {latest} | ETH: ${eth_price:,.2f}")
-    print(f"[SCAN] Scanning blocks {latest - num_blocks + 1} to {latest}")
+    print(f"[SCAN] Scanning blocks {start_block} to {latest} ({num_blocks} blocks, ~{num_blocks * 12 // 60} min)")
 
-    # ── Strategy 1: Check transactions TO watched addresses ──
+    # ── Strategy 1: Check ETH + token transactions TO watched addresses ──
     for address, addr_info in WATCHED_ADDRESSES.items():
         label = addr_info["label"]
         print(f"[SCAN] Checking {label} ({address[:10]}...)")
-        txs = get_normal_transactions(address, latest - num_blocks, latest)
-        time.sleep(0.3)  # Rate limit
 
-        if not txs:
+        # Fetch BOTH normal txs and token transfers
+        txs = get_normal_transactions(address, start_block, latest)
+        time.sleep(0.3)
+        token_txs = get_token_transfers(address, start_block, latest)
+        time.sleep(0.3)
+
+        has_eth = bool(txs)
+        has_tokens = bool(token_txs)
+
+        if not has_eth and not has_tokens:
             continue
 
-        # Group by sender
-        sender_map = {}
-        for tx in txs:
-            sender = tx.get("from", "").lower()
-            if sender not in WATCHED_ADDRESSES:
-                sender_map.setdefault(sender, []).append(tx)
+        print(f"  [DATA] {len(txs)} ETH txs, {len(token_txs)} token transfers")
 
-        for sender, sender_txs in sender_map.items():
-            eth_values = [int(tx.get("value", "0")) / 1e18 for tx in sender_txs]
-            total_eth = sum(eth_values)
-            timestamps = [int(tx.get("timeStamp", "0")) for tx in sender_txs]
+        # ── Process ETH transactions (existing logic) ──
+        if has_eth:
+            sender_map = {}
+            for tx in txs:
+                sender = tx.get("from", "").lower()
+                if sender not in WATCHED_ADDRESSES:
+                    sender_map.setdefault(sender, []).append(tx)
 
-            if total_eth < 0.001:
-                continue  # Skip dust
+            for sender, sender_txs in sender_map.items():
+                eth_values = [int(tx.get("value", "0")) / 1e18 for tx in sender_txs]
+                total_eth = sum(eth_values)
+                timestamps = [int(tx.get("timeStamp", "0")) for tx in sender_txs]
 
-            # ── Run ALL rules ──
-            rules_triggered = []
+                if total_eth < 0.001:
+                    continue  # Skip dust
 
-            # Get wallet profile for sender (the interesting party)
-            print(f"  [PROFILE] Profiling sender {sender[:10]}...")
-            wallet_info = get_wallet_info(sender)
-            time.sleep(0.3)
+                rules_triggered = []
 
-            # Apply each rule
-            for rule_fn, args in [
-                (rule_mixer_interaction, (address,)),
-                (rule_sanctioned_entity, (sender, address)),
-                (rule_state_sponsored, (address,)),
-                (rule_novel_wallet, (wallet_info, total_eth)),
-                (rule_dormant_activation, (wallet_info, total_eth)),
-                (rule_high_value, (total_eth, eth_price)),
-                (rule_structuring, (eth_values,)),
-                (rule_peel_chain, (eth_values,)),
-                (rule_rapid_fire, (timestamps,)),
-                (rule_exit_rush, (wallet_info, total_eth)),
-                (rule_exchange_avoidance, (address,)),
-            ]:
-                result = rule_fn(*args)
-                if result:
-                    rules_triggered.append(result)
+                print(f"  [PROFILE] Profiling sender {sender[:10]}...")
+                wallet_info = get_wallet_info(sender)
+                time.sleep(0.3)
 
-            # Skip if no rules triggered (shouldn't happen for watched addresses)
-            if not rules_triggered:
-                continue
+                for rule_fn, args in [
+                    (rule_mixer_interaction, (address,)),
+                    (rule_sanctioned_entity, (sender, address)),
+                    (rule_state_sponsored, (address,)),
+                    (rule_novel_wallet, (wallet_info, total_eth)),
+                    (rule_dormant_activation, (wallet_info, total_eth)),
+                    (rule_high_value, (total_eth, eth_price)),
+                    (rule_structuring, (eth_values,)),
+                    (rule_peel_chain, (eth_values,)),
+                    (rule_rapid_fire, (timestamps,)),
+                    (rule_exit_rush, (wallet_info, total_eth)),
+                    (rule_exchange_avoidance, (address,)),
+                ]:
+                    result = rule_fn(*args)
+                    if result:
+                        rules_triggered.append(result)
 
-            # Compute composite score
-            risk_score, risk_level, _ = compute_risk_score(rules_triggered)
-            print(f"  [SCORE] {sender[:10]}... → Score: {risk_score} ({risk_level})")
+                if not rules_triggered:
+                    continue
 
-            findings.append({
-                "sender": sender,
-                "receiver": address,
-                "receiver_label": label,
-                "tx_count": len(sender_txs),
-                "total_eth": total_eth,
-                "individual_values": eth_values,
-                "timestamps": timestamps,
-                "tx_hashes": [tx.get("hash", "") for tx in sender_txs],
-                "block_range": f"{min(int(tx.get('blockNumber', 0)) for tx in sender_txs)}-"
-                               f"{max(int(tx.get('blockNumber', 0)) for tx in sender_txs)}",
-                # AML Engine fields
-                "risk_score": risk_score,
-                "risk_level": risk_level,
-                "rules_triggered": rules_triggered,
-                "wallet_profile": {
-                    "age_days": wallet_info.get("wallet_age_days", "unknown"),
-                    "tx_count": wallet_info.get("tx_count", "unknown"),
-                    "balance_eth": wallet_info.get("balance_eth", 0),
-                    "days_idle": wallet_info.get("days_since_last_tx", 0),
-                },
-            })
+                risk_score, risk_level, _ = compute_risk_score(rules_triggered)
+                print(f"  [SCORE] {sender[:10]}... → Score: {risk_score} ({risk_level})")
+
+                findings.append({
+                    "sender": sender,
+                    "receiver": address,
+                    "receiver_label": label,
+                    "tx_count": len(sender_txs),
+                    "total_eth": total_eth,
+                    "individual_values": eth_values,
+                    "timestamps": timestamps,
+                    "tx_hashes": [tx.get("hash", "") for tx in sender_txs],
+                    "block_range": f"{min(int(tx.get('blockNumber', 0)) for tx in sender_txs)}-"
+                                   f"{max(int(tx.get('blockNumber', 0)) for tx in sender_txs)}",
+                    "risk_score": risk_score,
+                    "risk_level": risk_level,
+                    "rules_triggered": rules_triggered,
+                    "wallet_profile": {
+                        "age_days": wallet_info.get("wallet_age_days", "unknown"),
+                        "tx_count": wallet_info.get("tx_count", "unknown"),
+                        "balance_eth": wallet_info.get("balance_eth", 0),
+                        "days_idle": wallet_info.get("days_since_last_tx", 0),
+                    },
+                    "token_transfers": [],  # No tokens in this finding
+                })
+
+        # ── Process ERC-20 token transfers (NEW — catches USDT/DAI/USDC through mixers) ──
+        if has_tokens:
+            # Group token transfers by sender
+            token_sender_map = {}
+            for tx in token_txs:
+                sender = tx.get("from", "").lower()
+                if sender not in WATCHED_ADDRESSES:
+                    token_sender_map.setdefault(sender, []).append(tx)
+
+            for sender, sender_token_txs in token_sender_map.items():
+                # Run stablecoin mixing rule
+                stablecoin_result = rule_stablecoin_mixing(sender_token_txs, address)
+                if not stablecoin_result:
+                    continue
+
+                # Also check if this sender did OFAC / state-sponsored / mixer touch
+                rules_triggered = [stablecoin_result]
+                ofac = rule_sanctioned_entity(sender, address)
+                if ofac:
+                    rules_triggered.append(ofac)
+                mixer = rule_mixer_interaction(address)
+                if mixer:
+                    rules_triggered.append(mixer)
+                state = rule_state_sponsored(address)
+                if state:
+                    rules_triggered.append(state)
+
+                risk_score, risk_level, _ = compute_risk_score(rules_triggered)
+                print(f"  [TOKEN] {sender[:10]}... → Score: {risk_score} ({risk_level}) — stablecoin mixing")
+
+                # Build token transfer summary for the report
+                token_summary = []
+                for tx in sender_token_txs:
+                    symbol = tx.get("tokenSymbol", "?")
+                    try:
+                        decimals = int(tx.get("tokenDecimal", "18"))
+                        value = int(tx.get("value", "0")) / (10 ** decimals)
+                    except (ValueError, TypeError):
+                        value = 0
+                    if value > 0:
+                        token_summary.append({"symbol": symbol, "value": value, "hash": tx.get("hash", "")})
+
+                total_token_usd = sum(t["value"] for t in token_summary)
+
+                findings.append({
+                    "sender": sender,
+                    "receiver": address,
+                    "receiver_label": label,
+                    "tx_count": len(sender_token_txs),
+                    "total_eth": 0,  # Token transfers, not ETH
+                    "total_token_usd": total_token_usd,
+                    "individual_values": [t["value"] for t in token_summary],
+                    "timestamps": [int(tx.get("timeStamp", "0")) for tx in sender_token_txs],
+                    "tx_hashes": [tx.get("hash", "") for tx in sender_token_txs],
+                    "block_range": f"{min(int(tx.get('blockNumber', 0)) for tx in sender_token_txs)}-"
+                                   f"{max(int(tx.get('blockNumber', 0)) for tx in sender_token_txs)}",
+                    "risk_score": risk_score,
+                    "risk_level": risk_level,
+                    "rules_triggered": rules_triggered,
+                    "wallet_profile": {},
+                    "token_transfers": token_summary,
+                })
 
     # ── Strategy 2: High-value block scanning ──
     for offset in range(min(num_blocks, 5)):  # Only scan 5 blocks for high-value
@@ -702,7 +852,12 @@ def generate_roast(finding: dict, eth_price: float) -> dict:
             "recommended_action": "Flag for manual review. Trace upstream funding source.",
         }
 
-    usd_value = finding["total_eth"] * eth_price
+    # Handle both ETH findings and token findings
+    token_transfers = finding.get("token_transfers", [])
+    if token_transfers:
+        usd_value = finding.get("total_token_usd", 0)
+    else:
+        usd_value = finding["total_eth"] * eth_price
     rules_text = "\n".join(
         f"- [{r['rule']}] (score: {r['score']}) {r['detail']}"
         for r in finding["rules_triggered"]
@@ -729,9 +884,10 @@ TRANSACTION DATA:
 - Sender: {finding['sender']}
 - Receiver: {finding['receiver']} ({finding['receiver_label']})
 - Transaction count: {finding['tx_count']}
-- Total value: {finding['total_eth']:.4f} ETH (${usd_value:,.0f} USD)
-- Individual amounts: {', '.join(f"{v:.4f} ETH" for v in finding['individual_values'][:10])}
+- Total value: {f"{finding['total_eth']:.4f} ETH" if finding['total_eth'] > 0 else f"${finding.get('total_token_usd', 0):,.0f} (stablecoin)"} (${usd_value:,.0f} USD)
+- Individual amounts: {', '.join(f"{v:.4f}" for v in finding['individual_values'][:10])}
 - Block range: {finding['block_range']}
+- Token transfers: {', '.join(f"{t['symbol']} {t['value']:,.0f}" for t in token_transfers[:5]) if token_transfers else 'None (ETH only)'}
 
 SENDER WALLET PROFILE:
 {wallet_text}
@@ -793,7 +949,7 @@ def generate_report(findings: list, eth_price: float, scan_meta: dict) -> str:
 **ETH Price:** ${eth_price:,.2f}
 **Blocks Scanned:** {scan_meta.get('block_range', 'N/A')}
 **Addresses Monitored:** {len(WATCHED_ADDRESSES)}
-**Detection Rules Active:** 11 (mixer_touch, ofac_hit, state_sponsored, novel_wallet_dump, dormant_activation, high_value, whale_transfer, structuring, peel_chain, velocity, exit_rush, exchange_avoidance)
+**Detection Rules Active:** 12 (mixer_touch, ofac_hit, state_sponsored, novel_wallet_dump, dormant_activation, high_value, whale_transfer, structuring, peel_chain, velocity, exit_rush, exchange_avoidance, stablecoin_mixing)
 **Engine:** NEXUS AML Engine v2 (ported from v1 — 94.9% detection rate)
 
 ---
@@ -803,7 +959,7 @@ def generate_report(findings: list, eth_price: float, scan_meta: dict) -> str:
     if not findings:
         report += """## No Suspicious Activity Detected
 
-All quiet on the Ethereum front. 11 detection rules armed and scanning.
+All quiet on the Ethereum front. 12 detection rules armed and scanning.
 The mixers are sleeping, the whales are resting, and nobody's trying to
 wash their crypto through Tornado Cash right now.
 
@@ -816,14 +972,25 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
 
     for i, finding in enumerate(findings, 1):
         roast_data = generate_roast(finding, eth_price)
-        usd_value = finding["total_eth"] * eth_price
+        token_transfers = finding.get("token_transfers", [])
+        if token_transfers:
+            usd_value = finding.get("total_token_usd", 0)
+        else:
+            usd_value = finding["total_eth"] * eth_price
         wallet = finding.get("wallet_profile", {})
+
+        # Build value line based on ETH vs token finding
+        if token_transfers:
+            token_detail = ", ".join(f"{t['value']:,.0f} {t['symbol']}" for t in token_transfers[:5])
+            value_line = f"**{finding['tx_count']}** token transfer{'s' if finding['tx_count'] > 1 else ''} totaling **${usd_value:,.0f}** ({token_detail})"
+        else:
+            value_line = f"**{finding['tx_count']}** tx{'s' if finding['tx_count'] > 1 else ''} totaling **{finding['total_eth']:.4f} ETH** (${usd_value:,.0f})"
 
         report += f"""## Finding #{i}: {finding['risk_level']} — Score {finding['risk_score']}
 
 **Sender:** `{finding['sender']}`
 **Target:** {finding['receiver_label']} (`{finding['receiver'][:20]}...`)
-**Pattern:** {finding['tx_count']} tx{'s' if finding['tx_count'] > 1 else ''} totaling **{finding['total_eth']:.4f} ETH** (${usd_value:,.0f})
+**Pattern:** {value_line}
 **Block Range:** {finding['block_range']}
 
 ### Sender Wallet Profile
@@ -860,10 +1027,12 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
     # Summary
     total_eth = sum(f["total_eth"] for f in findings)
     total_usd = total_eth * eth_price
+    total_token_usd = sum(f.get("total_token_usd", 0) for f in findings)
     max_score = max(f["risk_score"] for f in findings)
     critical_count = sum(1 for f in findings if f["risk_level"] == "CRITICAL")
     high_count = sum(1 for f in findings if f["risk_level"] == "HIGH")
 
+    token_line = f" + ${total_token_usd:,.0f} stablecoins" if total_token_usd > 0 else ""
     report += f"""## Summary
 | Metric | Value |
 |--------|-------|
@@ -873,8 +1042,8 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
 | HIGH findings | {high_count} |
 | Highest risk score | {max_score} |
 | Addresses flagged | {len(set(f['sender'] for f in findings))} |
-| Total suspicious value | {total_eth:.4f} ETH (${total_usd:,.0f}) |
-| Detection rules active | 11 |
+| Total suspicious ETH | {total_eth:.4f} ETH (${total_usd:,.0f}){token_line} |
+| Detection rules active | 12 |
 
 *Report generated by AML Roaster Agent v2 (NEXUS Engine) — Automated Run*
 """
@@ -886,8 +1055,9 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
 def main():
     print("=" * 60)
     print("🔥 AML ROASTER AGENT v2 (NEXUS Engine) — Starting scan")
-    print(f"   Detection rules: 11 active")
+    print(f"   Detection rules: 12 active (incl. stablecoin_mixing)")
     print(f"   Watched addresses: {len(WATCHED_ADDRESSES)}")
+    print(f"   Scan window: 200 blocks (~25 min)")
     print("=" * 60)
 
     eth_price = get_eth_price()
@@ -898,7 +1068,7 @@ def main():
         eth_price = 2000.0
 
     latest_block = get_latest_block()
-    num_blocks = 50
+    num_blocks = 200  # ~25-30 min to match 30-min cron interval
     findings = scan_recent_blocks(num_blocks=num_blocks)
 
     scan_meta = {
