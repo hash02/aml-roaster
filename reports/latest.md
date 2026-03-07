@@ -2,7 +2,7 @@
 **Timestamp:** 2026-03-07 22:47 UTC
 **Network:** Ethereum Mainnet
 **ETH Price:** $1,968.01
-**Blocks Scanned:** 24608452 — 24608651
+**Blocks Scanned:** 24608455 — 24608654
 **Addresses Monitored:** 10
 **Detection Rules Active:** 12 (mixer_touch, ofac_hit, state_sponsored, novel_wallet_dump, dormant_activation, high_value, whale_transfer, structuring, peel_chain, velocity, exit_rush, exchange_avoidance, stablecoin_mixing)
 **Engine:** NEXUS AML Engine v2 (ported from v1 — 94.9% detection rate)
