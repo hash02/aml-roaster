@@ -877,6 +877,8 @@ def generate_roast(finding: dict, eth_price: float) -> dict:
     """Generate roast + SAR narrative using Groq AI, informed by AML engine scoring."""
     if not GROQ_API_KEY:
         return {
+            "what_happened": f"A wallet interacted with {finding['receiver_label']}, a flagged address on our watchlist. "
+                             f"The engine scored this {finding['risk_score']} out of a possible 500+ — that's a serious red flag.",
             "roast": f"Someone just sent {finding['total_eth']:.4f} ETH to {finding['receiver_label']}. "
                      f"Risk score: {finding['risk_score']}. Bold move.",
             "sar_narrative": "Automated SAR generation unavailable — no LLM API key configured.",
@@ -904,13 +906,23 @@ def generate_roast(finding: dict, eth_price: float) -> dict:
 
     prompt = f"""You are the AML Roaster — a blockchain compliance analyst with the humor of a stand-up comedian and the precision of a forensic accountant.
 
-You have access to a full AML detection engine scoring system. Use the SPECIFIC rule names and scores in your analysis.
+You have access to a full AML detection engine scoring system.
 
-Generate:
-1. A ROAST (3-5 sentences, brutally funny, sarcastic — reference SPECIFIC numbers, rule names, and patterns)
-2. A SAR NARRATIVE (professional suspicious activity report, 3-4 sentences, reference rule names and evidence)
-3. A RISK VERDICT ({finding['risk_level']} — already scored by engine, justify it)
-4. A RECOMMENDED ACTION (1-2 sentences)
+IMPORTANT WRITING RULES:
+- The audience is MIXED — some readers know crypto, some don't.
+- In the "what_happened" field: write in PLAIN ENGLISH. No jargon. Explain it like you're telling a friend what happened. Use analogies. If you mention a technical concept, explain it in parentheses immediately.
+- In the "roast" field: be funny and specific. When you reference a rule name, explain what it means in plain language the FIRST time. Example: "scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist)."
+- In the "sar_narrative" field: this IS for compliance professionals — use proper AML terminology and cite rule names.
+- Keep the risk_verdict to ONE clear sentence.
+- Keep recommended_action to 1-2 practical sentences.
+
+Generate these 5 fields:
+
+1. WHAT HAPPENED (2-3 sentences, plain English, zero jargon — a non-crypto person should fully understand this. Use real-world analogies like "this is like walking into a known money laundering front" etc.)
+2. ROAST (3-5 sentences, brutally funny, sarcastic — reference specific data but explain technical terms inline the first time)
+3. SAR NARRATIVE (professional suspicious activity report for compliance teams, 3-4 sentences, cite rule names and evidence)
+4. RISK VERDICT ({finding['risk_level']} — one sentence justification)
+5. RECOMMENDED ACTION (1-2 sentences, practical next steps)
 
 TRANSACTION DATA:
 - Sender: {finding['sender']}
@@ -921,18 +933,21 @@ TRANSACTION DATA:
 - Block range: {finding['block_range']}
 - Token transfers: {', '.join(f"{t['symbol']} {t['value']:,.0f}" for t in token_transfers[:5]) if token_transfers else 'None (ETH only)'}
 
+CONTEXT: Tornado Cash is a crypto mixing service that was sanctioned by the U.S. Treasury (OFAC) in August 2022 for helping launder $7+ billion including funds stolen by North Korea's Lazarus Group. Any interaction with it is a major red flag.
+
 SENDER WALLET PROFILE:
 {wallet_text}
 
 AML ENGINE SCORING (Composite Score: {finding['risk_score']}):
 {rules_text}
 
-Respond in this EXACT JSON format (no markdown, no code blocks):
+Respond in this EXACT JSON format (no markdown, no code blocks, no backticks):
 {{
-    "roast": "your roast here — make it specific to the data, not generic",
-    "sar_narrative": "your professional SAR narrative here — cite rule names",
-    "risk_verdict": "{finding['risk_level']} — one line reason citing the score",
-    "recommended_action": "what to do next"
+    "what_happened": "plain English explanation here — a non-crypto person should understand this completely",
+    "roast": "your roast here — funny but explain jargon inline",
+    "sar_narrative": "professional SAR narrative — cite rule names, this section IS for compliance pros",
+    "risk_verdict": "{finding['risk_level']} — one sentence reason",
+    "recommended_action": "practical next steps"
 }}"""
 
     try:
@@ -941,7 +956,7 @@ Respond in this EXACT JSON format (no markdown, no code blocks):
             model=GROQ_MODEL,
             messages=[{"role": "user", "content": prompt}],
             temperature=0.8,
-            max_tokens=700,
+            max_tokens=900,
         )
         raw = response.choices[0].message.content.strip()
         if raw.startswith("```"):
@@ -953,6 +968,7 @@ Respond in this EXACT JSON format (no markdown, no code blocks):
 
     except json.JSONDecodeError:
         return {
+            "what_happened": f"A wallet was caught interacting with {finding['receiver_label']}. Our engine flagged it at score {finding['risk_score']}.",
             "roast": raw[:300] if 'raw' in dir() else "The AI was speechless.",
             "sar_narrative": "Automated SAR generation failed — manual review required.",
             "risk_verdict": f"{finding['risk_level']} — Score {finding['risk_score']}",
@@ -961,6 +977,7 @@ Respond in this EXACT JSON format (no markdown, no code blocks):
     except Exception as e:
         print(f"[ERROR] Groq API: {e}")
         return {
+            "what_happened": f"A wallet was caught interacting with {finding['receiver_label']}. Our engine flagged it at score {finding['risk_score']}.",
             "roast": "Even our AI refused to look at this transaction.",
             "sar_narrative": f"Automated analysis error: {str(e)[:100]}",
             "risk_verdict": f"{finding['risk_level']} — API error",
@@ -975,14 +992,10 @@ def generate_report(findings: list, eth_price: float, scan_meta: dict) -> str:
     now = datetime.now(timezone.utc)
     timestamp = now.strftime("%Y-%m-%d %H:%M UTC")
 
-    report = f"""# 🔥 AML Roaster Report — v2 (NEXUS Engine)
-**Timestamp:** {timestamp}
-**Network:** Ethereum Mainnet
-**ETH Price:** ${eth_price:,.2f}
-**Blocks Scanned:** {scan_meta.get('block_range', 'N/A')}
-**Addresses Monitored:** {len(WATCHED_ADDRESSES)}
-**Detection Rules Active:** 13 (mixer_touch, ofac_hit, state_sponsored, mixer_contract_call, novel_wallet_dump, dormant_activation, high_value, whale_transfer, structuring, peel_chain, velocity, exit_rush, exchange_avoidance, stablecoin_mixing)
-**Engine:** NEXUS AML Engine v2 (ported from v1 — 94.9% detection rate)
+    report = f"""# 🔥 AML Roaster Report
+**{timestamp}** · Ethereum Mainnet · ETH ${eth_price:,.2f}
+**Blocks:** {scan_meta.get('block_range', 'N/A')} · **Watched Addresses:** {len(WATCHED_ADDRESSES)} · **Detection Rules:** 13
+**Engine:** NEXUS AML v2 — 94.9% detection rate
 
 ---
 
@@ -1020,12 +1033,28 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
 
         report += f"""## Finding #{i}: {finding['risk_level']} — Score {finding['risk_score']}
 
-**Sender:** `{finding['sender']}`
-**Target:** {finding['receiver_label']} (`{finding['receiver'][:20]}...`)
-**Pattern:** {value_line}
-**Block Range:** {finding['block_range']}
+| | |
+|---|---|
+| **Sender** | `{finding['sender']}` |
+| **Target** | {finding['receiver_label']} (`{finding['receiver'][:20]}...`) |
+| **Activity** | {value_line} |
+| **Blocks** | {finding['block_range']} |
 
-### Sender Wallet Profile
+### 💬 What Happened
+{roast_data.get('what_happened', 'Analysis unavailable.')}
+
+### 🔥 The Roast
+{roast_data['roast']}
+
+### 🎯 Verdict & Next Steps
+**{roast_data['risk_verdict']}**
+
+{roast_data['recommended_action']}
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
 | Metric | Value |
 |--------|-------|
 | Wallet Age | {wallet.get('age_days', '?')} days |
@@ -1033,23 +1062,16 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
 | Current Balance | {wallet.get('balance_eth', 0):.6f} ETH |
 | Days Since Last Activity | {wallet.get('days_idle', '?')} |
 
-### AML Engine Rules Triggered ({len(finding['rules_triggered'])} rules, composite score: {finding['risk_score']})
+**Rules Triggered** ({len(finding['rules_triggered'])} rules, composite score: {finding['risk_score']}):
 """
         for r in finding["rules_triggered"]:
-            report += f"- ⚠️ **[{r['rule']}]** (score: {r['score']}) — {r['detail']}\n"
+            report += f"- **{r['rule']}** (+{r['score']}) — {r['detail']}\n"
 
         report += f"""
-### 🔥 ROAST
-{roast_data['roast']}
-
-### 📋 SAR NARRATIVE
+**SAR Narrative** *(for compliance teams)*:
 {roast_data['sar_narrative']}
 
-### ⚡ RISK VERDICT
-**{roast_data['risk_verdict']}**
-
-### 🎯 RECOMMENDED ACTION
-{roast_data['recommended_action']}
+</details>
 
 ---
 
@@ -1064,20 +1086,22 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
     critical_count = sum(1 for f in findings if f["risk_level"] == "CRITICAL")
     high_count = sum(1 for f in findings if f["risk_level"] == "HIGH")
 
-    token_line = f" + ${total_token_usd:,.0f} stablecoins" if total_token_usd > 0 else ""
-    report += f"""## Summary
-| Metric | Value |
-|--------|-------|
-| Blocks scanned | {scan_meta.get('block_range', 'N/A')} |
-| Suspicious findings | {len(findings)} |
-| CRITICAL findings | {critical_count} |
-| HIGH findings | {high_count} |
-| Highest risk score | {max_score} |
-| Addresses flagged | {len(set(f['sender'] for f in findings))} |
-| Total suspicious ETH | {total_eth:.4f} ETH (${total_usd:,.0f}){token_line} |
-| Detection rules active | 13 |
+    token_line = f" + ${total_token_usd:,.0f} in stablecoins" if total_token_usd > 0 else ""
+    unique_senders = len(set(f['sender'] for f in findings))
+    report += f"""## Scan Summary
 
-*Report generated by AML Roaster Agent v2 (NEXUS Engine) — Automated Run*
+**{len(findings)} suspicious finding{'s' if len(findings) != 1 else ''}** detected across {unique_senders} unique wallet{'s' if unique_senders != 1 else ''}. Highest risk score: **{max_score}**.
+
+| | |
+|---|---|
+| 🔴 CRITICAL | {critical_count} |
+| 🟠 HIGH | {high_count} |
+| Wallets flagged | {unique_senders} |
+| Suspicious value | {total_eth:.4f} ETH (${total_usd:,.0f}){token_line} |
+| Blocks scanned | {scan_meta.get('block_range', 'N/A')} |
+
+---
+*AML Roaster v2 — NEXUS Engine · 13 detection rules · automated scan*
 """
     return report
 
