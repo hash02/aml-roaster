@@ -1274,16 +1274,23 @@
           "recommended_action": "Immediately flag this transaction and the sender's wallet for further investigation, and consider reporting it to the relevant authorities as a suspicious activity. It's also a good idea to monitor the wallet's activity closely for any other signs of shady dealings."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-08T14:50:01.311095+00:00",
+      "eth_price": 1940.51821454569,
+      "block_range": "24613249 \u2014 24613448",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 42,
+    "total_scans": 43,
     "total_findings": 37,
     "unique_senders": 25,
     "highest_score": 568,
     "critical_count": 37,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-08T14:22:25.873914+00:00"
+    "last_scan": "2026-03-08T14:50:01.311095+00:00"
   }
 }
