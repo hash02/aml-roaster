@@ -1,0 +1,16 @@
+[Unit]
+Description=AML Roaster Telegram Bot Listener
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=vic1hash
+WorkingDirectory=/home/vic1hash/workspace
+ExecStart=/home/vic1hash/workspace/venv/bin/python3 /home/vic1hash/workspace/bot.py
+Restart=always
+RestartSec=10
+EnvironmentFile=/home/vic1hash/workspace/.env
+
+[Install]
+WantedBy=multi-user.target
