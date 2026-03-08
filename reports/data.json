@@ -2025,16 +2025,48 @@
           "recommended_action": "Immediately flag the sender's wallet for further investigation and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It's also recommended to monitor the wallet's activity closely for any future interactions with sanctioned entities or other high-risk indicators."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-08T22:20:10.926723+00:00",
+      "eth_price": 1926.41426966677,
+      "block_range": "24615473 \u2014 24615672",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x13c49a71663afd5d6230d5c0a6fffb8257c9e0e7",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 330,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 1.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a known money laundering front and handing over nearly $2,000 in cash. That's basically what happened here, but with cryptocurrency. Someone sent about $1,926 worth of Ethereum to a service called Tornado Cash, which is like a digital laundry machine for money - it mixes up the funds to hide where they came from. The problem is, this service has been flagged by the U.S. government for helping bad actors, like North Korean hackers, clean their dirty money.",
+          "roast": "This sender just scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm probably a money launderer.' And with a mixer_touch score of 100, it looks like they're trying to cover their tracks by using Tornado Cash - a service that's been sanctioned by the U.S. government for helping launder over $7 billion. They're also getting a score of 30 for exchange_avoidance (basically, they're avoiding legitimate exchanges where they'd have to show their ID, like a normal person). It's like they're playing a game of hide and seek with the law, but they're really bad at it.",
+          "risk_verdict": "The risk verdict is CRITICAL due to the sender's interaction with a sanctioned entity and attempts to circumvent AML controls.",
+          "recommended_action": "Immediate action should be taken to freeze the sender's assets and report this activity to the Financial Crimes Enforcement Network (FinCEN) as a Suspicious Activity Report (SAR). Further investigation into the sender's wallet and associated transactions is also recommended to determine the full extent of their illicit activity."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 57,
-    "total_findings": 61,
-    "unique_senders": 36,
+    "total_scans": 58,
+    "total_findings": 62,
+    "unique_senders": 37,
     "highest_score": 568,
-    "critical_count": 61,
+    "critical_count": 62,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-08T21:45:49.063410+00:00"
+    "last_scan": "2026-03-08T22:20:10.926723+00:00"
   }
 }
