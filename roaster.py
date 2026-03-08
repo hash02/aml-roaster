@@ -1017,6 +1017,8 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
 
     for i, finding in enumerate(findings, 1):
         roast_data = generate_roast(finding, eth_price)
+        # Store roast text on finding dict so save_scan_data() can capture it
+        finding["_roast_data"] = roast_data
         token_transfers = finding.get("token_transfers", [])
         if token_transfers:
             usd_value = finding.get("total_token_usd", 0)
@@ -1106,6 +1108,75 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
     return report
 
 
+# ─── JSON Data Layer (for Dashboard) ─────────────────────────────────────────
+
+def save_scan_data(findings: list, eth_price: float, scan_meta: dict):
+    """Append scan results to data.json — cumulative data source for dashboard."""
+    data_file = REPORTS_DIR / "data.json"
+
+    # Load existing data or start fresh
+    if data_file.exists():
+        try:
+            existing = json.loads(data_file.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, Exception):
+            existing = {"scans": []}
+    else:
+        existing = {"scans": []}
+
+    now = datetime.now(timezone.utc)
+
+    # Build scan entry
+    scan_entry = {
+        "timestamp": now.isoformat(),
+        "eth_price": eth_price,
+        "block_range": scan_meta.get("block_range", ""),
+        "total_findings": len(findings),
+        "findings": [],
+    }
+
+    for f in findings:
+        roast = f.get("_roast_data", {})
+        scan_entry["findings"].append({
+            "sender": f["sender"],
+            "receiver": f["receiver"],
+            "receiver_label": f["receiver_label"],
+            "risk_score": f["risk_score"],
+            "risk_level": f["risk_level"],
+            "tx_count": f["tx_count"],
+            "total_eth": f["total_eth"],
+            "total_token_usd": f.get("total_token_usd", 0),
+            "rules_triggered": [r["rule"] for r in f["rules_triggered"]],
+            "rule_scores": {r["rule"]: r["score"] for r in f["rules_triggered"]},
+            # Roast content for dashboard display
+            "what_happened": roast.get("what_happened", ""),
+            "roast": roast.get("roast", ""),
+            "risk_verdict": roast.get("risk_verdict", ""),
+            "recommended_action": roast.get("recommended_action", ""),
+        })
+
+    existing["scans"].append(scan_entry)
+
+    # Keep last 500 scans max (~10 days at 30-min intervals)
+    if len(existing["scans"]) > 500:
+        existing["scans"] = existing["scans"][-500:]
+
+    # Write stats summary for quick dashboard access
+    all_findings = [f for s in existing["scans"] for f in s["findings"]]
+    existing["stats"] = {
+        "total_scans": len(existing["scans"]),
+        "total_findings": len(all_findings),
+        "unique_senders": len(set(f["sender"] for f in all_findings)) if all_findings else 0,
+        "highest_score": max((f["risk_score"] for f in all_findings), default=0),
+        "critical_count": sum(1 for f in all_findings if f["risk_level"] == "CRITICAL"),
+        "high_count": sum(1 for f in all_findings if f["risk_level"] == "HIGH"),
+        "first_scan": existing["scans"][0]["timestamp"],
+        "last_scan": existing["scans"][-1]["timestamp"],
+    }
+
+    data_file.write_text(json.dumps(existing, indent=2), encoding="utf-8")
+    print(f"[SAVED] {data_file} ({existing['stats']['total_scans']} scans, {existing['stats']['total_findings']} total findings)")
+
+
 # ─── Main ────────────────────────────────────────────────────────────────────
 
 def main():
@@ -1146,6 +1217,9 @@ def main():
 
     (REPORTS_DIR / "latest.md").write_text(report, encoding="utf-8")
     print(f"[SAVED] {REPORTS_DIR / 'latest.md'}")
+
+    # Save structured data for dashboard
+    save_scan_data(findings, eth_price, scan_meta)
 
     print("\n" + "=" * 60)
     print("🔥 AML ROASTER AGENT v2 — Scan complete")

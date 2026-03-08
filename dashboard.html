@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AML Roaster — Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #020204;
+            --bg2: #08080e;
+            --accent: #1fa068;
+            --accent-border: rgba(31, 160, 104, 0.07);
+            --text: #e4e4ec;
+            --text-2: #7a7a8c;
+            --text-3: #444454;
+            --red: #ff4444;
+            --radius: 10px;
+            --font: 'Plus Jakarta Sans', sans-serif;
+            --heading: 'Bricolage Grotesque', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        /* ─── Header ─── */
+        .header {
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-family: var(--heading);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.25rem;
+        }
+
+        .header-sub {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--text-2);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* ─── Stats Row ─── */
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--accent-border);
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-n {
+            font-family: var(--heading);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-n.warn { color: #fff; }
+
+        .stat-l {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 0.1rem;
+        }
+
+        /* ─── Section Labels ─── */
+        .section-label {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.3rem;
+        }
+
+        .section-title {
+            font-family: var(--heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ─── Roast Cards ─── */
+        .roast-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .roast {
+            background: var(--bg2);
+            border: 1px solid var(--accent-border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: border-color 0.2s;
+        }
+
+        .roast:hover {
+            border-color: rgba(31, 160, 104, 0.15);
+        }
+
+        .roast-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .roast-score {
+            font-family: var(--heading);
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .badge {
+            font-family: var(--mono);
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge.critical {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .badge.high {
+            background: rgba(255, 68, 68, 0.12);
+            color: var(--red);
+        }
+
+        .score-critical { color: #fff; }
+        .score-high { color: var(--red); }
+
+        .roast-addr {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--text-3);
+            margin-bottom: 1rem;
+        }
+
+        .roast-addr .label {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .roast-body {
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: var(--text);
+            border-left: 2px solid var(--accent);
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .roast-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .tag {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--accent-border);
+            color: var(--text-2);
+        }
+
+        .tag.hot {
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-2);
+            font-size: 0.9rem;
+        }
+
+        .empty-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* ─── Charts ─── */
+        .charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .chart-box {
+            background: var(--bg2);
+            border: 1px solid var(--accent-border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+        }
+
+        .chart-box h3 {
+            font-family: var(--heading);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-2);
+            margin-bottom: 1rem;
+        }
+
+        .chart-box canvas {
+            max-height: 200px;
+        }
+
+        /* ─── Footer ─── */
+        .footer {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--accent-border);
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .footer-meta {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            color: var(--text-3);
+            margin-top: 0.25rem;
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 640px) {
+            .wrap { padding: 2rem 1.25rem; }
+            .stats { gap: 1.25rem; flex-wrap: wrap; }
+            .charts { grid-template-columns: 1fr; }
+            .roast-top { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <!-- Header -->
+        <header class="header">
+            <h1>AML Roaster</h1>
+            <div class="header-sub">
+                <span class="live-dot"></span>
+                <span>Ethereum Mainnet</span>
+                <span>·</span>
+                <span id="meta-price">ETH $—</span>
+                <span>·</span>
+                <span id="meta-last">—</span>
+            </div>
+        </header>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-n" id="kpi-scans">0</div>
+                <div class="stat-l">Scans</div>
+            </div>
+            <div class="stat">
+                <div class="stat-n warn" id="kpi-findings">0</div>
+                <div class="stat-l">Findings</div>
+            </div>
+            <div class="stat">
+                <div class="stat-n warn" id="kpi-max">0</div>
+                <div class="stat-l">Highest Score</div>
+            </div>
+        </div>
+
+        <!-- Roasts -->
+        <section>
+            <div class="section-label">Latest</div>
+            <div class="section-title">Roasts</div>
+            <div class="roast-list" id="roast-list">
+                <!-- JS -->
+            </div>
+        </section>
+
+        <!-- Charts -->
+        <section>
+            <div class="section-label">Analytics</div>
+            <div class="section-title">Activity</div>
+            <div class="charts">
+                <div class="chart-box">
+                    <h3>Findings Over Time</h3>
+                    <canvas id="chart-timeline"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3>Rules Triggered</h3>
+                    <canvas id="chart-rules"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <a href="https://bionicbanker.tech" target="_blank">Bionic Banker</a>
+            <div class="footer-meta">AML Engine v2 · 13 rules · 94.9% detection</div>
+        </footer>
+    </div>
+
+    <script>
+        Chart.defaults.color = '#444454';
+        Chart.defaults.borderColor = 'rgba(31,160,104,0.07)';
+        Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+
+        const C = {
+            green: '#1fa068',
+            greenDim: 'rgba(31,160,104,0.3)',
+            red: '#ff4444',
+            muted: '#7a7a8c',
+            bg: '#08080e',
+        };
+
+        let DATA = null;
+
+        async function boot() {
+            try {
+                const r = await fetch('reports/data.json');
+                if (r.ok) DATA = await r.json();
+            } catch(e) {}
+            if (!DATA) DATA = FALLBACK;
+            render();
+        }
+
+        function render() {
+            const scans = DATA.scans || [];
+            const stats = DATA.stats || {};
+            const all = scans.flatMap(s => s.findings.map(f => ({...f, timestamp: s.timestamp, eth_price: s.eth_price})));
+
+            // KPIs
+            document.getElementById('kpi-scans').textContent = stats.total_scans || scans.length;
+            document.getElementById('kpi-findings').textContent = stats.total_findings || all.length;
+            document.getElementById('kpi-max').textContent = stats.highest_score || 0;
+
+            // Meta
+            const last = scans[scans.length - 1];
+            if (last) {
+                document.getElementById('meta-price').textContent = 'ETH $' + (last.eth_price ? last.eth_price.toLocaleString() : '—');
+                document.getElementById('meta-last').textContent = fmt(last.timestamp);
+            }
+
+            renderRoasts(all);
+            renderTimeline(scans);
+            renderRules(all);
+        }
+
+        function renderRoasts(findings) {
+            const el = document.getElementById('roast-list');
+
+            if (findings.length === 0) {
+                el.innerHTML = '<div class="empty"><div class="empty-icon">✅</div><p>All clear. 13 rules scanning every 30 min.</p></div>';
+                return;
+            }
+
+            const sorted = [...findings].sort((a, b) => b.risk_score - a.risk_score);
+
+            el.innerHTML = sorted.map(f => {
+                const lvl = (f.risk_level || 'high').toLowerCase();
+                const rules = f.rules_triggered || [];
+                const scores = f.rule_scores || {};
+                const top3 = Object.entries(scores).sort((a,b) => b[1]-a[1]).slice(0,3).map(r => r[0]);
+
+                let h = '<div class="roast">';
+
+                // Top row: score + badge
+                h += '<div class="roast-top">';
+                h += '<div style="display:flex;align-items:center;gap:0.75rem;">';
+                h += '<span class="roast-score score-' + lvl + '">' + f.risk_score + '</span>';
+                h += '<span class="badge ' + lvl + '">' + f.risk_level + '</span>';
+                h += '</div>';
+                h += '<span style="font-family:var(--mono);font-size:0.65rem;color:var(--text-3);">' + fmt(f.timestamp) + '</span>';
+                h += '</div>';
+
+                // Address
+                h += '<div class="roast-addr">';
+                h += shorten(f.sender) + ' → <span class="label">' + (f.receiver_label || 'Unknown') + '</span>';
+                h += ' · ' + (f.tx_count || 0) + ' tx';
+                h += '</div>';
+
+                // Roast text (the main event)
+                if (f.roast) {
+                    h += '<div class="roast-body">' + f.roast + '</div>';
+                } else if (f.what_happened) {
+                    h += '<div class="roast-body">' + f.what_happened + '</div>';
+                }
+
+                // Tags
+                h += '<div class="roast-tags">';
+                rules.forEach(r => {
+                    const hot = top3.includes(r);
+                    h += '<span class="tag ' + (hot ? 'hot' : '') + '">' + r;
+                    if (scores[r]) h += ' +' + scores[r];
+                    h += '</span>';
+                });
+                h += '</div>';
+
+                h += '</div>';
+                return h;
+            }).join('');
+        }
+
+        function renderTimeline(scans) {
+            const ctx = document.getElementById('chart-timeline').getContext('2d');
+            const labels = scans.map(s => fmt(s.timestamp));
+            const data = scans.map(s => s.total_findings);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels,
+                    datasets: [{
+                        data,
+                        backgroundColor: data.map(v => v > 0 ? '#fff' : C.greenDim),
+                        borderColor: data.map(v => v > 0 ? '#fff' : C.green),
+                        borderWidth: 1,
+                        borderRadius: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { display: false },
+                        y: { beginAtZero: true, ticks: { stepSize: 1 }, grid: { color: 'rgba(31,160,104,0.05)' } }
+                    }
+                }
+            });
+        }
+
+        function renderRules(findings) {
+            const ctx = document.getElementById('chart-rules').getContext('2d');
+            const counts = {};
+            findings.forEach(f => (f.rules_triggered || []).forEach(r => counts[r] = (counts[r] || 0) + 1));
+            const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]);
+
+            if (!sorted.length) {
+                ctx.canvas.parentElement.querySelector('h3').textContent = 'Rules — No data yet';
+                return;
+            }
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: sorted.map(r => r[0]),
+                    datasets: [{
+                        data: sorted.map(r => r[1]),
+                        backgroundColor: C.greenDim,
+                        borderColor: C.green,
+                        borderWidth: 1,
+                        borderRadius: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { beginAtZero: true, ticks: { stepSize: 1 }, grid: { color: 'rgba(31,160,104,0.05)' } },
+                        y: { ticks: { color: C.green, font: { family: "'JetBrains Mono', monospace", size: 10 } }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function fmt(iso) {
+            if (!iso) return '—';
+            const d = new Date(iso);
+            return d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
+        }
+
+        function shorten(addr) {
+            if (!addr || addr.length < 12) return addr || '';
+            return addr.slice(0, 6) + '…' + addr.slice(-4);
+        }
+
+        // Fallback data
+        var FALLBACK = {"scans":[{"timestamp":"2026-03-07T18:10:00Z","eth_price":1965.5,"block_range":"24607200 — 24607399","total_findings":0,"findings":[]},{"timestamp":"2026-03-07T19:19:00Z","eth_price":1967.1,"block_range":"24607600 — 24607799","total_findings":0,"findings":[]},{"timestamp":"2026-03-07T20:21:00Z","eth_price":1968.5,"block_range":"24608000 — 24608199","total_findings":0,"findings":[]},{"timestamp":"2026-03-07T21:15:00Z","eth_price":1968.01,"block_range":"24608455 — 24608654","total_findings":0,"findings":[]},{"timestamp":"2026-03-07T22:19:00Z","eth_price":1969.0,"block_range":"24608700 — 24608899","total_findings":0,"findings":[]},{"timestamp":"2026-03-07T23:19:00Z","eth_price":1970.2,"block_range":"24608900 — 24609099","total_findings":0,"findings":[]},{"timestamp":"2026-03-08T00:14:00Z","eth_price":1973.9,"block_range":"24608885 — 24609084","total_findings":2,"findings":[{"sender":"0x0a5b2bf3ccfb44c1d22f07eed9553ecba752d4ad","receiver":"0xd90e2f925da726b50c4ed8d0fb90ad053324f31b","receiver_label":"Tornado Cash (0.1 ETH Pool)","risk_score":530,"risk_level":"CRITICAL","tx_count":5,"total_eth":0.0,"rules_triggered":["mixer_touch","ofac_hit","mixer_contract_call","structuring","peel_chain_linear","exchange_avoidance"],"rule_scores":{"mixer_touch":100,"ofac_hit":200,"mixer_contract_call":70,"structuring":70,"peel_chain_linear":60,"exchange_avoidance":30},"what_happened":"Someone sent 5 identical empty transactions to Tornado Cash — a crypto mixing service that the US government sanctioned in 2022. Think of it like repeatedly visiting a money laundering front but claiming you never bought anything. The pattern screams 'testing the waters' before moving real money through.","roast":"Wow, it takes a special kind of genius to send five identical transactions of 0.0000 ETH to a sanctioned mixer like Tornado Cash, scoring a whopping 530 on our AML engine — I mean, who needs actual money when you can just smurf your way to OFAC's bad side? The structuring pattern is just the cherry on top, because who doesn't love a good game of 'let's make all our transactions look identical'? And with a peel chain detected, it's clear this user is a master of layering patterns. But hey, at least they're consistent, right?","risk_verdict":"CRITICAL — composite score of 530, with direct contact to an OFAC-sanctioned mixer, textbook structuring, and peel chain layering","recommended_action":"Immediately flag the sender's wallet for further investigation and consider reporting to the relevant authorities. Block any future transactions to sanctioned mixers like Tornado Cash."},{"sender":"0xd0b9b6674b77befd88884d2bdeea979c023938e8","receiver":"0xd90e2f925da726b50c4ed8d0fb90ad053324f31b","receiver_label":"Tornado Cash (0.1 ETH Pool)","risk_score":400,"risk_level":"CRITICAL","tx_count":2,"total_eth":0.0,"rules_triggered":["mixer_touch","ofac_hit","mixer_contract_call","exchange_avoidance"],"rule_scores":{"mixer_touch":100,"ofac_hit":200,"mixer_contract_call":70,"exchange_avoidance":30},"what_happened":"A wallet with over 1,000 days of history suddenly started interacting with Tornado Cash — a sanctioned crypto mixer. Two zero-value calls to the mixer suggest they're either relaying withdrawals for someone else or testing the service before moving real funds.","roast":"Looks like someone's trying to spin their dirty laundry through Tornado Cash, scoring a whopping 400 on our AML engine, with a special shoutout to the 200 points from hitting the OFAC sanctions list — who needs clean money when you can just mix it with some sanctioned friends? At least they chose the 0.1 ETH pool, because apparently even money launderers have a budget.","risk_verdict":"CRITICAL — composite score of 400, driven by direct OFAC sanctions match, indicating clear interaction with a sanctioned entity","recommended_action":"Immediately flag and freeze the sender's wallet, and file a SAR with the relevant authorities."}]}],"stats":{"total_scans":7,"total_findings":2,"unique_senders":2,"highest_score":530,"critical_count":2,"high_count":0}};
+
+        boot();
+    </script>
+</body>
+</html>
