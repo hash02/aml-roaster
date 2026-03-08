@@ -2156,16 +2156,23 @@
           "recommended_action": "Immediately freeze the sender's wallet and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Conduct a thorough investigation into the sender's wallet activity to identify the source of funds and potential connections to illicit activities."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-08T23:45:43.771431+00:00",
+      "eth_price": 1940.21040812933,
+      "block_range": "24615916 \u2014 24616115",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 64,
+    "total_scans": 65,
     "total_findings": 64,
     "unique_senders": 37,
     "highest_score": 570,
     "critical_count": 64,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-08T23:05:40.074010+00:00"
+    "last_scan": "2026-03-08T23:45:43.771431+00:00"
   }
 }
