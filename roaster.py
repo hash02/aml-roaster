@@ -536,6 +536,21 @@ def rule_exchange_avoidance(receiver: str) -> dict | None:
     return None
 
 
+def rule_contract_interaction(receiver_addr: str, total_eth: float) -> dict | None:
+    """RULE: Zero-value contract call to mixer — likely withdrawal relay or governance."""
+    if total_eth >= 0.001:
+        return None  # Not a zero-value call, other rules handle this
+    addr_info = WATCHED_ADDRESSES.get(receiver_addr.lower())
+    if addr_info and addr_info["type"] in ("mixer", "sanctioned_exchange", "state_sponsored"):
+        return {
+            "rule": "mixer_contract_call",
+            "score": 70,
+            "detail": f"Zero-value contract call to {addr_info['label']} — "
+                      f"likely withdrawal relay, governance vote, or obfuscation technique",
+        }
+    return None
+
+
 def rule_stablecoin_mixing(token_transfers: list, receiver_addr: str) -> dict | None:
     """
     RULE: Stablecoin deposits to mixer/sanctioned addresses.
@@ -644,9 +659,9 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
 
         # Fetch BOTH normal txs and token transfers
         txs = get_normal_transactions(address, start_block, latest)
-        time.sleep(0.3)
+        time.sleep(0.5)
         token_txs = get_token_transfers(address, start_block, latest)
-        time.sleep(0.3)
+        time.sleep(0.5)
 
         has_eth = bool(txs)
         has_tokens = bool(token_txs)
@@ -656,7 +671,7 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
 
         print(f"  [DATA] {len(txs)} ETH txs, {len(token_txs)} token transfers")
 
-        # ── Process ETH transactions (existing logic) ──
+        # ── Process ETH transactions ──
         if has_eth:
             sender_map = {}
             for tx in txs:
@@ -664,24 +679,39 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                 if sender not in WATCHED_ADDRESSES:
                     sender_map.setdefault(sender, []).append(tx)
 
+            # DEBUG: show what was filtered
+            watched_senders = sum(1 for tx in txs if tx.get("from", "").lower() in WATCHED_ADDRESSES)
+            if watched_senders:
+                print(f"  [DEBUG] {watched_senders} txs from watched→watched (kept for reference)")
+
             for sender, sender_txs in sender_map.items():
                 eth_values = [int(tx.get("value", "0")) / 1e18 for tx in sender_txs]
                 total_eth = sum(eth_values)
                 timestamps = [int(tx.get("timeStamp", "0")) for tx in sender_txs]
 
-                if total_eth < 0.001:
-                    continue  # Skip dust
+                # Smart dust filter: skip dust ONLY for non-watched receivers
+                # ANY interaction with a mixer/sanctioned address is suspicious,
+                # even zero-value contract calls (withdrawal relay, governance, etc.)
+                is_watched_receiver = address in WATCHED_ADDRESSES
+                if total_eth < 0.001 and not is_watched_receiver:
+                    continue  # Skip dust for normal addresses only
+
+                # For zero-value txs to watched addresses, mark as contract interaction
+                is_contract_call = (total_eth < 0.001 and is_watched_receiver)
+                if is_contract_call:
+                    print(f"  [DETECT] Zero-value contract call to {label} from {sender[:10]}... — likely withdrawal/relay")
 
                 rules_triggered = []
 
                 print(f"  [PROFILE] Profiling sender {sender[:10]}...")
                 wallet_info = get_wallet_info(sender)
-                time.sleep(0.3)
+                time.sleep(0.5)
 
                 for rule_fn, args in [
                     (rule_mixer_interaction, (address,)),
                     (rule_sanctioned_entity, (sender, address)),
                     (rule_state_sponsored, (address,)),
+                    (rule_contract_interaction, (address, total_eth)),
                     (rule_novel_wallet, (wallet_info, total_eth)),
                     (rule_dormant_activation, (wallet_info, total_eth)),
                     (rule_high_value, (total_eth, eth_price)),
@@ -791,7 +821,7 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     for offset in range(min(num_blocks, 5)):  # Only scan 5 blocks for high-value
         block_num = latest - offset
         txs = get_block_transactions(block_num)
-        time.sleep(0.3)
+        time.sleep(0.5)
 
         for tx in txs:
             eth_value = wei_to_eth(tx.get("value", "0x0"))
@@ -961,7 +991,7 @@ def generate_report(findings: list, eth_price: float, scan_meta: dict) -> str:
     if not findings:
         report += """## No Suspicious Activity Detected
 
-All quiet on the Ethereum front. 12 detection rules armed and scanning.
+All quiet on the Ethereum front. 13 detection rules armed and scanning.
 The mixers are sleeping, the whales are resting, and nobody's trying to
 wash their crypto through Tornado Cash right now.
 
@@ -1045,7 +1075,7 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
 | Highest risk score | {max_score} |
 | Addresses flagged | {len(set(f['sender'] for f in findings))} |
 | Total suspicious ETH | {total_eth:.4f} ETH (${total_usd:,.0f}){token_line} |
-| Detection rules active | 12 |
+| Detection rules active | 13 |
 
 *Report generated by AML Roaster Agent v2 (NEXUS Engine) — Automated Run*
 """
@@ -1057,7 +1087,7 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
 def main():
     print("=" * 60)
     print("🔥 AML ROASTER AGENT v2 (NEXUS Engine) — Starting scan")
-    print(f"   Detection rules: 12 active (incl. stablecoin_mixing)")
+    print(f"   Detection rules: 13 active (incl. stablecoin_mixing, contract_interaction)")
     print(f"   Watched addresses: {len(WATCHED_ADDRESSES)}")
     print(f"   Scan window: 200 blocks (~25 min)")
     print("=" * 60)
