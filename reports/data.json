@@ -1,28 +1,142 @@
 {
   "scans": [
-    {"timestamp": "2026-03-07T18:10:00Z", "eth_price": 1965.50, "block_range": "24607200 — 24607399", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T18:55:00Z", "eth_price": 1966.20, "block_range": "24607400 — 24607599", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T19:19:00Z", "eth_price": 1967.10, "block_range": "24607600 — 24607799", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T19:42:00Z", "eth_price": 1967.80, "block_range": "24607800 — 24607999", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T20:21:00Z", "eth_price": 1968.50, "block_range": "24608000 — 24608199", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T20:43:00Z", "eth_price": 1968.85, "block_range": "24608200 — 24608399", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T20:47:00Z", "eth_price": 1968.85, "block_range": "24608200 — 24608399", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T20:53:00Z", "eth_price": 1968.90, "block_range": "24608250 — 24608449", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T21:15:00Z", "eth_price": 1968.01, "block_range": "24608455 — 24608654", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T21:17:00Z", "eth_price": 1968.01, "block_range": "24608455 — 24608654", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T21:29:00Z", "eth_price": 1968.10, "block_range": "24608500 — 24608699", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T21:42:00Z", "eth_price": 1968.30, "block_range": "24608550 — 24608749", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T22:19:00Z", "eth_price": 1969.00, "block_range": "24608700 — 24608899", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T22:22:00Z", "eth_price": 1969.10, "block_range": "24608720 — 24608919", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T22:47:00Z", "eth_price": 1969.58, "block_range": "24608789 — 24608988", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T23:19:00Z", "eth_price": 1970.20, "block_range": "24608900 — 24609099", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T23:44:00Z", "eth_price": 1971.00, "block_range": "24608950 — 24609149", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T23:52:00Z", "eth_price": 1971.50, "block_range": "24609000 — 24609199", "total_findings": 0, "findings": []},
-    {"timestamp": "2026-03-07T23:55:00Z", "eth_price": 1971.80, "block_range": "24609050 — 24609249", "total_findings": 0, "findings": []},
+    {
+      "timestamp": "2026-03-07T18:10:00Z",
+      "eth_price": 1965.5,
+      "block_range": "24607200 \u2014 24607399",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T18:55:00Z",
+      "eth_price": 1966.2,
+      "block_range": "24607400 \u2014 24607599",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T19:19:00Z",
+      "eth_price": 1967.1,
+      "block_range": "24607600 \u2014 24607799",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T19:42:00Z",
+      "eth_price": 1967.8,
+      "block_range": "24607800 \u2014 24607999",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T20:21:00Z",
+      "eth_price": 1968.5,
+      "block_range": "24608000 \u2014 24608199",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T20:43:00Z",
+      "eth_price": 1968.85,
+      "block_range": "24608200 \u2014 24608399",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T20:47:00Z",
+      "eth_price": 1968.85,
+      "block_range": "24608200 \u2014 24608399",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T20:53:00Z",
+      "eth_price": 1968.9,
+      "block_range": "24608250 \u2014 24608449",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T21:15:00Z",
+      "eth_price": 1968.01,
+      "block_range": "24608455 \u2014 24608654",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T21:17:00Z",
+      "eth_price": 1968.01,
+      "block_range": "24608455 \u2014 24608654",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T21:29:00Z",
+      "eth_price": 1968.1,
+      "block_range": "24608500 \u2014 24608699",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T21:42:00Z",
+      "eth_price": 1968.3,
+      "block_range": "24608550 \u2014 24608749",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T22:19:00Z",
+      "eth_price": 1969.0,
+      "block_range": "24608700 \u2014 24608899",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T22:22:00Z",
+      "eth_price": 1969.1,
+      "block_range": "24608720 \u2014 24608919",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T22:47:00Z",
+      "eth_price": 1969.58,
+      "block_range": "24608789 \u2014 24608988",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T23:19:00Z",
+      "eth_price": 1970.2,
+      "block_range": "24608900 \u2014 24609099",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T23:44:00Z",
+      "eth_price": 1971.0,
+      "block_range": "24608950 \u2014 24609149",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T23:52:00Z",
+      "eth_price": 1971.5,
+      "block_range": "24609000 \u2014 24609199",
+      "total_findings": 0,
+      "findings": []
+    },
+    {
+      "timestamp": "2026-03-07T23:55:00Z",
+      "eth_price": 1971.8,
+      "block_range": "24609050 \u2014 24609249",
+      "total_findings": 0,
+      "findings": []
+    },
     {
       "timestamp": "2026-03-08T00:14:00Z",
-      "eth_price": 1973.90,
-      "block_range": "24608885 — 24609084",
+      "eth_price": 1973.9,
+      "block_range": "24608885 \u2014 24609084",
       "total_findings": 2,
       "findings": [
         {
@@ -34,11 +148,25 @@
           "tx_count": 5,
           "total_eth": 0.0,
           "total_token_usd": 0,
-          "rules_triggered": ["mixer_touch", "ofac_hit", "mixer_contract_call", "structuring", "peel_chain_linear", "exchange_avoidance"],
-          "rule_scores": {"mixer_touch": 100, "ofac_hit": 200, "mixer_contract_call": 70, "structuring": 70, "peel_chain_linear": 60, "exchange_avoidance": 30},
-          "what_happened": "Someone sent 5 identical empty transactions to Tornado Cash — a crypto mixing service that the US government sanctioned in 2022. Think of it like repeatedly visiting a money laundering front but claiming you never bought anything. The pattern screams 'testing the waters' before moving real money through.",
-          "roast": "Wow, it takes a special kind of genius to send five identical transactions of 0.0000 ETH to a sanctioned mixer like Tornado Cash, scoring a whopping 530 on our AML engine — I mean, who needs actual money when you can just smurf your way to OFAC's bad side? The structuring pattern is just the cherry on top, because who doesn't love a good game of 'let's make all our transactions look identical'? And with a peel chain detected, it's clear this user is a master of layering patterns. But hey, at least they're consistent, right?",
-          "risk_verdict": "CRITICAL — composite score of 530, with direct contact to an OFAC-sanctioned mixer, textbook structuring, and peel chain layering",
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Someone sent 5 identical empty transactions to Tornado Cash \u2014 a crypto mixing service that the US government sanctioned in 2022. Think of it like repeatedly visiting a money laundering front but claiming you never bought anything. The pattern screams 'testing the waters' before moving real money through.",
+          "roast": "Wow, it takes a special kind of genius to send five identical transactions of 0.0000 ETH to a sanctioned mixer like Tornado Cash, scoring a whopping 530 on our AML engine \u2014 I mean, who needs actual money when you can just smurf your way to OFAC's bad side? The structuring pattern is just the cherry on top, because who doesn't love a good game of 'let's make all our transactions look identical'? And with a peel chain detected, it's clear this user is a master of layering patterns. But hey, at least they're consistent, right?",
+          "risk_verdict": "CRITICAL \u2014 composite score of 530, with direct contact to an OFAC-sanctioned mixer, textbook structuring, and peel chain layering",
           "recommended_action": "Immediately flag the sender's wallet for further investigation and consider reporting to the relevant authorities. Block any future transactions to sanctioned mixers like Tornado Cash."
         },
         {
@@ -50,24 +178,41 @@
           "tx_count": 2,
           "total_eth": 0.0,
           "total_token_usd": 0,
-          "rules_triggered": ["mixer_touch", "ofac_hit", "mixer_contract_call", "exchange_avoidance"],
-          "rule_scores": {"mixer_touch": 100, "ofac_hit": 200, "mixer_contract_call": 70, "exchange_avoidance": 30},
-          "what_happened": "A wallet with over 1,000 days of history suddenly started interacting with Tornado Cash — a sanctioned crypto mixer. Two zero-value calls to the mixer suggest they're either relaying withdrawals for someone else or testing the service before moving real funds.",
-          "roast": "Looks like someone's trying to spin their dirty laundry through Tornado Cash, scoring a whopping 400 on our AML engine, with a special shoutout to the 200 points from hitting the OFAC sanctions list — who needs clean money when you can just mix it with some sanctioned friends? At least they chose the 0.1 ETH pool, because apparently even money launderers have a budget.",
-          "risk_verdict": "CRITICAL — composite score of 400, driven by direct OFAC sanctions match, indicating clear interaction with a sanctioned entity",
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A wallet with over 1,000 days of history suddenly started interacting with Tornado Cash \u2014 a sanctioned crypto mixer. Two zero-value calls to the mixer suggest they're either relaying withdrawals for someone else or testing the service before moving real funds.",
+          "roast": "Looks like someone's trying to spin their dirty laundry through Tornado Cash, scoring a whopping 400 on our AML engine, with a special shoutout to the 200 points from hitting the OFAC sanctions list \u2014 who needs clean money when you can just mix it with some sanctioned friends? At least they chose the 0.1 ETH pool, because apparently even money launderers have a budget.",
+          "risk_verdict": "CRITICAL \u2014 composite score of 400, driven by direct OFAC sanctions match, indicating clear interaction with a sanctioned entity",
           "recommended_action": "Immediately flag and freeze the sender's wallet, and file a SAR with the relevant authorities."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-08T01:22:17.038094+00:00",
+      "eth_price": 1970.19793210183,
+      "block_range": "24609224 \u2014 24609423",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 20,
+    "total_scans": 21,
     "total_findings": 2,
     "unique_senders": 2,
     "highest_score": 530,
     "critical_count": 2,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-08T00:14:00Z"
+    "last_scan": "2026-03-08T01:22:17.038094+00:00"
   }
 }
