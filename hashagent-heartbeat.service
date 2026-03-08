@@ -1,0 +1,14 @@
+[Unit]
+Description=AML Roaster Agent - Heartbeat Monitor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=vic1hash
+WorkingDirectory=/home/vic1hash/workspace
+ExecStart=/home/vic1hash/workspace/venv/bin/python3 /home/vic1hash/workspace/roaster.py
+EnvironmentFile=/home/vic1hash/workspace/.env
+
+[Install]
+WantedBy=multi-user.target
