@@ -1991,16 +1991,50 @@
       "block_range": "24615192 \u2014 24615391",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-08T21:45:49.063410+00:00",
+      "eth_price": 1954.88249361918,
+      "block_range": "24615285 \u2014 24615484",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0xd04e9f0945dea8373d882c730e2c93a74b591796",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine you're at a bank and you see someone putting money into an ATM that's known to be used by money launderers. That's basically what happened here - someone sent cryptocurrency to a service called Tornado Cash, which is like a money laundry for crypto. It's a big red flag because Tornado Cash has been used by bad actors to hide billions of dollars in stolen funds.",
+          "roast": "This sender just scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big neon sign saying 'I'm involved in shady dealings'. And with a mixer-touch score of 100, it's clear they're trying to cover their tracks by using a crypto mixing service like Tornado Cash. They also got a score of 70 for mixer_contract_call, which is like trying to sneak around without being seen - not very subtle. Oh, and let's not forget the exchange_avoidance score of 30, which is like trying to avoid the bouncer at a club - they're clearly trying to avoid the authorities.",
+          "risk_verdict": "CRITICAL \u2014 the transaction involves a direct interaction with a sanctioned entity, indicating a high risk of money laundering or other illicit activity.",
+          "recommended_action": "Immediately flag the sender's wallet for further investigation and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It's also recommended to monitor the wallet's activity closely for any future interactions with sanctioned entities or other high-risk indicators."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 56,
-    "total_findings": 60,
+    "total_scans": 57,
+    "total_findings": 61,
     "unique_senders": 36,
     "highest_score": 568,
-    "critical_count": 60,
+    "critical_count": 61,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-08T21:20:14.241105+00:00"
+    "last_scan": "2026-03-08T21:45:49.063410+00:00"
   }
 }
