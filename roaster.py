@@ -981,7 +981,7 @@ def generate_report(findings: list, eth_price: float, scan_meta: dict) -> str:
 **ETH Price:** ${eth_price:,.2f}
 **Blocks Scanned:** {scan_meta.get('block_range', 'N/A')}
 **Addresses Monitored:** {len(WATCHED_ADDRESSES)}
-**Detection Rules Active:** 12 (mixer_touch, ofac_hit, state_sponsored, novel_wallet_dump, dormant_activation, high_value, whale_transfer, structuring, peel_chain, velocity, exit_rush, exchange_avoidance, stablecoin_mixing)
+**Detection Rules Active:** 13 (mixer_touch, ofac_hit, state_sponsored, mixer_contract_call, novel_wallet_dump, dormant_activation, high_value, whale_transfer, structuring, peel_chain, velocity, exit_rush, exchange_avoidance, stablecoin_mixing)
 **Engine:** NEXUS AML Engine v2 (ported from v1 — 94.9% detection rate)
 
 ---
@@ -1127,7 +1127,11 @@ def main():
     print("🔥 AML ROASTER AGENT v2 — Scan complete")
     print("=" * 60)
 
-    return 0 if not findings else len(findings)
+    # Always exit 0 — findings aren't errors, they're the whole point.
+    # GitHub Actions treats non-zero exit as failure, which blocks the
+    # commit-and-push step from saving the report.
+    print(f"\n   Findings count: {len(findings)}")
+    return 0
 
 
 if __name__ == "__main__":
