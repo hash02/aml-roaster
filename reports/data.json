@@ -2255,16 +2255,50 @@
           "recommended_action": "Immediately flag this transaction and the sender's wallet for further investigation, and consider filing a Suspicious Activity Report (SAR) with FinCEN to report the potential money laundering activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-09T04:14:45.770488+00:00",
+      "eth_price": 1975.89099456492,
+      "block_range": "24617255 \u2014 24617454",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x4750bcfcc340aa4b31be7e71fa072716d28c29c5",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "This is like trying to sneak money through a back door - someone sent a tiny amount of cryptocurrency to a service called Tornado Cash, which is like a money laundry for crypto. The problem is, this service was shut down by the U.S. government because it helped bad guys like North Korea's hackers clean their dirty money. It's basically a big red flag that someone is trying to hide something.",
+          "roast": "Wow, they scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), that's like having a big 'I'm a bad guy' sign on their forehead. And with a score of 100 on the mixer_touch (meaning they directly used a sanctioned crypto mixer), it's clear they're trying to wash their dirty crypto. Also, 70 points for mixer_contract_call (basically, using the mixer in a sneaky way) and 30 for exchange_avoidance (skipping regular crypto exchanges to avoid being caught) - this person is like a laundry expert, but for dirty money.",
+          "risk_verdict": "CRITICAL - The transaction is directly interacting with a sanctioned entity, indicating a high risk of money laundering or other illicit activity.",
+          "recommended_action": "Immediately flag this transaction and the involved wallet for further review, and consider reporting it to the relevant authorities as a suspicious activity. It's also a good idea to monitor this wallet's future activity for any other potential red flags."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 66,
-    "total_findings": 67,
-    "unique_senders": 39,
+    "total_scans": 67,
+    "total_findings": 68,
+    "unique_senders": 40,
     "highest_score": 570,
-    "critical_count": 67,
+    "critical_count": 68,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-09T01:51:47.946947+00:00"
+    "last_scan": "2026-03-09T04:14:45.770488+00:00"
   }
 }
