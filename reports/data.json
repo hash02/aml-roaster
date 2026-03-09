@@ -2669,16 +2669,23 @@
       "block_range": "24619850 \u2014 24620049",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-09T14:05:49.798332+00:00",
+      "eth_price": 2023.14223082831,
+      "block_range": "24620195 \u2014 24620394",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 75,
+    "total_scans": 76,
     "total_findings": 80,
     "unique_senders": 46,
     "highest_score": 610,
     "critical_count": 80,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-09T12:55:28.222096+00:00"
+    "last_scan": "2026-03-09T14:05:49.798332+00:00"
   }
 }
