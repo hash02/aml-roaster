@@ -2662,16 +2662,23 @@
           "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN), and block any further transactions from this wallet to prevent potential money laundering activities."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-09T12:55:28.222096+00:00",
+      "eth_price": 2002.33696300702,
+      "block_range": "24619850 \u2014 24620049",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 74,
+    "total_scans": 75,
     "total_findings": 80,
     "unique_senders": 46,
     "highest_score": 610,
     "critical_count": 80,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-09T11:33:06.090788+00:00"
+    "last_scan": "2026-03-09T12:55:28.222096+00:00"
   }
 }
