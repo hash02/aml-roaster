@@ -4030,16 +4030,54 @@
       "block_range": "24625431 \u2014 24625630",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-10T08:37:34.685679+00:00",
+      "eth_price": 2066.74243266706,
+      "block_range": "24625722 \u2014 24625921",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x000000cd6521ed1a65fae0678ea15af4eead74fe",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 530,
+          "risk_level": "CRITICAL",
+          "tx_count": 3,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "This is like walking into a known money laundering front and trying to sneak in some suspicious transactions. Someone is sending tiny amounts of cryptocurrency to a service called Tornado Cash, which is like a digital laundry machine that helps hide the origin of the money. It's a major red flag because Tornado Cash was shut down by the U.S. government for helping bad guys like North Korea's hackers launder billions of dollars.",
+          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big neon sign saying 'I'm a bad guy'. They're also using a technique called structuring (which means breaking up transactions into smaller amounts to avoid detection) and sending all these tiny transactions to Tornado Cash, which is like trying to sneak into a nightclub through the back door. And with a composite score of 530, this sender is basically waving a flag saying 'catch me if you can'. Oh, and they're using a service that's been sanctioned by the U.S. government, which is like saying 'I'm a fan of North Korea's hackers' - not a great look.",
+          "risk_verdict": "CRITICAL \u2014 the sender's transactions involve a sanctioned entity and exhibit multiple indicators of money laundering and suspicious activity.",
+          "recommended_action": "Immediately flag this sender for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Block any further transactions to or from this sender to prevent potential money laundering and comply with OFAC regulations."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 93,
-    "total_findings": 125,
+    "total_scans": 94,
+    "total_findings": 126,
     "unique_senders": 63,
     "highest_score": 610,
-    "critical_count": 125,
+    "critical_count": 126,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-10T07:38:58.586308+00:00"
+    "last_scan": "2026-03-10T08:37:34.685679+00:00"
   }
 }
