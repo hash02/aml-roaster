@@ -5535,16 +5535,23 @@
           "recommended_action": "Immediately flag this transaction and freeze the sender's assets to prevent further potential money laundering. Conduct a thorough investigation into the sender's identity and the source of their funds to determine the extent of their involvement with illicit activities."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-10T23:24:28.632633+00:00",
+      "eth_price": 2030.85822190061,
+      "block_range": "24630127 \u2014 24630326",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 110,
+    "total_scans": 111,
     "total_findings": 175,
     "unique_senders": 83,
     "highest_score": 680,
     "critical_count": 175,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-10T22:54:03.325049+00:00"
+    "last_scan": "2026-03-10T23:24:28.632633+00:00"
   }
 }
