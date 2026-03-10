@@ -5034,16 +5034,23 @@
           "recommended_action": "Immediate action should be taken to freeze the sender's assets and prevent further transactions, and a thorough investigation should be conducted to determine the source of the funds and the intent behind the transaction."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-10T16:33:33.180659+00:00",
+      "eth_price": 2079.92217959198,
+      "block_range": "24628083 \u2014 24628282",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 101,
+    "total_scans": 102,
     "total_findings": 159,
     "unique_senders": 77,
     "highest_score": 610,
     "critical_count": 159,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-10T15:30:33.955264+00:00"
+    "last_scan": "2026-03-10T16:33:33.180659+00:00"
   }
 }
