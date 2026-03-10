@@ -5542,16 +5542,54 @@
       "block_range": "24630127 \u2014 24630326",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-10T23:50:03.274395+00:00",
+      "eth_price": 2034.70120112369,
+      "block_range": "24630253 \u2014 24630452",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x03392600086874456e08d2bac104380bcdebcfc0",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 530,
+          "risk_level": "CRITICAL",
+          "tx_count": 6,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine you're at a bank and you see someone repeatedly trying to deposit tiny amounts of money into an account that's known to be used for money laundering. That's basically what's happening here - someone is sending tiny amounts of cryptocurrency to a service called Tornado Cash, which is like a washing machine for dirty money, and it's been flagged by the government for helping bad guys launder billions of dollars. It's like they're trying to sneak in dirty money without getting caught.",
+          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, like a 'most wanted' list for bad guys). They're also getting a big fat 100 for directly depositing into Tornado Cash, which is like walking into a known money laundering front and asking for a tour. And to top it all off, they're doing it with a bunch of tiny deposits, which is like trying to sneak into a concert by paying for each ticket individually - it's just suspicious. They're basically waving a big flag that says 'I'm trying to launder money!'",
+          "risk_verdict": "CRITICAL \u2014 the direct interaction with a sanctioned entity and suspicious transaction patterns indicate a high risk of money laundering activity.",
+          "recommended_action": "Immediately flag this transaction and suspend any further activity from this wallet, and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN)."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 111,
-    "total_findings": 175,
+    "total_scans": 112,
+    "total_findings": 176,
     "unique_senders": 83,
     "highest_score": 680,
-    "critical_count": 175,
+    "critical_count": 176,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-10T23:24:28.632633+00:00"
+    "last_scan": "2026-03-10T23:50:03.274395+00:00"
   }
 }
