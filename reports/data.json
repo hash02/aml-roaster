@@ -6421,16 +6421,23 @@
           "recommended_action": "Immediately freeze the sender's account and conduct a thorough investigation into their transaction history to identify potential money laundering patterns. Report this activity to the relevant authorities, such as the Financial Crimes Enforcement Network (FinCEN), as required by law."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-11T21:57:19.778227+00:00",
+      "eth_price": 2072.76117775424,
+      "block_range": "24636850 \u2014 24637049",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 133,
+    "total_scans": 134,
     "total_findings": 202,
     "unique_senders": 93,
     "highest_score": 680,
     "critical_count": 202,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-11T21:29:49.392910+00:00"
+    "last_scan": "2026-03-11T21:57:19.778227+00:00"
   }
 }
