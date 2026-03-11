@@ -6106,16 +6106,23 @@
           "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with FinCEN, as the interaction with a sanctioned entity and attempts to evade AML controls indicate a high risk of illicit activity. Block any further transactions from this wallet until the matter is resolved."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-11T19:15:03.707519+00:00",
+      "eth_price": 2070.98047806794,
+      "block_range": "24636047 \u2014 24636246",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 129,
+    "total_scans": 130,
     "total_findings": 191,
     "unique_senders": 89,
     "highest_score": 680,
     "critical_count": 191,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-11T18:10:17.084549+00:00"
+    "last_scan": "2026-03-11T19:15:03.707519+00:00"
   }
 }
