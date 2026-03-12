@@ -6905,16 +6905,23 @@
           "recommended_action": "Immediately flag and freeze the sender's account, and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report the potential money laundering activity. Conduct a thorough investigation into the sender's activities and transactions to determine the source and purpose of the funds."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-12T09:39:13.482134+00:00",
+      "eth_price": 2042.4740996893,
+      "block_range": "24640295 \u2014 24640494",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 144,
+    "total_scans": 145,
     "total_findings": 217,
     "unique_senders": 98,
     "highest_score": 680,
     "critical_count": 217,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-12T08:38:34.216474+00:00"
+    "last_scan": "2026-03-12T09:39:13.482134+00:00"
   }
 }
