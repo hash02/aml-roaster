@@ -6972,16 +6972,50 @@
           "recommended_action": "Immediately flag the sender's wallet for further investigation and consider filing a SAR with FinCEN, as the transaction patterns and sanctioned mixer involvement indicate potential illicit activity. Additionally, monitor the wallet's activity for any future suspicious transactions and consider freezing or blocking the wallet to prevent further potential money laundering or sanctions evasion."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-12T11:29:46.016783+00:00",
+      "eth_price": 2069.43914380543,
+      "block_range": "24640892 \u2014 24641091",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0xf32fdf2b89964e0ef4d6f0b262064172e4942d5d",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 370,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 1.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "exit_rush",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "exit_rush": 40,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a shady store that's known for helping people hide their money, and you give them a large sum of cash to mix with other people's money so it can't be traced back to you. That's basically what happened here, but with cryptocurrency. Someone sent a significant amount of digital money to a service called Tornado Cash, which is like a digital money launderer. This service was even banned by the U.S. government because it helped bad people, like hackers from North Korea, hide their stolen money.",
+          "roast": "This sender is either very naughty or very stupid, scoring 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, like a 'most wanted' list for bad money). They also scored 100 on the mixer_touch, which is like a big red flag saying 'I'm trying to hide my money.' And with an exit_rush score of 40, it looks like they emptied their wallet in a hurry, like they were trying to get rid of the evidence. Oh, and let's not forget the exchange_avoidance score of 30, which is like saying 'I'd rather not follow the rules, thanks.'",
+          "risk_verdict": "CRITICAL \u2014 The transaction's involvement with a sanctioned entity and evasion of anti-money laundering controls poses a significant risk of illicit activity.",
+          "recommended_action": "Immediately freeze the sender's assets and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Conduct a thorough investigation into the sender's activities and consider reporting to relevant law enforcement agencies."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 146,
-    "total_findings": 219,
-    "unique_senders": 98,
+    "total_scans": 147,
+    "total_findings": 220,
+    "unique_senders": 99,
     "highest_score": 680,
-    "critical_count": 219,
+    "critical_count": 220,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-12T10:35:34.044849+00:00"
+    "last_scan": "2026-03-12T11:29:46.016783+00:00"
   }
 }
