@@ -7070,16 +7070,23 @@
           "recommended_action": "Immediately flag this transaction and freeze any related assets to prevent further potential money laundering, and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) as required by 31 CFR 1020.320."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-12T12:52:45.304934+00:00",
+      "eth_price": 2065.96705909202,
+      "block_range": "24641306 \u2014 24641505",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 148,
+    "total_scans": 149,
     "total_findings": 222,
     "unique_senders": 100,
     "highest_score": 680,
     "critical_count": 222,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-12T11:52:29.453959+00:00"
+    "last_scan": "2026-03-12T12:52:45.304934+00:00"
   }
 }
