@@ -6725,16 +6725,58 @@
           "recommended_action": "Immediately freeze the sender's account and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN), and consider reporting this activity to the Office of Foreign Assets Control (OFAC) for potential sanctions violations. Conduct a thorough review of the sender's transaction history to identify any other potential suspicious activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-12T01:46:33.763236+00:00",
+      "eth_price": 2051.9701545428,
+      "block_range": "24637988 \u2014 24638187",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x61f5577912ce38939731e10528524b528b495774",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 630,
+          "risk_level": "CRITICAL",
+          "tx_count": 4,
+          "total_eth": 40.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "novel_wallet_dump",
+            "high_value",
+            "structuring",
+            "peel_chain_linear",
+            "exit_rush",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "novel_wallet_dump": 100,
+            "high_value": 30,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exit_rush": 40,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Someone created a brand new crypto wallet and immediately used it to send a large amount of money to a shady service called Tornado Cash, which is like a money laundering machine. This service was banned by the U.S. government last year because it helped bad guys like North Korean hackers clean their dirty money. The person sent the money in four identical transactions, which is a big red flag because it looks like they're trying to sneak the money past the authorities.",
+          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big neon sign saying 'I'm a money launderer'! They also got a perfect score on the mixer_touch (directly sending money to a sanctioned mixer) and novel_wallet_dump (using a brand new wallet to move a ton of money) - it's like they're trying to win a prize for 'most obvious money laundering attempt'. And let's not forget the structuring (breaking up large transactions into smaller ones to avoid detection) and peel_chain_linear (hiding the origin of the money by sending it through multiple layers of transactions) scores - this person is like a laundry expert, but for dirty money!",
+          "risk_verdict": "CRITICAL \u2014 the transaction poses a high risk of money laundering and terrorist financing due to the involvement of a sanctioned mixer service and multiple suspicious activity indicators",
+          "recommended_action": "Immediately freeze the subject's assets and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN), and consider reporting the incident to the Office of Foreign Assets Control (OFAC) for further investigation and potential enforcement action."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 138,
-    "total_findings": 212,
-    "unique_senders": 95,
+    "total_scans": 139,
+    "total_findings": 213,
+    "unique_senders": 96,
     "highest_score": 680,
-    "critical_count": 212,
+    "critical_count": 213,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-11T23:52:05.772179+00:00"
+    "last_scan": "2026-03-12T01:46:33.763236+00:00"
   }
 }
