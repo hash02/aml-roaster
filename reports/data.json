@@ -6774,16 +6774,50 @@
       "block_range": "24638664 \u2014 24638863",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-12T05:34:21.121762+00:00",
+      "eth_price": 2021.80007414844,
+      "block_range": "24639122 \u2014 24639321",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x88de50b7fef88113fd2ca3e42c8ab848935ede21",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "This is like walking into a known money laundering front and trying to sneak in some dirty cash. Someone sent a tiny amount of cryptocurrency to a service called Tornado Cash, which is like a digital laundry machine for money - it helps hide where the money came from. The problem is, the US government has already flagged Tornado Cash as a bad actor, so this transaction is raising some major red flags.",
+          "roast": "Wow, this sender is either really dumb or really clever - they scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big fat 'I'm a money launderer' stamp on their forehead. They also got a 100 on the mixer_touch score, which means they directly deposited into Tornado Cash, a service that's been sanctioned for helping launder billions of dollars. And with a wallet that's only 0 days old, but has already made 64 transactions, it's like they're trying to win a prize for 'most suspicious activity in one day'.",
+          "risk_verdict": "CRITICAL - The transaction involves a direct interaction with a sanctioned entity (Tornado Cash), indicating a high risk of money laundering or other illicit activity.",
+          "recommended_action": "Immediately freeze any assets associated with the sender's wallet and conduct a thorough investigation into the source and purpose of the funds. It's also recommended to report this activity to the relevant authorities, such as the Financial Crimes Enforcement Network (FinCEN), as it may be indicative of a larger money laundering scheme."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 140,
-    "total_findings": 213,
+    "total_scans": 141,
+    "total_findings": 214,
     "unique_senders": 96,
     "highest_score": 680,
-    "critical_count": 213,
+    "critical_count": 214,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-12T04:11:27.549537+00:00"
+    "last_scan": "2026-03-12T05:34:21.121762+00:00"
   }
 }
