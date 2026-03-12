@@ -7208,16 +7208,23 @@
           "recommended_action": "Immediately flag the sender's wallet for further investigation and consider reporting this activity to the relevant authorities, as it may be indicative of illicit financial activity. It's also a good idea to monitor the wallet's activity closely and be prepared to take additional action if necessary."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-12T16:34:02.150046+00:00",
+      "eth_price": 2069.59635578711,
+      "block_range": "24642405 \u2014 24642604",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 151,
+    "total_scans": 152,
     "total_findings": 226,
     "unique_senders": 101,
     "highest_score": 680,
     "critical_count": 226,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-12T15:15:48.800701+00:00"
+    "last_scan": "2026-03-12T16:34:02.150046+00:00"
   }
 }
