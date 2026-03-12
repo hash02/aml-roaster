@@ -6866,16 +6866,23 @@
           "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with FinCEN. It's also recommended to freeze any related assets and conduct a thorough investigation into the sender's wallet activity and intentions."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-12T07:44:08.780165+00:00",
+      "eth_price": 2037.35045663737,
+      "block_range": "24639767 \u2014 24639966",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 142,
+    "total_scans": 143,
     "total_findings": 216,
     "unique_senders": 97,
     "highest_score": 680,
     "critical_count": 216,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-12T06:50:41.912127+00:00"
+    "last_scan": "2026-03-12T07:44:08.780165+00:00"
   }
 }
