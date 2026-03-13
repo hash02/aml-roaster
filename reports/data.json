@@ -9414,16 +9414,50 @@
           "recommended_action": "Immediately flag this sender's account for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It's also a good idea to monitor their future transactions closely for any other suspicious activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-13T22:31:33.832959+00:00",
+      "eth_price": 2082.83174847943,
+      "block_range": "24651346 \u2014 24651545",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x88de50b7fef88113fd2ca3e42c8ab848935ede21",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "This is like walking into a known money laundering front and handing over cash to someone who's been banned by the government. Essentially, someone sent a tiny amount of cryptocurrency to a service called Tornado Cash, which is like a laundry machine for dirty money. The problem is, Tornado Cash has been blacklisted by the U.S. government for helping bad guys like North Korea's hackers clean their stolen cash.",
+          "roast": "Wow, this sender is really subtle, scoring 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist) and a cool 100 on the mixer_touch score (basically, they directly deposited into a sanctioned crypto mixer). They're also getting a score of 70 for a mixer_contract_call (likely trying to withdraw, vote, or obfuscate - think of it like trying to sneakily use a banned service without being detected). And to top it off, they get 30 points for exchange_avoidance (because who needs legitimate exchanges with know-your-customer rules when you can use a shady mixer?). This is like wearing a 'I'm a money launderer' t-shirt to a party.",
+          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with a sanctioned entity poses a significant risk of money laundering and terrorist financing.",
+          "recommended_action": "Immediately flag this transaction and the sender's wallet for further investigation and potential reporting to the Financial Crimes Enforcement Network (FinCEN). Consider blocking the sender's wallet to prevent any further suspicious activity."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 184,
-    "total_findings": 300,
+    "total_scans": 185,
+    "total_findings": 301,
     "unique_senders": 118,
     "highest_score": 680,
-    "critical_count": 300,
+    "critical_count": 301,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-13T21:58:00.423882+00:00"
+    "last_scan": "2026-03-13T22:31:33.832959+00:00"
   }
 }
