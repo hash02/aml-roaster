@@ -9352,16 +9352,23 @@
           "recommended_action": "Immediately flag this transaction and freeze any related assets to prevent further potential money laundering. Conduct a thorough review of the sender's wallet activity and profile to determine the source of the funds and potential connections to other illicit activities."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-13T19:29:13.818500+00:00",
+      "eth_price": 2099.8426637847,
+      "block_range": "24650437 \u2014 24650636",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 179,
+    "total_scans": 180,
     "total_findings": 299,
     "unique_senders": 118,
     "highest_score": 680,
     "critical_count": 299,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-13T18:41:58.233919+00:00"
+    "last_scan": "2026-03-13T19:29:13.818500+00:00"
   }
 }
