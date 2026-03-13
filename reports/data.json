@@ -9078,16 +9078,23 @@
           "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into their transactions and wallet activity. Additionally, consider reporting this activity to the relevant authorities, such as FinCEN, to ensure compliance with AML regulations."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-13T14:49:47.566253+00:00",
+      "eth_price": 2170.88973509955,
+      "block_range": "24649050 \u2014 24649249",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 174,
+    "total_scans": 175,
     "total_findings": 290,
     "unique_senders": 115,
     "highest_score": 680,
     "critical_count": 290,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-13T13:59:47.556884+00:00"
+    "last_scan": "2026-03-13T14:49:47.566253+00:00"
   }
 }
