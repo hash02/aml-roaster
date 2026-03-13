@@ -8608,16 +8608,23 @@
           "recommended_action": "Immediately freeze the sender's account and conduct a thorough investigation into their activities, including reviewing all past transactions for similar patterns of suspicious behavior. Report this activity to the relevant financial authorities as a suspicious transaction."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-13T07:42:54.050654+00:00",
+      "eth_price": 2097.39670036565,
+      "block_range": "24646922 \u2014 24647121",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 166,
+    "total_scans": 167,
     "total_findings": 274,
     "unique_senders": 109,
     "highest_score": 680,
     "critical_count": 274,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-13T06:48:43.473756+00:00"
+    "last_scan": "2026-03-13T07:42:54.050654+00:00"
   }
 }
