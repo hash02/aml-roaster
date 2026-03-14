@@ -10638,16 +10638,23 @@
           "recommended_action": "Immediately freeze the sender's assets and file a Suspicious Activity Report with the Financial Crimes Enforcement Network. Further investigation is necessary to determine the source and purpose of the funds."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-14T22:51:58.123526+00:00",
+      "eth_price": 2084.38539391505,
+      "block_range": "24658578 \u2014 24658777",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 218,
+    "total_scans": 219,
     "total_findings": 336,
     "unique_senders": 127,
     "highest_score": 680,
     "critical_count": 336,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-14T22:22:01.198445+00:00"
+    "last_scan": "2026-03-14T22:51:58.123526+00:00"
   }
 }
