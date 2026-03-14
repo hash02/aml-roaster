@@ -9606,16 +9606,50 @@
           "recommended_action": "Immediately freeze the sender's account and conduct a thorough investigation into their activity, including reviewing their transaction history and verifying their identity. Report this suspicious activity to the relevant authorities, such as FinCEN, as required by the Bank Secrecy Act."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-14T10:30:37.046867+00:00",
+      "eth_price": 2065.79236664872,
+      "block_range": "24654933 \u2014 24655132",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0xd0b9b6674b77befd88884d2bdeea979c023938e8",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a shady money exchange that's been blacklisted by the government, and you're trying to swap your cash without anyone noticing. That's basically what happened here, but with cryptocurrency. Someone sent a tiny amount of crypto to a service called Tornado Cash, which is like a money mixer that helps people hide where their money came from. The problem is, this service has been sanctioned by the U.S. government for helping bad actors launder billions of dollars.",
+          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved with some shady stuff'. They also got a 100 on the mixer_touch score, which is like getting caught red-handed trying to mix their dirty money. And let's not forget the 70 on the mixer_contract_call score, because who needs a legitimate transaction when you can just sneak around with zero-value contract calls? It's like they're playing a game of crypto hide-and-seek, but they're really bad at it.",
+          "risk_verdict": "The risk verdict is CRITICAL because the transaction involves a direct interaction with a sanctioned entity, indicating a high likelihood of illicit activity and potential involvement with malicious actors.",
+          "recommended_action": "Immediately flag the sender's wallet for further investigation and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, monitor the wallet's activity closely for any future transactions that may indicate ongoing illicit activity."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 196,
-    "total_findings": 304,
+    "total_scans": 197,
+    "total_findings": 305,
     "unique_senders": 118,
     "highest_score": 680,
-    "critical_count": 304,
+    "critical_count": 305,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-14T09:57:35.325971+00:00"
+    "last_scan": "2026-03-14T10:30:37.046867+00:00"
   }
 }
