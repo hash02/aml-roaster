@@ -10009,16 +10009,48 @@
           "recommended_action": "Immediately flag this transaction and the sender's wallet for further review, and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report the potential money laundering activity. It's also recommended to monitor the sender's wallet for any future suspicious activity and to consider blocking or restricting their access to the platform."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-14T16:56:11.114381+00:00",
+      "eth_price": 2077.82374540889,
+      "block_range": "24656853 \u2014 24657052",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0xf3ad7313a5b187740bfe6ed52eaa6dc6ec6e5635",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 380,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 100.0,
+          "rules_triggered": [
+            "stablecoin_mixing",
+            "ofac_hit",
+            "mixer_touch"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80,
+            "ofac_hit": 200,
+            "mixer_touch": 100
+          },
+          "what_happened": "Imagine walking into a store that's known for helping bad people hide their dirty money, and you give them $100 to mix with other money so it can't be traced. That's basically what happened here, but with cryptocurrency. Someone sent $100 in a type of cryptocurrency called stablecoin to a service called Tornado Cash, which is like a money mixer. The problem is, Tornado Cash has been marked by the U.S. government as a place that helps launder money, including for very bad actors like North Korea.",
+          "roast": "This sender just scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like getting a big red flag that says 'I'm involved with bad people.' They also got an 80 for stablecoin mixing, because who needs subtle money laundering when you can just send round-number amounts to a known mixer? And to top it off, they got a 100 for mixer touch, because directly depositing into Tornado Cash is like wearing a 'I'm probably a money launderer' t-shirt. It's not the most subtle move.",
+          "risk_verdict": "CRITICAL \u2014 The transaction involves a direct and significant interaction with a U.S. Treasury-sanctioned entity, indicating a high risk of money laundering or other illicit financial activity.",
+          "recommended_action": "Immediately flag this transaction for further review and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) due to the involvement of a sanctioned entity and potential money laundering activity. Additionally, consider freezing or blocking any further transactions related to this sender or recipient to prevent potential further illicit activity."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 207,
-    "total_findings": 316,
+    "total_scans": 208,
+    "total_findings": 317,
     "unique_senders": 121,
     "highest_score": 680,
-    "critical_count": 316,
+    "critical_count": 317,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-14T16:27:15.059862+00:00"
+    "last_scan": "2026-03-14T16:56:11.114381+00:00"
   }
 }
