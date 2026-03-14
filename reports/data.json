@@ -9872,16 +9872,50 @@
           "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into their activity, including reviewing their transaction history and identifying the source of their funds. Report this suspicious activity to the relevant authorities, such as FinCEN, as soon as possible."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-14T14:54:11.471759+00:00",
+      "eth_price": 2072.91016421832,
+      "block_range": "24656247 \u2014 24656446",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x4af043aca08bbe1fa2ac78eb205ea353327aa5ce",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "This is like sending money to a shady character on the street who's known for helping bad guys launder their cash. Someone just sent a tiny amount of cryptocurrency to a service called Tornado Cash, which is like a money blender that makes it hard to track where the money came from or where it's going. It's a major red flag because Tornado Cash has been sanctioned by the U.S. government for helping launder billions of dollars, including money stolen by North Korea's hackers.",
+          "roast": "Wow, this sender is either really bad at hiding their tracks or they're trying to win a prize for 'most obvious money laundering attempt'. They scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big neon sign saying 'I'm helping bad guys'. And with a score of 100 for mixer_touch (directly sending money to a sanctioned mixer), it's like they're trying to make it easy for us to catch them. They even got a score of 70 for mixer_contract_call (likely trying to obfuscate their tracks), which is just a fancy way of saying they're trying to cover their behinds.",
+          "risk_verdict": "CRITICAL \u2014 The sender's interaction with a sanctioned entity and attempts to obfuscate their tracks pose a significant risk of money laundering and illicit activity.",
+          "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, the sender's wallet should be monitored closely for any future suspicious activity."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 203,
-    "total_findings": 312,
+    "total_scans": 204,
+    "total_findings": 313,
     "unique_senders": 120,
     "highest_score": 680,
-    "critical_count": 312,
+    "critical_count": 313,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-14T14:25:45.347348+00:00"
+    "last_scan": "2026-03-14T14:54:11.471759+00:00"
   }
 }
