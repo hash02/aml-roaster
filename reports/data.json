@@ -10958,16 +10958,48 @@
           "recommended_action": "Immediately flag and freeze the sender's wallet, and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to ensure compliance with AML regulations. Further investigation into the sender's identity and the source of the funds is also recommended."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-15T10:25:50.389317+00:00",
+      "eth_price": 2119.64199904635,
+      "block_range": "24662078 \u2014 24662277",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0xe85e5d6fa8d55a1232517b8ac57707997a764517",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 330,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.1,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a shady money exchange that's known for helping bad guys like hackers and thieves. That's basically what happened here - someone sent a small amount of cryptocurrency, about $212 worth, to a service called Tornado Cash, which is like a digital laundry machine for dirty money. This service was even sanctioned by the US government for helping launder billions of dollars, including funds stolen by North Korean hackers.",
+          "roast": "Scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over your head saying 'I'm involved in some shady stuff'. And to make matters worse, they also scored 100 on the mixer_touch (basically, they directly sent money to a sanctioned crypto mixer), and 30 on the exchange_avoidance (meaning they skipped the legitimate exchange where they would have had to show their ID, like trying to avoid a metal detector at the airport). It looks like someone's trying to wash their dirty crypto undies in private.",
+          "risk_verdict": "CRITICAL - The transaction poses a high risk of money laundering due to its involvement with a sanctioned crypto mixer and evasion of legitimate exchange controls.",
+          "recommended_action": "Immediately flag this transaction for further review and consider reporting it to the relevant authorities, as it may be connected to illicit activity. Additionally, monitor the sender's wallet for any future suspicious activity."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 228,
-    "total_findings": 345,
-    "unique_senders": 128,
+    "total_scans": 229,
+    "total_findings": 346,
+    "unique_senders": 129,
     "highest_score": 680,
-    "critical_count": 345,
+    "critical_count": 346,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-15T09:30:58.694289+00:00"
+    "last_scan": "2026-03-15T10:25:50.389317+00:00"
   }
 }
