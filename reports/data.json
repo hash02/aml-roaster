@@ -11210,16 +11210,23 @@
           "recommended_action": "Immediately flag the sender's wallet for suspicious activity and consider filing a SAR with FinCEN. Block any further transactions to or from this wallet to prevent potential money laundering and comply with OFAC sanctions regulations."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-15T12:43:46.794992+00:00",
+      "eth_price": 2112.41943819905,
+      "block_range": "24662764 \u2014 24662963",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 232,
+    "total_scans": 233,
     "total_findings": 353,
     "unique_senders": 131,
     "highest_score": 680,
     "critical_count": 353,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-15T11:48:47.965989+00:00"
+    "last_scan": "2026-03-15T12:43:46.794992+00:00"
   }
 }
