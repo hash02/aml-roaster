@@ -12384,16 +12384,50 @@
           "recommended_action": "Immediately freeze all assets associated with the sender's wallet and file a suspicious activity report to the Financial Crimes Enforcement Network (FinCEN). Conduct a thorough investigation into the source of funds and the purpose of the transactions to determine the extent of potential money laundering activity"
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-16T22:29:26.754030+00:00",
+      "eth_price": 2361.36189838795,
+      "block_range": "24672815 \u2014 24673014",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x09efa4777a855eb946df013c8f3e51fc553aa81d",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a shady money exchange that's known for helping bad guys clean their dirty cash - that's basically what happened here. Someone sent a tiny amount of cryptocurrency to a place called Tornado Cash, which is like a laundry machine for money, but instead of clothes, it 'washes' cryptocurrency to make it untraceable. This Tornado Cash place has been flagged by the U.S. government for helping some very bad people, including those from North Korea.",
+          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag that says 'I'm involved with some shady stuff'. They also got a score of 100 for directly depositing into Tornado Cash, a mixer (think of it like a blender for money) that's been sanctioned by the U.S. government. It looks like they're trying to avoid the law by using a zero-value contract call, which is like trying to sneak past the bouncer at a club without paying the cover charge. Oh, and they got a 30 for avoiding legitimate exchanges, which is like trying to buy groceries from a shady character on the street instead of going to a real store.",
+          "risk_verdict": "CRITICAL - the transaction involves direct interaction with a U.S. Treasury-sanctioned entity, indicating a high risk of money laundering or other illicit activity.",
+          "recommended_action": "Immediately flag the sender's wallet for further investigation and consider filing a Suspicious Activity Report (SAR) with FinCEN. Block any future transactions to or from this wallet to prevent potential money laundering or other illicit activity."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 267,
-    "total_findings": 387,
+    "total_scans": 268,
+    "total_findings": 388,
     "unique_senders": 144,
     "highest_score": 680,
-    "critical_count": 387,
+    "critical_count": 388,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-16T21:36:03.234146+00:00"
+    "last_scan": "2026-03-16T22:29:26.754030+00:00"
   }
 }
