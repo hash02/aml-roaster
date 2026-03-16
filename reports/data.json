@@ -12305,16 +12305,54 @@
       "block_range": "24671734 \u2014 24671933",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-16T19:53:24.969984+00:00",
+      "eth_price": 2330.50505773529,
+      "block_range": "24672072 \u2014 24672271",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0xf50ef13e5c29f9cf52b6476997d7d9a9352587e7",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 530,
+          "risk_level": "CRITICAL",
+          "tx_count": 4,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a store that's known for helping criminals hide their dirty money, and then trying to sneak in some fake, empty boxes to make it look like you're just a regular customer. That's basically what happened here, but instead of a store, it's a special kind of computer program called Tornado Cash, which was shut down by the government for helping bad people launder money. The person sending the money is trying to hide their tracks by sending it to this program, but it's like they're waving a big red flag saying 'hey, I'm up to no good'.",
+          "roast": "This sender just scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, like a 'most wanted' list for money launderers). They're using Tornado Cash, which is like a big neon sign saying 'I'm a money launderer, catch me if you can'. And with a score of 100 on the mixer_touch (which means they directly interacted with a sanctioned mixer, basically a no-no in the crypto world), it's like they're trying to win an award for 'most creative way to get caught'. Oh, and let's not forget the structuring score of 70 (meaning they're trying to sneak money in by breaking it up into smaller, less suspicious-looking pieces), because who needs subtlety when you're already being so obvious?",
+          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with a sanctioned entity and suspicious transaction patterns pose a high risk of money laundering and illicit activity.",
+          "recommended_action": "Immediately flag the sender's account for further review and consideration of enhanced due diligence measures, and consider reporting this activity to the relevant authorities, such as FinCEN, in accordance with 31 CFR 1020.320."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 264,
-    "total_findings": 385,
+    "total_scans": 265,
+    "total_findings": 386,
     "unique_senders": 143,
     "highest_score": 680,
-    "critical_count": 385,
+    "critical_count": 386,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-16T18:57:03.656854+00:00"
+    "last_scan": "2026-03-16T19:53:24.969984+00:00"
   }
 }
