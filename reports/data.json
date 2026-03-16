@@ -12350,16 +12350,50 @@
       "block_range": "24672280 \u2014 24672479",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-16T21:36:03.234146+00:00",
+      "eth_price": 2355.80784141269,
+      "block_range": "24672580 \u2014 24672779",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x862f8d1af5cde8551f83e9d184a40f45c9734644",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 380,
+          "risk_level": "CRITICAL",
+          "tx_count": 9,
+          "total_eth": 111.6,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "whale_transfer",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "whale_transfer": 50,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a store that's known for helping bad people hide their dirty money, and you give them a huge amount of cash to mix with other people's money so it can't be traced. That's basically what happened here - someone sent a lot of Ethereum (a type of digital money) to a service called Tornado Cash, which is like a money laundering machine. The problem is, this service was banned by the U.S. government because it was helping bad people, like hackers from North Korea, hide their stolen money.",
+          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, which is like a list of the worst financial criminals in the world). They're also getting a big fat 100 for directly depositing into a sanctioned mixer, because who needs to follow the law, right? And let's not forget the whale-level transfer of 111.6000 ETH, which is like trying to sneak a blue whale through a revolving door - it's just not subtle. This is like a money laundering 101 class, and they're getting an A+ in 'how to get caught'",
+          "risk_verdict": "CRITICAL - The direct interaction with a sanctioned entity and large-scale transfers indicate a high likelihood of money laundering activity",
+          "recommended_action": "Immediately freeze all assets associated with the sender's wallet and file a suspicious activity report to the Financial Crimes Enforcement Network (FinCEN). Conduct a thorough investigation into the source of funds and the purpose of the transactions to determine the extent of potential money laundering activity"
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 266,
-    "total_findings": 386,
-    "unique_senders": 143,
+    "total_scans": 267,
+    "total_findings": 387,
+    "unique_senders": 144,
     "highest_score": 680,
-    "critical_count": 386,
+    "critical_count": 387,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-16T20:36:15.127261+00:00"
+    "last_scan": "2026-03-16T21:36:03.234146+00:00"
   }
 }
