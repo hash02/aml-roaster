@@ -12684,16 +12684,23 @@
           "recommended_action": "Immediately flag this transaction and freeze the sender's wallet to prevent further suspicious activity, and file a SAR with FinCEN within the required timeframe to report the potential money laundering attempt."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-17T07:58:45.933550+00:00",
+      "eth_price": 2326.11214823676,
+      "block_range": "24675677 \u2014 24675876",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 274,
+    "total_scans": 275,
     "total_findings": 396,
     "unique_senders": 147,
     "highest_score": 680,
     "critical_count": 396,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-17T07:00:09.688416+00:00"
+    "last_scan": "2026-03-17T07:58:45.933550+00:00"
   }
 }
