@@ -14538,16 +14538,23 @@
           "recommended_action": "Immediately flag this transaction for further review and consider filing a suspicious activity report with the Financial Crimes Enforcement Network (FinCEN). Additionally, consider blocking or restricting the sender's wallet address to prevent potential future illicit activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-18T13:03:08.556765+00:00",
+      "eth_price": 2226.27394015455,
+      "block_range": "24684293 \u2014 24684492",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 299,
+    "total_scans": 300,
     "total_findings": 458,
     "unique_senders": 168,
     "highest_score": 680,
     "critical_count": 458,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-18T11:42:51.134836+00:00"
+    "last_scan": "2026-03-18T13:03:08.556765+00:00"
   }
 }
