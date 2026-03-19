@@ -15516,16 +15516,50 @@
       "block_range": "24691431 \u2014 24691630",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-19T14:07:53.868118+00:00",
+      "eth_price": 2137.21064350523,
+      "block_range": "24691828 \u2014 24692027",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x5555555731006f71f121144534ca7c8799f66aa3",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a known money laundering front, handing over your cash, and expecting it to be 'cleaned' so you can use it without anyone tracing it back to you. That's basically what happened here, but with cryptocurrency. Someone sent a transaction to a service called Tornado Cash, which is like a digital laundry machine for money, and it's been flagged by the U.S. government for helping bad guys like North Korea's hackers. This service was used to mix and hide the origin of the funds, making it hard to track where the money came from or where it's going.",
+          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big, red 'I'm a money launderer' flag waving over their head. They also got a mixer_touch score of 100 for directly depositing into Tornado Cash, because who needs subtlety when you're laundering money? And with a mixer_contract_call score of 70, it looks like they were trying to withdraw, vote, or just generally obfuscate their tracks \u2013 you know, the usual 'I'm not doing anything shady, I swear' move. Oh, and they got a cool 30 points for exchange_avoidance, because using a legit exchange with actual KYC/AML controls would just be too mainstream.",
+          "risk_verdict": "CRITICAL \u2014 The transaction poses a significant risk due to its direct involvement with a sanctioned entity and potential money laundering activity.",
+          "recommended_action": "Immediately flag this transaction and the sender's wallet for further investigation, and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report the potential money laundering activity. It is also recommended to monitor the sender's wallet for any future suspicious activity and to take appropriate action to prevent any potential illicit funds from being transferred."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 320,
-    "total_findings": 489,
+    "total_scans": 321,
+    "total_findings": 490,
     "unique_senders": 179,
     "highest_score": 680,
-    "critical_count": 489,
+    "critical_count": 490,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-19T12:59:08.626335+00:00"
+    "last_scan": "2026-03-19T14:07:53.868118+00:00"
   }
 }
