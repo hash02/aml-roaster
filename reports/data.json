@@ -15468,16 +15468,50 @@
           "recommended_action": "Immediately flag this transaction and the involved parties for further investigation, and consider reporting this activity to the Financial Crimes Enforcement Network (FinCEN) as a Suspicious Activity Report (SAR)."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-19T10:37:32.451443+00:00",
+      "eth_price": 2179.15434410704,
+      "block_range": "24690728 \u2014 24690927",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x213cfeb89529efc2eae2a502d4a8253fe4ae76ef",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a shady store that's known for helping bad guys launder their dirty money, and you're trying to exchange some cash there instead of going to a legitimate bank. That's basically what happened here - someone sent a transaction to a service called Tornado Cash, which is like a money laundering machine that was shut down by the U.S. government because it helped North Korea and other bad actors. This service is designed to mix and hide the source of funds, kind of like trying to erase the history of where your money came from.",
+          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, think of it like a list of the worst financial criminals), which is like having a big red flag waving over their head saying 'I'm involved with bad guys'. And to make matters worse, they're using Tornado Cash, a crypto mixing service that's been sanctioned for helping launder over $7 billion in dirty money. They're also avoiding legitimate exchanges, which is like trying to avoid a security check at the airport - it raises a lot of suspicion. With a composite score of 400, this transaction is basically screaming 'I'm a money laundering attempt' - it's like they're wearing a neon sign that says 'catch me if you can'.",
+          "risk_verdict": "CRITICAL \u2014 the transaction involves a sanctioned entity and exhibits strong indicators of money laundering activity, posing a significant risk to the financial system.",
+          "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Block any further transactions from this sender to prevent potential money laundering activity."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 317,
-    "total_findings": 488,
+    "total_scans": 318,
+    "total_findings": 489,
     "unique_senders": 179,
     "highest_score": 680,
-    "critical_count": 488,
+    "critical_count": 489,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-19T09:39:41.651065+00:00"
+    "last_scan": "2026-03-19T10:37:32.451443+00:00"
   }
 }
