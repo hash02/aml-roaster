@@ -15404,16 +15404,48 @@
           "recommended_action": "Immediate attention is required to investigate and potentially freeze the sender's assets to prevent further potential money laundering activities. It is also recommended to file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report this potentially illicit activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-19T08:38:03.674932+00:00",
+      "eth_price": 2160.55989419101,
+      "block_range": "24690150 \u2014 24690349",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x620c3bc421ae782e73ce587008417931e4a17daf",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 2000.0,
+          "rules_triggered": [
+            "stablecoin_mixing",
+            "ofac_hit",
+            "mixer_touch"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 100,
+            "ofac_hit": 200,
+            "mixer_touch": 100
+          },
+          "what_happened": "Someone sent $2,000 in stablecoins to a cryptocurrency mixing service called Tornado Cash, which is like trying to wash your money clean by putting it through a spin cycle - it's a major red flag. This service was actually banned by the U.S. government because it helped bad people, like North Korean hackers, launder billions of dollars. Basically, this transaction is like walking into a known money laundering front and handing over your cash.",
+          "roast": "Looks like someone scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist) - congrats, you're now associated with North Korean hackers and other lovely folks. They also got a 100 on the mixer_touch (that's when you directly deposit money into a shady mixing service like Tornado Cash, which is like throwing your money into a black hole, but less fun). And to top it all off, they got another 100 for stablecoin_mixing (basically, using stablecoins to try and disguise the money trail - think of it like using a fake mustache to hide your identity, but way less convincing).",
+          "risk_verdict": "CRITICAL \u2014 the transaction involves a direct interaction with a sanctioned entity, indicating a high risk of money laundering and sanctions evasion.",
+          "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It's also a good idea to freeze any related accounts and conduct a thorough investigation into the source of the funds and the intended use of the cryptocurrency."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 315,
-    "total_findings": 486,
-    "unique_senders": 178,
+    "total_scans": 316,
+    "total_findings": 487,
+    "unique_senders": 179,
     "highest_score": 680,
-    "critical_count": 486,
+    "critical_count": 487,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-19T07:45:14.322440+00:00"
+    "last_scan": "2026-03-19T08:38:03.674932+00:00"
   }
 }
