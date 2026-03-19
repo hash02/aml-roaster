@@ -15120,16 +15120,48 @@
       "block_range": "24688912 \u2014 24689111",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-19T05:42:05.020567+00:00",
+      "eth_price": 2191.20454793576,
+      "block_range": "24689306 \u2014 24689505",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x977609b3d74f01a3c351097f71986d119d225e55",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 380,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 100.0,
+          "rules_triggered": [
+            "stablecoin_mixing",
+            "ofac_hit",
+            "mixer_touch"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80,
+            "ofac_hit": 200,
+            "mixer_touch": 100
+          },
+          "what_happened": "Someone just sent $100 in a type of digital money called stablecoin to a place called Tornado Cash, which is like a shady laundry service for cryptocurrency. This is like walking into a known money laundering front and handing over cash - it's a major red flag. The person who sent the money did it in a way that tried to make the transaction look normal, but it's still suspicious.",
+          "roast": "Oh great, someone decided to use Tornado Cash, a service that's literally on the U.S. Treasury's sanctions blacklist (that's what we call an OFAC hit, meaning this address is on the list of bad guys). They scored 200 on the OFAC hit, which is like getting a big fat F on a test of 'are you a good guy or not'. And to make matters worse, they also got a high score for stablecoin mixing (that's when you mix your money with other people's money to hide where it came from) and mixer touch (which is just a fancy way of saying they touched a dirty mixer, like Tornado Cash). It's like they're trying to win an award for 'most suspicious transaction ever'.",
+          "risk_verdict": "CRITICAL \u2014 the transaction involves a direct interaction with a sanctioned entity, Tornado Cash, and exhibits multiple indicators of money laundering activity.",
+          "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with FinCEN. Block any further transactions from this sender to prevent potential money laundering activity."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 312,
-    "total_findings": 476,
+    "total_scans": 313,
+    "total_findings": 477,
     "unique_senders": 176,
     "highest_score": 680,
-    "critical_count": 476,
+    "critical_count": 477,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-19T04:22:40.147115+00:00"
+    "last_scan": "2026-03-19T05:42:05.020567+00:00"
   }
 }
