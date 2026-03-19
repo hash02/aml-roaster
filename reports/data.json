@@ -15550,16 +15550,23 @@
           "recommended_action": "Immediately flag this transaction and the sender's wallet for further investigation, and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report the potential money laundering activity. It is also recommended to monitor the sender's wallet for any future suspicious activity and to take appropriate action to prevent any potential illicit funds from being transferred."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-19T15:15:05.787585+00:00",
+      "eth_price": 2128.14084694268,
+      "block_range": "24692162 \u2014 24692361",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 321,
+    "total_scans": 322,
     "total_findings": 490,
     "unique_senders": 179,
     "highest_score": 680,
     "critical_count": 490,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-19T14:07:53.868118+00:00"
+    "last_scan": "2026-03-19T15:15:05.787585+00:00"
   }
 }
