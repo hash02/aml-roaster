@@ -15727,16 +15727,23 @@
           "recommended_action": "Immediately freeze the sender's assets and flag their account for further investigation, and consider reporting this activity to the Financial Crimes Enforcement Network (FinCEN) as a suspicious transaction."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-19T18:53:39.933244+00:00",
+      "eth_price": 2117.97886165014,
+      "block_range": "24693252 \u2014 24693451",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 324,
+    "total_scans": 325,
     "total_findings": 496,
     "unique_senders": 181,
     "highest_score": 680,
     "critical_count": 496,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-19T17:32:11.612835+00:00"
+    "last_scan": "2026-03-19T18:53:39.933244+00:00"
   }
 }
