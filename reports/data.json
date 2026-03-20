@@ -16729,16 +16729,82 @@
       "block_range": "24700032 \u2014 24700231",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-20T18:42:58.538117+00:00",
+      "eth_price": 2124.1912120802,
+      "block_range": "24700362 \u2014 24700561",
+      "total_findings": 2,
+      "findings": [
+        {
+          "sender": "0x4750bcfcc340aa4b31be7e71fa072716d28c29c5",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 580,
+          "risk_level": "CRITICAL",
+          "tx_count": 4,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "velocity",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "velocity": 50,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a shady money laundering front, but instead of cash, it's cryptocurrency. Someone is trying to hide their money trail by using a service called Tornado Cash, which is like a cryptocurrency laundry machine. They've made four identical transactions in a short span, which is like trying to sneak money into the laundry machine without being noticed.",
+          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head. They're using Tornado Cash, a crypto mixing service that's been sanctioned for helping launder billions of dollars, including funds stolen by North Korea's Lazarus Group - nice company they're keeping. They're also trying to sneak in zero-value transactions, which is like trying to hide a elephant in a closet. And with a wallet that's been around for 1359 days, you'd think they'd know better, but I guess old habits die hard.",
+          "risk_verdict": "CRITICAL \u2014 the transactions involve a sanctioned entity and exhibit clear indicators of money laundering, posing a high risk to the financial system.",
+          "recommended_action": "Immediately freeze the sender's wallet and report this activity to the relevant authorities, and consider enhanced due diligence on the sender's wallet and associated transactions to prevent further potential money laundering activity."
+        },
+        {
+          "sender": "0xf50ef13e5c29f9cf52b6476997d7d9a9352587e7",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a bank and trying to deposit money into an account that's known to be used by criminals to launder their dirty cash. That's basically what happened here, but instead of a bank, it's a cryptocurrency transaction. The sender is trying to move money to an address that's linked to Tornado Cash, a service that helps people mix their cryptocurrency to hide its origin, which is like trying to wash dirty money clean.",
+          "roast": "This sender is either very brave or very stupid, scoring 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, like a 'most wanted' list for financial crimes). They're essentially waving a big red flag saying 'hey, I'm trying to launder some money here!' with a direct deposit to Tornado Cash, a mixer that's been sanctioned for helping bad guys like North Korea's Lazarus Group. And with a score of 100 on the mixer_touch, it's like they're leaving a trail of breadcrumbs to their illicit activities. It's not like they're even trying to hide it, making it a big fat 400 composite score, which is like a neon sign saying 'I'm a high-risk transaction'",
+          "risk_verdict": "CRITICAL \u2014 the transaction poses a high risk of money laundering and sanctions evasion due to its direct involvement with a sanctioned entity, Tornado Cash.",
+          "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the relevant authorities. It's also recommended to freeze any related assets and conduct a thorough investigation into the sender's wallet activity to identify any potential illicit transactions."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 347,
-    "total_findings": 527,
+    "total_scans": 348,
+    "total_findings": 529,
     "unique_senders": 189,
     "highest_score": 680,
-    "critical_count": 527,
+    "critical_count": 529,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-20T17:33:28.657636+00:00"
+    "last_scan": "2026-03-20T18:42:58.538117+00:00"
   }
 }
