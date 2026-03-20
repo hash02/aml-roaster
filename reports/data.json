@@ -17105,16 +17105,23 @@
           "recommended_action": "Immediately flag the sender's wallet for enhanced monitoring and report this activity to the Financial Crimes Enforcement Network (FinCEN) via a Suspicious Activity Report (SAR), and consider freezing any related assets to prevent further illicit activity. It is also recommended to review the sender's entire transaction history for any other suspicious patterns or connections to sanctioned entities."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-20T23:51:28.754530+00:00",
+      "eth_price": 2147.34546854084,
+      "block_range": "24701858 \u2014 24702057",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 355,
+    "total_scans": 356,
     "total_findings": 539,
     "unique_senders": 193,
     "highest_score": 680,
     "critical_count": 539,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-20T23:26:13.944378+00:00"
+    "last_scan": "2026-03-20T23:51:28.754530+00:00"
   }
 }
