@@ -16241,16 +16241,23 @@
           "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It's also a good idea to investigate the sender's identity and the source of the funds to determine if any additional suspicious activity has occurred."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-20T07:43:20.181767+00:00",
+      "eth_price": 2150.04060897562,
+      "block_range": "24697088 \u2014 24697287",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 335,
+    "total_scans": 336,
     "total_findings": 512,
     "unique_senders": 185,
     "highest_score": 680,
     "critical_count": 512,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-20T06:51:08.262162+00:00"
+    "last_scan": "2026-03-20T07:43:20.181767+00:00"
   }
 }
