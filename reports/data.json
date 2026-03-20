@@ -16795,16 +16795,102 @@
           "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the relevant authorities. It's also recommended to freeze any related assets and conduct a thorough investigation into the sender's wallet activity to identify any potential illicit transactions."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-20T19:35:48.339305+00:00",
+      "eth_price": 2121.12319290168,
+      "block_range": "24700639 \u2014 24700838",
+      "total_findings": 3,
+      "findings": [
+        {
+          "sender": "0x527fc50164c5b485b41dd2041d71e6141c37f728",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 446,
+          "risk_level": "CRITICAL",
+          "tx_count": 5,
+          "total_eth": 3.2,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "novel_wallet_dump",
+            "velocity",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "novel_wallet_dump": 66,
+            "velocity": 50,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Someone just sent a bunch of money to a super shady place on the internet, kind of like walking into a known money laundering front. They used a brand new wallet, which is like creating a new bank account just to send a large sum of money, and they did it really fast, like they were trying to avoid detection. The place they sent the money to is called Tornado Cash, which is like a laundry machine for dirty money, and it's been banned by the US government because it helps bad people clean their money.",
+          "roast": "Wow, you scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag that says 'I'm a money launderer'. And with a score of 100 on the mixer_touch (which means you directly sent money to a sanctioned mixing service), it's like you're trying to win an award for 'most obvious money laundering attempt'. You also got a score of 66 on the novel_wallet_dump (which means you used a brand new wallet to move a large amount of money), because who needs a legitimate wallet when you can just create a new one to launder money? And let's not forget the score of 50 on the velocity (which means you sent multiple transactions in a short amount of time), because nothing says 'legitimate transaction' like sending a bunch of money really fast.",
+          "risk_verdict": "CRITICAL \u2014 the transaction pattern indicates a high likelihood of money laundering activity due to the use of a sanctioned mixer service and other suspicious characteristics.",
+          "recommended_action": "Immediately freeze the sender's wallet and report this activity to the relevant authorities, as it appears to be a clear attempt to launder money through a sanctioned service. Conduct a thorough investigation to determine the source of the funds and the identities of the individuals involved."
+        },
+        {
+          "sender": "0x0a5b2bf3ccfb44c1d22f07eed9553ecba752d4ad",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a store that's known for helping bad people hide their dirty money, and you're trying to exchange some cash there instead of going to a legitimate bank. That's basically what happened here, but with cryptocurrency. Someone sent a transaction to a service called Tornado Cash, which is like a money laundering machine, and it's been flagged by the U.S. government for helping bad actors.",
+          "roast": "Wow, this sender is either really bad at hiding their tracks or they're trying to win an award for 'most obvious money laundering attempt'. They scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved in shady stuff'. And let's not forget the mixer_touch score of 100, which is like a big stamp that says 'I'm using a service that's designed to hide illegal activity'. It's like they're trying to make it easy for us to catch them.",
+          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with a sanctioned entity poses a significant risk of money laundering and illicit activity.",
+          "recommended_action": "Immediately flag this transaction and the sender's wallet for further review, and consider reporting this activity to the Financial Crimes Enforcement Network (FinCEN) as a suspicious transaction. It's also a good idea to monitor this wallet's activity closely for any future suspicious behavior."
+        },
+        {
+          "sender": "0xcd53fa7f05fb6749b3e67c297b058dcbafb5f977",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 330,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.1,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Someone just sent a chunk of money to a shady place called Tornado Cash, which is like walking into a known money laundering front - it's a service that mixes up money to hide where it came from. This is a big deal because Tornado Cash was specifically sanctioned by the U.S. government for helping bad guys like North Korea's hackers launder billions of dollars. The person sending the money is using a brand new wallet, which is like using a burner phone to make a suspicious call.",
+          "roast": "Looks like someone just scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like getting a big fat F on your report card for being a bad actor. They also got a 100 on the mixer_touch score, which means they directly deposited money into Tornado Cash, a crypto mixing service that's basically a laundry machine for dirty money. And to top it off, they got a 30 on the exchange_avoidance score, which means they're trying to avoid the usual checks and balances that legitimate exchanges have in place - it's like trying to sneak into a club through the back door.",
+          "risk_verdict": "CRITICAL - the transaction involves a direct deposit to a sanctioned entity, indicating a high risk of money laundering and potential support of illicit activities.",
+          "recommended_action": "Immediately freeze the sender's assets and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN), and consider reporting this activity to the U.S. Treasury's Office of Foreign Assets Control (OFAC) for potential sanctions violations."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 348,
-    "total_findings": 529,
-    "unique_senders": 189,
+    "total_scans": 349,
+    "total_findings": 532,
+    "unique_senders": 191,
     "highest_score": 680,
-    "critical_count": 529,
+    "critical_count": 532,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-20T18:42:58.538117+00:00"
+    "last_scan": "2026-03-20T19:35:48.339305+00:00"
   }
 }
