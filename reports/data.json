@@ -16143,16 +16143,54 @@
           "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into the source of the funds and the intent behind using a sanctioned mixer service. It is also recommended to file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) as soon as possible."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-20T05:33:57.405052+00:00",
+      "eth_price": 2140.836342304,
+      "block_range": "24696438 \u2014 24696637",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x09efa4777a855eb946df013c8f3e51fc553aa81d",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 530,
+          "risk_level": "CRITICAL",
+          "tx_count": 5,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine you're at a bank and you see someone repeatedly making tiny deposits into an account that's known to be used for money laundering. That's basically what happened here - someone made five identical, zero-value transactions to a crypto account linked to Tornado Cash, a service that's like a digital laundry machine for dirty money. It's like they're trying to sneak in some dirty money without being noticed, but they're using a service that's already on the government's radar.",
+          "roast": "Scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), nice job trying to fly under the radar with Tornado Cash! You also got a mixer_touch score of 100 for directly depositing into a sanctioned mixer - that's like walking into a known money laundering front and asking for a laundry job. And with a structuring score of 70 for making all those identical deposits, it's like you're trying to win an award for most creative way to launder money. Oh, and let's not forget the peel_chain_linear score of 60, because who needs subtlety when you're layering your dirty money?",
+          "risk_verdict": "CRITICAL - the transactions involve a sanctioned entity and exhibit clear signs of money laundering and structuring, posing a high risk of illicit activity.",
+          "recommended_action": "Immediately freeze the sender's account and conduct a thorough investigation into the source and purpose of the transactions. Additionally, consider reporting this activity to the relevant authorities, such as FinCEN, as it may be indicative of a larger money laundering scheme."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 333,
-    "total_findings": 509,
+    "total_scans": 334,
+    "total_findings": 510,
     "unique_senders": 184,
     "highest_score": 680,
-    "critical_count": 509,
+    "critical_count": 510,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-20T04:11:58.585674+00:00"
+    "last_scan": "2026-03-20T05:33:57.405052+00:00"
   }
 }
