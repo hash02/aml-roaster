@@ -18656,16 +18656,23 @@
           "recommended_action": "Immediately freeze all assets associated with the sender's wallet and conduct a thorough investigation into the source of the funds and the intent behind the transaction. It's also recommended to report this activity to the relevant financial authorities as it may be indicative of money laundering or other illicit financial activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-21T16:54:08.704132+00:00",
+      "eth_price": 2148.90365036607,
+      "block_range": "24706990 \u2014 24707189",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 376,
+    "total_scans": 377,
     "total_findings": 590,
     "unique_senders": 202,
     "highest_score": 680,
     "critical_count": 590,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-21T16:25:27.361066+00:00"
+    "last_scan": "2026-03-21T16:54:08.704132+00:00"
   }
 }
