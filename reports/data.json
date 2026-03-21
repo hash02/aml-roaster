@@ -19110,16 +19110,23 @@
           "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, monitor the sender's wallet for any future suspicious activity and ensure all relevant AML/KYC procedures are strictly adhered to."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-21T20:22:05.242475+00:00",
+      "eth_price": 2152.60195488298,
+      "block_range": "24708038 \u2014 24708237",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 382,
+    "total_scans": 383,
     "total_findings": 605,
     "unique_senders": 207,
     "highest_score": 680,
     "critical_count": 605,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-21T19:45:30.878842+00:00"
+    "last_scan": "2026-03-21T20:22:05.242475+00:00"
   }
 }
