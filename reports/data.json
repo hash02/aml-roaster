@@ -18862,16 +18862,23 @@
           "recommended_action": "Immediately freeze the sender's assets and flag the transaction for further review, and consider reporting this activity to the relevant authorities. It's also recommended to monitor the sender's wallet for any further suspicious activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-21T18:31:30.670493+00:00",
+      "eth_price": 2151.30179604119,
+      "block_range": "24707489 \u2014 24707688",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 379,
+    "total_scans": 380,
     "total_findings": 597,
     "unique_senders": 204,
     "highest_score": 680,
     "critical_count": 597,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-21T17:50:27.780802+00:00"
+    "last_scan": "2026-03-21T18:31:30.670493+00:00"
   }
 }
