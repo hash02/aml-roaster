@@ -17244,16 +17244,54 @@
           "recommended_action": "Immediately flag the sender wallet for further investigation and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, review all transaction history associated with this wallet to identify potential patterns of suspicious activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-21T05:27:12.647260+00:00",
+      "eth_price": 2154.45562742528,
+      "block_range": "24703577 \u2014 24703776",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x2937fee6dba23c541295a4f07a17bdbf5d0ebed1",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 530,
+          "risk_level": "CRITICAL",
+          "tx_count": 19,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "This is like someone walking into a known money laundering front and trying to hide their tracks by breaking up their transactions into tiny, identical pieces. They're using a service called Tornado Cash, which is like a cryptographic washing machine, to mix their funds with others and make it hard to trace where the money came from. The problem is, this service has been flagged by the U.S. government for helping bad actors launder billions of dollars, so it's a major red flag when someone uses it.",
+          "roast": "Wow, they scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big, red 'I'm a money launderer' stamp on their forehead. They also got a 100 on the mixer_touch score, which is like a prize for directly depositing into a sanctioned mixer. And let's not forget the 70 on the mixer_contract_call score, which is like a bonus for trying to obfuscate their withdrawal. It looks like they're trying to win an award for 'most creative ways to launder money' with a total composite score of 530.",
+          "risk_verdict": "CRITICAL \u2014 the use of a sanctioned mixer and structuring techniques indicates a high risk of money laundering and potential support of illicit activities.",
+          "recommended_action": "Immediately flag this transaction and freeze any associated assets, and conduct a thorough investigation into the subject's activities to determine the source and intent of the funds. It is also recommended to report this suspicious activity to the relevant authorities, such as FinCEN, in accordance with 31 CFR Chapter X."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 358,
-    "total_findings": 543,
-    "unique_senders": 195,
+    "total_scans": 359,
+    "total_findings": 544,
+    "unique_senders": 196,
     "highest_score": 680,
-    "critical_count": 543,
+    "critical_count": 544,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-21T04:02:57.186332+00:00"
+    "last_scan": "2026-03-21T05:27:12.647260+00:00"
   }
 }
