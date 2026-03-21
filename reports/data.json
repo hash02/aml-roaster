@@ -18534,16 +18534,54 @@
           "recommended_action": "Immediate action should be taken to freeze the sender's assets and prevent further transactions. A thorough investigation should be conducted to determine the source and purpose of the funds, and a SAR should be filed with the Financial Crimes Enforcement Network (FinCEN) to report the suspicious activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-21T15:48:13.979018+00:00",
+      "eth_price": 2153.62775200773,
+      "block_range": "24706675 \u2014 24706874",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x213cfeb89529efc2eae2a502d4a8253fe4ae76ef",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 530,
+          "risk_level": "CRITICAL",
+          "tx_count": 5,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "This is like someone trying to sneak past a security guard by using a secret door, but the door is actually a known entrance for bad guys. The sender is sending money to a place called Tornado Cash, which is like a laundry machine for dirty money, and it's been flagged by the government for helping bad people clean their money. The sender is trying to be sneaky by sending multiple tiny transactions, but it's like trying to hide a big pile of dirty laundry in a bunch of small bags.",
+          "roast": "Oh great, someone's trying to use the crypto equivalent of a money laundering Laundromat, scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, think of it like a list of naughty people and places that are not allowed to play with others). And to make matters worse, they're using a mixer (think of it like a big bowl where you throw all your dirty money and it comes out clean, but in reality, it's just a way to hide the origin of the money), which is like trying to erase their footprints in the sand, but really they're just leaving a big footprint that says 'I'm trying to hide something'. They even got a score of 100 for directly depositing into this sanctioned mixer, nice job, you're like a crypto criminal mastermind, said no one ever.",
+          "risk_verdict": "CRITICAL \u2014 the transaction involves a sanctioned entity and exhibits clear signs of money laundering and structuring, posing a significant risk to the financial system.",
+          "recommended_action": "Immediately freeze the sender's account and report this suspicious activity to the relevant authorities, as it may be connected to larger illicit financial networks, and consider collaborating with law enforcement to investigate the origin and purpose of these transactions."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 374,
-    "total_findings": 586,
+    "total_scans": 375,
+    "total_findings": 587,
     "unique_senders": 200,
     "highest_score": 680,
-    "critical_count": 586,
+    "critical_count": 587,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-21T15:22:44.794655+00:00"
+    "last_scan": "2026-03-21T15:48:13.979018+00:00"
   }
 }
