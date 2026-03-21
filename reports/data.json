@@ -17357,16 +17357,23 @@
           "recommended_action": "Immediately freeze the sender's wallet and conduct a thorough investigation into the source of funds and the sender's identity. Report this activity to the relevant authorities, such as FinCEN, and consider collaborating with law enforcement to prevent further illicit activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-21T07:51:32.833836+00:00",
+      "eth_price": 2155.47359349723,
+      "block_range": "24704300 \u2014 24704499",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 361,
+    "total_scans": 362,
     "total_findings": 546,
     "unique_senders": 196,
     "highest_score": 680,
     "critical_count": 546,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-21T07:09:14.586595+00:00"
+    "last_scan": "2026-03-21T07:51:32.833836+00:00"
   }
 }
