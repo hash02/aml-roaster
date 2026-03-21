@@ -17428,16 +17428,23 @@
           "recommended_action": "Immediately freeze the sender's assets and file a SAR with FinCEN, and consider reporting this activity to the U.S. Treasury's OFAC for further investigation. Additionally, review the sender's wallet profile and transaction history to identify any other suspicious activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-21T08:58:31.253034+00:00",
+      "eth_price": 2154.0798027989,
+      "block_range": "24704629 \u2014 24704828",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 363,
+    "total_scans": 364,
     "total_findings": 548,
     "unique_senders": 196,
     "highest_score": 680,
     "critical_count": 548,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-21T08:28:48.843914+00:00"
+    "last_scan": "2026-03-21T08:58:31.253034+00:00"
   }
 }
