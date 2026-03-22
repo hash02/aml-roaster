@@ -20177,16 +20177,50 @@
       "block_range": "24714310 \u2014 24714509",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-22T17:50:52.393566+00:00",
+      "eth_price": 2079.00871189812,
+      "block_range": "24714453 \u2014 24714652",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x0a5b2bf3ccfb44c1d22f07eed9553ecba752d4ad",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a store that's known for helping bad people hide their money, and you're basically giving them a big hug by doing business with them. That's what just happened here - someone sent a transaction to a place called Tornado Cash, which is like a big washing machine for dirty money, and it's been flagged by the U.S. government for helping launder billions of dollars. This is a major red flag because it looks like someone might be trying to hide their tracks.",
+          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big neon sign that says 'I'm involved in some shady stuff'. They also got a score of 100 for directly depositing into Tornado Cash, a mixer (think of it like a money blender) that's been sanctioned by the U.S. government. And let's not forget the 70 points for making a zero-value contract call to Tornado Cash, which is like trying to sneak a peek at the washing machine's instructions without actually doing any laundry. This sender is basically waving a flag that says 'I'm trying to avoid the law'",
+          "risk_verdict": "CRITICAL - the transaction is high-risk due to the sender's direct interaction with a sanctioned entity, Tornado Cash, and potential attempts to evade anti-money laundering controls.",
+          "recommended_action": "Immediately freeze any related assets and conduct a thorough investigation into the sender's wallet activity, including reviewing all transactions and identifying the source of funds. It's also essential to file a Suspicious Activity Report (SAR) with FinCEN to report this potentially illicit activity."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 411,
-    "total_findings": 637,
+    "total_scans": 412,
+    "total_findings": 638,
     "unique_senders": 218,
     "highest_score": 680,
-    "critical_count": 637,
+    "critical_count": 638,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-22T17:22:03.116820+00:00"
+    "last_scan": "2026-03-22T17:50:52.393566+00:00"
   }
 }
