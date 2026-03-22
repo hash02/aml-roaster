@@ -19440,16 +19440,23 @@
           "recommended_action": "Immediately flag this transaction for further review and consider reporting it to the relevant authorities. It's also a good idea to monitor the sender's wallet for any additional suspicious activity and to block any future transactions with Tornado Cash."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-22T01:55:50.791246+00:00",
+      "eth_price": 2089.35337736954,
+      "block_range": "24709667 \u2014 24709866",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 390,
+    "total_scans": 391,
     "total_findings": 615,
     "unique_senders": 209,
     "highest_score": 680,
     "critical_count": 615,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-21T23:47:17.741837+00:00"
+    "last_scan": "2026-03-22T01:55:50.791246+00:00"
   }
 }
