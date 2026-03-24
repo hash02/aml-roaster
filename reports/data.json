@@ -22124,16 +22124,54 @@
           "recommended_action": "Immediately flag this transaction for further review and consider reporting it to the relevant authorities, as it may indicate a serious violation of AML regulations. Additionally, the sender's wallet should be monitored closely for any future suspicious activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-24T22:27:16.423202+00:00",
+      "eth_price": 2146.47829251711,
+      "block_range": "24730124 \u2014 24730323",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x213cfeb89529efc2eae2a502d4a8253fe4ae76ef",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 530,
+          "risk_level": "CRITICAL",
+          "tx_count": 19,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a known money laundering front and trying to sneak in 19 tiny packages, all empty, in a row. That's basically what happened here - someone sent 19 super small transactions to a shady place called Tornado Cash, which is like a washing machine for dirty money. This place was even blacklisted by the US government for helping bad guys like North Korea's hackers.",
+          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big fat X marked through your name in the government's bad books. And let's not forget the mixer_touch score of 100, which is like getting caught with your hand in the cookie jar - they directly deposited to a sanctioned mixer, Tornado Cash. It's like they're trying to win an award for 'most obvious money laundering attempt'. They even got a score of 70 for structuring (that's when you break up transactions into tiny pieces to avoid detection, like a kid trying to sneak cookies without getting caught).",
+          "risk_verdict": "CRITICAL - the transaction pattern and interaction with a sanctioned entity pose a high risk of money laundering and terrorist financing.",
+          "recommended_action": "Immediately freeze the sender's assets and file a SAR with FinCEN, and consider reporting to OFAC for potential sanctions violations. Conduct a thorough investigation into the sender's wallet activity and connections to other sanctioned entities."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 460,
-    "total_findings": 696,
+    "total_scans": 461,
+    "total_findings": 697,
     "unique_senders": 247,
     "highest_score": 680,
-    "critical_count": 696,
+    "critical_count": 697,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-24T21:35:08.743045+00:00"
+    "last_scan": "2026-03-24T22:27:16.423202+00:00"
   }
 }
