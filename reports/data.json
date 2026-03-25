@@ -22245,16 +22245,50 @@
       "block_range": "24731209 \u2014 24731408",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-25T04:18:59.259211+00:00",
+      "eth_price": 2161.14408278613,
+      "block_range": "24731928 \u2014 24732127",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x9335a567293441ca70bf4ff7b4c6b63dfdfff3cd",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 360,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 10.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "high_value",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "high_value": 30,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a bank and trying to deposit a large sum of money into an account that's known to be used for money laundering. That's basically what happened here, but instead of a bank, it's a cryptocurrency transaction. Someone sent a significant amount of Ethereum (about $21,611) to a mixing service called Tornado Cash, which is like a laundry machine for dirty money - it helps hide where the money came from. This service has been flagged by the U.S. government for helping bad actors, like North Korean hackers, clean their stolen funds.",
+          "roast": "This sender just scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like getting a big red 'X' marked through their reputation. They also got a 100 on the mixer_touch (directly sending money to a sanctioned crypto mixer), because who needs clean money, right? And to top it off, they're trying to avoid using legitimate exchanges, which have rules to prevent exactly this kind of shady activity, hence the 30 points for exchange_avoidance (trying to skip anti-money laundering checks). It looks like someone's trying to hide something, and not very well.",
+          "risk_verdict": "CRITICAL - The transaction involves a direct and significant transfer of funds to a sanctioned entity, indicating a high likelihood of money laundering or other illicit activity.",
+          "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into the source of the funds and the purpose of the transaction. File a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to comply with regulatory requirements."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 464,
-    "total_findings": 699,
-    "unique_senders": 247,
+    "total_scans": 465,
+    "total_findings": 700,
+    "unique_senders": 248,
     "highest_score": 680,
-    "critical_count": 699,
+    "critical_count": 700,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-25T01:54:21.850205+00:00"
+    "last_scan": "2026-03-25T04:18:59.259211+00:00"
   }
 }
