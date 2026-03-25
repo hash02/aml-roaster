@@ -22858,16 +22858,23 @@
           "recommended_action": "Immediately freeze the sender's wallet and conduct a thorough investigation into their transaction history to identify potential money laundering activity. It is also recommended to report this suspicious activity to the relevant authorities, such as FinCEN, in accordance with regulatory requirements."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-25T19:44:24.789516+00:00",
+      "eth_price": 2173.32316112327,
+      "block_range": "24736531 \u2014 24736730",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 477,
+    "total_scans": 478,
     "total_findings": 718,
     "unique_senders": 254,
     "highest_score": 680,
     "critical_count": 718,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-25T18:52:44.115557+00:00"
+    "last_scan": "2026-03-25T19:44:24.789516+00:00"
   }
 }
