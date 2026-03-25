@@ -22780,16 +22780,23 @@
           "recommended_action": "Immediately flag this transaction and the associated wallet for further review, and consider reporting it to the relevant authorities, such as the Financial Crimes Enforcement Network (FinCEN)."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-25T16:07:30.298877+00:00",
+      "eth_price": 2159.69194925832,
+      "block_range": "24735451 \u2014 24735650",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 474,
+    "total_scans": 475,
     "total_findings": 716,
     "unique_senders": 253,
     "highest_score": 680,
     "critical_count": 716,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-25T14:40:18.316872+00:00"
+    "last_scan": "2026-03-25T16:07:30.298877+00:00"
   }
 }
