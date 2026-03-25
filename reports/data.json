@@ -22471,16 +22471,23 @@
           "recommended_action": "Immediately freeze the sender's account and conduct a thorough investigation into their activity, including reviewing their transaction history and identifying any other potential interactions with sanctioned entities. Report this activity to the relevant authorities, such as FinCEN, as soon as possible."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-25T09:51:09.568217+00:00",
+      "eth_price": 2178.00009107206,
+      "block_range": "24733586 \u2014 24733785",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
-    "total_scans": 469,
+    "total_scans": 470,
     "total_findings": 706,
     "unique_senders": 250,
     "highest_score": 680,
     "critical_count": 706,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-25T08:48:34.343458+00:00"
+    "last_scan": "2026-03-25T09:51:09.568217+00:00"
   }
 }
