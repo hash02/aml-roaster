@@ -23669,16 +23669,50 @@
       "block_range": "24744070 \u2014 24744269",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-26T21:35:07.969466+00:00",
+      "eth_price": 2069.50921869915,
+      "block_range": "24744204 \u2014 24744403",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0xc0e272092e74688b31313c8e3d9846628fd71508",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine you're at a bank and someone walks in with a briefcase full of money, then immediately puts it into a secret safe that's known for helping bad guys hide their cash - that's basically what happened here. The sender, who just created their wallet, sent money to a service called Tornado Cash, which is like a washing machine for dirty money. This service was actually banned by the U.S. government last year because it helped launder billions of dollars, including money stolen by North Korean hackers.",
+          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag that says 'I'm involved with bad guys'. They also got a high score for mixer_touch (basically, directly using a service that mixes dirty money with clean money to hide its origin), and mixer_contract_call (a fancy way of saying they likely tried to withdraw money or vote on something without being seen). Oh, and they got a score for exchange_avoidance (which means they didn't use a normal, regulated exchange where people have to show their ID), because who needs rules when you can just use a shady service? And let's not forget the OFAC SDN match, which is like a 'most wanted' list - they're basically saying hello to the U.S. Treasury's list of bad actors.",
+          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with a sanctioned entity and attempts to obfuscate the transaction pose a significant risk of money laundering and illicit activity.",
+          "recommended_action": "Immediately flag this transaction and the sender's wallet for further investigation, and consider reporting it to the relevant authorities as a suspicious activity. It's also a good idea to monitor the wallet's activity closely for any other potential red flags."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 497,
-    "total_findings": 743,
-    "unique_senders": 268,
+    "total_scans": 498,
+    "total_findings": 744,
+    "unique_senders": 269,
     "highest_score": 680,
-    "critical_count": 743,
+    "critical_count": 744,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-26T20:57:58.164290+00:00"
+    "last_scan": "2026-03-26T21:35:07.969466+00:00"
   }
 }
