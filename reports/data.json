@@ -22988,16 +22988,50 @@
           "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN), as it may indicate an attempt to launder funds or evade sanctions. Additionally, the involved parties should be subject to enhanced due diligence to assess the legitimacy of their activities."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-26T07:41:22.046224+00:00",
+      "eth_price": 2120.24313895206,
+      "block_range": "24740106 \u2014 24740305",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x0a5b2bf3ccfb44c1d22f07eed9553ecba752d4ad",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a shady money laundering front, where people go to hide the source of their cash. This is basically what happened here, but with cryptocurrency. Someone sent a transaction to a sanctioned crypto mixing service called Tornado Cash, which is like a digital laundry for dirty money.",
+          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved in some shady stuff'. They also got a score of 100 for directly depositing into Tornado Cash, a mixer (think of it like a big blender that mixes all the transactions together to hide the source), and another 70 for making a zero-value contract call to Tornado Cash, which is like trying to sneak in a secret handshake. It's like they're trying to hide something, but really, they're just making it obvious.",
+          "risk_verdict": "CRITICAL \u2014 the transaction poses a high risk of money laundering and sanctions evasion due to its involvement with a sanctioned crypto mixing service.",
+          "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into the source of their funds. Report this suspicious activity to the relevant authorities, such as the Financial Crimes Enforcement Network (FinCEN)."
+        }
+      ]
     }
   ],
   "stats": {
-    "total_scans": 485,
-    "total_findings": 721,
+    "total_scans": 486,
+    "total_findings": 722,
     "unique_senders": 256,
     "highest_score": 680,
-    "critical_count": 721,
+    "critical_count": 722,
     "high_count": 0,
     "first_scan": "2026-03-07T18:10:00Z",
-    "last_scan": "2026-03-26T06:12:26.072175+00:00"
+    "last_scan": "2026-03-26T07:41:22.046224+00:00"
   }
 }
