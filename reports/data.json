@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-07T20:53:00Z",
-      "eth_price": 1968.9,
-      "block_range": "24608250 \u2014 24608449",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-07T21:15:00Z",
       "eth_price": 1968.01,
       "block_range": "24608455 \u2014 24608654",
@@ -24162,6 +24155,13 @@
           "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into the source and purpose of the funds, and consider filing a Suspicious Activity Report (SAR) with the relevant authorities. It's also recommended to monitor the sender's wallet for any further suspicious activity and to take steps to prevent any potential future interactions with sanctioned entities."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-27T10:43:39.514723+00:00",
+      "eth_price": 2009.9709288276,
+      "block_range": "24748117 \u2014 24748316",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
@@ -24171,7 +24171,7 @@
     "highest_score": 680,
     "critical_count": 760,
     "high_count": 0,
-    "first_scan": "2026-03-07T20:53:00Z",
-    "last_scan": "2026-03-27T09:52:50.771982+00:00"
+    "first_scan": "2026-03-07T21:15:00Z",
+    "last_scan": "2026-03-27T10:43:39.514723+00:00"
   }
 }
