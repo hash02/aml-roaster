@@ -1,70 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-08T00:14:00Z",
-      "eth_price": 1973.9,
-      "block_range": "24608885 \u2014 24609084",
-      "total_findings": 2,
-      "findings": [
-        {
-          "sender": "0x0a5b2bf3ccfb44c1d22f07eed9553ecba752d4ad",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 530,
-          "risk_level": "CRITICAL",
-          "tx_count": 5,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "structuring",
-            "peel_chain_linear",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "structuring": 70,
-            "peel_chain_linear": 60,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Someone sent 5 identical empty transactions to Tornado Cash \u2014 a crypto mixing service that the US government sanctioned in 2022. Think of it like repeatedly visiting a money laundering front but claiming you never bought anything. The pattern screams 'testing the waters' before moving real money through.",
-          "roast": "Wow, it takes a special kind of genius to send five identical transactions of 0.0000 ETH to a sanctioned mixer like Tornado Cash, scoring a whopping 530 on our AML engine \u2014 I mean, who needs actual money when you can just smurf your way to OFAC's bad side? The structuring pattern is just the cherry on top, because who doesn't love a good game of 'let's make all our transactions look identical'? And with a peel chain detected, it's clear this user is a master of layering patterns. But hey, at least they're consistent, right?",
-          "risk_verdict": "CRITICAL \u2014 composite score of 530, with direct contact to an OFAC-sanctioned mixer, textbook structuring, and peel chain layering",
-          "recommended_action": "Immediately flag the sender's wallet for further investigation and consider reporting to the relevant authorities. Block any future transactions to sanctioned mixers like Tornado Cash."
-        },
-        {
-          "sender": "0xd0b9b6674b77befd88884d2bdeea979c023938e8",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 2,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "A wallet with over 1,000 days of history suddenly started interacting with Tornado Cash \u2014 a sanctioned crypto mixer. Two zero-value calls to the mixer suggest they're either relaying withdrawals for someone else or testing the service before moving real funds.",
-          "roast": "Looks like someone's trying to spin their dirty laundry through Tornado Cash, scoring a whopping 400 on our AML engine, with a special shoutout to the 200 points from hitting the OFAC sanctions list \u2014 who needs clean money when you can just mix it with some sanctioned friends? At least they chose the 0.1 ETH pool, because apparently even money launderers have a budget.",
-          "risk_verdict": "CRITICAL \u2014 composite score of 400, driven by direct OFAC sanctions match, indicating clear interaction with a sanctioned entity",
-          "recommended_action": "Immediately flag and freeze the sender's wallet, and file a SAR with the relevant authorities."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-08T01:22:17.038094+00:00",
       "eth_price": 1970.19793210183,
       "block_range": "24609224 \u2014 24609423",
@@ -24858,16 +24794,23 @@
           "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Block any further transactions from this sender to prevent potential money laundering activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-27T21:59:09.743543+00:00",
+      "eth_price": 1985.07038164424,
+      "block_range": "24751534 \u2014 24751733",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 785,
+    "total_findings": 783,
     "unique_senders": 288,
     "highest_score": 680,
-    "critical_count": 785,
+    "critical_count": 783,
     "high_count": 0,
-    "first_scan": "2026-03-08T00:14:00Z",
-    "last_scan": "2026-03-27T21:30:46.323721+00:00"
+    "first_scan": "2026-03-08T01:22:17.038094+00:00",
+    "last_scan": "2026-03-27T21:59:09.743543+00:00"
   }
 }
