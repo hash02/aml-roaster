@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-07T21:17:00Z",
-      "eth_price": 1968.01,
-      "block_range": "24608455 \u2014 24608654",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-07T21:29:00Z",
       "eth_price": 1968.1,
       "block_range": "24608500 \u2014 24608699",
@@ -24245,16 +24238,106 @@
           "recommended_action": "Immediately flag the sender's wallet for further investigation and consider reporting to the Financial Crimes Enforcement Network (FinCEN) as a suspicious activity. It's also advisable to monitor all related transactions and wallets for any further potentially illicit activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-27T12:58:42.728582+00:00",
+      "eth_price": 1987.68397815121,
+      "block_range": "24748843 \u2014 24749042",
+      "total_findings": 3,
+      "findings": [
+        {
+          "sender": "0x49b13f8fef33de58be89646defb6fe72c53a3ba1",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 510,
+          "risk_level": "CRITICAL",
+          "tx_count": 3,
+          "total_eth": 0.30000000000000004,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "structuring",
+            "peel_chain_linear",
+            "velocity",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "velocity": 50,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a shady money laundering front and handing over cash to someone you don't know, three times in a row, with each payment being exactly the same amount. That's basically what happened here, but with cryptocurrency. Someone sent three identical payments of cryptocurrency to a service called Tornado Cash, which is like a digital washing machine for money - it mixes up the funds so they can't be traced. The problem is, this service was shut down by the U.S. government because it was used by bad guys to launder billions of dollars.",
+          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, like a 'most wanted' list for money launderers). And to make matters worse, they're using a technique called structuring (that's when you break up a large payment into smaller, identical ones to avoid detection - like a bad guy trying to sneak past the bouncer at a nightclub). It's like they're trying to win an award for 'most obvious money laundering attempt'. Oh, and they're using a mixer, which is like a big bowl where you toss in your dirty money and it comes out all clean and untraceable - except when it's sanctioned by the government, that is.",
+          "risk_verdict": "CRITICAL \u2014 the direct interaction with a sanctioned mixer service and suspicious transaction pattern pose a high risk of money laundering and terrorist financing.",
+          "recommended_action": "Immediately flag this transaction and the involved wallet for further review, and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN)."
+        },
+        {
+          "sender": "0xf3ad7313a5b187740bfe6ed52eaa6dc6ec6e5635",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "This is like trying to sneak a suitcase full of cash into a country by using a shady middleman - the sender is essentially using a mixing service called Tornado Cash to blend their money with others, making it hard to track. Think of it like a laundry service, but instead of cleaning clothes, it's 'cleaning' money. The problem is, Tornado Cash has been flagged by the U.S. government for helping bad actors launder billions of dollars, including money stolen by North Korea.",
+          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red 'X' marked through their name. They also got a 100 on the mixer_touch (basically, they directly sent money to a known bad actor), and a 70 on the mixer_contract_call (likely trying to cover their tracks or cast a fake vote). It's like they're playing a game of hide-and-seek, but with money, and they're really bad at it. Oh, and let's not forget the 30 on exchange_avoidance (they're avoiding the normal, safe channels and going straight to the shady stuff) - it's like they're trying to dodge a speed camera on the highway to Nowheresville.",
+          "risk_verdict": "CRITICAL - The sender's direct interaction with a sanctioned entity and use of mixing services to obfuscate transactions poses a significant risk of money laundering and terrorist financing.",
+          "recommended_action": "Immediately freeze the sender's assets and file a Suspicious Activity Report (SAR) with FinCEN, providing all relevant transaction data and wallet profiling information. Conduct a thorough investigation into the sender's activities and consider reporting to law enforcement if necessary."
+        },
+        {
+          "sender": "0x1ab42e5814c9749103fabafce7fa624b16f524de",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 360,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 10.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "high_value",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "high_value": 30,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a store that's known for helping bad people hide their dirty money, and then giving them a large sum of cash. That's basically what happened here - someone sent a significant amount of cryptocurrency to a service called Tornado Cash, which is like a digital laundry for money. This service was explicitly banned by the U.S. government for helping bad actors, like North Korean hackers, clean their stolen funds.",
+          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big, red 'I'm a money launderer' flag waving over their head. They also got a 100 for direct deposit to Tornado Cash, because who needs subtlety when you're trying to hide your tracks? And let's not forget the 30 for high-value transfer, because moving nearly $20,000 in one go isn't suspicious at all. Oh, and they got another 30 for exchange avoidance, which is just a fancy way of saying they didn't want to follow the rules and get their identity checked.",
+          "risk_verdict": "The risk is CRITICAL because the transaction directly involves a sanctioned entity and exhibits clear signs of attempted money laundering.",
+          "recommended_action": "Immediately freeze any associated assets and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report this potentially illicit activity. Conduct a thorough investigation into the sender's wallet activity to identify any other suspicious transactions."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 763,
-    "unique_senders": 277,
+    "total_findings": 766,
+    "unique_senders": 278,
     "highest_score": 680,
-    "critical_count": 763,
+    "critical_count": 766,
     "high_count": 0,
-    "first_scan": "2026-03-07T21:17:00Z",
-    "last_scan": "2026-03-27T11:39:47.389716+00:00"
+    "first_scan": "2026-03-07T21:29:00Z",
+    "last_scan": "2026-03-27T12:58:42.728582+00:00"
   }
 }
