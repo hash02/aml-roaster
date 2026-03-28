@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-08T05:28:18.526528+00:00",
-      "eth_price": 1950.0712996948,
-      "block_range": "24610454 \u2014 24610653",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-08T06:04:20.514085+00:00",
       "eth_price": 1950.43084415717,
       "block_range": "24610632 \u2014 24610831",
@@ -24771,6 +24764,13 @@
           "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with FinCEN. Block any future transactions from this sender to prevent potential money laundering activities."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-28T07:42:46.024689+00:00",
+      "eth_price": 2004.07075942393,
+      "block_range": "24754402 \u2014 24754601",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
@@ -24780,7 +24780,7 @@
     "highest_score": 680,
     "critical_count": 782,
     "high_count": 0,
-    "first_scan": "2026-03-08T05:28:18.526528+00:00",
-    "last_scan": "2026-03-28T06:55:07.673068+00:00"
+    "first_scan": "2026-03-08T06:04:20.514085+00:00",
+    "last_scan": "2026-03-28T07:42:46.024689+00:00"
   }
 }
