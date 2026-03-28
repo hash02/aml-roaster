@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-08T11:43:29.266999+00:00",
-      "eth_price": 1947.67183165804,
-      "block_range": "24612320 \u2014 24612519",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-08T12:41:11.929678+00:00",
       "eth_price": 1947.74201560721,
       "block_range": "24612606 \u2014 24612805",
@@ -24529,6 +24522,13 @@
           "recommended_action": "Immediately flag the sender's wallet for further investigation and consider reporting this activity to the Financial Crimes Enforcement Network (FinCEN) as a suspicious transaction. It is also recommended to monitor the wallet's activity closely for any future suspicious transactions."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-28T16:29:18.737809+00:00",
+      "eth_price": 2027.78831818546,
+      "block_range": "24757069 \u2014 24757268",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
@@ -24538,7 +24538,7 @@
     "highest_score": 680,
     "critical_count": 772,
     "high_count": 0,
-    "first_scan": "2026-03-08T11:43:29.266999+00:00",
-    "last_scan": "2026-03-28T15:38:18.690475+00:00"
+    "first_scan": "2026-03-08T12:41:11.929678+00:00",
+    "last_scan": "2026-03-28T16:29:18.737809+00:00"
   }
 }
