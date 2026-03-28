@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-08T16:23:25.237686+00:00",
-      "eth_price": 1940.83926111557,
-      "block_range": "24613713 \u2014 24613912",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-08T16:51:40.626610+00:00",
       "eth_price": 1935.46199977999,
       "block_range": "24613854 \u2014 24614053",
@@ -24518,6 +24511,13 @@
           "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into their wallet activity to determine the source and intended use of the funds. Additionally, consider reporting this transaction to the relevant authorities, such as FinCEN, for further review and potential action."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-28T20:55:43.451743+00:00",
+      "eth_price": 2022.80657482412,
+      "block_range": "24758399 \u2014 24758598",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
@@ -24527,7 +24527,7 @@
     "highest_score": 680,
     "critical_count": 771,
     "high_count": 0,
-    "first_scan": "2026-03-08T16:23:25.237686+00:00",
-    "last_scan": "2026-03-28T20:26:03.674558+00:00"
+    "first_scan": "2026-03-08T16:51:40.626610+00:00",
+    "last_scan": "2026-03-28T20:55:43.451743+00:00"
   }
 }
