@@ -1,44 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-10T08:37:34.685679+00:00",
-      "eth_price": 2066.74243266706,
-      "block_range": "24625722 \u2014 24625921",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0x000000cd6521ed1a65fae0678ea15af4eead74fe",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 530,
-          "risk_level": "CRITICAL",
-          "tx_count": 3,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "structuring",
-            "peel_chain_linear",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "structuring": 70,
-            "peel_chain_linear": 60,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "This is like walking into a known money laundering front and trying to sneak in some suspicious transactions. Someone is sending tiny amounts of cryptocurrency to a service called Tornado Cash, which is like a digital laundry machine that helps hide the origin of the money. It's a major red flag because Tornado Cash was shut down by the U.S. government for helping bad guys like North Korea's hackers launder billions of dollars.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big neon sign saying 'I'm a bad guy'. They're also using a technique called structuring (which means breaking up transactions into smaller amounts to avoid detection) and sending all these tiny transactions to Tornado Cash, which is like trying to sneak into a nightclub through the back door. And with a composite score of 530, this sender is basically waving a flag saying 'catch me if you can'. Oh, and they're using a service that's been sanctioned by the U.S. government, which is like saying 'I'm a fan of North Korea's hackers' - not a great look.",
-          "risk_verdict": "CRITICAL \u2014 the sender's transactions involve a sanctioned entity and exhibit multiple indicators of money laundering and suspicious activity.",
-          "recommended_action": "Immediately flag this sender for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Block any further transactions to or from this sender to prevent potential money laundering and comply with OFAC regulations."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-10T09:40:36.667891+00:00",
       "eth_price": 2068.32015594425,
       "block_range": "24626035 \u2014 24626234",
@@ -24399,16 +24361,82 @@
       "block_range": "24773218 \u2014 24773417",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-30T23:32:02.736452+00:00",
+      "eth_price": 2022.39156251009,
+      "block_range": "24773518 \u2014 24773717",
+      "total_findings": 2,
+      "findings": [
+        {
+          "sender": "0xb7522656bc59d2bea0fc6154416323c772c7ce7b",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 610,
+          "risk_level": "CRITICAL",
+          "tx_count": 12,
+          "total_eth": 120.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "novel_wallet_dump",
+            "whale_transfer",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "novel_wallet_dump": 100,
+            "whale_transfer": 50,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine someone walking into a shady money launderer's office and handing over a large briefcase full of cash, but instead of cash, it's a digital currency called Ethereum, and instead of an office, it's a website on the internet. This person is using a brand new digital wallet, which is like a super anonymous bank account, to send a huge amount of money to a place that's known for helping bad guys hide their money. This place is called Tornado Cash, and it's like a big washing machine for dirty money, where people can mix their bad money with other people's good money to make it seem clean again.",
+          "roast": "This guy scored 200 on the OFAC hit, meaning this address is literally on the U.S. Treasury's sanctions blacklist - that's like being on the FBI's most wanted list, but for money laundering. And with a score of 100 for mixer_touch, they're basically wearing a neon sign that says 'I'm trying to hide something' by directly depositing into Tornado Cash. They also got busted for novel_wallet_dump, which is just a fancy way of saying they used a brand new wallet to move a ton of money - classic burner pattern, dude. It's like they took every red flag from the money laundering playbook and said, 'Yeah, I'll take one of each, please.'",
+          "risk_verdict": "CRITICAL \u2014 the transaction pattern and direct interaction with an OFAC-sanctioned entity pose a significant risk of money laundering and terrorist financing.",
+          "recommended_action": "Immediately freeze the sender wallet and report this activity to the relevant authorities, and consider enhancing due diligence and monitoring of similar transactions to prevent potential money laundering and terrorist financing activities."
+        },
+        {
+          "sender": "0x0a5b2bf3ccfb44c1d22f07eed9553ecba752d4ad",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Someone sent a tiny amount of cryptocurrency to a service called Tornado Cash, which is like putting money into a washing machine that's designed to hide where the money came from. This is a major red flag because Tornado Cash has been used by bad actors, like North Korean hackers, to launder billions of dollars. It's like walking into a known money laundering front and expecting nobody to notice.",
+          "roast": "This sender just scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big fat 'I'm a money launderer' stamp on their forehead. They also got a 100 on the mixer_touch score, which means they directly deposited into a sanctioned mixer, because subtlety is not their strong suit. And with a wallet that's been around for 277 days and has made over 4,000 transactions, it's clear they're trying to fly under the radar, but really they're just flying straight into the danger zone.",
+          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with a sanctioned entity and pattern of suspicious behavior pose a significant risk of money laundering or other illicit activity.",
+          "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into their wallet activity and connections. Report this suspicious activity to the relevant authorities, including FinCEN, as soon as possible."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 768,
-    "unique_senders": 281,
+    "total_findings": 769,
+    "unique_senders": 282,
     "highest_score": 680,
-    "critical_count": 768,
+    "critical_count": 769,
     "high_count": 0,
-    "first_scan": "2026-03-10T08:37:34.685679+00:00",
-    "last_scan": "2026-03-30T22:31:46.049421+00:00"
+    "first_scan": "2026-03-10T09:40:36.667891+00:00",
+    "last_scan": "2026-03-30T23:32:02.736452+00:00"
   }
 }
