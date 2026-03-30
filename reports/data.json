@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-09T23:50:34.255031+00:00",
-      "eth_price": 1995.65457206063,
-      "block_range": "24623103 \u2014 24623302",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-10T01:45:27.452649+00:00",
       "eth_price": 2009.42196546437,
       "block_range": "24623671 \u2014 24623870",
@@ -24680,6 +24673,13 @@
           "recommended_action": "Immediate further investigation and potential reporting to the Financial Crimes Enforcement Network (FinCEN) are warranted, and consideration should be given to freezing or blocking the subject's assets to prevent further suspicious activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-30T17:27:12.149427+00:00",
+      "eth_price": 2041.28773875817,
+      "block_range": "24771701 \u2014 24771900",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
@@ -24689,7 +24689,7 @@
     "highest_score": 680,
     "critical_count": 778,
     "high_count": 0,
-    "first_scan": "2026-03-09T23:50:34.255031+00:00",
-    "last_scan": "2026-03-30T16:04:23.446274+00:00"
+    "first_scan": "2026-03-10T01:45:27.452649+00:00",
+    "last_scan": "2026-03-30T17:27:12.149427+00:00"
   }
 }
