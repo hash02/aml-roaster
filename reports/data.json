@@ -1,70 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-10T05:31:44.449256+00:00",
-      "eth_price": 2045.06144868823,
-      "block_range": "24624776 \u2014 24624975",
-      "total_findings": 2,
-      "findings": [
-        {
-          "sender": "0x4750bcfcc340aa4b31be7e71fa072716d28c29c5",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 530,
-          "risk_level": "CRITICAL",
-          "tx_count": 3,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "structuring",
-            "peel_chain_linear",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "structuring": 70,
-            "peel_chain_linear": 60,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Someone sent money to a very shady place on the internet, kind of like walking into a known money laundering front. They did this three times in a row, but the weird thing is, they didn't actually send any real money - it was like sending an empty envelope. The recipient is a service that helps people mix their money with others to hide where it came from, which is like trying to erase the serial number on a dollar bill.",
-          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved with some very bad people'. They also got a high score for using a mixer (think of it like a washing machine for dirty money), and for structuring their transactions in a way that screams 'I'm trying to hide something'. Oh, and let's not forget the peel chain detection (that's when you send money in a way that tries to cover your tracks), it's like they're playing a game of cat and mouse with the law. And to top it all off, they're avoiding legitimate exchanges, which is like trying to buy a car from a shady dealer instead of a reputable one.",
-          "risk_verdict": "CRITICAL - The interaction with an OFAC-sanctioned entity and the suspicious transaction patterns pose a significant risk of money laundering and terrorist financing.",
-          "recommended_action": "Immediately freeze any assets associated with the sender's wallet and conduct a thorough investigation into the source and intended use of the funds. Report this activity to the relevant authorities and consider filing a Suspicious Activity Report (SAR)."
-        },
-        {
-          "sender": "0xc0f12799b8d3fa8810dfe1616095170c72117f8f",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a store that's known for helping bad guys hide their money, and you give them some of your own cash. That's basically what happened here. Someone sent a tiny amount of cryptocurrency to a shady place called Tornado Cash, which is like a money-laundering front, but for crypto.",
-          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm a bad guy'. And with a mixer_touch score of 100, it's like they're trying to wash their dirty crypto clothes in a sanctioned washing machine. They also got a score of 70 for a mixer_contract_call, which is like trying to sneak a peek at the washing machine's instruction manual to see how to get the stain out. Oh, and let's not forget the exchange_avoidance score of 30, which is like trying to avoid the bouncer at the front door of a legit crypto club.",
-          "risk_verdict": "CRITICAL \u2014 the transaction involves a sanctioned entity and exhibits multiple suspicious behaviors, posing a significant risk of money laundering and terrorist financing.",
-          "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, the involved wallet and entities should be placed on a watchlist for future monitoring and potential freezing of assets."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-10T06:44:57.142431+00:00",
       "eth_price": 2046.81342885255,
       "block_range": "24625154 \u2014 24625353",
@@ -24673,16 +24609,23 @@
           "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into the source of funds and the purpose of the transaction. File a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report the potential money laundering activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-30T20:41:20.334248+00:00",
+      "eth_price": 2023.50377652583,
+      "block_range": "24772668 \u2014 24772867",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 778,
+    "total_findings": 776,
     "unique_senders": 284,
     "highest_score": 680,
-    "critical_count": 778,
+    "critical_count": 776,
     "high_count": 0,
-    "first_scan": "2026-03-10T05:31:44.449256+00:00",
-    "last_scan": "2026-03-30T19:33:53.555802+00:00"
+    "first_scan": "2026-03-10T06:44:57.142431+00:00",
+    "last_scan": "2026-03-30T20:41:20.334248+00:00"
   }
 }
