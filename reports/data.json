@@ -1,40 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-10T14:12:04.640203+00:00",
-      "eth_price": 2016.82369765324,
-      "block_range": "24627380 \u2014 24627579",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0x0a5b2bf3ccfb44c1d22f07eed9553ecba752d4ad",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 2,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine someone walking into a known money laundering front, handing over their cash, and expecting it to come out clean on the other side. That's essentially what happened here, but with cryptocurrency. The sender, who has been around for about 9 months and has made nearly 4,000 transactions, sent cryptocurrency to a service called Tornado Cash, which is like a digital laundry machine for money. This service was shut down by the U.S. government because it helped bad people, like North Korean hackers, hide their stolen money.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved with bad people'. They also got a score of 100 for directly depositing into Tornado Cash, a mixer (think of it like a big blender that mixes all the money together so you can't tell where it came from), and 70 for making a contract call to Tornado Cash, which is likely just a fancy way of saying they're trying to cover their tracks. And let's not forget the 30 points for avoiding legitimate exchanges, because who needs pesky things like Know Your Customer (KYC) and Anti-Money Laundering (AML) controls, right?",
-          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with the OFAC-sanctioned Tornado Cash mixer poses a significant risk of money laundering and terrorist financing.",
-          "recommended_action": "Immediately flag this transaction and the sender's wallet for further review, and consider reporting this activity to the relevant authorities, such as the Financial Crimes Enforcement Network (FinCEN)."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-10T15:30:33.955264+00:00",
       "eth_price": 2071.64778082881,
       "block_range": "24627766 \u2014 24627965",
@@ -23859,16 +23825,23 @@
       "block_range": "24776323 \u2014 24776522",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-03-31T10:03:04.291836+00:00",
+      "eth_price": 2018.16749329828,
+      "block_range": "24776666 \u2014 24776865",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 749,
+    "total_findings": 748,
     "unique_senders": 278,
     "highest_score": 680,
-    "critical_count": 749,
+    "critical_count": 748,
     "high_count": 0,
-    "first_scan": "2026-03-10T14:12:04.640203+00:00",
-    "last_scan": "2026-03-31T08:54:18.940513+00:00"
+    "first_scan": "2026-03-10T15:30:33.955264+00:00",
+    "last_scan": "2026-03-31T10:03:04.291836+00:00"
   }
 }
