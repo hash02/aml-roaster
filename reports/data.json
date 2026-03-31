@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-10T16:33:33.180659+00:00",
-      "eth_price": 2079.92217959198,
-      "block_range": "24628083 \u2014 24628282",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-10T17:43:24.356250+00:00",
       "eth_price": 2067.06744734982,
       "block_range": "24628430 \u2014 24628629",
@@ -23914,6 +23907,13 @@
           "recommended_action": "Immediately flag and review the sender's wallet activity to identify potential money laundering patterns and report this suspicious activity to the relevant authorities. Consider freezing the sender's assets and conducting a thorough investigation into the source and destination of the funds."
         }
       ]
+    },
+    {
+      "timestamp": "2026-03-31T12:06:23.564792+00:00",
+      "eth_price": 2042.77732113552,
+      "block_range": "24777278 \u2014 24777477",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
@@ -23923,7 +23923,7 @@
     "highest_score": 680,
     "critical_count": 751,
     "high_count": 0,
-    "first_scan": "2026-03-10T16:33:33.180659+00:00",
-    "last_scan": "2026-03-31T11:26:53.474853+00:00"
+    "first_scan": "2026-03-10T17:43:24.356250+00:00",
+    "last_scan": "2026-03-31T12:06:23.564792+00:00"
   }
 }
