@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-11T15:11:55.375253+00:00",
-      "eth_price": 2053.45764621177,
-      "block_range": "24634838 \u2014 24635037",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-11T16:09:57.929155+00:00",
       "eth_price": 2053.00354521768,
       "block_range": "24635123 \u2014 24635322",
@@ -24093,16 +24086,54 @@
           "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Freeze any related assets and conduct a thorough investigation into the sender's wallet activity to determine the source and intent of the funds."
         }
       ]
+    },
+    {
+      "timestamp": "2026-04-01T20:40:27.098349+00:00",
+      "eth_price": 2139.21837636489,
+      "block_range": "24786997 \u2014 24787196",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x5a407869d84c688c378e5e5456b900a961a617dc",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 510,
+          "risk_level": "CRITICAL",
+          "tx_count": 4,
+          "total_eth": 0.4,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "structuring",
+            "peel_chain_linear",
+            "velocity",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "velocity": 50,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Someone sent a bunch of money to a super shady place called Tornado Cash, which is like a laundry service for dirty money. Imagine walking into a known money laundering front and handing over your cash - that's basically what's happening here. The person sending the money is doing it in a way that looks like they're trying to avoid detection, by breaking it up into smaller amounts.",
+          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved in some shady stuff'. They also got a high score for 'structuring', which is just a fancy way of saying they're breaking up their transactions into smaller amounts to try to fly under the radar - it's like trying to sneak into a club by wearing a disguise. And to make matters worse, they're using a 'mixer' service, which is like a washing machine for dirty money, to try to hide their tracks. They're basically shouting 'I'm laundering money' from the rooftops.",
+          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with a sanctioned entity and attempts to conceal their transactions pose a significant risk of money laundering and terrorist financing.",
+          "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into their activities, including reviewing their transaction history and identifying any other potential suspicious activity. It's also a good idea to report this to the relevant authorities, such as the Financial Crimes Enforcement Network (FinCEN), as soon as possible."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 758,
-    "unique_senders": 290,
+    "total_findings": 759,
+    "unique_senders": 291,
     "highest_score": 654,
-    "critical_count": 758,
+    "critical_count": 759,
     "high_count": 0,
-    "first_scan": "2026-03-11T15:11:55.375253+00:00",
-    "last_scan": "2026-04-01T19:36:45.475594+00:00"
+    "first_scan": "2026-03-11T16:09:57.929155+00:00",
+    "last_scan": "2026-04-01T20:40:27.098349+00:00"
   }
 }
