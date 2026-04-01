@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-11T01:45:07.159738+00:00",
-      "eth_price": 2032.36416042358,
-      "block_range": "24630815 \u2014 24631014",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-11T04:07:23.116859+00:00",
       "eth_price": 2020.46164082164,
       "block_range": "24631516 \u2014 24631715",
@@ -23609,16 +23602,48 @@
           "recommended_action": "Immediately freeze the sender's wallet and report this transaction to the relevant authorities, such as FinCEN, as it may be related to sanctions evasion and money laundering activities. Conduct a thorough investigation into the sender's wallet activity and transactions to identify potential co-conspirators and determine the source of the funds."
         }
       ]
+    },
+    {
+      "timestamp": "2026-04-01T02:11:06.772007+00:00",
+      "eth_price": 2094.33310720363,
+      "block_range": "24781479 \u2014 24781678",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x5e604a4813e40f799631e5622988364a014ee3ce",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 330,
+          "risk_level": "CRITICAL",
+          "tx_count": 2,
+          "total_eth": 0.2,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a shady money laundering store and trying to hide your cash - that's basically what happened here. Someone sent a total of $419 worth of Ethereum to a place called Tornado Cash, which is like a super sketchy laundromat for cryptocurrency. The problem is, this 'laundromat' was shut down by the U.S. government for helping bad guys like North Korean hackers clean their dirty money.",
+          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist) - that's like having a 'most wanted' poster with your face on it. They also got a 100 on the mixer_touch score (basically, they directly deposited money into a sanctioned mixer, which is a huge no-no). And to top it off, they got a 30 for exchange_avoidance (meaning they avoided using legitimate exchanges with proper anti-money laundering controls, like a bank). It looks like someone's trying to hide something - or a lot of things.",
+          "risk_verdict": "CRITICAL - the transaction involves direct interaction with a sanctioned entity, indicating a high risk of money laundering and potential support of illicit activities.",
+          "recommended_action": "Immediately flag this transaction and the associated wallet for further review, and consider reporting it to the relevant authorities, such as FinCEN, as it may be connected to illicit activity."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 740,
+    "total_findings": 741,
     "unique_senders": 280,
     "highest_score": 654,
-    "critical_count": 740,
+    "critical_count": 741,
     "high_count": 0,
-    "first_scan": "2026-03-11T01:45:07.159738+00:00",
-    "last_scan": "2026-03-31T23:31:25.510382+00:00"
+    "first_scan": "2026-03-11T04:07:23.116859+00:00",
+    "last_scan": "2026-04-01T02:11:06.772007+00:00"
   }
 }
