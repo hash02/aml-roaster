@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-11T17:26:16.330287+00:00",
-      "eth_price": 2084.2363631613,
-      "block_range": "24635503 \u2014 24635702",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-11T18:10:17.084549+00:00",
       "eth_price": 2067.11754519084,
       "block_range": "24635722 \u2014 24635921",
@@ -24124,16 +24117,54 @@
       "block_range": "24787286 \u2014 24787485",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-01T22:34:05.559195+00:00",
+      "eth_price": 2146.17649492349,
+      "block_range": "24787564 \u2014 24787763",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0xd0b9b6674b77befd88884d2bdeea979c023938e8",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 530,
+          "risk_level": "CRITICAL",
+          "tx_count": 10,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a shady store that's known for helping people hide their money, and you see someone making 10 tiny deposits into a special account that's designed to mix and hide funds. This is basically what happened here, but instead of a store, it's a cryptocurrency transaction, and the 'store' is a service called Tornado Cash, which is like a big blender for money. The person making these transactions is trying to hide their money, just like someone might try to hide their identity by wearing a disguise.",
+          "roast": "Looks like someone's trying to win an award for 'most creative way to launder money' by using Tornado Cash, which scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist). They also scored 100 on the mixer_touch (basically, they directly deposited money into the sanctioned mixer), and 70 on the mixer_contract_call (likely trying to withdraw or obfuscate their tracks). It's like they're playing a game of hide-and-seek, but with money, and they're really bad at it. Oh, and let's not forget the 70 points for structuring (aka smurfing, where they break up their money into tiny pieces to avoid detection) \u2013 it's like they're trying to sneak past the authorities, but really, they're just sneaking into the 'most wanted' list.",
+          "risk_verdict": "CRITICAL \u2014 the transactions involve a sanctioned entity and exhibit characteristics of money laundering, posing a significant risk to the financial system.",
+          "recommended_action": "Immediately freeze the subject's assets and file a Suspicious Activity Report (SAR) with FinCEN, and consider reporting the incident to OFAC and other relevant authorities. Conduct a thorough review of the subject's transaction history to identify any other suspicious activity."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 759,
+    "total_findings": 760,
     "unique_senders": 291,
     "highest_score": 654,
-    "critical_count": 759,
+    "critical_count": 760,
     "high_count": 0,
-    "first_scan": "2026-03-11T17:26:16.330287+00:00",
-    "last_scan": "2026-04-01T21:38:32.803560+00:00"
+    "first_scan": "2026-03-11T18:10:17.084549+00:00",
+    "last_scan": "2026-04-01T22:34:05.559195+00:00"
   }
 }
