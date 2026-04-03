@@ -1,38 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-13T09:36:18.372502+00:00",
-      "eth_price": 2105.77867082071,
-      "block_range": "24647487 \u2014 24647686",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0x7922b472df82ba3349564431356ed78f453645fe",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 380,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0,
-          "total_token_usd": 1000.0,
-          "rules_triggered": [
-            "stablecoin_mixing",
-            "ofac_hit",
-            "mixer_touch"
-          ],
-          "rule_scores": {
-            "stablecoin_mixing": 80,
-            "ofac_hit": 200,
-            "mixer_touch": 100
-          },
-          "what_happened": "This is like someone trying to sneak their money into a laundry service that's known for cleaning dirty cash. The sender just moved $1,000 into Tornado Cash, a virtual money mixer that was put on the U.S. government's blacklist for helping bad guys like North Korea's hackers. It's essentially a digital version of walking into a shady money laundering front, but instead of cash, it's cryptocurrency.",
-          "roast": "Wow, great job scoring 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), that's like getting a gold star in money laundering 101. And with a stablecoin mixing score of 80, it looks like our friend is trying to blend their dirty money with some clean cash, like throwing a handful of dirty laundry into a washing machine. They also got a 100 on the mixer touch score, which is just a fancy way of saying they directly deposited their money into a known dirty money pit, Tornado Cash.",
-          "risk_verdict": "CRITICAL \u2014 the transaction involves a direct interaction with a U.S. Treasury-sanctioned entity, indicating a high risk of money laundering and potential support for illicit activities.",
-          "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, the sender's wallet should be closely monitored for any future suspicious activity."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-13T10:33:01.665141+00:00",
       "eth_price": 2126.84155129119,
       "block_range": "24647770 \u2014 24647969",
@@ -23505,16 +23473,23 @@
       "block_range": "24801748 \u2014 24801947",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-03T22:41:17.714053+00:00",
+      "eth_price": 2054.55433985691,
+      "block_range": "24801957 \u2014 24802156",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 736,
-    "unique_senders": 293,
+    "total_findings": 735,
+    "unique_senders": 292,
     "highest_score": 654,
-    "critical_count": 736,
+    "critical_count": 735,
     "high_count": 0,
-    "first_scan": "2026-03-13T09:36:18.372502+00:00",
-    "last_scan": "2026-04-03T21:59:24.624186+00:00"
+    "first_scan": "2026-03-13T10:33:01.665141+00:00",
+    "last_scan": "2026-04-03T22:41:17.714053+00:00"
   }
 }
