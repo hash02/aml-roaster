@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-13T17:32:29.903084+00:00",
-      "eth_price": 2120.16869593722,
-      "block_range": "24649857 \u2014 24650056",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-13T18:41:58.233919+00:00",
       "eth_price": 2105.63078103832,
       "block_range": "24650197 \u2014 24650396",
@@ -23013,16 +23006,48 @@
       "block_range": "24804930 \u2014 24805129",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-04T09:34:34.301697+00:00",
+      "eth_price": 2049.76427191134,
+      "block_range": "24805214 \u2014 24805413",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x832751432e36369021c1a05595db665f2225c391",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 330,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 1.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a store that's known for helping bad people hide their dirty money, and then giving them a large sum of cash - that's basically what happened here. Someone sent a significant amount of cryptocurrency, about $2,050, to a service called Tornado Cash, which is like a money laundering machine. This service was even sanctioned by the U.S. government for helping bad actors, including those from North Korea, hide billions of dollars.",
+          "roast": "This sender just scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved with some shady stuff'. And with a mixer_touch score of 100 for directly depositing into Tornado Cash, it's clear they're trying to hide something. It's like they're trying to avoid a Breathalyzer test by drinking a bottle of mouthwash - it's not fooling anyone, especially with an exchange_avoidance score of 30 for dodging legitimate exchanges that have real anti-money laundering controls.",
+          "risk_verdict": "CRITICAL \u2014 the transaction involves a direct deposit to a sanctioned entity, indicating a high likelihood of illicit activity.",
+          "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into the source of the funds and the purpose of the transaction. File a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report the potential money laundering activity."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 717,
-    "unique_senders": 286,
+    "total_findings": 718,
+    "unique_senders": 287,
     "highest_score": 654,
-    "critical_count": 717,
+    "critical_count": 718,
     "high_count": 0,
-    "first_scan": "2026-03-13T17:32:29.903084+00:00",
-    "last_scan": "2026-04-04T08:37:20.640486+00:00"
+    "first_scan": "2026-03-13T18:41:58.233919+00:00",
+    "last_scan": "2026-04-04T09:34:34.301697+00:00"
   }
 }
