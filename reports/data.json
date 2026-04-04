@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-13T11:54:27.304483+00:00",
-      "eth_price": 2120.13215798612,
-      "block_range": "24648151 \u2014 24648350",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-13T12:52:32.345450+00:00",
       "eth_price": 2144.24892551697,
       "block_range": "24648461 \u2014 24648660",
@@ -23277,16 +23270,48 @@
       "block_range": "24802346 \u2014 24802545",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-04T02:49:55.129933+00:00",
+      "eth_price": 2048.3616681623,
+      "block_range": "24803195 \u2014 24803394",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x239065529c75bd1814b128d19071fc6598d51c84",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 330,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 1.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine you're at a bank and someone walks in to deposit money into an account that's known to be used for money laundering. That's basically what happened here, but with cryptocurrency. Someone sent a significant amount of Ethereum (about $2,048 USD) to an address that's linked to Tornado Cash, a service that helps mix and hide the source of funds, which is like a digital laundry for dirty money. This address is essentially a blacklisted location due to its involvement in past money laundering activities.",
+          "roast": "Wow, it looks like our sender is trying to win an award for 'most creative way to launder money'. They scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved in shady dealings'. And to make matters worse, they also scored 100 on the mixer_touch (which means they directly interacted with a sanctioned mixing service, essentially a digital washing machine for dirty cash) and 30 on the exchange_avoidance (meaning they chose to avoid using a legitimate exchange where they'd have to follow the rules). It's like they took every red flag, put them in a blender, and hit puree.",
+          "risk_verdict": "The risk is CRITICAL because the transaction directly involves an OFAC-sanctioned address, indicating a high likelihood of money laundering or other illicit financial activity.",
+          "recommended_action": "Immediately freeze the sender's assets and report this activity to the Financial Crimes Enforcement Network (FinCEN) as a Suspicious Activity Report (SAR). Further investigation into the sender's wallet and transaction history is also warranted to identify any other potential illicit activities."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 727,
+    "total_findings": 728,
     "unique_senders": 289,
     "highest_score": 654,
-    "critical_count": 727,
+    "critical_count": 728,
     "high_count": 0,
-    "first_scan": "2026-03-13T11:54:27.304483+00:00",
-    "last_scan": "2026-04-03T23:59:44.414225+00:00"
+    "first_scan": "2026-03-13T12:52:32.345450+00:00",
+    "last_scan": "2026-04-04T02:49:55.129933+00:00"
   }
 }
