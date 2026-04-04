@@ -1,40 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-14T09:57:35.325971+00:00",
-      "eth_price": 2068.6719910289,
-      "block_range": "24654768 \u2014 24654967",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0x09efa4777a855eb946df013c8f3e51fc553aa81d",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 2,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a known money laundering shop, handing over your cash, and expecting nobody to notice - that's basically what happened here. Someone sent two transactions to a place called Tornado Cash, which is like a big washing machine for dirty money, and it's been banned by the U.S. government. This Tornado Cash place has been used to clean billions of dollars in stolen funds, so it's a major red flag when someone interacts with it.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big, fat, red 'I'm a money launderer' stamp on their forehead. They also got a score of 100 for directly depositing into Tornado Cash, which is like intentionally trying to hide their tracks - it's not exactly subtle. And let's not forget the 70 points for making a zero-value contract call, which is like trying to sneak in the back door - it's a pretty obvious attempt to obfuscate their activity.",
-          "risk_verdict": "CRITICAL - the sender's direct interaction with a sanctioned entity and attempts to obfuscate their activity pose a significant risk of money laundering and terrorist financing.",
-          "recommended_action": "Immediately freeze the sender's account and conduct a thorough investigation into their activity, including reviewing their transaction history and verifying their identity. Report this suspicious activity to the relevant authorities, such as FinCEN, as required by the Bank Secrecy Act."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-14T10:30:37.046867+00:00",
       "eth_price": 2065.79236664872,
       "block_range": "24654933 \u2014 24655132",
@@ -23088,16 +23054,23 @@
       "block_range": "24808792 \u2014 24808991",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-04T22:26:15.296160+00:00",
+      "eth_price": 2071.60806287525,
+      "block_range": "24809061 \u2014 24809260",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 719,
+    "total_findings": 718,
     "unique_senders": 286,
     "highest_score": 654,
-    "critical_count": 719,
+    "critical_count": 718,
     "high_count": 0,
-    "first_scan": "2026-03-14T09:57:35.325971+00:00",
-    "last_scan": "2026-04-04T21:32:07.504605+00:00"
+    "first_scan": "2026-03-14T10:30:37.046867+00:00",
+    "last_scan": "2026-04-04T22:26:15.296160+00:00"
   }
 }
