@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-13T14:49:47.566253+00:00",
-      "eth_price": 2170.88973509955,
-      "block_range": "24649050 \u2014 24649249",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-13T15:39:31.438526+00:00",
       "eth_price": 2148.53833402002,
       "block_range": "24649271 \u2014 24649470",
@@ -23116,16 +23109,56 @@
       "block_range": "24804119 \u2014 24804318",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-04T06:56:44.670528+00:00",
+      "eth_price": 2056.8837564111,
+      "block_range": "24804426 \u2014 24804625",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x4750bcfcc340aa4b31be7e71fa072716d28c29c5",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 580,
+          "risk_level": "CRITICAL",
+          "tx_count": 5,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "velocity",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "velocity": 50,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "This is like trying to sneak into a high-security building through a secret door that's been locked down by the government. The sender is trying to move money to a place called Tornado Cash, which is like a money-laundering machine that helps people hide their tracks. The problem is, the U.S. government has already caught on and shut it down, so anyone using it now is basically waving a red flag saying 'I'm up to no good'.",
+          "roast": "Wow, this sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), because who needs to follow the law, right? They're also using a technique called 'structuring' (which is like breaking up a large amount of money into smaller pieces to avoid detection) by making five identical deposits of zero value - yeah, that's not suspicious at all. And let's not forget the 'mixer_touch' score, which is like a big neon sign saying 'I'm trying to launder money through a sanctioned mixer'.",
+          "risk_verdict": "CRITICAL \u2014 the sender's interaction with a sanctioned address and use of suspicious transaction patterns indicates a high risk of money laundering or other illicit activity.",
+          "recommended_action": "Immediately flag this sender's account for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Block any further transactions to or from this address to prevent potential money laundering or other illicit activity."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 721,
+    "total_findings": 722,
     "unique_senders": 287,
     "highest_score": 654,
-    "critical_count": 721,
+    "critical_count": 722,
     "high_count": 0,
-    "first_scan": "2026-03-13T14:49:47.566253+00:00",
-    "last_scan": "2026-04-04T05:54:39.076380+00:00"
+    "first_scan": "2026-03-13T15:39:31.438526+00:00",
+    "last_scan": "2026-04-04T06:56:44.670528+00:00"
   }
 }
