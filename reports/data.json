@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-14T08:31:03.127483+00:00",
-      "eth_price": 2079.88931960498,
-      "block_range": "24654338 \u2014 24654537",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-14T09:28:58.694073+00:00",
       "eth_price": 2076.81104486773,
       "block_range": "24654595 \u2014 24654794",
@@ -23023,16 +23016,88 @@
       "block_range": "24808465 \u2014 24808664",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-04T20:57:17.029963+00:00",
+      "eth_price": 2062.26055866498,
+      "block_range": "24808617 \u2014 24808816",
+      "total_findings": 2,
+      "findings": [
+        {
+          "sender": "0x0a5b2bf3ccfb44c1d22f07eed9553ecba752d4ad",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 580,
+          "risk_level": "CRITICAL",
+          "tx_count": 5,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "velocity",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "velocity": 50,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine someone walking into a shady money laundering front, handing over cash, and expecting it to be 'cleaned' and untraceable. That's basically what happened here, but with cryptocurrency. The sender, who has been very active in the past, sent multiple tiny transactions to a service called Tornado Cash, which is like a digital laundry machine for dirty money. The problem is, this service was sanctioned by the U.S. government for helping bad actors, including North Korean hackers, launder billions of dollars.",
+          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red 'X' marked on your forehead. They also got a 100 on the mixer_touch (directly interacting with a sanctioned crypto mixer) - it's like they wanted to make sure they got caught. And what's with the five identical deposits of zero value? That's like trying to sneak past the bouncer at a club by telling them you're just there for the free water. The AML engine even detected a peel chain (a pattern of sequential transactions designed to obscure the origin of funds) - talk about leaving a trail of breadcrumbs.",
+          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with a sanctioned crypto mixer and patterns of suspicious activity indicate a high risk of money laundering or other illicit finance activity.",
+          "recommended_action": "Immediately flag this sender's account for review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, the sender's transactions should be blocked to prevent further potential money laundering activity."
+        },
+        {
+          "sender": "0xf715ebb67b7dfedf27121414e7ea1d0a1784721d",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 560,
+          "risk_level": "CRITICAL",
+          "tx_count": 3,
+          "total_eth": 300.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "whale_transfer",
+            "structuring",
+            "peel_chain_linear",
+            "velocity",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "whale_transfer": 50,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "velocity": 50,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a store that's known for helping bad guys launder their dirty money, and you give them a huge amount of cash, $618,678, in three identical installments. That's basically what happened here, but instead of a store, it's a crypto mixing service called Tornado Cash, and instead of cash, it's a type of digital money called Ethereum. This service is like a big washing machine for dirty money, and it's been flagged by the U.S. government for helping bad actors clean their funds.",
+          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving saying 'I'm involved with bad guys'. They also got a score of 100 for directly depositing into Tornado Cash, a mixer that's been sanctioned for helping launder over $7 billion, including funds from North Korea's Lazarus Group. It looks like they're trying to 'structure' their transactions (which means breaking up a large transaction into smaller ones to avoid detection) by sending three identical amounts of 100 Ethereum each. And, they're doing it all at a 'velocity' (or speed) that suggests it's automated, like a robot trying to sneak past the authorities. Oh, and let's not forget the 'whale transfer' (a huge transaction) of $618,678, which is like trying to sneak an elephant through a revolving door.",
+          "risk_verdict": "CRITICAL \u2014 the transaction involves a sanctioned entity and exhibits strong indicators of money laundering and structuring, posing a high risk of illicit activity.",
+          "recommended_action": "Immediately flag the sender's wallet for further investigation and consider reporting the activity to the relevant authorities, such as the Financial Crimes Enforcement Network (FinCEN). Additionally, monitor the wallet for any future suspicious activity and take steps to prevent any potential laundering or terrorist financing."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 717,
-    "unique_senders": 285,
+    "total_findings": 719,
+    "unique_senders": 286,
     "highest_score": 654,
-    "critical_count": 717,
+    "critical_count": 719,
     "high_count": 0,
-    "first_scan": "2026-03-14T08:31:03.127483+00:00",
-    "last_scan": "2026-04-04T20:26:33.141495+00:00"
+    "first_scan": "2026-03-14T09:28:58.694073+00:00",
+    "last_scan": "2026-04-04T20:57:17.029963+00:00"
   }
 }
