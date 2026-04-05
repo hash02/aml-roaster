@@ -1,42 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-14T15:24:18.601206+00:00",
-      "eth_price": 2077.71768313374,
-      "block_range": "24656398 \u2014 24656597",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0x7e91a185069def45d4f894f5384ea570d5341334",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 432,
-          "risk_level": "CRITICAL",
-          "tx_count": 2,
-          "total_eth": 1.1,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "novel_wallet_dump",
-            "exit_rush",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "novel_wallet_dump": 62,
-            "exit_rush": 40,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a shady money laundering shop, handing over a bunch of cash, and expecting it to come out clean on the other side. That's basically what happened here, but with cryptocurrency. Someone sent a total of $2,285 worth of Ethereum to a service called Tornado Cash, which is like a digital laundry machine for dirty money. The problem is, Tornado Cash has been flagged by the U.S. government for helping bad actors launder billions of dollars.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved in some shady stuff'. They also scored high on the mixer_touch (100 points) for directly depositing into Tornado Cash, a service that's basically a cryptocurrency washing machine. And let's not forget the novel_wallet_dump (62 points) for using a brand new wallet to move a large amount of money - that's like using a burner phone to make a suspicious call. This sender is basically screaming 'I'm trying to launder money!'",
-          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with a sanctioned entity and suspicious transaction patterns pose a high risk of money laundering and illicit activity.",
-          "recommended_action": "Immediately freeze the sender's assets and file a suspicious activity report (SAR) with FinCEN, as the transaction activity indicates a high risk of money laundering and illicit activity. Further investigation into the sender's identity and transaction history is also recommended."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-14T15:50:35.960805+00:00",
       "eth_price": 2074.19664714298,
       "block_range": "24656530 \u2014 24656729",
@@ -22901,16 +22865,23 @@
       "block_range": "24812398 \u2014 24812597",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-05T10:29:47.447449+00:00",
+      "eth_price": 2044.08495340615,
+      "block_range": "24812667 \u2014 24812866",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 712,
-    "unique_senders": 287,
+    "total_findings": 711,
+    "unique_senders": 286,
     "highest_score": 654,
-    "critical_count": 712,
+    "critical_count": 711,
     "high_count": 0,
-    "first_scan": "2026-03-14T15:24:18.601206+00:00",
-    "last_scan": "2026-04-05T09:35:49.425610+00:00"
+    "first_scan": "2026-03-14T15:50:35.960805+00:00",
+    "last_scan": "2026-04-05T10:29:47.447449+00:00"
   }
 }
