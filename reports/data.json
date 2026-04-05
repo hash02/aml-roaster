@@ -1,40 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-14T23:50:22.715009+00:00",
-      "eth_price": 2096.57618388433,
-      "block_range": "24658914 \u2014 24659113",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0xaaafeb4c3973d9bb2b354ca3298e19f840f4f3cf",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a bank and trying to deposit money into an account that's known to be used by bad actors, like money launderers or terrorists. That's basically what happened here, but with cryptocurrency. Someone sent a tiny amount of cryptocurrency to a service called Tornado Cash, which is like a digital laundry machine for dirty money. The problem is, Tornado Cash has been flagged by the U.S. government for helping bad people hide their money.",
-          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm probably a bad guy'. And with a score of 100 on the mixer_touch, it's clear they're trying to mix their dirty money with others to avoid detection. It's like trying to sneak into a nightclub through the back door, but the bouncer (in this case, the AML engine) is onto them. And let's not forget the score of 70 on the mixer_contract_call, which is like trying to sneak a peek at the VIP list to see if their 'friends' are on it. Newsflash: the VIP list is actually the sanctions list, buddy!",
-          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with a sanctioned entity poses a significant risk of money laundering and terrorist financing.",
-          "recommended_action": "Immediately freeze the sender's account and conduct a thorough investigation into their activities, including a review of their transaction history and wallet profile. Report this suspicious activity to the relevant authorities, such as FinCEN, as required by law."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-15T02:02:41.850671+00:00",
       "eth_price": 2091.77006152309,
       "block_range": "24659569 \u2014 24659768",
@@ -22627,16 +22593,82 @@
       "block_range": "24815967 \u2014 24816166",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-05T22:27:40.732593+00:00",
+      "eth_price": 2050.67431834965,
+      "block_range": "24816243 \u2014 24816442",
+      "total_findings": 2,
+      "findings": [
+        {
+          "sender": "0xc7c3c87603c55955100dceca02443fbff1b15361",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 580,
+          "risk_level": "CRITICAL",
+          "tx_count": 4,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "velocity",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "velocity": 50,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a shady money laundering front, knowing it's been banned by the government for helping bad guys like North Korea's hackers. That's basically what the sender's wallet did - it sent money to a crypto mixing service called Tornado Cash, which is like a digital laundry machine for dirty money. This service was sanctioned by the U.S. Treasury, meaning it's off-limits, but the sender still interacted with it, raising a huge red flag.",
+          "roast": "Looks like someone's trying to do some laundry, and not the kind that involves soap and water. They scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big neon sign saying 'I'm involved in some shady stuff.' And let's not forget the mixer_touch score (basically, a direct deposit to a sanctioned mixer), which is like walking into that money laundering front I mentioned earlier. It's like they're trying to win an award for 'most creative way to get caught.'",
+          "risk_verdict": "CRITICAL \u2014 the sender's wallet has demonstrated a clear intent to engage with a sanctioned entity, indicating a high risk of money laundering or other illicit activities.",
+          "recommended_action": "Immediately flag the sender's wallet for further investigation and consider reporting to the relevant authorities, as the interactions with Tornado Cash and other suspicious patterns may indicate a serious compliance risk."
+        },
+        {
+          "sender": "0x4af043aca08bbe1fa2ac78eb205ea353327aa5ce",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a store that's known for helping bad guys hide their stolen money, and you're essentially doing the same thing by sending crypto to this place. This transaction is like that, where the sender is interacting with a service called Tornado Cash, which is basically a crypto laundry machine that was shut down by the U.S. government for helping North Korea and other bad actors. It's a big red flag because it looks like the sender is trying to hide something.",
+          "roast": "Scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big scarlet letter 'S' for 'sanctioned' stamped on your forehead. And let's not forget the mixer_touch score of 100, which is like a badge of honor for directly depositing into a crypto mixer, essentially a service that helps hide the source of your funds. The sender also got a score of 70 for mixer_contract_call, which is like trying to sneak around the system by making a zero-value contract call to Tornado Cash, probably to avoid detection or withdraw funds without being seen.",
+          "risk_verdict": "The risk verdict is CRITICAL because the sender is directly interacting with a sanctioned entity, indicating a high likelihood of money laundering or other illicit activity.",
+          "recommended_action": "Immediately freeze the sender's account and conduct a thorough investigation into their activity, including a review of their transaction history and wallet profile, to determine the source and purpose of the funds. Additionally, file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report the potential money laundering activity."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 702,
+    "total_findings": 703,
     "unique_senders": 284,
     "highest_score": 654,
-    "critical_count": 702,
+    "critical_count": 703,
     "high_count": 0,
-    "first_scan": "2026-03-14T23:50:22.715009+00:00",
-    "last_scan": "2026-04-05T21:40:14.485910+00:00"
+    "first_scan": "2026-03-15T02:02:41.850671+00:00",
+    "last_scan": "2026-04-05T22:27:40.732593+00:00"
   }
 }
