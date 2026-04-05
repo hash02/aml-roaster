@@ -1,40 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-14T11:23:48.314963+00:00",
-      "eth_price": 2070.40888748731,
-      "block_range": "24655137 \u2014 24655336",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0x4af043aca08bbe1fa2ac78eb205ea353327aa5ce",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a bank and trying to deposit money into an account that's known for helping bad guys launder their dirty cash. That's basically what happened here, but instead of a bank, it's a cryptocurrency transaction. The sender is trying to move money to a service called Tornado Cash, which is like a digital washing machine for money - it's meant to mix up the money so it can't be tracked, but it's been flagged by the government for helping criminals.",
-          "roast": "Wow, great job trying to sneak one past the authorities by using Tornado Cash, which scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist). That's like trying to sneak into a nightclub with a fake ID that's been revoked. You also got a score of 100 for directly depositing into this shady service, and 70 for making a contract call that's likely just a way to hide what you're really doing. And let's not forget the 30 points for trying to avoid legitimate exchanges, which have rules in place to prevent exactly this kind of thing. You're like a laundry enthusiast, but instead of clean clothes, you're trying to wash dirty money.",
-          "risk_verdict": "CRITICAL \u2014 The transaction involves a direct interaction with a sanctioned entity, posing a high risk of money laundering and illicit activity.",
-          "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into their activities, including reviewing their transaction history and wallet profile to identify potential patterns of illicit behavior. Report this suspicious activity to the relevant authorities, such as FinCEN, and take steps to prevent future interactions with sanctioned entities."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-14T11:46:10.723548+00:00",
       "eth_price": 2075.86987546986,
       "block_range": "24655309 \u2014 24655508",
@@ -23118,16 +23084,23 @@
           "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with FinCEN. Additionally, the wallet and its associated transactions should be isolated and monitored for any further suspicious activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-04-05T02:06:04.384304+00:00",
+      "eth_price": 2055.71110980981,
+      "block_range": "24810159 \u2014 24810358",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 720,
+    "total_findings": 719,
     "unique_senders": 289,
     "highest_score": 654,
-    "critical_count": 720,
+    "critical_count": 719,
     "high_count": 0,
-    "first_scan": "2026-03-14T11:23:48.314963+00:00",
-    "last_scan": "2026-04-04T23:32:20.934769+00:00"
+    "first_scan": "2026-03-14T11:46:10.723548+00:00",
+    "last_scan": "2026-04-05T02:06:04.384304+00:00"
   }
 }
