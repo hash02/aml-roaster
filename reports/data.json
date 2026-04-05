@@ -1,40 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-14T13:43:05.753745+00:00",
-      "eth_price": 2079.47658359745,
-      "block_range": "24655893 \u2014 24656092",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0x7a78e67c8818a967ef300b7458d5ed0015f3b486",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Someone sent a tiny amount of cryptocurrency to a shady service called Tornado Cash, which is like walking into a known money laundering front - it's a place where people try to hide the source of their money. This service was actually sanctioned by the U.S. government for helping bad guys like North Korea's hackers. It's weird because the person sending the money didn't even send any real value, it was basically no amount at all, like sending an empty envelope to a criminal.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag that says 'I'm probably a money launderer'. They also got a high score for using a mixer (think of it like a laundry machine for dirty money), which is a big no-no. And to top it off, they routed their funds to Tornado Cash instead of a legitimate exchange, which is like trying to avoid a metal detector at the airport - it raises a lot of suspicions. They basically shouted 'I'm trying to hide something' to the whole world.",
-          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with a sanctioned mixer and attempts to obfuscate the transaction pose a significant risk of money laundering and illicit activity.",
-          "recommended_action": "Immediately flag this transaction and the sender's wallet for further review and potential reporting to regulatory authorities. It's also a good idea to monitor the sender's wallet for any future suspicious activity and consider blocking any further transactions to sanctioned entities."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-14T14:25:45.347348+00:00",
       "eth_price": 2076.16080375725,
       "block_range": "24656104 \u2014 24656303",
@@ -23064,16 +23030,23 @@
       "block_range": "24811406 \u2014 24811605",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-05T07:37:05.104460+00:00",
+      "eth_price": 2034.40630245112,
+      "block_range": "24811806 \u2014 24812005",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 718,
-    "unique_senders": 289,
+    "total_findings": 717,
+    "unique_senders": 288,
     "highest_score": 654,
-    "critical_count": 718,
+    "critical_count": 717,
     "high_count": 0,
-    "first_scan": "2026-03-14T13:43:05.753745+00:00",
-    "last_scan": "2026-04-05T06:16:31.466519+00:00"
+    "first_scan": "2026-03-14T14:25:45.347348+00:00",
+    "last_scan": "2026-04-05T07:37:05.104460+00:00"
   }
 }
