@@ -1,40 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-14T11:46:10.723548+00:00",
-      "eth_price": 2075.86987546986,
-      "block_range": "24655309 \u2014 24655508",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0x4af043aca08bbe1fa2ac78eb205ea353327aa5ce",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a store that's known for helping bad people hide their dirty money, and then you try to use a special service in that store that helps mix up all the money so it can't be traced. That's basically what happened here - someone sent a transaction to a place called Tornado Cash, which is like a big money blender that was shut down by the government because it was helping bad people like North Korean hackers. This person's wallet has been around for a while and has made a lot of transactions, but this particular move is like a big red flag waving in the air.",
-          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, like a 'most wanted' list for bad people and places). They also got a 100 on the mixer_touch (which means they directly deposited into the infamous Tornado Cash, a crypto mixing service that's like a laundry machine for dirty money). And let's not forget the 70 on the mixer_contract_call (basically, they made a sneaky call to Tornado Cash, probably trying to withdraw or obscure some funds). It's like they're trying to win an award for 'most creative ways to avoid getting caught'.",
-          "risk_verdict": "CRITICAL \u2014 The transaction poses an extremely high risk due to the direct involvement with a sanctioned entity and attempts to obfuscate transaction activity.",
-          "recommended_action": "Immediately flag the sender's wallet for further review and consider reporting this activity to the relevant authorities, as it may indicate an attempt to launder or finance illicit activities. It's also a good idea to monitor the wallet's activity closely for any other suspicious transactions."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-14T12:42:54.526377+00:00",
       "eth_price": 2071.91968035713,
       "block_range": "24655592 \u2014 24655791",
@@ -23091,16 +23057,23 @@
       "block_range": "24810159 \u2014 24810358",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-05T04:59:40.225953+00:00",
+      "eth_price": 2054.67792984825,
+      "block_range": "24811023 \u2014 24811222",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 719,
+    "total_findings": 718,
     "unique_senders": 289,
     "highest_score": 654,
-    "critical_count": 719,
+    "critical_count": 718,
     "high_count": 0,
-    "first_scan": "2026-03-14T11:46:10.723548+00:00",
-    "last_scan": "2026-04-05T02:06:04.384304+00:00"
+    "first_scan": "2026-03-14T12:42:54.526377+00:00",
+    "last_scan": "2026-04-05T04:59:40.225953+00:00"
   }
 }
