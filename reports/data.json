@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-15T07:59:13.288246+00:00",
-      "eth_price": 2106.45086698201,
-      "block_range": "24661334 \u2014 24661533",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-15T08:47:21.265438+00:00",
       "eth_price": 2112.3548941802,
       "block_range": "24661584 \u2014 24661783",
@@ -22713,16 +22706,52 @@
           "recommended_action": "Immediately flag the sender's wallet for suspicious activity and freeze any further transactions to prevent potential money laundering and sanctions evasion. Conduct a thorough review of the wallet's transaction history to identify any other potentially suspicious activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-04-06T07:08:17.828247+00:00",
+      "eth_price": 2122.97358480462,
+      "block_range": "24818835 \u2014 24819034",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x9331e21f3d8ec835fec4f415b867cedd20a43027",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 460,
+          "risk_level": "CRITICAL",
+          "tx_count": 11,
+          "total_eth": 25.4,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "novel_wallet_dump",
+            "high_value",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "novel_wallet_dump": 100,
+            "high_value": 30,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a shady money laundering front and handing over a large sum of cash, hoping it gets cleaned and can't be traced back to you. That's basically what happened here, but with cryptocurrency. Someone sent a lot of money, $53,924 worth of Ethereum, to a service called Tornado Cash, which is like a laundry machine for dirty money. It's been banned by the U.S. government because it helped bad actors, like North Korean hackers, hide their stolen funds.",
+          "roast": "This sender is either extremely reckless or hilariously bad at hiding their tracks. They scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, like a 'most wanted' list for bad financial actors). It's like they thought, 'You know what's a great idea? Let me send all my money to a service that's been banned by the U.S. government for helping North Korean hackers!' And the cherry on top is they did it from a brand new wallet, which is a classic move for someone trying to avoid detection, scoring 100 on the novel_wallet_dump (a fancy way of saying they're using a 'burner wallet' that's never been used before).",
+          "risk_verdict": "CRITICAL \u2014 The transaction poses a high risk due to its direct involvement with a sanctioned entity and the use of patterns indicative of money laundering attempts.",
+          "recommended_action": "Immediately flag this transaction for further investigation and consider reporting it to the relevant financial authorities. It's also crucial to monitor the sender's wallet and any associated wallets for further suspicious activity."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 705,
-    "unique_senders": 284,
+    "total_findings": 706,
+    "unique_senders": 285,
     "highest_score": 654,
-    "critical_count": 705,
+    "critical_count": 706,
     "high_count": 0,
-    "first_scan": "2026-03-15T07:59:13.288246+00:00",
-    "last_scan": "2026-04-06T05:09:45.101381+00:00"
+    "first_scan": "2026-03-15T08:47:21.265438+00:00",
+    "last_scan": "2026-04-06T07:08:17.828247+00:00"
   }
 }
