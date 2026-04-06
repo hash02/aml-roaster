@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-15T16:28:07.079386+00:00",
-      "eth_price": 2092.38948763765,
-      "block_range": "24663884 \u2014 24664083",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-15T16:59:29.513541+00:00",
       "eth_price": 2092.26496705931,
       "block_range": "24664034 \u2014 24664233",
@@ -22386,6 +22379,13 @@
           "recommended_action": "Immediately freeze any related assets and file a Suspicious Activity Report with FinCEN, as this transaction poses a significant risk of money laundering and terrorist financing. Conduct a thorough review of the sender's wallet activity to identify any other potential suspicious transactions."
         }
       ]
+    },
+    {
+      "timestamp": "2026-04-06T21:34:50.184191+00:00",
+      "eth_price": 2146.01293147786,
+      "block_range": "24823153 \u2014 24823352",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
@@ -22395,7 +22395,7 @@
     "highest_score": 660,
     "critical_count": 693,
     "high_count": 0,
-    "first_scan": "2026-03-15T16:28:07.079386+00:00",
-    "last_scan": "2026-04-06T20:34:33.035176+00:00"
+    "first_scan": "2026-03-15T16:59:29.513541+00:00",
+    "last_scan": "2026-04-06T21:34:50.184191+00:00"
   }
 }
