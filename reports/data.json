@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-15T16:59:29.513541+00:00",
-      "eth_price": 2092.26496705931,
-      "block_range": "24664034 \u2014 24664233",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-15T17:33:31.158062+00:00",
       "eth_price": 2095.88360219995,
       "block_range": "24664202 \u2014 24664401",
@@ -22386,16 +22379,50 @@
       "block_range": "24823153 \u2014 24823352",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-06T22:33:07.641905+00:00",
+      "eth_price": 2132.39538512279,
+      "block_range": "24823442 \u2014 24823641",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x0a5b2bf3ccfb44c1d22f07eed9553ecba752d4ad",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "This is like walking into a known money laundering front and handing over cash to a shady character. The sender's wallet made a transaction to Tornado Cash, which is essentially a crypto laundry service that helps people hide the source of their money. Think of it like a super secretive bank that doesn't follow any rules, and this transaction is like a big red flag waving in the air.",
+          "roast": "Look who's trying to sneak around the law, scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, like a 'most wanted' list for bad guys). They're using Tornado Cash, which is like a dirty laundromat for crypto, and they're trying to fly under the radar with a zero-value transaction - yeah, that's not suspicious at all. They're basically shouting 'I'm trying to hide something' with a score of 100 on the mixer_touch (directly interacting with a shady mixing service). And let's not forget the 30 points for exchange_avoidance (trying to avoid the regular, law-abiding crypto exchanges), because who needs rules and regulations, anyway?",
+          "risk_verdict": "CRITICAL \u2014 The sender's direct interaction with a sanctioned entity and attempts to obfuscate the transaction pose a significant risk of money laundering and illicit activity.",
+          "recommended_action": "Immediately flag the sender's wallet for further investigation and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Freeze any related assets and conduct a thorough review of the wallet's transaction history to identify potential patterns of illicit activity."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 693,
+    "total_findings": 694,
     "unique_senders": 281,
     "highest_score": 660,
-    "critical_count": 693,
+    "critical_count": 694,
     "high_count": 0,
-    "first_scan": "2026-03-15T16:59:29.513541+00:00",
-    "last_scan": "2026-04-06T21:34:50.184191+00:00"
+    "first_scan": "2026-03-15T17:33:31.158062+00:00",
+    "last_scan": "2026-04-06T22:33:07.641905+00:00"
   }
 }
