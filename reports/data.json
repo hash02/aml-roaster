@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-15T21:51:22.540455+00:00",
-      "eth_price": 2138.00299319401,
-      "block_range": "24665496 \u2014 24665695",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-15T22:24:36.271603+00:00",
       "eth_price": 2132.96543094307,
       "block_range": "24665657 \u2014 24665856",
@@ -22688,16 +22681,136 @@
           "recommended_action": "Immediately freeze the sender's assets and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Conduct a thorough review of the sender's transaction history to identify any other potential suspicious activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-04-07T11:29:17.159660+00:00",
+      "eth_price": 2091.78863107092,
+      "block_range": "24827289 \u2014 24827488",
+      "total_findings": 4,
+      "findings": [
+        {
+          "sender": "0x66ef2383ff5877bf5d0735702c781ae07c8ad108",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 532,
+          "risk_level": "CRITICAL",
+          "tx_count": 6,
+          "total_eth": 6.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "novel_wallet_dump",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "novel_wallet_dump": 72,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine you're at a bank and someone walks in with a bunch of briefcases full of cash, all containing the exact same amount, and they start depositing them one by one into an account that's known to be used by bad actors. That's basically what happened here, but instead of a bank, it's a cryptocurrency transaction, and instead of briefcases, it's digital money. The person sending the money is using a brand new account, which is like using a burner phone - it's a red flag because it looks like they're trying to hide something.",
+          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a 'most wanted' poster with their face on it. They also got a 100 on the mixer_touch (which means they directly interacted with a sanctioned crypto mixer, like Tornado Cash), because who needs clean money when you can just mix it with dirty money, right? And let's not forget the 72 on the novel_wallet_dump, because using a brand new wallet to move a large amount of money is like using a fake ID to buy a car - it's a classic move for people trying to stay under the radar.",
+          "risk_verdict": "CRITICAL \u2014 the transaction pattern and interaction with a sanctioned entity pose a high risk of money laundering or terrorist financing activity.",
+          "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, consider blocking any future transactions from this wallet and conducting a thorough investigation into the source and destination of the funds."
+        },
+        {
+          "sender": "0x557bff6c7c79d43dff19b6116dca6675f9391d59",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 460,
+          "risk_level": "CRITICAL",
+          "tx_count": 6,
+          "total_eth": 0.6,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "This is like someone walking into a known money laundering front, handing over cash in small bills, and then quickly leaving - it's suspicious and raises a lot of red flags. In this case, the person sent small amounts of cryptocurrency to a service called Tornado Cash, which is like a digital laundry machine for money, and it's been banned by the US government for helping bad people hide their money. The person did this six times in a row, which is a classic sign of trying to avoid detection.",
+          "roast": "Looks like someone scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, it's like being on the 'no fly' list but for money laundering). They also got a perfect score of 100 for directly depositing into Tornado Cash, a service so shady it makes a black market look like a farmer's market. And to top it off, they got 70 points for structuring (basically, breaking up large transactions into smaller ones to avoid raising alarms, like trying to sneak a big cake into a party by bringing it in six small pieces).",
+          "risk_verdict": "CRITICAL - The transaction involves a sanctioned entity and exhibits clear signs of money laundering and structuring, posing a high risk of illicit activity.",
+          "recommended_action": "Immediately flag and freeze the sender's wallet, and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report the potential money laundering activity. Conduct a thorough investigation into the sender's identity and transaction history to determine the source and intended use of the funds."
+        },
+        {
+          "sender": "0xfde71e6bf1ff39037109476fe0c831e6777888cb",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 432,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 1.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "novel_wallet_dump",
+            "exit_rush",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "novel_wallet_dump": 62,
+            "exit_rush": 40,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "This is like trying to sneak cash into a shady money laundering operation. Someone created a brand new wallet, sent a large amount of Ethereum (about $2,092) to a mixing service called Tornado Cash, and then completely drained the wallet. It's suspicious because Tornado Cash was sanctioned by the U.S. government for helping bad actors launder money.",
+          "roast": "This sender just scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag that says 'I'm probably a bad guy'. They also got a 100 on the mixer_touch (directly interacting with a sanctioned mixer, basically a money laundering front) and a 62 on the novel_wallet_dump (using a brand new wallet to move a large amount of money, a classic sign of trying to hide something). And to top it all off, they got a 40 on the exit_rush (draining the wallet immediately after the transaction, because who needs money when you're done laundering it?).",
+          "risk_verdict": "CRITICAL \u2014 the transaction involves a direct interaction with a sanctioned entity and exhibits multiple indicators of attempted money laundering.",
+          "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Block any further transactions from this wallet and investigate any related activity to prevent potential money laundering."
+        },
+        {
+          "sender": "0x0a5b2bf3ccfb44c1d22f07eed9553ecba752d4ad",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "This is like trying to sneak into a secret club that's known for helping bad guys launder money. The sender is essentially using a service called Tornado Cash, which is like a money laundry machine that mixes your dirty cash with clean cash so it's hard to track. It's a major red flag because Tornado Cash has been sanctioned by the U.S. government for helping launder billions of dollars.",
+          "roast": "Wow, this sender is really trying to fly under the radar by using a sanctioned service like Tornado Cash, which scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist). It's like they're trying to hide their money in a washing machine, but the washing machine is on fire and has a big sign that says 'money launderers welcome'. They also scored 100 on the mixer_touch, which means they directly deposited into Tornado Cash, and 70 on the mixer_contract_call, which is like trying to sneak out the back door of the money laundry. And let's not forget the 30 on the exchange_avoidance, because who needs legitimate exchanges with KYC/AML controls when you can just use a shady mixer?",
+          "risk_verdict": "CRITICAL \u2014 the transaction involves a sanctioned entity and exhibits high-risk characteristics indicative of potential money laundering activity.",
+          "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with FinCEN. Block any further transactions from this sender to prevent potential money laundering activity."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 704,
-    "unique_senders": 285,
+    "total_findings": 708,
+    "unique_senders": 288,
     "highest_score": 660,
-    "critical_count": 704,
+    "critical_count": 708,
     "high_count": 0,
-    "first_scan": "2026-03-15T21:51:22.540455+00:00",
-    "last_scan": "2026-04-07T10:09:47.193142+00:00"
+    "first_scan": "2026-03-15T22:24:36.271603+00:00",
+    "last_scan": "2026-04-07T11:29:17.159660+00:00"
   }
 }
