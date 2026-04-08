@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-16T14:43:35.036203+00:00",
-      "eth_price": 2260.50452570065,
-      "block_range": "24670530 \u2014 24670729",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-16T16:02:42.216637+00:00",
       "eth_price": 2274.13828944835,
       "block_range": "24670926 \u2014 24671125",
@@ -22648,16 +22641,50 @@
       "block_range": "24832143 \u2014 24832342",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-08T05:45:28.238197+00:00",
+      "eth_price": 2242.72292101874,
+      "block_range": "24832775 \u2014 24832974",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x49eafd5be294ef68188679295d561e9bee1d912d",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 360,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 10.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "high_value",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "high_value": 30,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "Imagine walking into a known money laundering front and handing over a briefcase full of cash - that's basically what happened here. Someone sent a large amount of Ethereum (a type of digital money) to a service called Tornado Cash, which is like a digital laundry machine for dirty money. This service was shut down by the U.S. government last year because it was helping bad people, like North Korean hackers, clean their stolen money.",
+          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big, red 'I'm a bad guy' stamp on their digital forehead. They also scored high on the mixer_touch and exchange_avoidance rules, which means they're trying to hide their tracks by using a shady service like Tornado Cash. It's like they're trying to sneak into a nightclub without getting caught, but they just set off every alarm in the system. And with a wallet that's only 40 days old, it's clear they're trying to make a quick dirty buck.",
+          "risk_verdict": "CRITICAL - the transaction involves a direct interaction with a sanctioned entity, indicating a high risk of money laundering or other illicit activity.",
+          "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). The sender's wallet should also be monitored for any future suspicious activity."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 703,
-    "unique_senders": 286,
+    "total_findings": 704,
+    "unique_senders": 287,
     "highest_score": 660,
-    "critical_count": 703,
+    "critical_count": 704,
     "high_count": 0,
-    "first_scan": "2026-03-16T14:43:35.036203+00:00",
-    "last_scan": "2026-04-08T03:38:20.757018+00:00"
+    "first_scan": "2026-03-16T16:02:42.216637+00:00",
+    "last_scan": "2026-04-08T05:45:28.238197+00:00"
   }
 }
