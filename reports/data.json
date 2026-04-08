@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-17T04:15:50.805967+00:00",
-      "eth_price": 2328.37771831335,
-      "block_range": "24674546 \u2014 24674745",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-17T05:41:25.550377+00:00",
       "eth_price": 2308.47309924247,
       "block_range": "24674994 \u2014 24675193",
@@ -23275,6 +23268,13 @@
           "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into the source and destination of their funds. It's also recommended to report this activity to the relevant authorities, such as FinCEN, to ensure compliance with AML regulations."
         }
       ]
+    },
+    {
+      "timestamp": "2026-04-08T20:42:50.826870+00:00",
+      "eth_price": 2207.17638257197,
+      "block_range": "24837253 \u2014 24837452",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
@@ -23284,7 +23284,7 @@
     "highest_score": 660,
     "critical_count": 726,
     "high_count": 0,
-    "first_scan": "2026-03-17T04:15:50.805967+00:00",
-    "last_scan": "2026-04-08T19:57:22.438506+00:00"
+    "first_scan": "2026-03-17T05:41:25.550377+00:00",
+    "last_scan": "2026-04-08T20:42:50.826870+00:00"
   }
 }
