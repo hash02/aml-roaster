@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-16T20:36:15.127261+00:00",
-      "eth_price": 2334.818486839,
-      "block_range": "24672280 \u2014 24672479",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-16T21:36:03.234146+00:00",
       "eth_price": 2355.80784141269,
       "block_range": "24672580 \u2014 24672779",
@@ -22906,6 +22899,13 @@
           "recommended_action": "Immediately freeze the sender's assets and report this transaction to the relevant authorities, as it may be part of a larger money laundering scheme. Conduct a thorough investigation into the sender's identity and the source of the funds to determine the full extent of the potential illicit activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-04-08T12:08:58.964835+00:00",
+      "eth_price": 2250.04845094821,
+      "block_range": "24834692 \u2014 24834891",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
@@ -22915,7 +22915,7 @@
     "highest_score": 660,
     "critical_count": 713,
     "high_count": 0,
-    "first_scan": "2026-03-16T20:36:15.127261+00:00",
-    "last_scan": "2026-04-08T11:29:41.369782+00:00"
+    "first_scan": "2026-03-16T21:36:03.234146+00:00",
+    "last_scan": "2026-04-08T12:08:58.964835+00:00"
   }
 }
