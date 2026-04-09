@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-17T19:54:37.423268+00:00",
-      "eth_price": 2320.88559079493,
-      "block_range": "24679225 \u2014 24679424",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-17T20:35:31.929398+00:00",
       "eth_price": 2326.90158090733,
       "block_range": "24679428 \u2014 24679627",
@@ -22474,16 +22467,46 @@
       "block_range": "24842742 \u2014 24842941",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-09T16:47:18.004201+00:00",
+      "eth_price": 2201.15063789952,
+      "block_range": "24843249 \u2014 24843448",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x539fe2332a0725c50de5f7e0d13a2c32e8062a84",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 150,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 100.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "whale_transfer",
+            "mixer_touch"
+          ],
+          "rule_scores": {
+            "whale_transfer": 50,
+            "mixer_touch": 100
+          },
+          "what_happened": "Someone just sent a huge amount of money, $220,115 worth of Ethereum, to a very shady place called Tornado Cash. This is like walking into a known money laundering front and handing over a briefcase full of cash. It's a major red flag because Tornado Cash has been sanctioned by the U.S. government for helping bad actors, like North Korean hackers, clean their dirty money.",
+          "roast": "This sender just scored 100 on the mixer_touch (meaning they directly interacted with a sanctioned crypto mixing service, which is like a big neon sign saying 'I'm laundering money'). And with a whopping 100 ETH transfer, they also triggered the whale_transfer (a huge transaction that's like throwing a giant fish into a small pond, it's gonna make waves). They're basically shouting 'I'm trying to hide something' to the whole world. Oh, and they also scored 50 on the whale_transfer, because who needs subtlety when you're laundering money?",
+          "risk_verdict": "CRITICAL \u2014 the transaction poses a significant risk of money laundering and terrorist financing due to the involvement of a sanctioned entity.",
+          "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into the source of the funds and the sender's identity. Report the suspicious activity to the Financial Crimes Enforcement Network (FinCEN) and consider filing a Suspicious Activity Report (SAR)."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 696,
-    "unique_senders": 282,
+    "total_findings": 697,
+    "unique_senders": 283,
     "highest_score": 660,
-    "critical_count": 696,
+    "critical_count": 697,
     "high_count": 0,
-    "first_scan": "2026-03-17T19:54:37.423268+00:00",
-    "last_scan": "2026-04-09T15:05:37.994146+00:00"
+    "first_scan": "2026-03-17T20:35:31.929398+00:00",
+    "last_scan": "2026-04-09T16:47:18.004201+00:00"
   }
 }
