@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-18T13:03:08.556765+00:00",
-      "eth_price": 2226.27394015455,
-      "block_range": "24684293 \u2014 24684492",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-18T14:46:32.188478+00:00",
       "eth_price": 2204.37124731213,
       "block_range": "24684806 \u2014 24685005",
@@ -22590,6 +22583,13 @@
           "recommended_action": "Immediately flag this transaction and the sender's wallet for further review, and consider reporting this activity to the relevant authorities. It's also a good idea to monitor the sender's wallet for any future suspicious activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-04-10T13:54:16.479034+00:00",
+      "eth_price": 2218.83519152739,
+      "block_range": "24849551 \u2014 24849750",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
@@ -22599,7 +22599,7 @@
     "highest_score": 660,
     "critical_count": 701,
     "high_count": 0,
-    "first_scan": "2026-03-18T13:03:08.556765+00:00",
-    "last_scan": "2026-04-10T12:06:22.918422+00:00"
+    "first_scan": "2026-03-18T14:46:32.188478+00:00",
+    "last_scan": "2026-04-10T13:54:16.479034+00:00"
   }
 }
