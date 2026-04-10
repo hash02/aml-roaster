@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-18T10:49:12.881621+00:00",
-      "eth_price": 2311.96864794381,
-      "block_range": "24683657 \u2014 24683856",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-18T11:42:51.134836+00:00",
       "eth_price": 2275.44440692613,
       "block_range": "24683941 \u2014 24684140",
@@ -22358,6 +22351,13 @@
           "recommended_action": "Immediately freeze the sender's assets and file a Suspicious Activity Report with FinCEN. Conduct further investigation into the sender's identity and the source of the funds to determine the extent of potential money laundering activity."
         }
       ]
+    },
+    {
+      "timestamp": "2026-04-10T11:25:38.455234+00:00",
+      "eth_price": 2215.3355974339,
+      "block_range": "24848809 \u2014 24849008",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
@@ -22367,7 +22367,7 @@
     "highest_score": 660,
     "critical_count": 692,
     "high_count": 0,
-    "first_scan": "2026-03-18T10:49:12.881621+00:00",
-    "last_scan": "2026-04-10T10:06:37.767447+00:00"
+    "first_scan": "2026-03-18T11:42:51.134836+00:00",
+    "last_scan": "2026-04-10T11:25:38.455234+00:00"
   }
 }
