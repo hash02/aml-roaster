@@ -1,38 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-19T16:15:25.414166+00:00",
-      "eth_price": 2114.89140082732,
-      "block_range": "24692463 \u2014 24692662",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0xa8cc08c9fdcceb2cc7e255422a97fa1086114493",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 410,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0,
-          "total_token_usd": 10000.0,
-          "rules_triggered": [
-            "stablecoin_mixing",
-            "ofac_hit",
-            "mixer_touch"
-          ],
-          "rule_scores": {
-            "stablecoin_mixing": 110,
-            "ofac_hit": 200,
-            "mixer_touch": 100
-          },
-          "what_happened": "Imagine walking into a known money laundering front and handing over a briefcase full of cash - that's basically what happened here, but with cryptocurrency. Someone sent $10,000 in stablecoins (think of it like digital cash) to a service called Tornado Cash, which is like a digital laundry machine for money. The problem is, Tornado Cash has been flagged by the U.S. government for helping bad guys like North Korean hackers clean their dirty money.",
-          "roast": "Wow, it takes some serious guts (or stupidity) to send $10,000 in stablecoins to a sanctioned crypto mixer like Tornado Cash - that's like wearing a neon sign saying 'I'm trying to launder money'. This address scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like being on the FBI's most wanted list, but for cryptocurrency. And with a score of 110 for stablecoin mixing, it's clear they're trying to cover their tracks by washing their money through a service designed to obscure the origin of funds.",
-          "risk_verdict": "CRITICAL - the transaction involves a sanctioned entity and exhibits clear signs of money laundering, posing a significant risk to the financial system.",
-          "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into the source of the funds and the intent behind the transaction. Report this activity to the relevant authorities, including FinCEN, as required by the Bank Secrecy Act."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-19T17:32:11.612835+00:00",
       "eth_price": 2128.58623434214,
       "block_range": "24692843 \u2014 24693042",
@@ -22212,16 +22180,23 @@
       "block_range": "24856720 \u2014 24856919",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-11T14:33:53.669585+00:00",
+      "eth_price": 2241.92845985343,
+      "block_range": "24856899 \u2014 24857098",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 687,
+    "total_findings": 686,
     "unique_senders": 283,
     "highest_score": 660,
-    "critical_count": 687,
+    "critical_count": 686,
     "high_count": 0,
-    "first_scan": "2026-03-19T16:15:25.414166+00:00",
-    "last_scan": "2026-04-11T13:53:52.936076+00:00"
+    "first_scan": "2026-03-19T17:32:11.612835+00:00",
+    "last_scan": "2026-04-11T14:33:53.669585+00:00"
   }
 }
