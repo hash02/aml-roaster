@@ -1,40 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-20T08:36:56.579427+00:00",
-      "eth_price": 2165.82287945791,
-      "block_range": "24697354 \u2014 24697553",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0xc7f8278721c86ea7a5b5a08ce47359a1f6601c8d",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 2,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "This is like someone walking into a known money laundering front and trying to clean their dirty money. They're using a service called Tornado Cash, which is like a big washing machine for money, to mix their funds with others and hide where it came from. The problem is, this service has been flagged by the U.S. government for helping bad people like North Korean hackers launder billions of dollars.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved in some shady stuff'. They also got a 100 on the mixer_touch score, which means they directly deposited money into this sanctioned mixer, Tornado Cash. It's like they're trying to win an award for 'most obvious money launderer'. And with a wallet that's only 59 days old but has already made 346 transactions, it's clear they're trying to move some dirty money around quickly.",
-          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with a sanctioned mixer and OFAC SDN match poses a high risk of money laundering and terrorist financing.",
-          "recommended_action": "Immediately freeze the sender's assets and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Conduct a thorough investigation into the sender's transactions and wallet activity to determine the source and destination of the funds."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-20T09:37:42.337508+00:00",
       "eth_price": 2147.33738236982,
       "block_range": "24697645 \u2014 24697844",
@@ -22188,16 +22154,23 @@
       "block_range": "24859730 \u2014 24859929",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-12T02:52:01.967879+00:00",
+      "eth_price": 2226.61680285707,
+      "block_range": "24860596 \u2014 24860795",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 686,
+    "total_findings": 685,
     "unique_senders": 281,
     "highest_score": 660,
-    "critical_count": 686,
+    "critical_count": 685,
     "high_count": 0,
-    "first_scan": "2026-03-20T08:36:56.579427+00:00",
-    "last_scan": "2026-04-11T23:57:57.322939+00:00"
+    "first_scan": "2026-03-20T09:37:42.337508+00:00",
+    "last_scan": "2026-04-12T02:52:01.967879+00:00"
   }
 }
