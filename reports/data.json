@@ -1,118 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-20T20:28:40.805956+00:00",
-      "eth_price": 2129.62004325655,
-      "block_range": "24700902 \u2014 24701101",
-      "total_findings": 4,
-      "findings": [
-        {
-          "sender": "0xcd53fa7f05fb6749b3e67c297b058dcbafb5f977",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 460,
-          "risk_level": "CRITICAL",
-          "tx_count": 3,
-          "total_eth": 0.30000000000000004,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "structuring",
-            "peel_chain_linear",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "structuring": 70,
-            "peel_chain_linear": 60,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a shady store that's known for helping people launder money, and you give them a bunch of cash in small bags, trying not to draw attention to yourself. That's basically what happened here - someone sent a total of $639 in three identical payments of $213 to a crypto mixing service called Tornado Cash, which is like a digital version of that shady store. The problem is, Tornado Cash has been banned by the U.S. government for helping bad guys like North Korea's hackers launder billions of dollars.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm trying to launder money'. They also scored high on the structuring rule (think of it like trying to sneak past the bouncer by bringing in small groups of friends instead of one big crowd), and the peel chain rule (imagine layering an onion to hide the smell, but in this case, it's to hide the money trail). It looks like they're trying to avoid detection by using a mixer, but really they're just leaving a big trail of digital breadcrumbs. And to top it off, they got a score for exchange avoidance, which is like trying to sneak into a club through the back door instead of walking in the front door where the bouncers are checking IDs.",
-          "risk_verdict": "CRITICAL - the transaction involves a sanctioned entity and exhibits suspicious patterns indicative of money laundering, posing a high risk to the financial system.",
-          "recommended_action": "Immediately freeze the sender's wallet and report this activity to the relevant authorities, as it appears to be a clear case of attempted money laundering using a sanctioned mixer service. The wallet should be monitored closely for any further suspicious activity."
-        },
-        {
-          "sender": "0x0a5b2bf3ccfb44c1d22f07eed9553ecba752d4ad",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 2,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine you're at a bank and you see someone putting money into an account that's known to be used for money laundering. That's basically what happened here, but with cryptocurrency. Someone sent cryptocurrency to a service called Tornado Cash, which is like a washing machine for dirty money - it mixes it with other money to hide where it came from. This service was even sanctioned by the US government for helping bad people launder billions of dollars.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved in some shady stuff'. They also got a high score for using a mixer, which is like trying to erase their fingerprints from a crime scene. And to top it all off, they're using a service that's specifically designed to avoid the laws that are in place to prevent money laundering - that's like trying to sneak into a secured building through a back door. Oh, and let's not forget the zero-value contract call, which is like sending a secret message to their accomplices saying 'hey, I've got some dirty money to launder'.",
-          "risk_verdict": "CRITICAL - The sender's direct interaction with a sanctioned entity and high-risk transaction behavior pose a significant threat to the integrity of the financial system.",
-          "recommended_action": "Immediately flag and freeze the sender's account, and file a Suspicious Activity Report (SAR) with FinCEN. Conduct a thorough review of the sender's transaction history to identify any other potential suspicious activity."
-        },
-        {
-          "sender": "0x4750bcfcc340aa4b31be7e71fa072716d28c29c5",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a store that's known for helping bad people hide their dirty money, and you're essentially giving them a big hug by doing business with them. That's what's happening here, but instead of a store, it's a cryptocurrency mixing service called Tornado Cash, which was shut down by the U.S. government for helping launder billions of dollars. Someone is sending cryptocurrency to this service, which is like a big red flag waving in the air saying 'something fishy is going on here'.",
-          "roast": "Wow, it looks like someone scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like getting a big fat F on your report card for being a good boy or girl. And to make matters worse, they also got a 100 on the mixer_touch (basically, a direct deposit to a shady service that helps people hide their money), and a 70 on the mixer_contract_call (likely trying to sneakily withdraw or vote on something without being seen). It's like they're trying to win an award for 'most likely to launder money'.",
-          "risk_verdict": "CRITICAL \u2014 the transaction poses a high risk of money laundering due to the involvement of a sanctioned cryptocurrency mixing service and suspicious wallet activity.",
-          "recommended_action": "Immediately freeze any assets associated with the sender's wallet and conduct a thorough investigation into the source and destination of the funds, including reviewing the wallet's transaction history and identifying any potential counterparties."
-        },
-        {
-          "sender": "0x13c49a71663afd5d6230d5c0a6fffb8257c9e0e7",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 330,
-          "risk_level": "CRITICAL",
-          "tx_count": 2,
-          "total_eth": 0.2,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a shady store that's known for helping people launder money, and you give them $426 in cash, twice. That's basically what happened here, but with a type of money called Ethereum. Someone sent $426 worth of Ethereum to a service called Tornado Cash, which is like a money-laundering machine. This service was even put on a blacklist by the U.S. government for helping bad people clean their dirty money.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved with some shady stuff'. They also got a high score for using a mixer (think of it like a washing machine for dirty money), specifically Tornado Cash, which is a known haven for money launderers. And to top it off, they avoided using a legitimate exchange, which is like trying to sneak past a security guard at a bank. It looks like they're trying to cover their tracks, but our AML engine caught them red-handed.",
-          "risk_verdict": "The risk verdict is CRITICAL because the sender interacted with a sanctioned entity, Tornado Cash, which is a clear indication of potential money laundering activity.",
-          "recommended_action": "We recommend immediately freezing the sender's assets and conducting a thorough investigation into their activities, including reviewing their transaction history and identifying the source of their funds. Additionally, we should report this suspicious activity to the relevant authorities."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-20T20:58:31.077791+00:00",
       "eth_price": 2133.50872089015,
       "block_range": "24701053 \u2014 24701252",
@@ -21750,16 +21638,23 @@
       "block_range": "24864698 \u2014 24864897",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-12T17:31:30.658937+00:00",
+      "eth_price": 2195.8702065246,
+      "block_range": "24864981 \u2014 24865180",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 670,
+    "total_findings": 666,
     "unique_senders": 279,
     "highest_score": 660,
-    "critical_count": 670,
+    "critical_count": 666,
     "high_count": 0,
-    "first_scan": "2026-03-20T20:28:40.805956+00:00",
-    "last_scan": "2026-04-12T16:34:38.029519+00:00"
+    "first_scan": "2026-03-20T20:58:31.077791+00:00",
+    "last_scan": "2026-04-12T17:31:30.658937+00:00"
   }
 }
