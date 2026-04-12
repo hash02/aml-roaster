@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-20T22:55:23.633893+00:00",
-      "eth_price": 2155.46972809313,
-      "block_range": "24701589 \u2014 24701788",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-20T23:26:13.944378+00:00",
       "eth_price": 2148.00745616094,
       "block_range": "24701784 \u2014 24701983",
@@ -21645,16 +21638,48 @@
       "block_range": "24865880 \u2014 24866079",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-12T21:31:21.087178+00:00",
+      "eth_price": 2209.84640257613,
+      "block_range": "24866177 \u2014 24866376",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0xd4eaa6e07378696bf2db832792ea5166833cef0f",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 430,
+          "risk_level": "CRITICAL",
+          "tx_count": 3,
+          "total_eth": 0,
+          "total_token_usd": 30000.0,
+          "rules_triggered": [
+            "stablecoin_mixing",
+            "ofac_hit",
+            "mixer_touch"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 130,
+            "ofac_hit": 200,
+            "mixer_touch": 100
+          },
+          "what_happened": "This is like someone walking into a known money laundering front and handing over a briefcase full of cash, but instead, they're using a cryptocurrency called stablecoin to move $30,000 into a shady service called Tornado Cash, which is like a digital laundry machine for dirty money. The person made three separate transactions, each for $10,000, which is a big red flag because it looks like they're trying to avoid detection. It's like they're trying to sneak money into a system that's designed to hide where it came from.",
+          "roast": "Wow, this guy really knows how to pick a winner - they scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, like a 'most wanted' list for bad actors). And with a composite score of 430, they're basically shouting 'I'm laundering money!' - the stablecoin mixing score of 130 is like a big neon sign saying 'I'm trying to hide something!' because they made three round-number transactions to Tornado Cash, a service that's been sanctioned by the U.S. Treasury for helping bad guys like North Korea's Lazarus Group. It's like they took a class on 'how to get caught laundering money' and got an A+.",
+          "risk_verdict": "CRITICAL \u2014 the transaction involves a direct deposit to a known OFAC-sanctioned mixer, indicating a high risk of money laundering activity.",
+          "recommended_action": "Immediately freeze the sender's account and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN), and conduct a thorough investigation into the source of the funds and the purpose of the transactions."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 666,
+    "total_findings": 667,
     "unique_senders": 279,
     "highest_score": 660,
-    "critical_count": 666,
+    "critical_count": 667,
     "high_count": 0,
-    "first_scan": "2026-03-20T22:55:23.633893+00:00",
-    "last_scan": "2026-04-12T20:31:42.752314+00:00"
+    "first_scan": "2026-03-20T23:26:13.944378+00:00",
+    "last_scan": "2026-04-12T21:31:21.087178+00:00"
   }
 }
