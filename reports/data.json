@@ -1,40 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-22T11:20:57.259125+00:00",
-      "eth_price": 2080.96559011272,
-      "block_range": "24712497 \u2014 24712696",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0x58f133518504d313c5374eb10b8cb012f7ff7918",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 392,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 1.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "novel_wallet_dump",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "novel_wallet_dump": 62,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "This is like walking into a known money laundering front and handing over a briefcase full of cash - someone sent a significant amount of cryptocurrency, about $2,081 worth, directly to a service called Tornado Cash, which is essentially a digital laundry machine that helps hide where the money came from. It's like trying to wash dirty clothes in a secret location so no one can see the stains. The sender used a brand new digital wallet, which is suspicious because it was created just for this one transaction, kind of like buying a burner phone to make a shady call.",
-          "roast": "Scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a 'Wanted' poster with your face on it at the local post office. They also got a 100 for directly depositing into Tornado Cash, a mixer service that's been banned for helping bad guys like North Korea's hackers launder billions. And let's not forget the 62 for using a brand new wallet, which screams 'burner wallet' - it's like buying a new phone just to make one shady call. This guy's trying to avoid the law like it's their job, and they got a 30 for skipping the usual exchange routes, which have checks to prevent exactly this kind of thing.",
-          "risk_verdict": "CRITICAL - the transaction involves a direct deposit to a sanctioned entity, indicating a high risk of money laundering and sanctions evasion.",
-          "recommended_action": "Immediately flag this transaction for further review and consider reporting it to the relevant authorities, as it may involve sanctions evasion and money laundering. The sender's wallet and associated transactions should be subject to enhanced monitoring to prevent further suspicious activity."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-22T11:45:42.974355+00:00",
       "eth_price": 2074.89594821225,
       "block_range": "24712637 \u2014 24712836",
@@ -21733,16 +21699,23 @@
       "block_range": "24887628 \u2014 24887827",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-15T22:08:54.883450+00:00",
+      "eth_price": 2369.11959241446,
+      "block_range": "24887907 \u2014 24888106",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 669,
-    "unique_senders": 283,
+    "total_findings": 668,
+    "unique_senders": 282,
     "highest_score": 660,
-    "critical_count": 669,
+    "critical_count": 668,
     "high_count": 0,
-    "first_scan": "2026-03-22T11:20:57.259125+00:00",
-    "last_scan": "2026-04-15T21:13:14.063469+00:00"
+    "first_scan": "2026-03-22T11:45:42.974355+00:00",
+    "last_scan": "2026-04-15T22:08:54.883450+00:00"
   }
 }
