@@ -9,13 +9,14 @@ Detection rules ported from NEXUS-AGENT v1 AML engine (22 rules, 94.9% detection
 Author: HASH (hash02) — Bionic Banker
 """
 
+import json
 import os
 import sys
-import json
 import time
-import requests
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
+
+import requests
 from openai import OpenAI
 
 # ─── Configuration ───────────────────────────────────────────────────────────
@@ -186,28 +187,89 @@ THRESHOLDS = {
     "risk_critical": 150,
 }
 
+# Backfill window for addresses we've just started watching.
+# Covers ~7 days at 12s/block so a newly-added Railgun / ChangeNOW entry
+# doesn't miss recent deposits that happened before the first cron run.
+BACKFILL_BLOCKS = 50_000
+SCAN_STATE_PATH = Path(__file__).parent / "reports" / "scan_state.json"
+
+
+def load_scan_state() -> dict:
+    """Read {last_scanned_block, first_seen} state for watched addresses.
+
+    Malformed / missing file is non-fatal — returns empty defaults so the
+    scanner falls back to the default window.
+    """
+    if not SCAN_STATE_PATH.exists():
+        return {"last_scanned_block": {}, "first_seen": {}}
+    try:
+        data = json.loads(SCAN_STATE_PATH.read_text())
+        data.setdefault("last_scanned_block", {})
+        data.setdefault("first_seen", {})
+        return data
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[WARN] scan_state load failed, starting fresh: {e}")
+        return {"last_scanned_block": {}, "first_seen": {}}
+
+
+def save_scan_state(state: dict) -> None:
+    SCAN_STATE_PATH.parent.mkdir(exist_ok=True)
+    SCAN_STATE_PATH.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
+
 
 # ─── Blockchain Data Layer ───────────────────────────────────────────────────
 
-def etherscan_get(params: dict, timeout: int = 15):
-    """Helper — make Etherscan API V2 call with chainid and optional key."""
+# Retry configuration for transient network / rate-limit errors.
+# Exponential backoff: 2s, 4s, 8s. Anything past that indicates a real outage
+# and the scan should fail loudly rather than silently produce "no findings".
+_RETRY_ATTEMPTS = 3
+_RETRY_BASE_SECONDS = 2
+
+
+def _sleep_backoff(attempt: int) -> None:
+    time.sleep(_RETRY_BASE_SECONDS * (2 ** attempt))
+
+
+def etherscan_get(params: dict, timeout: int = 15) -> dict:
+    """Call Etherscan V2 with retries.
+
+    Retries with exponential backoff on network errors, HTTP 5xx, and HTTP
+    429. Returns the decoded JSON dict on success. On total failure returns
+    an empty dict — caller is expected to check for an empty/missing result
+    and either fall back to RPC or fail loudly.
+    """
     params["chainid"] = ETHERSCAN_CHAINID
     if ETHERSCAN_KEY:
         params["apikey"] = ETHERSCAN_KEY
-    try:
-        r = requests.get(ETHERSCAN_API, params=params, timeout=timeout)
-        data = r.json()
-        # Log errors from Etherscan
-        if data.get("status") == "0" and data.get("message") != "No transactions found":
-            print(f"[WARN] Etherscan API error: {data.get('result', data.get('message', 'unknown'))}")
-        return data
-    except Exception as e:
-        print(f"[ERROR] Etherscan API call failed: {e}")
-        return {}
+
+    for attempt in range(_RETRY_ATTEMPTS):
+        try:
+            r = requests.get(ETHERSCAN_API, params=params, timeout=timeout)
+            if r.status_code == 429 or r.status_code >= 500:
+                print(f"[WARN] Etherscan HTTP {r.status_code} (attempt {attempt + 1}/{_RETRY_ATTEMPTS})")
+                if attempt < _RETRY_ATTEMPTS - 1:
+                    _sleep_backoff(attempt)
+                    continue
+                return {}
+            data = r.json()
+            if data.get("status") == "0" and data.get("message") != "No transactions found":
+                print(f"[WARN] Etherscan API error: {data.get('result', data.get('message', 'unknown'))}")
+            return data
+        except requests.RequestException as e:
+            print(f"[WARN] Etherscan network error (attempt {attempt + 1}/{_RETRY_ATTEMPTS}): {e}")
+            if attempt < _RETRY_ATTEMPTS - 1:
+                _sleep_backoff(attempt)
+                continue
+    print("[ERROR] Etherscan API unreachable after retries")
+    return {}
 
 
 def rpc_call(method: str, params: list = None) -> dict:
-    """Call Ethereum JSON-RPC directly (fallback when Etherscan fails)."""
+    """Call Ethereum JSON-RPC across multiple public endpoints.
+
+    Each endpoint gets one retry with backoff before moving on. Returns the
+    first successful response. Empty dict means every endpoint is unreachable.
+    """
     payload = {
         "jsonrpc": "2.0",
         "method": method,
@@ -215,20 +277,34 @@ def rpc_call(method: str, params: list = None) -> dict:
         "id": 1,
     }
     for rpc_url in PUBLIC_RPC_ENDPOINTS:
-        try:
-            r = requests.post(rpc_url, json=payload, timeout=10)
-            data = r.json()
-            if "result" in data and data["result"] is not None:
-                return data
-        except Exception:
-            continue
+        for attempt in range(2):
+            try:
+                r = requests.post(rpc_url, json=payload, timeout=10)
+                if r.status_code == 429 or r.status_code >= 500:
+                    if attempt == 0:
+                        _sleep_backoff(attempt)
+                        continue
+                    break
+                data = r.json()
+                if "result" in data and data["result"] is not None:
+                    return data
+                break
+            except requests.RequestException:
+                if attempt == 0:
+                    _sleep_backoff(attempt)
+                    continue
+                break
     print(f"[ERROR] All RPC endpoints failed for {method}")
     return {}
 
 
 def get_latest_block() -> int:
-    """Get the latest Ethereum block number. Tries Etherscan first, then RPC fallback."""
-    # Try Etherscan
+    """Get the latest Ethereum block number. Tries Etherscan first, then RPC.
+
+    Fails loudly if no source returns a valid block — a silent "block=0" here
+    would make the scanner report "no findings" when it actually never
+    scanned anything.
+    """
     data = etherscan_get({"module": "proxy", "action": "eth_blockNumber"})
     try:
         block = int(data["result"], 16)
@@ -238,16 +314,18 @@ def get_latest_block() -> int:
     except (KeyError, ValueError, TypeError):
         pass
 
-    # Fallback to public RPC
     print("[INFO] Etherscan failed, trying public RPC...")
     data = rpc_call("eth_blockNumber")
     try:
         block = int(data["result"], 16)
-        print(f"[INFO] Latest block from RPC: {block}")
-        return block
+        if block > 0:
+            print(f"[INFO] Latest block from RPC: {block}")
+            return block
     except (KeyError, ValueError, TypeError):
-        print("[ERROR] Could not get latest block from any source")
-        return 0
+        pass
+
+    print("[FATAL] Could not get latest block from any source — aborting scan")
+    sys.exit(1)
 
 
 def get_block_transactions(block_num: int) -> list:
@@ -587,7 +665,7 @@ def rule_rapid_fire(timestamps: list, eth_values: list) -> dict | None:
     false positives from dust / airdrop spam.
     """
     min_value = THRESHOLDS["rapid_tx_min_value_eth"]
-    paired = [ts for ts, val in zip(timestamps, eth_values) if val >= min_value]
+    paired = [ts for ts, val in zip(timestamps, eth_values, strict=False) if val >= min_value]
     if len(paired) < THRESHOLDS["rapid_tx_count"]:
         return None
 
@@ -814,26 +892,40 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     Scans BOTH native ETH transfers AND ERC-20 token transfers.
     """
     findings = []
-    latest = get_latest_block()
-    if not latest:
-        print("[ERROR] Could not determine latest block. Aborting scan.")
-        return findings
-
-    start_block = latest - num_blocks + 1
+    latest = get_latest_block()  # fails loudly on total source failure
+    default_start = latest - num_blocks + 1
     eth_price = get_eth_price() or 2000.0
     print(f"[SCAN] Latest block: {latest} | ETH: ${eth_price:,.2f}")
-    print(f"[SCAN] Scanning blocks {start_block} to {latest} ({num_blocks} blocks, ~{num_blocks * 12 // 60} min)")
+    print(f"[SCAN] Default window: blocks {default_start}-{latest} ({num_blocks} blocks)")
+
+    # Per-address backfill state. Newly-added watched addresses look back
+    # BACKFILL_BLOCKS (~7 days) once; thereafter we pick up where we left off.
+    scan_state = load_scan_state()
+    last_scanned = scan_state["last_scanned_block"]
+    first_seen = scan_state["first_seen"]
+    scan_started_at = datetime.now(UTC).isoformat()
 
     # ── Strategy 1: Check ETH + token transactions TO watched addresses ──
     for address, addr_info in WATCHED_ADDRESSES.items():
         label = addr_info["label"]
         print(f"[SCAN] Checking {label} ({address[:10]}...)")
 
+        addr_last = last_scanned.get(address)
+        if addr_last is None:
+            addr_start = max(1, latest - BACKFILL_BLOCKS + 1)
+            first_seen.setdefault(address, scan_started_at)
+            print(f"  [BACKFILL] Newly-watched — scanning last {BACKFILL_BLOCKS:,} blocks")
+        else:
+            addr_start = max(addr_last + 1, default_start)
+            if addr_last + 1 < default_start:
+                print(f"  [CATCHUP] Last scanned at {addr_last}, continuing from {addr_start}")
+
         # Fetch BOTH normal txs and token transfers
-        txs = get_normal_transactions(address, start_block, latest)
+        txs = get_normal_transactions(address, addr_start, latest)
         time.sleep(0.5)
-        token_txs = get_token_transfers(address, start_block, latest)
+        token_txs = get_token_transfers(address, addr_start, latest)
         time.sleep(0.5)
+        last_scanned[address] = latest
 
         has_eth = bool(txs)
         has_tokens = bool(token_txs)
@@ -1043,6 +1135,11 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
 
     # Sort by risk score (most dangerous first)
     unique.sort(key=lambda x: x["risk_score"], reverse=True)
+
+    # Persist per-address scan progress so new additions backfill once and
+    # resume from where we left off on subsequent runs.
+    save_scan_state({"last_scanned_block": last_scanned, "first_seen": first_seen})
+
     return unique
 
 
@@ -1164,7 +1261,7 @@ Respond in this EXACT JSON format (no markdown, no code blocks, no backticks):
 
 def generate_report(findings: list, eth_price: float, scan_meta: dict) -> str:
     """Generate a markdown report with AML engine scoring."""
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     timestamp = now.strftime("%Y-%m-%d %H:%M UTC")
 
     report = f"""# 🔥 AML Roaster Report
@@ -1298,7 +1395,7 @@ def save_scan_data(findings: list, eth_price: float, scan_meta: dict):
     else:
         existing = {"scans": []}
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
 
     # Build scan entry
     scan_entry = {
@@ -1357,9 +1454,9 @@ def save_scan_data(findings: list, eth_price: float, scan_meta: dict):
 def main():
     print("=" * 60)
     print("🔥 AML ROASTER AGENT v2 (NEXUS Engine) — Starting scan")
-    print(f"   Detection rules: 13 active (incl. stablecoin_mixing, contract_interaction)")
+    print("   Detection rules: 13 active (incl. stablecoin_mixing, contract_interaction)")
     print(f"   Watched addresses: {len(WATCHED_ADDRESSES)}")
-    print(f"   Scan window: 200 blocks (~25 min)")
+    print("   Scan window: 200 blocks (~25 min)")
     print("=" * 60)
 
     eth_price = get_eth_price()
@@ -1384,7 +1481,7 @@ def main():
 
     report = generate_report(findings, eth_price, scan_meta)
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     filename = f"report_{now.strftime('%Y-%m-%d_%H%M')}.md"
     filepath = REPORTS_DIR / filename
     filepath.write_text(report, encoding="utf-8")

@@ -1,0 +1,13 @@
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+extend-exclude = ["reports", "addresses", "__pycache__"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+# E501 (line-too-long) is noisy for detail strings in rule outputs; keep line-length gate instead.
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
