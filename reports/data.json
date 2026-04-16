@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-22T15:48:14.089584+00:00",
-      "eth_price": 2079.18196555009,
-      "block_range": "24713842 \u2014 24714041",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-22T16:25:58.974271+00:00",
       "eth_price": 2079.97167868916,
       "block_range": "24714031 \u2014 24714230",
@@ -21553,16 +21546,48 @@
       "block_range": "24891275 \u2014 24891474",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-04-16T10:44:26.279281+00:00",
+      "eth_price": 2334.40157344577,
+      "block_range": "24891666 \u2014 24891865",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x9a7b8037b7dada4ea97cad3ace49c2910d78f4f8",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
+          "risk_score": 380,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1000.0,
+          "rules_triggered": [
+            "stablecoin_mixing",
+            "ofac_hit",
+            "mixer_touch"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80,
+            "ofac_hit": 200,
+            "mixer_touch": 100
+          },
+          "what_happened": "Imagine walking into a shady store that's known for helping bad people hide their dirty money, and you hand over $1,000 in cash to be mixed with other people's money so it can't be traced back to you. That's basically what happened here, but instead of a store, it's a cryptocurrency mixing service called Tornado Cash, and instead of cash, it's a type of digital money called stablecoin. The person sending the money did it in a way that tries to avoid detection by using a round number, like $1,000, which is a common technique used by people trying to hide their money.",
+          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, kind of like being on the FBI's most wanted list, but for financial crimes). They also got an 80 for stablecoin mixing, which is like trying to wash your dirty laundry by mixing it with clean clothes, and another 100 for directly depositing money into Tornado Cash, a mixer that's been sanctioned by the U.S. government. It's like they wanted to scream 'I'm laundering money!' but did it in a way that's supposed to be sneaky. Oh, and by the way, Tornado Cash has been linked to some really bad guys, like North Korea's Lazarus Group, so this is some serious bad company.",
+          "risk_verdict": "CRITICAL \u2014 the transaction involves a direct deposit into a sanctioned cryptocurrency mixer, indicating a high risk of money laundering or other illicit activity.",
+          "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with FinCEN, as it may indicate a serious attempt to launder money or finance illicit activities. Additionally, consider blocking any future transactions from this sender to prevent potential further illicit activity."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 662,
-    "unique_senders": 279,
+    "total_findings": 663,
+    "unique_senders": 280,
     "highest_score": 660,
-    "critical_count": 662,
+    "critical_count": 663,
     "high_count": 0,
-    "first_scan": "2026-03-22T15:48:14.089584+00:00",
-    "last_scan": "2026-04-16T09:25:30.900193+00:00"
+    "first_scan": "2026-03-22T16:25:58.974271+00:00",
+    "last_scan": "2026-04-16T10:44:26.279281+00:00"
   }
 }
