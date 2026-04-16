@@ -325,3 +325,96 @@ def test_lrt_wash_none_on_bridge():
 
 def test_lrt_wash_none_on_unknown():
     assert roaster.rule_lrt_restaking_wash(UNKNOWN_ADDR) is None
+
+
+# ─── Rule 19: phishing_contact ───────────────────────────────────────────
+
+def test_phishing_contact_fires_when_receiver_is_phishing():
+    # Seed the lookup directly so the test is independent of which exact
+    # addresses happen to be in the vendored feed.
+    roaster.PHISHING_ADDRESSES["0xdeadbeef00000000000000000000000000000001"] = "test phish"
+    try:
+        r = roaster.rule_phishing_contact(
+            RANDOM_SENDER, "0xdeadbeef00000000000000000000000000000001"
+        )
+        assert r is not None
+        assert r["score"] == 60
+    finally:
+        roaster.PHISHING_ADDRESSES.pop("0xdeadbeef00000000000000000000000000000001", None)
+
+
+def test_phishing_contact_none_on_clean_pair():
+    assert roaster.rule_phishing_contact(RANDOM_SENDER, UNKNOWN_ADDR) is None
+
+
+# ─── Rule 20: exploit_contact ────────────────────────────────────────────
+
+def test_exploit_contact_fires_when_sender_is_exploit():
+    roaster.EXPLOIT_ADDRESSES["0xdeadbeef00000000000000000000000000000002"] = "test exploit"
+    try:
+        r = roaster.rule_exploit_contact(
+            "0xdeadbeef00000000000000000000000000000002", UNKNOWN_ADDR
+        )
+        assert r is not None
+        assert r["score"] == 80
+    finally:
+        roaster.EXPLOIT_ADDRESSES.pop("0xdeadbeef00000000000000000000000000000002", None)
+
+
+def test_exploit_contact_none_on_clean_pair():
+    assert roaster.rule_exploit_contact(RANDOM_SENDER, UNKNOWN_ADDR) is None
+
+
+# ─── Rule 21: live_sanctions_oracle ──────────────────────────────────────
+
+def test_live_sanctions_oracle_fires_on_oracle_hit(monkeypatch):
+    # Stub the oracle helper so tests don't make network calls.
+    calls = []
+
+    def stub_oracle_check(addr: str) -> bool:
+        calls.append(addr)
+        return addr == "0xcafecafecafecafecafecafecafecafecafecafe"
+
+    monkeypatch.setattr(roaster, "chainalysis_oracle_check", stub_oracle_check)
+    r = roaster.rule_live_sanctions_oracle(
+        RANDOM_SENDER, "0xcafecafecafecafecafecafecafecafecafecafe"
+    )
+    assert r is not None
+    assert r["score"] == 200
+
+
+def test_live_sanctions_oracle_skips_known_ofac(monkeypatch):
+    # Addresses already in OFAC_ADDRESSES should be skipped so the oracle
+    # doesn't waste a call on what rule_sanctioned_entity already flagged.
+    seen = []
+
+    def stub_oracle_check(addr: str) -> bool:
+        seen.append(addr)
+        return False
+
+    monkeypatch.setattr(roaster, "chainalysis_oracle_check", stub_oracle_check)
+    # TC_1_ETH_POOL is already in OFAC_ADDRESSES.
+    roaster.rule_live_sanctions_oracle(RANDOM_SENDER, TC_1_ETH_POOL)
+    assert TC_1_ETH_POOL not in seen
+
+
+def test_live_sanctions_oracle_none_when_clean(monkeypatch):
+    monkeypatch.setattr(roaster, "chainalysis_oracle_check", lambda _addr: False)
+    assert roaster.rule_live_sanctions_oracle(RANDOM_SENDER, UNKNOWN_ADDR) is None
+
+
+# ─── Intent-solver additions (reuse rule_bridge_hop) ─────────────────────
+
+COW_SETTLEMENT = "0x9008d19f58aabd9ed0d60971565aa8510560ab41"
+ACROSS_RELAYER_1 = "0x428ab2ba90eba0a4be7af34c9ac451ab061ac010"
+
+
+def test_bridge_hop_fires_on_cow_settlement():
+    r = roaster.rule_bridge_hop(COW_SETTLEMENT)
+    assert r is not None
+    assert r["score"] == 65
+
+
+def test_bridge_hop_fires_on_across_relayer():
+    r = roaster.rule_bridge_hop(ACROSS_RELAYER_1)
+    assert r is not None

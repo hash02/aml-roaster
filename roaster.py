@@ -81,6 +81,8 @@ WATCHED_ADDRESSES = {
     "0xa96be652a08d9905f15b7fbe2255708709becd09": {"label": "ChangeNOW Hot Wallet 2", "type": "no_kyc_offramp", "risk": 85},
     "0xa12e1462d0ced572f396f58b6e2d03894cd7c8a4": {"label": "ChangeNOW 10", "type": "no_kyc_offramp", "risk": 85},
     "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2": {"label": "SideShift Hot Wallet", "type": "no_kyc_offramp", "risk": 85},
+    "0x4727250679294802377dd6ca6541b8e459077c95": {"label": "FixedFloat Hot Wallet", "type": "no_kyc_offramp", "risk": 85},
+    "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f": {"label": "FixedFloat 1", "type": "no_kyc_offramp", "risk": 85},
     # ── Cross-chain bridges ───────────────────────────────────────────────
     # Per Global Ledger 2026, bridges now handle ~50% of stolen-fund
     # laundering (3× more than mixers). Intent-based solvers (Across
@@ -91,6 +93,11 @@ WATCHED_ADDRESSES = {
     "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5": {"label": "Across SpokePool V2", "type": "bridge", "risk": 65},
     "0x66a71dcef29a0ffbdbe3c6a460a3b5bc225cd675": {"label": "LayerZero Endpoint V1", "type": "bridge", "risk": 65},
     "0x98f3c9e6e3face36baad05fe09d375ef1464288b": {"label": "Wormhole Core Bridge", "type": "bridge", "risk": 65},
+    # Intent-based cross-chain (2026 successor to classic bridges). Classed
+    # as `bridge` so the existing rule_bridge_hop covers them uniformly.
+    "0x428ab2ba90eba0a4be7af34c9ac451ab061ac010": {"label": "Across Relayer 1 (intent filler)", "type": "bridge", "risk": 65},
+    "0x15652636f3898f550b257b89926d5566821c32e1": {"label": "Across Relayer 2 (intent filler)", "type": "bridge", "risk": 65},
+    "0x9008d19f58aabd9ed0d60971565aa8510560ab41": {"label": "CoW Protocol GPv2Settlement (intent settlement)", "type": "bridge", "risk": 65},
     # ── Liquid Restaking Token protocols ──────────────────────────────────
     # LRT wash: deposit dirty ETH, mint eETH/ezETH/rsETH, redeem clean
     # ETH post-unbond. $16B+ TVL makes it a meaningful laundering vector
@@ -151,6 +158,76 @@ def _load_ofac_feed() -> int:
 _ofac_added = _load_ofac_feed()
 if _ofac_added:
     print(f"[INFO] OFAC feed merged: +{_ofac_added} addresses (total {len(OFAC_ADDRESSES)})")
+
+
+# ─── Phishing & Exploit Feeds (lookup-only, NOT iterated) ───────────────────
+#
+# These dicts are large (hundreds of entries each) and must NOT be added
+# to WATCHED_ADDRESSES — the scan loop iterates WATCHED and fetches txs
+# per address, which would blow the API budget. Instead, rules check these
+# dicts during evaluation against addresses actually seen on-chain.
+
+PHISHING_ADDRESSES: dict[str, str] = {}
+EXPLOIT_ADDRESSES: dict[str, str] = {}
+
+
+def _load_json_feed(filename: str, target: dict, feed_name: str) -> int:
+    feed_path = Path(__file__).parent / "addresses" / filename
+    if not feed_path.exists():
+        return 0
+    try:
+        feed = json.loads(feed_path.read_text())
+        entries = feed.get("addresses", {})
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[WARN] {feed_name} feed load failed: {e}")
+        return 0
+    for addr, label in entries.items():
+        target[addr.lower()] = label
+    return len(target)
+
+
+_phishing_loaded = _load_json_feed("phishing.json", PHISHING_ADDRESSES, "phishing")
+_exploits_loaded = _load_json_feed("exploits.json", EXPLOIT_ADDRESSES, "exploits")
+if _phishing_loaded:
+    print(f"[INFO] Phishing feed loaded: {_phishing_loaded} addresses")
+if _exploits_loaded:
+    print(f"[INFO] Exploit feed loaded: {_exploits_loaded} addresses")
+
+
+# ─── Chainalysis Sanctions Oracle (live on-chain sanctions check) ───────────
+#
+# Replaces weekly OFAC cron for catching designations added mid-week.
+# Public, free, no API key. ABI: `isSanctioned(address) view returns (bool)`.
+# Docs: https://go.chainalysis.com/chainalysis-oracle-docs.html
+
+CHAINALYSIS_ORACLE = "0x40c57923924b5c5c5455c48d93317139addac8fb"
+CHAINALYSIS_SELECTOR = "0xdf592f7d"  # keccak256("isSanctioned(address)")[:4]
+
+# Per-scan cache of oracle lookups; cleared at scan start.
+_oracle_cache: dict[str, bool] = {}
+
+
+def chainalysis_oracle_check(address: str) -> bool:
+    """Return True if `address` is sanctioned per the Chainalysis Oracle.
+
+    Uses the existing rpc_call retry/backoff pipeline. Cached within a
+    single scan run. RPC failures return False (fail-open for oracle —
+    the vendored OFAC feed is the primary defense; the oracle is
+    a live top-up).
+    """
+    addr = address.lower()
+    if addr in _oracle_cache:
+        return _oracle_cache[addr]
+    padded = addr.removeprefix("0x").rjust(64, "0")
+    data = CHAINALYSIS_SELECTOR + padded
+    resp = rpc_call("eth_call", [{"to": CHAINALYSIS_ORACLE, "data": data}, "latest"])
+    try:
+        result = int(resp.get("result", "0x0"), 16) == 1
+    except (ValueError, TypeError):
+        result = False
+    _oracle_cache[addr] = result
+    return result
+
 
 # Etherscan API V2 (V1 deprecated Aug 2025 — must use V2 with chainid)
 ETHERSCAN_API = "https://api.etherscan.io/v2/api"
@@ -917,6 +994,55 @@ def rule_lrt_restaking_wash(receiver_addr: str) -> dict | None:
     return None
 
 
+def rule_phishing_contact(sender: str, receiver: str) -> dict | None:
+    """RULE: Either side of the transaction is a known phishing wallet.
+
+    Source: MyEtherWallet/ethereum-lists darklist (vendored).
+    """
+    for addr in (sender.lower(), receiver.lower()):
+        if addr in PHISHING_ADDRESSES:
+            return {
+                "rule": "phishing_contact",
+                "score": 60,
+                "detail": f"Phishing address match: {addr[:10]}... — {PHISHING_ADDRESSES[addr]}",
+            }
+    return None
+
+
+def rule_exploit_contact(sender: str, receiver: str) -> dict | None:
+    """RULE: Either side of the transaction is a known exploit contract.
+
+    Source: forta-network/labelled-datasets malicious_smart_contracts.csv
+    (exploit / heist / phish-hack Etherscan labels).
+    """
+    for addr in (sender.lower(), receiver.lower()):
+        if addr in EXPLOIT_ADDRESSES:
+            return {
+                "rule": "exploit_contact",
+                "score": 80,
+                "detail": f"Exploit contract match: {addr[:10]}... — {EXPLOIT_ADDRESSES[addr]}",
+            }
+    return None
+
+
+def rule_live_sanctions_oracle(sender: str, receiver: str) -> dict | None:
+    """RULE: Live Chainalysis Oracle sanctions check.
+
+    Catches OFAC designations added between our weekly feed refreshes.
+    Skips addresses already covered by OFAC_ADDRESSES to save oracle calls.
+    """
+    for addr in (sender.lower(), receiver.lower()):
+        if addr in OFAC_ADDRESSES:
+            continue  # already handled by rule_sanctioned_entity
+        if chainalysis_oracle_check(addr):
+            return {
+                "rule": "live_sanctions_oracle",
+                "score": 200,
+                "detail": f"Chainalysis Oracle flagged {addr[:10]}... as sanctioned (post-feed designation)",
+            }
+    return None
+
+
 def compute_risk_score(rules_triggered: list) -> tuple:
     """
     Compute composite risk score and level from triggered rules.
@@ -947,6 +1073,7 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     Scans BOTH native ETH transfers AND ERC-20 token transfers.
     """
     findings = []
+    _oracle_cache.clear()  # fresh oracle lookups each scan
     latest = get_latest_block()  # fails loudly on total source failure
     default_start = latest - num_blocks + 1
     eth_price = get_eth_price() or 2000.0
@@ -1042,6 +1169,9 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                     (rule_exit_to_no_kyc_offramp, (address,)),
                     (rule_bridge_hop, (address,)),
                     (rule_lrt_restaking_wash, (address,)),
+                    (rule_phishing_contact, (sender, address)),
+                    (rule_exploit_contact, (sender, address)),
+                    (rule_live_sanctions_oracle, (sender, address)),
                     (rule_exit_rush, (wallet_info, total_eth)),
                     (rule_exchange_avoidance, (address,)),
                 ]:
