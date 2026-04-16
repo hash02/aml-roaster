@@ -284,6 +284,17 @@
             margin-top: 0.25rem;
         }
 
+        .roast-link {
+            display: inline-block;
+            margin-top: 0.75rem;
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+            text-decoration: none;
+        }
+        .roast-link:hover { text-decoration: underline; }
+
         /* ─── Flow Graph ─── */
         .graph-box {
             background: var(--bg2);
@@ -552,6 +563,11 @@
                     h += '</span>';
                 });
                 h += '</div>';
+
+                // Detail-page link (only for findings with an id)
+                if (f.id) {
+                    h += '<a class="roast-link" href="reports/finding-' + f.id + '.html">View details →</a>';
+                }
 
                 h += '</div>';
                 return h;
