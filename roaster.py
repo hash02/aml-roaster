@@ -276,6 +276,9 @@ THRESHOLDS = {
     "tranche_cv_max": 0.15,         # Max coefficient of variation across cluster
     "tranche_usd_bands": [7_000, 9_500, 500_000, 1_000_000],  # US CTR / FinCEN brackets
     "tranche_usd_gap_pct": 10,      # How close to the band (e.g. 9000 counts as "under 9500")
+    # Sybil fan-in (many-to-one orchestrated deposits)
+    "sybil_min_senders": 10,        # Min distinct senders hitting one watched addr to consider Sybil
+    "sybil_max_cv": 0.3,            # Max coefficient of variation across amounts to flag
     # Risk score thresholds
     "risk_low": 30,
     "risk_medium": 60,
@@ -1025,6 +1028,49 @@ def rule_exploit_contact(sender: str, receiver: str) -> dict | None:
     return None
 
 
+def rule_sybil_fan_in(sender: str, sender_map: dict, sender_eth_totals: dict) -> dict | None:
+    """RULE: Fan-in from many similar-amount senders (Sybil cluster signature).
+
+    Fires when ≥sybil_min_senders of this watched address's senders sent
+    similar amounts (within sybil_max_cv of the population median).
+    Cluster detection uses the median and a tolerance band so a single
+    outlier (e.g. a legitimate whale deposit mixed in with Sybil smurfs)
+    doesn't destroy the signal. Only senders *inside* the tolerance
+    band are flagged.
+    """
+    min_senders = THRESHOLDS["sybil_min_senders"]
+    max_cv = THRESHOLDS["sybil_max_cv"]
+
+    if len(sender_map) < min_senders:
+        return None
+    amounts = [v for v in sender_eth_totals.values() if v > 0]
+    if len(amounts) < min_senders:
+        return None
+
+    amounts_sorted = sorted(amounts)
+    median = amounts_sorted[len(amounts_sorted) // 2]
+    if median <= 0:
+        return None
+
+    tolerance = max_cv * median
+    cluster = {s.lower(): a for s, a in sender_eth_totals.items() if abs(a - median) <= tolerance}
+    if len(cluster) < min_senders:
+        return None
+
+    if sender.lower() not in cluster:
+        return None  # this sender is an outlier, not part of the Sybil cluster
+
+    cluster_mean = sum(cluster.values()) / len(cluster)
+    return {
+        "rule": "sybil_fan_in",
+        "score": 70,
+        "detail": (
+            f"1 of {len(cluster)} senders depositing similar amounts "
+            f"(~{cluster_mean:.3f} ETH ± {max_cv * 100:.0f}%) — fan-in Sybil pattern"
+        ),
+    }
+
+
 def rule_live_sanctions_oracle(sender: str, receiver: str) -> dict | None:
     """RULE: Live Chainalysis Oracle sanctions check.
 
@@ -1130,6 +1176,13 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
             if watched_senders:
                 print(f"  [DEBUG] {watched_senders} txs from watched→watched (kept for reference)")
 
+            # Precompute per-sender ETH totals so rule_sybil_fan_in can
+            # reason about the whole fan-in population without refetching.
+            sender_eth_totals = {
+                s: sum(int(tx.get("value", "0")) / 1e18 for tx in txs_)
+                for s, txs_ in sender_map.items()
+            }
+
             for sender, sender_txs in sender_map.items():
                 eth_values = [int(tx.get("value", "0")) / 1e18 for tx in sender_txs]
                 total_eth = sum(eth_values)
@@ -1172,6 +1225,7 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                     (rule_phishing_contact, (sender, address)),
                     (rule_exploit_contact, (sender, address)),
                     (rule_live_sanctions_oracle, (sender, address)),
+                    (rule_sybil_fan_in, (sender, sender_map, sender_eth_totals)),
                     (rule_exit_rush, (wallet_info, total_eth)),
                     (rule_exchange_avoidance, (address,)),
                 ]:

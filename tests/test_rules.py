@@ -418,3 +418,45 @@ def test_bridge_hop_fires_on_cow_settlement():
 def test_bridge_hop_fires_on_across_relayer():
     r = roaster.rule_bridge_hop(ACROSS_RELAYER_1)
     assert r is not None
+
+
+# ─── Rule 22: sybil_fan_in ───────────────────────────────────────────────
+
+def _sybil_setup(n: int, amount: float = 5.0, noise: float = 0.0):
+    """Build a (sender_map, sender_eth_totals) pair for N senders."""
+    senders = [f"0x{i:040x}" for i in range(1, n + 1)]
+    sender_map = {s: [] for s in senders}
+    totals = {s: amount + noise * (i - n / 2) for i, s in enumerate(senders)}
+    return senders, sender_map, totals
+
+
+def test_sybil_fan_in_fires_when_cluster_matches():
+    senders, sender_map, totals = _sybil_setup(12, amount=5.0, noise=0.05)
+    r = roaster.rule_sybil_fan_in(senders[0], sender_map, totals)
+    assert r is not None
+    assert r["score"] == 70
+
+
+def test_sybil_fan_in_none_when_too_few_senders():
+    senders, sender_map, totals = _sybil_setup(5, amount=5.0, noise=0.05)
+    assert roaster.rule_sybil_fan_in(senders[0], sender_map, totals) is None
+
+
+def test_sybil_fan_in_none_when_high_variance():
+    # 12 senders but amounts span 0.1 ETH to 10 ETH — high CV.
+    senders = [f"0x{i:040x}" for i in range(1, 13)]
+    sender_map = {s: [] for s in senders}
+    totals = {s: 0.1 + i * 1.0 for i, s in enumerate(senders)}
+    assert roaster.rule_sybil_fan_in(senders[0], sender_map, totals) is None
+
+
+def test_sybil_fan_in_excludes_outlier_sender():
+    # Cluster of 12 at ~5 ETH each, but sender at position 0 sent 50 ETH.
+    senders, sender_map, totals = _sybil_setup(12, amount=5.0, noise=0.05)
+    totals[senders[0]] = 50.0  # outlier
+    # Cluster still triggers, but THIS sender is outside the cluster.
+    r = roaster.rule_sybil_fan_in(senders[0], sender_map, totals)
+    assert r is None
+    # A cluster-member sender still fires.
+    r = roaster.rule_sybil_fan_in(senders[5], sender_map, totals)
+    assert r is not None
