@@ -81,6 +81,25 @@ WATCHED_ADDRESSES = {
     "0xa96be652a08d9905f15b7fbe2255708709becd09": {"label": "ChangeNOW Hot Wallet 2", "type": "no_kyc_offramp", "risk": 85},
     "0xa12e1462d0ced572f396f58b6e2d03894cd7c8a4": {"label": "ChangeNOW 10", "type": "no_kyc_offramp", "risk": 85},
     "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2": {"label": "SideShift Hot Wallet", "type": "no_kyc_offramp", "risk": 85},
+    # ── Cross-chain bridges ───────────────────────────────────────────────
+    # Per Global Ledger 2026, bridges now handle ~50% of stolen-fund
+    # laundering (3× more than mixers). Intent-based solvers (Across
+    # filler, CoW solver, UniswapX filler) not yet listed — addresses
+    # vary per fill; future enhancement.
+    "0x8731d54e9d02c286767d56ac03e8037c07e01e98": {"label": "Stargate Router", "type": "bridge", "risk": 65},
+    "0x150f94b44927f078737562f0fcf3c95c01cc2376": {"label": "Stargate ETH Router 2", "type": "bridge", "risk": 65},
+    "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5": {"label": "Across SpokePool V2", "type": "bridge", "risk": 65},
+    "0x66a71dcef29a0ffbdbe3c6a460a3b5bc225cd675": {"label": "LayerZero Endpoint V1", "type": "bridge", "risk": 65},
+    "0x98f3c9e6e3face36baad05fe09d375ef1464288b": {"label": "Wormhole Core Bridge", "type": "bridge", "risk": 65},
+    # ── Liquid Restaking Token protocols ──────────────────────────────────
+    # LRT wash: deposit dirty ETH, mint eETH/ezETH/rsETH, redeem clean
+    # ETH post-unbond. $16B+ TVL makes it a meaningful laundering vector
+    # per TRM/Chainalysis 2026 reports. Current rule flags protocol
+    # engagement; full wash-cycle detection (deposit + later withdraw)
+    # is a follow-up once we track per-wallet cross-tx history.
+    "0x308861a430be4cce5502d0a12724771fc6daf216": {"label": "EtherFi Liquidity Pool (eETH)", "type": "lrt", "risk": 55},
+    "0x74a09653a083691711cf8215a6ab074bb4e99ef5": {"label": "Renzo RestakeManager (ezETH)", "type": "lrt", "risk": 55},
+    "0x036676389e48133b63a802f8635ad39e752d375d": {"label": "Kelp DAO LRT Deposit Pool (rsETH)", "type": "lrt", "risk": 55},
 }
 
 # OFAC SDN list — known sanctioned wallet addresses
@@ -862,6 +881,42 @@ def rule_exit_to_no_kyc_offramp(receiver_addr: str) -> dict | None:
     return None
 
 
+def rule_bridge_hop(receiver_addr: str) -> dict | None:
+    """RULE: Deposit to a cross-chain bridge router.
+
+    Per Global Ledger 2026, bridges now carry ~50% of stolen-fund
+    laundering flow (3× mixer volume). This rule flags the on-chain
+    leg; cross-chain taint tracing is out of scope for a single-chain
+    scanner.
+    """
+    addr_info = WATCHED_ADDRESSES.get(receiver_addr.lower())
+    if addr_info and addr_info["type"] == "bridge":
+        return {
+            "rule": "bridge_hop",
+            "score": 65,
+            "detail": f"Deposit to {addr_info['label']} — cross-chain bridge",
+        }
+    return None
+
+
+def rule_lrt_restaking_wash(receiver_addr: str) -> dict | None:
+    """RULE: Deposit to a Liquid Restaking Token (LRT) protocol.
+
+    Flags engagement with EtherFi/Renzo/Kelp style restaking pools.
+    A laundering pattern observed in 2026: deposit dirty ETH → mint
+    eETH/ezETH/rsETH → redeem clean ETH after unbond. Detecting the
+    full wash cycle needs per-wallet cross-tx history, deferred.
+    """
+    addr_info = WATCHED_ADDRESSES.get(receiver_addr.lower())
+    if addr_info and addr_info["type"] == "lrt":
+        return {
+            "rule": "lrt_restaking",
+            "score": 55,
+            "detail": f"Deposit to {addr_info['label']} — LRT restaking pool",
+        }
+    return None
+
+
 def compute_risk_score(rules_triggered: list) -> tuple:
     """
     Compute composite risk score and level from triggered rules.
@@ -985,6 +1040,8 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                     (rule_sub_threshold_tranching, (eth_values, eth_price)),
                     (rule_privacy_protocol_non_tornado, (address,)),
                     (rule_exit_to_no_kyc_offramp, (address,)),
+                    (rule_bridge_hop, (address,)),
+                    (rule_lrt_restaking_wash, (address,)),
                     (rule_exit_rush, (wallet_info, total_eth)),
                     (rule_exchange_avoidance, (address,)),
                 ]:

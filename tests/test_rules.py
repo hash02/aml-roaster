@@ -274,3 +274,54 @@ def test_no_kyc_offramp_fires_on_changenow():
 
 def test_no_kyc_offramp_none_on_unknown():
     assert roaster.rule_exit_to_no_kyc_offramp(UNKNOWN_ADDR) is None
+
+
+# ─── Rule 17: bridge_hop ─────────────────────────────────────────────────
+
+STARGATE_ROUTER = "0x8731d54e9d02c286767d56ac03e8037c07e01e98"
+ACROSS_SPOKE = "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5"
+
+
+def test_bridge_hop_fires_on_stargate():
+    r = roaster.rule_bridge_hop(STARGATE_ROUTER)
+    assert r is not None
+    assert r["score"] == 65
+
+
+def test_bridge_hop_fires_on_across():
+    r = roaster.rule_bridge_hop(ACROSS_SPOKE)
+    assert r is not None
+
+
+def test_bridge_hop_none_on_mixer():
+    # Tornado pool is type=mixer, not bridge — must not fire here.
+    assert roaster.rule_bridge_hop(TC_1_ETH_POOL) is None
+
+
+def test_bridge_hop_none_on_unknown():
+    assert roaster.rule_bridge_hop(UNKNOWN_ADDR) is None
+
+
+# ─── Rule 18: lrt_restaking_wash ─────────────────────────────────────────
+
+ETHERFI_POOL = "0x308861a430be4cce5502d0a12724771fc6daf216"
+KELP_POOL = "0x036676389e48133b63a802f8635ad39e752d375d"
+
+
+def test_lrt_wash_fires_on_etherfi():
+    r = roaster.rule_lrt_restaking_wash(ETHERFI_POOL)
+    assert r is not None
+    assert r["score"] == 55
+
+
+def test_lrt_wash_fires_on_kelp():
+    r = roaster.rule_lrt_restaking_wash(KELP_POOL)
+    assert r is not None
+
+
+def test_lrt_wash_none_on_bridge():
+    assert roaster.rule_lrt_restaking_wash(STARGATE_ROUTER) is None
+
+
+def test_lrt_wash_none_on_unknown():
+    assert roaster.rule_lrt_restaking_wash(UNKNOWN_ADDR) is None
