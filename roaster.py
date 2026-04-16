@@ -86,6 +86,38 @@ OFAC_ADDRESSES = {
     "0xa7e5d5a720f06526557c513402f2e6b5fa20b008": "Lazarus Group (OFAC)",
 }
 
+
+def _load_ofac_feed() -> int:
+    """Merge `addresses/ofac.json` into OFAC_ADDRESSES at startup.
+
+    Feed is a vendored snapshot of ultrasoundmoney/ofac-ethereum-addresses
+    (MIT), refreshed weekly via .github/workflows/refresh-addresses.yml.
+    Any address already present keeps its curated label; new addresses
+    adopt the upstream name. Missing / malformed file is non-fatal —
+    scanner keeps running with the hardcoded list.
+    """
+    feed_path = Path(__file__).parent / "addresses" / "ofac.json"
+    if not feed_path.exists():
+        return 0
+    try:
+        feed = json.loads(feed_path.read_text())
+        new_entries = feed.get("addresses", {})
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[WARN] OFAC feed load failed: {e}")
+        return 0
+    added = 0
+    for addr, name in new_entries.items():
+        addr = addr.lower()
+        if addr not in OFAC_ADDRESSES:
+            OFAC_ADDRESSES[addr] = name
+            added += 1
+    return added
+
+
+_ofac_added = _load_ofac_feed()
+if _ofac_added:
+    print(f"[INFO] OFAC feed merged: +{_ofac_added} addresses (total {len(OFAC_ADDRESSES)})")
+
 # Etherscan API V2 (V1 deprecated Aug 2025 — must use V2 with chainid)
 ETHERSCAN_API = "https://api.etherscan.io/v2/api"
 ETHERSCAN_KEY = os.environ.get("ETHERSCAN_API_KEY", "")
