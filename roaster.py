@@ -21,32 +21,68 @@ from openai import OpenAI
 # ─── Configuration ───────────────────────────────────────────────────────────
 
 # Known mixer / sanctioned / flagged addresses (lowercase)
+# Tornado Cash contract addresses verified against tornadocash/docs
+# (general/tornado-cash-smart-contracts.md). All pools listed here were
+# added to OFAC SDN in August 2022.
 WATCHED_ADDRESSES = {
-    # Tornado Cash pools
-    "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b": {"label": "Tornado Cash (0.1 ETH Pool)", "type": "mixer", "risk": 100},
-    "0xd4b88df4d29f5cedd6857912842cff3b20c8cfa3": {"label": "Tornado Cash (100 ETH Pool)", "type": "mixer", "risk": 100},
-    "0xa160cdab225685da1d56aa342ad8841c3b53f291": {"label": "Tornado Cash (10 ETH Pool)", "type": "mixer", "risk": 100},
-    "0xfd8610d20aa15b7b2e3be39b396a1bc3516c7144": {"label": "Tornado Cash (1 ETH Pool)", "type": "mixer", "risk": 100},
-    "0x722122df12d4e14e13ac3b6895a86e84145b6967": {"label": "Tornado Cash Router", "type": "mixer", "risk": 100},
-    "0x905b63fff465b9ffbf41dea908ceb12de6d0e40f": {"label": "Tornado Cash (Governance)", "type": "mixer", "risk": 80},
-    # Sanctioned exchanges
+    # ── Tornado Cash ETH Pools ────────────────────────────────────────────
+    "0x12d66f87a04a9e220743712ce6d9bb1b5616b8fc": {"label": "Tornado Cash (0.1 ETH Pool)", "type": "mixer", "risk": 100},
+    "0x47ce0c6ed5b0ce3d3a51fdb1c52dc66a7c3c2936": {"label": "Tornado Cash (1 ETH Pool)", "type": "mixer", "risk": 100},
+    "0x910cbd523d972eb0a6f4cae4618ad62622b39dbf": {"label": "Tornado Cash (10 ETH Pool)", "type": "mixer", "risk": 100},
+    "0xa160cdab225685da1d56aa342ad8841c3b53f291": {"label": "Tornado Cash (100 ETH Pool)", "type": "mixer", "risk": 100},
+    # ── Tornado Cash DAI Pools ────────────────────────────────────────────
+    "0xd4b88df4d29f5cedd6857912842cff3b20c8cfa3": {"label": "Tornado Cash (100 DAI Pool)", "type": "mixer", "risk": 100},
+    "0xfd8610d20aa15b7b2e3be39b396a1bc3516c7144": {"label": "Tornado Cash (1,000 DAI Pool)", "type": "mixer", "risk": 100},
+    "0x07687e702b410fa43f4cb4af7fa097918ffd2730": {"label": "Tornado Cash (10,000 DAI Pool)", "type": "mixer", "risk": 100},
+    "0x23773e65ed146a459791799d01336db287f25334": {"label": "Tornado Cash (100,000 DAI Pool)", "type": "mixer", "risk": 100},
+    # ── Tornado Cash cDAI Pools ───────────────────────────────────────────
+    "0x22aaa7720ddd5388a3c0a3333430953c68f1849b": {"label": "Tornado Cash (5,000 cDAI Pool)", "type": "mixer", "risk": 100},
+    "0x03893a7c7463ae47d46bc7f091665f1893656003": {"label": "Tornado Cash (50,000 cDAI Pool)", "type": "mixer", "risk": 100},
+    "0x2717c5e28cf931547b621a5dddb772ab6a35b701": {"label": "Tornado Cash (500,000 cDAI Pool)", "type": "mixer", "risk": 100},
+    "0xd21be7248e0197ee08e0c20d4a96debdac3d20af": {"label": "Tornado Cash (5,000,000 cDAI Pool)", "type": "mixer", "risk": 100},
+    # ── Tornado Cash USDC Pools ───────────────────────────────────────────
+    "0x4736dcf1b7a3d580672cce6e7c65cd5cc9cfba9d": {"label": "Tornado Cash (100 USDC Pool)", "type": "mixer", "risk": 100},
+    "0xd96f2b1c14db8458374d9aca76e26c3d18364307": {"label": "Tornado Cash (1,000 USDC Pool)", "type": "mixer", "risk": 100},
+    # ── Tornado Cash USDT Pools ───────────────────────────────────────────
+    "0x169ad27a470d064dede56a2d3ff727986b15d52b": {"label": "Tornado Cash (100 USDT Pool)", "type": "mixer", "risk": 100},
+    "0x0836222f2b2b24a3f36f98668ed8f0b38d1a872f": {"label": "Tornado Cash (1,000 USDT Pool)", "type": "mixer", "risk": 100},
+    # ── Tornado Cash WBTC Pools ───────────────────────────────────────────
+    "0x178169b423a011fff22b9e3f3abea13414ddd0f1": {"label": "Tornado Cash (0.1 WBTC Pool)", "type": "mixer", "risk": 100},
+    "0x610b717796ad172b316836ac95a2ffad065ceab4": {"label": "Tornado Cash (1 WBTC Pool)", "type": "mixer", "risk": 100},
+    "0xbb93e510bbcd0b7beb5a853875f9ec60275cf498": {"label": "Tornado Cash (10 WBTC Pool)", "type": "mixer", "risk": 100},
+    # ── Tornado Cash Routers ──────────────────────────────────────────────
+    "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b": {"label": "Tornado Cash Router", "type": "mixer", "risk": 100},
+    "0x722122df12d4e14e13ac3b6895a86e84145b6967": {"label": "Tornado Cash (deprecated proxy)", "type": "mixer", "risk": 80},
+    # ── Tornado Cash Infra (cataloged; rules do not fire on mixer_infra) ─
+    "0x5efda50f22d34f262c29268506c5fa42cb56a1ce": {"label": "Tornado Cash Governance", "type": "mixer_infra", "risk": 40},
+    "0x77777feddddffc19ff86db637967013e6c6a116c": {"label": "Tornado Cash TORN Token", "type": "mixer_infra", "risk": 40},
+    "0x58e8dcc13be9780fc42e8723d8ead4cf46943df2": {"label": "Tornado Cash RelayerRegistry", "type": "mixer_infra", "risk": 40},
+    # ── Sanctioned Exchanges ──────────────────────────────────────────────
     "0xba214c1c1928a32bffe790263e38b4af9bfcd659": {"label": "eXch Exchange (flagged)", "type": "sanctioned_exchange", "risk": 90},
-    # Lazarus Group (DPRK / North Korea)
-    "0x47ce0c6ed5b0ce3d3a51fdb1c52dc66a7c3c2936": {"label": "Lazarus Group (DPRK)", "type": "state_sponsored", "risk": 200},
-    "0xa7e5d5a720f06526557c513402f2e6b5fa20b008": {"label": "Lazarus Group (DPRK) #2", "type": "state_sponsored", "risk": 200},
-    # Known exploit/hack addresses (recent)
+    # ── Lazarus Group (DPRK) ──────────────────────────────────────────────
+    # Note: 0x47ce...2936 was previously mislabelled here as "Lazarus #1";
+    # it is actually Tornado's 1 ETH pool (Lazarus deposits to it, but does
+    # not control it). Corrected above.
+    "0xa7e5d5a720f06526557c513402f2e6b5fa20b008": {"label": "Lazarus Group (DPRK)", "type": "state_sponsored", "risk": 200},
+    # ── Known exploit addresses ───────────────────────────────────────────
     "0x3747d3e0e868d72ed471d10888ab8c246faf52f4": {"label": "Ronin Bridge Exploiter", "type": "exploit", "risk": 150},
 }
 
 # OFAC SDN list — known sanctioned wallet addresses
+# Labels corrected: several Tornado pool addresses were previously labelled
+# as "Lazarus Group" here (e.g. 0x47ce...2936 is a TC 1 ETH pool, not a
+# Lazarus wallet). Full OFAC sync is planned via the `addresses/ofac.json`
+# feed in a subsequent change.
 OFAC_ADDRESSES = {
     "0x8589427373d6d84e98730d7795d8f6f8731fda16": "Tornado Cash (OFAC 2022)",
-    "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b": "Tornado Cash (OFAC 2022)",
-    "0xd4b88df4d29f5cedd6857912842cff3b20c8cfa3": "Tornado Cash (OFAC 2022)",
-    "0xa160cdab225685da1d56aa342ad8841c3b53f291": "Tornado Cash (OFAC 2022)",
-    "0xfd8610d20aa15b7b2e3be39b396a1bc3516c7144": "Tornado Cash (OFAC 2022)",
-    "0x722122df12d4e14e13ac3b6895a86e84145b6967": "Tornado Cash (OFAC 2022)",
-    "0x47ce0c6ed5b0ce3d3a51fdb1c52dc66a7c3c2936": "Lazarus Group (OFAC)",
+    "0x12d66f87a04a9e220743712ce6d9bb1b5616b8fc": "Tornado Cash 0.1 ETH Pool (OFAC 2022)",
+    "0x47ce0c6ed5b0ce3d3a51fdb1c52dc66a7c3c2936": "Tornado Cash 1 ETH Pool (OFAC 2022)",
+    "0x910cbd523d972eb0a6f4cae4618ad62622b39dbf": "Tornado Cash 10 ETH Pool (OFAC 2022)",
+    "0xa160cdab225685da1d56aa342ad8841c3b53f291": "Tornado Cash 100 ETH Pool (OFAC 2022)",
+    "0xd4b88df4d29f5cedd6857912842cff3b20c8cfa3": "Tornado Cash 100 DAI Pool (OFAC 2022)",
+    "0xfd8610d20aa15b7b2e3be39b396a1bc3516c7144": "Tornado Cash 1,000 DAI Pool (OFAC 2022)",
+    "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b": "Tornado Cash Router (OFAC 2022)",
+    "0x722122df12d4e14e13ac3b6895a86e84145b6967": "Tornado Cash deprecated proxy (OFAC 2022)",
     "0xa7e5d5a720f06526557c513402f2e6b5fa20b008": "Lazarus Group (OFAC)",
 }
 
