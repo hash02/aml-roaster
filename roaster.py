@@ -9,6 +9,8 @@ Detection rules ported from NEXUS-AGENT v1 AML engine (22 rules, 94.9% detection
 Author: HASH (hash02) — Bionic Banker
 """
 
+import hashlib
+import html as _html
 import json
 import os
 import sys
@@ -92,7 +94,14 @@ WATCHED_ADDRESSES = {
     "0x150f94b44927f078737562f0fcf3c95c01cc2376": {"label": "Stargate ETH Router 2", "type": "bridge", "risk": 65},
     "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5": {"label": "Across SpokePool V2", "type": "bridge", "risk": 65},
     "0x66a71dcef29a0ffbdbe3c6a460a3b5bc225cd675": {"label": "LayerZero Endpoint V1", "type": "bridge", "risk": 65},
+    "0x1a44076050125825900e736c501f859c50fe728c": {"label": "LayerZero EndpointV2", "type": "bridge", "risk": 65},
     "0x98f3c9e6e3face36baad05fe09d375ef1464288b": {"label": "Wormhole Core Bridge", "type": "bridge", "risk": 65},
+    "0xb8901acb165ed027e32754e0ffe830802919727f": {"label": "Hop Protocol Ethereum Bridge (ETH)", "type": "bridge", "risk": 65},
+    "0x3666f603cc164936c1b87e207f36beba4ac5f18a": {"label": "Hop Protocol USDC Bridge", "type": "bridge", "risk": 65},
+    "0x3e4a3a4796d16c0cd582c382691998f7c06420b6": {"label": "Hop Protocol USDT Bridge", "type": "bridge", "risk": 65},
+    "0x3d4cc8a61c7528fd86c55cfe061a78dcba48edd1": {"label": "Hop Protocol DAI Bridge", "type": "bridge", "risk": 65},
+    "0x2796317b0ff8538f253012862c06787adfb8ceb6": {"label": "Synapse Bridge", "type": "bridge", "risk": 65},
+    "0xd5a597d6e7ddf373a92c8f477daaa673b0902f48": {"label": "Synapse CCTP Router", "type": "bridge", "risk": 65},
     # Intent-based cross-chain (2026 successor to classic bridges). Classed
     # as `bridge` so the existing rule_bridge_hop covers them uniformly.
     "0x428ab2ba90eba0a4be7af34c9ac451ab061ac010": {"label": "Across Relayer 1 (intent filler)", "type": "bridge", "risk": 65},
@@ -1758,6 +1767,210 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
 
 # ─── JSON Data Layer (for Dashboard) ─────────────────────────────────────────
 
+def finding_id(sender: str, receiver: str, timestamp: str) -> str:
+    """Stable 12-char id for a finding, used as detail-page filename."""
+    key = f"{sender.lower()}|{receiver.lower()}|{timestamp}"
+    return hashlib.sha1(key.encode("utf-8")).hexdigest()[:12]
+
+
+_FINDING_PAGE_TEMPLATE = """<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finding {FID} — AML Roaster</title>
+<script src="https://cdn.jsdelivr.net/npm/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {{ --bg:#0a0a12;--bg2:#12121e;--accent:#1fa068;--accent-border:rgba(31,160,104,.07);--text:#e4e4ec;--text-2:#7a7a8c;--text-3:#444454;--red:#ff4444;--orange:#ff8844;--radius:10px; }}
+* {{ box-sizing:border-box;margin:0;padding:0 }}
+body {{ font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6 }}
+.wrap {{ max-width:900px;margin:0 auto;padding:3rem 1.5rem }}
+a {{ color:var(--accent);text-decoration:none }}
+a:hover {{ text-decoration:underline }}
+h1 {{ font-family:'Bricolage Grotesque',sans-serif;font-size:1.8rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.25rem }}
+.sub {{ font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2rem }}
+.back {{ display:inline-block;margin-bottom:1.5rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-2) }}
+.panel {{ background:var(--bg2);border:1px solid var(--accent-border);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1.25rem }}
+.panel h3 {{ font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.6rem }}
+.badge {{ display:inline-block;padding:.25rem .6rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.05em;font-weight:600 }}
+.badge.critical {{ background:rgba(255,68,68,.15);color:var(--red);border:1px solid rgba(255,68,68,.3) }}
+.badge.high {{ background:rgba(255,136,68,.15);color:var(--orange);border:1px solid rgba(255,136,68,.3) }}
+.badge.medium {{ background:rgba(31,160,104,.15);color:var(--accent);border:1px solid rgba(31,160,104,.3) }}
+.badge.low {{ background:rgba(122,122,140,.15);color:var(--text-2);border:1px solid rgba(122,122,140,.3) }}
+.score {{ font-family:'Bricolage Grotesque',sans-serif;font-size:3rem;font-weight:800;letter-spacing:-.04em }}
+.score.critical {{ color:var(--red) }} .score.high {{ color:var(--orange) }} .score.medium,.score.low {{ color:var(--accent) }}
+.kv {{ display:grid;grid-template-columns:140px 1fr;gap:.5rem 1rem;font-size:.9rem }}
+.kv dt {{ color:var(--text-2);font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em }}
+.kv dd {{ color:var(--text);word-break:break-all }}
+.mono {{ font-family:'JetBrains Mono',monospace;font-size:.8rem }}
+.tag {{ display:inline-block;padding:.2rem .5rem;border-radius:3px;background:rgba(31,160,104,.1);color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.65rem;margin:.15rem .2rem .15rem 0;border:1px solid rgba(31,160,104,.2) }}
+.tag.hot {{ background:rgba(255,68,68,.12);color:var(--red);border-color:rgba(255,68,68,.25) }}
+.roast-body {{ font-size:1rem;line-height:1.7;color:var(--text);padding:1rem 1.25rem;background:rgba(31,160,104,.05);border-left:3px solid var(--accent);border-radius:4px }}
+.roast-body.muted {{ border-left-color:var(--text-3);background:rgba(122,122,140,.05);color:var(--text-2) }}
+#cy {{ width:100%;height:380px;background:var(--bg);border-radius:6px }}
+.footer {{ margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--accent-border);font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text-3) }}
+</style></head>
+<body><div class="wrap">
+<a class="back" href="../dashboard.html">← Back to dashboard</a>
+<h1>Finding {FID}</h1>
+<div class="sub">{RECEIVER_LABEL} · {TIMESTAMP}</div>
+
+<div class="panel" style="display:flex;align-items:center;justify-content:space-between;gap:2rem">
+  <div><div class="score {LEVEL_LOWER}">{SCORE}</div><div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-2);letter-spacing:.08em;text-transform:uppercase;margin-top:.25rem">Risk Score</div></div>
+  <span class="badge {LEVEL_LOWER}">{LEVEL}</span>
+</div>
+
+<section class="panel">
+  <h3>Transaction</h3>
+  <dl class="kv">
+    <dt>Sender</dt><dd><a class="mono" href="https://etherscan.io/address/{SENDER}" target="_blank" rel="noopener">{SENDER}</a></dd>
+    <dt>Receiver</dt><dd><a class="mono" href="https://etherscan.io/address/{RECEIVER}" target="_blank" rel="noopener">{RECEIVER}</a></dd>
+    <dt>Receiver Label</dt><dd>{RECEIVER_LABEL}</dd>
+    <dt>Tx Count</dt><dd>{TX_COUNT}</dd>
+    <dt>ETH Total</dt><dd>{TOTAL_ETH} ETH (≈${TOTAL_USD})</dd>
+    <dt>Block Range</dt><dd class="mono">{BLOCK_RANGE}</dd>
+  </dl>
+</section>
+
+<section class="panel">
+  <h3>Rules Triggered</h3>
+  <div>{RULES_HTML}</div>
+</section>
+
+<section class="panel">
+  <h3>Flow</h3>
+  <div id="cy"></div>
+</section>
+
+<section class="panel">
+  <h3>What Happened</h3>
+  <div class="roast-body muted">{WHAT_HAPPENED}</div>
+</section>
+
+<section class="panel">
+  <h3>Roast</h3>
+  <div class="roast-body">{ROAST}</div>
+</section>
+
+<section class="panel">
+  <h3>Risk Verdict</h3>
+  <div class="roast-body muted">{RISK_VERDICT}</div>
+</section>
+
+<section class="panel">
+  <h3>Recommended Action</h3>
+  <div class="roast-body muted">{RECOMMENDED_ACTION}</div>
+</section>
+
+<div class="footer">Generated {GENERATED} · AML Roaster · <a href="https://bionicbanker.tech" target="_blank" rel="noopener">Bionic Banker</a></div>
+</div>
+<script>
+cytoscape({{
+  container: document.getElementById('cy'),
+  elements: {ELEMENTS_JSON},
+  style: [
+    {{ selector:'node', style:{{
+      'background-color': ele => ele.data('type')==='receiver' ? '#ff4444' : '#1fa068',
+      'label':'data(label)', 'color':'#7a7a8c', 'font-size':'10px',
+      'font-family':'JetBrains Mono, monospace',
+      'text-valign':'bottom','text-margin-y':6,
+      'width':'data(size)','height':'data(size)',
+      'border-width':1,'border-color':'rgba(31,160,104,0.3)'
+    }}}},
+    {{ selector:'edge', style:{{
+      'width':3,'line-color':'{EDGE_COLOR}','curve-style':'bezier',
+      'target-arrow-shape':'triangle','target-arrow-color':'{EDGE_COLOR}',
+      'arrow-scale':0.9,'opacity':0.85,'label':'data(weight)',
+      'font-family':'JetBrains Mono, monospace','font-size':'9px','color':'#7a7a8c',
+      'text-background-color':'#0a0a12','text-background-opacity':1,'text-background-padding':2
+    }}}}
+  ],
+  layout: {{ name:'cose', animate:false, fit:true, padding:30, nodeRepulsion:4000 }}
+}});
+</script></body></html>
+"""
+
+
+def _rules_to_html(rules: list, rule_scores: dict) -> str:
+    top3 = [r[0] for r in sorted(rule_scores.items(), key=lambda x: -x[1])[:3]]
+    out = []
+    for r in rules:
+        hot = r in top3
+        score = rule_scores.get(r, "")
+        label = _html.escape(r)
+        tag = f'<span class="tag{" hot" if hot else ""}">{label} +{score}</span>' if score else f'<span class="tag">{label}</span>'
+        out.append(tag)
+    return "".join(out) or "<span style=\"color:var(--text-3)\">no rules</span>"
+
+
+def _edge_color_for(level: str) -> str:
+    level = (level or "").lower()
+    if level == "critical":
+        return "#ff4444"
+    if level == "high":
+        return "#ff8844"
+    return "rgba(31,160,104,0.6)"
+
+
+def generate_finding_page(f: dict, fid: str, scan_meta: dict, eth_price: float) -> Path:
+    """Write reports/finding-<fid>.html for a single finding. Returns path."""
+    sender = f["sender"]
+    receiver = f["receiver"]
+    level = (f.get("risk_level") or "MEDIUM").upper()
+    total_eth = f.get("total_eth", 0) or 0
+    total_usd = total_eth * (eth_price or 0)
+
+    # Ego graph: sender → receiver. Size both nodes by risk.
+    node_size = max(20, min(60, 20 + int(f.get("risk_score", 0)) // 20))
+    elements = {
+        "nodes": [
+            {"data": {"id": sender, "type": "sender", "label": sender[:6] + "…" + sender[-4:], "size": node_size}},
+            {"data": {"id": receiver, "type": "receiver", "label": f.get("receiver_label") or receiver[:6] + "…" + receiver[-4:], "size": node_size + 8}},
+        ],
+        "edges": [
+            {"data": {"id": "e1", "source": sender, "target": receiver, "weight": f"{total_eth:.4f} ETH · {f.get('tx_count', 0)} tx"}}
+        ],
+    }
+
+    rules = f.get("rules_triggered", [])
+    if rules and isinstance(rules[0], dict):
+        rule_names = [r["rule"] for r in rules]
+        rule_scores = {r["rule"]: r["score"] for r in rules}
+    else:
+        rule_names = rules
+        rule_scores = f.get("rule_scores", {})
+
+    def s(v):
+        return _html.escape(str(v)) if v is not None else ""
+
+    html_out = _FINDING_PAGE_TEMPLATE.format(
+        FID=_html.escape(fid),
+        SCORE=int(f.get("risk_score", 0) or 0),
+        LEVEL=s(level),
+        LEVEL_LOWER=s(level.lower()),
+        SENDER=s(sender),
+        RECEIVER=s(receiver),
+        RECEIVER_LABEL=s(f.get("receiver_label") or receiver),
+        TX_COUNT=int(f.get("tx_count", 0) or 0),
+        TOTAL_ETH=f"{total_eth:.4f}",
+        TOTAL_USD=f"{total_usd:,.0f}",
+        BLOCK_RANGE=s(scan_meta.get("block_range", "")),
+        TIMESTAMP=s(f.get("_timestamp", "")),
+        RULES_HTML=_rules_to_html(rule_names, rule_scores),
+        WHAT_HAPPENED=s(f.get("_roast_data", {}).get("what_happened", "") or f.get("what_happened", "") or "—"),
+        ROAST=s(f.get("_roast_data", {}).get("roast", "") or f.get("roast", "") or "—"),
+        RISK_VERDICT=s(f.get("_roast_data", {}).get("risk_verdict", "") or f.get("risk_verdict", "") or "—"),
+        RECOMMENDED_ACTION=s(f.get("_roast_data", {}).get("recommended_action", "") or f.get("recommended_action", "") or "—"),
+        ELEMENTS_JSON=json.dumps(elements),
+        EDGE_COLOR=_edge_color_for(level),
+        GENERATED=datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC"),
+    )
+
+    out = REPORTS_DIR / f"finding-{fid}.html"
+    out.write_text(html_out, encoding="utf-8")
+    return out
+
+
 def save_scan_data(findings: list, eth_price: float, scan_meta: dict):
     """Append scan results to data.json — cumulative data source for dashboard."""
     data_file = REPORTS_DIR / "data.json"
@@ -1784,7 +1997,15 @@ def save_scan_data(findings: list, eth_price: float, scan_meta: dict):
 
     for f in findings:
         roast = f.get("_roast_data", {})
+        fid = finding_id(f["sender"], f["receiver"], scan_entry["timestamp"])
+        f["_timestamp"] = scan_entry["timestamp"]
+        # Emit per-finding detail page (static, shareable URL).
+        try:
+            generate_finding_page(f, fid, scan_meta, eth_price)
+        except Exception as e:
+            print(f"[WARN] Could not write finding-{fid}.html: {e}")
         scan_entry["findings"].append({
+            "id": fid,
             "sender": f["sender"],
             "receiver": f["receiver"],
             "receiver_label": f["receiver_label"],
@@ -1808,6 +2029,22 @@ def save_scan_data(findings: list, eth_price: float, scan_meta: dict):
     if len(existing["scans"]) > 500:
         existing["scans"] = existing["scans"][-500:]
 
+    # Clean up detail-page orphans: any finding-*.html whose id isn't
+    # referenced by the retained scans should be removed.
+    live_ids = {
+        fg.get("id")
+        for s in existing["scans"]
+        for fg in s.get("findings", [])
+        if fg.get("id")
+    }
+    for path in REPORTS_DIR.glob("finding-*.html"):
+        fid = path.stem[len("finding-"):]
+        if fid not in live_ids:
+            try:
+                path.unlink()
+            except OSError:
+                pass
+
     # Write stats summary for quick dashboard access
     all_findings = [f for s in existing["scans"] for f in s["findings"]]
     existing["stats"] = {
@@ -1830,8 +2067,9 @@ def save_scan_data(findings: list, eth_price: float, scan_meta: dict):
 def main():
     print("=" * 60)
     print("🔥 AML ROASTER AGENT v2 (NEXUS Engine) — Starting scan")
-    print("   Detection rules: 13 active (incl. stablecoin_mixing, contract_interaction)")
     print(f"   Watched addresses: {len(WATCHED_ADDRESSES)}")
+    print(f"   OFAC lookup entries: {len(OFAC_ADDRESSES)}")
+    print(f"   Phishing / exploit entries: {len(PHISHING_ADDRESSES)} / {len(EXPLOIT_ADDRESSES)}")
     print("   Scan window: 200 blocks (~25 min)")
     print("=" * 60)
 
