@@ -18,30 +18,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from openai import OpenAI
 
-# ─── Telegram Configuration ──────────────────────────────────────────────────
-
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "6686810004")
-
-def send_telegram(message):
-    """Send a message to Telegram. Silently fails if not configured."""
-    if not TELEGRAM_BOT_TOKEN:
-        print("[WARN] TELEGRAM_BOT_TOKEN not set, skipping notification")
-        return
-    try:
-        url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-        resp = requests.post(url, json={
-            "chat_id": TELEGRAM_CHAT_ID,
-            "text": message,
-            "parse_mode": "Markdown",
-        }, timeout=10)
-        if resp.json().get("ok"):
-            print("[INFO] Telegram notification sent")
-        else:
-            print(f"[WARN] Telegram send failed: {resp.json().get('description')}")
-    except Exception as e:
-        print(f"[WARN] Telegram error: {e}")
-
 # ─── Configuration ───────────────────────────────────────────────────────────
 
 # Known mixer / sanctioned / flagged addresses (lowercase)
@@ -111,6 +87,7 @@ THRESHOLDS = {
     # Velocity rules
     "rapid_tx_window_sec": 300,     # Time window for rapid-fire detection (5 min)
     "rapid_tx_count": 3,            # Min tx count in window to flag
+    "rapid_tx_min_value_eth": 0.5,  # Ignore dust — only count txs above this value
     "velocity_24h_count": 20,       # More than this in 24h = velocity flag
     # Peel chain rules
     "peel_variance_pct": 5,         # Amounts within this % variance = peel chain
@@ -516,21 +493,26 @@ def rule_peel_chain(eth_values: list) -> dict | None:
     return None
 
 
-def rule_rapid_fire(timestamps: list) -> dict | None:
-    """RULE: Rapid-fire transactions — automated/scripted behavior."""
-    if len(timestamps) < THRESHOLDS["rapid_tx_count"]:
+def rule_rapid_fire(timestamps: list, eth_values: list) -> dict | None:
+    """RULE: Rapid-fire transactions — automated/scripted behavior.
+
+    Only counts transactions above rapid_tx_min_value_eth to avoid
+    false positives from dust / airdrop spam.
+    """
+    min_value = THRESHOLDS["rapid_tx_min_value_eth"]
+    paired = [ts for ts, val in zip(timestamps, eth_values) if val >= min_value]
+    if len(paired) < THRESHOLDS["rapid_tx_count"]:
         return None
 
-    if timestamps:
-        window = max(timestamps) - min(timestamps)
-        if window <= THRESHOLDS["rapid_tx_window_sec"]:
-            minutes = window / 60
-            return {
-                "rule": "velocity",
-                "score": 50,
-                "detail": f"{len(timestamps)} txs within {minutes:.1f} minutes — "
-                          f"automated/scripted velocity",
-            }
+    window = max(paired) - min(paired)
+    if window <= THRESHOLDS["rapid_tx_window_sec"]:
+        minutes = window / 60
+        return {
+            "rule": "velocity",
+            "score": 50,
+            "detail": f"{len(paired)} txs ≥{min_value} ETH within {minutes:.1f} minutes — "
+                      f"automated/scripted velocity",
+        }
     return None
 
 
@@ -741,7 +723,7 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                     (rule_high_value, (total_eth, eth_price)),
                     (rule_structuring, (eth_values,)),
                     (rule_peel_chain, (eth_values,)),
-                    (rule_rapid_fire, (timestamps,)),
+                    (rule_rapid_fire, (timestamps, eth_values)),
                     (rule_exit_rush, (wallet_info, total_eth)),
                     (rule_exchange_avoidance, (address,)),
                 ]:
@@ -1244,19 +1226,6 @@ def main():
 
     # Save structured data for dashboard
     save_scan_data(findings, eth_price, scan_meta)
-
-    # Send Telegram notification
-    if findings:
-        tg_msg = f"*AML ROASTER ALERT*\n\n"
-        tg_msg += f"Found *{len(findings)}* suspicious pattern(s)\n"
-        tg_msg += f"ETH: ${eth_price:,.2f} | Blocks: {scan_meta['block_range']}\n\n"
-        for f in findings[:5]:
-            tg_msg += f"[{f['risk_level']}] Score {f['risk_score']} — {f['sender'][:10]}... -> {f['receiver_label']}\n"
-        if len(findings) > 5:
-            tg_msg += f"\n...and {len(findings) - 5} more"
-        send_telegram(tg_msg)
-    else:
-        send_telegram(f"*AML Roaster* — Scan complete\n\nNo suspicious activity detected.\nETH: ${eth_price:,.2f} | Blocks: {scan_meta['block_range']}")
 
     print("\n" + "=" * 60)
     print("🔥 AML ROASTER AGENT v2 — Scan complete")
