@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AML Roaster — Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -283,6 +284,78 @@
             margin-top: 0.25rem;
         }
 
+        /* ─── Flow Graph ─── */
+        .graph-box {
+            background: var(--bg2);
+            border: 1px solid var(--accent-border);
+            border-radius: var(--radius);
+            padding: 1rem 1rem 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .graph-box h3 {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            color: var(--text-2);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .graph-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            color: var(--text-3);
+            margin-bottom: 0.75rem;
+        }
+        .graph-legend span { display: flex; align-items: center; gap: 0.35rem; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+        .dot-sender { background: var(--accent); }
+        .dot-receiver { background: var(--red); }
+        .dot-critical { background: var(--red); }
+        .dot-high { background: #ff8844; }
+        .dot-medium { background: rgba(31,160,104,0.6); }
+        #cy {
+            width: 100%;
+            height: 520px;
+            background: var(--bg);
+            border-radius: 6px;
+        }
+
+        /* ─── Leaderboard ─── */
+        .leaderboard {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 2rem;
+        }
+        .leader-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0.85rem;
+            background: var(--bg2);
+            border: 1px solid var(--accent-border);
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+        .leader-label {
+            color: var(--text);
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 70%;
+        }
+        .leader-count {
+            font-family: var(--mono);
+            color: var(--accent);
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        .leader-count .score { color: var(--text-3); margin-left: 0.5rem; }
+
         /* ─── Responsive ─── */
         @media (max-width: 640px) {
             .wrap { padding: 2rem 1.25rem; }
@@ -332,6 +405,32 @@
             </div>
         </section>
 
+        <!-- Flow Graph -->
+        <section>
+            <div class="section-label">Visualize</div>
+            <div class="section-title">Flow Graph</div>
+            <div class="graph-box">
+                <h3>Sender → Counterparty</h3>
+                <div class="graph-legend">
+                    <span><span class="dot dot-sender"></span>Sender</span>
+                    <span><span class="dot dot-receiver"></span>Watched counterparty</span>
+                    <span><span class="dot dot-critical"></span>Critical edge</span>
+                    <span><span class="dot dot-high"></span>High</span>
+                    <span><span class="dot dot-medium"></span>Medium</span>
+                </div>
+                <div id="cy"></div>
+            </div>
+        </section>
+
+        <!-- Top Counterparties -->
+        <section>
+            <div class="section-label">Leaderboard</div>
+            <div class="section-title">Top Counterparties</div>
+            <div class="leaderboard" id="leaderboard">
+                <!-- JS -->
+            </div>
+        </section>
+
         <!-- Charts -->
         <section>
             <div class="section-label">Analytics</div>
@@ -351,7 +450,7 @@
         <!-- Footer -->
         <footer class="footer">
             <a href="https://bionicbanker.tech" target="_blank">Bionic Banker</a>
-            <div class="footer-meta">AML Engine v2 · 13 rules · 94.9% detection</div>
+            <div class="footer-meta" id="footer-meta">AML Engine v2</div>
         </footer>
     </div>
 
@@ -397,8 +496,11 @@
             }
 
             renderRoasts(all);
+            renderGraph(all);
+            renderLeaderboard(all);
             renderTimeline(scans);
             renderRules(all);
+            renderFooter(all);
         }
 
         function renderRoasts(findings) {
@@ -483,6 +585,122 @@
                     }
                 }
             });
+        }
+
+        function renderGraph(findings) {
+            const container = document.getElementById('cy');
+            if (!findings.length) {
+                container.innerHTML = '<div class="empty" style="padding: 2rem;"><div class="empty-icon">◯</div><p>No flows to graph yet.</p></div>';
+                return;
+            }
+
+            // Build nodes (unique addresses) and edges (aggregated sender→receiver links).
+            const nodes = new Map();
+            const edgeMap = new Map();  // key: sender|receiver → { score, count, level }
+            findings.forEach(f => {
+                const s = (f.sender || '').toLowerCase();
+                const r = (f.receiver || '').toLowerCase();
+                if (!s || !r) return;
+                if (!nodes.has(s)) nodes.set(s, { id: s, type: 'sender', label: shorten(s), score: 0 });
+                if (!nodes.has(r)) nodes.set(r, { id: r, type: 'receiver', label: f.receiver_label || shorten(r), score: 0 });
+                nodes.get(s).score += f.risk_score || 0;
+                nodes.get(r).score = Math.max(nodes.get(r).score, f.risk_score || 0);
+                const ek = s + '|' + r;
+                if (!edgeMap.has(ek)) edgeMap.set(ek, { source: s, target: r, score: 0, count: 0, level: 'medium' });
+                const e = edgeMap.get(ek);
+                e.score += f.risk_score || 0;
+                e.count += 1;
+                const lvl = (f.risk_level || '').toLowerCase();
+                if (lvl === 'critical' || (lvl === 'high' && e.level !== 'critical')) e.level = lvl;
+            });
+
+            const elements = [
+                ...Array.from(nodes.values()).map(n => ({ data: n })),
+                ...Array.from(edgeMap.values()).map((e, i) => ({
+                    data: { id: 'e' + i, source: e.source, target: e.target, score: e.score, count: e.count, level: e.level }
+                })),
+            ];
+
+            cytoscape({
+                container,
+                elements,
+                style: [
+                    {
+                        selector: 'node',
+                        style: {
+                            'background-color': ele => ele.data('type') === 'receiver' ? '#ff4444' : '#1fa068',
+                            'label': 'data(label)',
+                            'color': '#7a7a8c',
+                            'font-size': '9px',
+                            'font-family': 'JetBrains Mono, monospace',
+                            'text-valign': 'bottom',
+                            'text-margin-y': 6,
+                            'width': ele => Math.max(14, Math.min(52, 14 + (ele.data('score') || 0) / 30)),
+                            'height': ele => Math.max(14, Math.min(52, 14 + (ele.data('score') || 0) / 30)),
+                            'border-width': 1,
+                            'border-color': 'rgba(31,160,104,0.3)',
+                            'border-opacity': 0.8,
+                        },
+                    },
+                    {
+                        selector: 'edge',
+                        style: {
+                            'width': ele => Math.max(1, Math.min(6, (ele.data('score') || 0) / 100)),
+                            'line-color': ele => {
+                                const l = ele.data('level');
+                                if (l === 'critical') return '#ff4444';
+                                if (l === 'high') return '#ff8844';
+                                return 'rgba(31,160,104,0.5)';
+                            },
+                            'curve-style': 'bezier',
+                            'target-arrow-shape': 'triangle',
+                            'target-arrow-color': ele => {
+                                const l = ele.data('level');
+                                if (l === 'critical') return '#ff4444';
+                                if (l === 'high') return '#ff8844';
+                                return 'rgba(31,160,104,0.5)';
+                            },
+                            'arrow-scale': 0.8,
+                            'opacity': 0.7,
+                        },
+                    },
+                    { selector: 'node:selected', style: { 'border-width': 3, 'border-color': '#fff' } },
+                ],
+                layout: { name: 'cose', animate: false, nodeRepulsion: 3500, idealEdgeLength: 90, fit: true, padding: 24 },
+                minZoom: 0.3,
+                maxZoom: 2.5,
+                wheelSensitivity: 0.2,
+            });
+        }
+
+        function renderLeaderboard(findings) {
+            const el = document.getElementById('leaderboard');
+            if (!findings.length) {
+                el.innerHTML = '<div class="empty" style="padding: 1rem;">No counterparties flagged yet.</div>';
+                return;
+            }
+            const counts = new Map();
+            findings.forEach(f => {
+                const k = f.receiver_label || f.receiver || 'unknown';
+                if (!counts.has(k)) counts.set(k, { count: 0, score: 0 });
+                counts.get(k).count += 1;
+                counts.get(k).score += f.risk_score || 0;
+            });
+            const sorted = Array.from(counts.entries()).sort((a, b) => b[1].count - a[1].count).slice(0, 10);
+            el.innerHTML = sorted.map(([label, s]) => (
+                '<div class="leader-row">' +
+                '<span class="leader-label">' + label + '</span>' +
+                '<span class="leader-count">' + s.count + ' hits<span class="score">Σ ' + s.score + '</span></span>' +
+                '</div>'
+            )).join('');
+        }
+
+        function renderFooter(findings) {
+            const rules = new Set();
+            findings.forEach(f => (f.rules_triggered || []).forEach(r => rules.add(r)));
+            const el = document.getElementById('footer-meta');
+            const now = new Date().toISOString().slice(0, 10);
+            el.textContent = 'AML Engine v2 · ' + rules.size + ' rules observed · live ' + now;
         }
 
         function renderRules(findings) {

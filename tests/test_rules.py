@@ -325,3 +325,215 @@ def test_lrt_wash_none_on_bridge():
 
 def test_lrt_wash_none_on_unknown():
     assert roaster.rule_lrt_restaking_wash(UNKNOWN_ADDR) is None
+
+
+# ─── Rule 19: phishing_contact ───────────────────────────────────────────
+
+def test_phishing_contact_fires_when_receiver_is_phishing():
+    # Seed the lookup directly so the test is independent of which exact
+    # addresses happen to be in the vendored feed.
+    roaster.PHISHING_ADDRESSES["0xdeadbeef00000000000000000000000000000001"] = "test phish"
+    try:
+        r = roaster.rule_phishing_contact(
+            RANDOM_SENDER, "0xdeadbeef00000000000000000000000000000001"
+        )
+        assert r is not None
+        assert r["score"] == 60
+    finally:
+        roaster.PHISHING_ADDRESSES.pop("0xdeadbeef00000000000000000000000000000001", None)
+
+
+def test_phishing_contact_none_on_clean_pair():
+    assert roaster.rule_phishing_contact(RANDOM_SENDER, UNKNOWN_ADDR) is None
+
+
+# ─── Rule 20: exploit_contact ────────────────────────────────────────────
+
+def test_exploit_contact_fires_when_sender_is_exploit():
+    roaster.EXPLOIT_ADDRESSES["0xdeadbeef00000000000000000000000000000002"] = "test exploit"
+    try:
+        r = roaster.rule_exploit_contact(
+            "0xdeadbeef00000000000000000000000000000002", UNKNOWN_ADDR
+        )
+        assert r is not None
+        assert r["score"] == 80
+    finally:
+        roaster.EXPLOIT_ADDRESSES.pop("0xdeadbeef00000000000000000000000000000002", None)
+
+
+def test_exploit_contact_none_on_clean_pair():
+    assert roaster.rule_exploit_contact(RANDOM_SENDER, UNKNOWN_ADDR) is None
+
+
+# ─── Rule 21: live_sanctions_oracle ──────────────────────────────────────
+
+def test_live_sanctions_oracle_fires_on_oracle_hit(monkeypatch):
+    # Stub the oracle helper so tests don't make network calls.
+    calls = []
+
+    def stub_oracle_check(addr: str) -> bool:
+        calls.append(addr)
+        return addr == "0xcafecafecafecafecafecafecafecafecafecafe"
+
+    monkeypatch.setattr(roaster, "chainalysis_oracle_check", stub_oracle_check)
+    r = roaster.rule_live_sanctions_oracle(
+        RANDOM_SENDER, "0xcafecafecafecafecafecafecafecafecafecafe"
+    )
+    assert r is not None
+    assert r["score"] == 200
+
+
+def test_live_sanctions_oracle_skips_known_ofac(monkeypatch):
+    # Addresses already in OFAC_ADDRESSES should be skipped so the oracle
+    # doesn't waste a call on what rule_sanctioned_entity already flagged.
+    seen = []
+
+    def stub_oracle_check(addr: str) -> bool:
+        seen.append(addr)
+        return False
+
+    monkeypatch.setattr(roaster, "chainalysis_oracle_check", stub_oracle_check)
+    # TC_1_ETH_POOL is already in OFAC_ADDRESSES.
+    roaster.rule_live_sanctions_oracle(RANDOM_SENDER, TC_1_ETH_POOL)
+    assert TC_1_ETH_POOL not in seen
+
+
+def test_live_sanctions_oracle_none_when_clean(monkeypatch):
+    monkeypatch.setattr(roaster, "chainalysis_oracle_check", lambda _addr: False)
+    assert roaster.rule_live_sanctions_oracle(RANDOM_SENDER, UNKNOWN_ADDR) is None
+
+
+# ─── Intent-solver additions (reuse rule_bridge_hop) ─────────────────────
+
+COW_SETTLEMENT = "0x9008d19f58aabd9ed0d60971565aa8510560ab41"
+ACROSS_RELAYER_1 = "0x428ab2ba90eba0a4be7af34c9ac451ab061ac010"
+
+
+def test_bridge_hop_fires_on_cow_settlement():
+    r = roaster.rule_bridge_hop(COW_SETTLEMENT)
+    assert r is not None
+    assert r["score"] == 65
+
+
+def test_bridge_hop_fires_on_across_relayer():
+    r = roaster.rule_bridge_hop(ACROSS_RELAYER_1)
+    assert r is not None
+
+
+# ─── Rule 22: sybil_fan_in ───────────────────────────────────────────────
+
+def _sybil_setup(n: int, amount: float = 5.0, noise: float = 0.0):
+    """Build a (sender_map, sender_eth_totals) pair for N senders."""
+    senders = [f"0x{i:040x}" for i in range(1, n + 1)]
+    sender_map = {s: [] for s in senders}
+    totals = {s: amount + noise * (i - n / 2) for i, s in enumerate(senders)}
+    return senders, sender_map, totals
+
+
+def test_sybil_fan_in_fires_when_cluster_matches():
+    senders, sender_map, totals = _sybil_setup(12, amount=5.0, noise=0.05)
+    r = roaster.rule_sybil_fan_in(senders[0], sender_map, totals)
+    assert r is not None
+    assert r["score"] == 70
+
+
+def test_sybil_fan_in_none_when_too_few_senders():
+    senders, sender_map, totals = _sybil_setup(5, amount=5.0, noise=0.05)
+    assert roaster.rule_sybil_fan_in(senders[0], sender_map, totals) is None
+
+
+def test_sybil_fan_in_none_when_high_variance():
+    # 12 senders but amounts span 0.1 ETH to 10 ETH — high CV.
+    senders = [f"0x{i:040x}" for i in range(1, 13)]
+    sender_map = {s: [] for s in senders}
+    totals = {s: 0.1 + i * 1.0 for i, s in enumerate(senders)}
+    assert roaster.rule_sybil_fan_in(senders[0], sender_map, totals) is None
+
+
+def test_sybil_fan_in_excludes_outlier_sender():
+    # Cluster of 12 at ~5 ETH each, but sender at position 0 sent 50 ETH.
+    senders, sender_map, totals = _sybil_setup(12, amount=5.0, noise=0.05)
+    totals[senders[0]] = 50.0  # outlier
+    # Cluster still triggers, but THIS sender is outside the cluster.
+    r = roaster.rule_sybil_fan_in(senders[0], sender_map, totals)
+    assert r is None
+    # A cluster-member sender still fires.
+    r = roaster.rule_sybil_fan_in(senders[5], sender_map, totals)
+    assert r is not None
+
+
+# ─── Rule 23: machine_cadence ────────────────────────────────────────────
+
+def test_machine_cadence_fires_on_metronome():
+    # 6 txs exactly 60s apart with identical gas price
+    timestamps = [1_700_000_000 + 60 * i for i in range(6)]
+    gas_prices = [20_000_000_000] * 6
+    r = roaster.rule_machine_cadence(timestamps, gas_prices)
+    assert r is not None
+    assert r["score"] == 55
+
+
+def test_machine_cadence_none_on_human_variance():
+    # Uneven gaps + varied gas prices
+    timestamps = [1_700_000_000, 1_700_000_037, 1_700_000_410, 1_700_001_823, 1_700_003_200, 1_700_005_100]
+    gas_prices = [20_000_000_000, 23_500_000_000, 18_000_000_000, 25_000_000_000, 19_500_000_000, 22_000_000_000]
+    assert roaster.rule_machine_cadence(timestamps, gas_prices) is None
+
+
+def test_machine_cadence_none_on_too_few_txs():
+    timestamps = [1_700_000_000 + 60 * i for i in range(3)]
+    gas_prices = [20_000_000_000] * 3
+    assert roaster.rule_machine_cadence(timestamps, gas_prices) is None
+
+
+# ─── Rule 24: gas_funding_from_mixer ─────────────────────────────────────
+
+def test_gas_funding_fires_on_mixer_seeded_fresh_wallet(monkeypatch):
+    # Stub out the network call.
+    def stub_first_inbound(addr):
+        return {
+            "from": TC_1_ETH_POOL,   # Tornado pool, type=mixer
+            "value": str(int(0.05 * 10**18)),   # 0.05 ETH — gas-funding amount
+        }
+
+    monkeypatch.setattr(roaster, "get_first_inbound", stub_first_inbound)
+    r = roaster.rule_gas_funding_from_mixer(
+        sender=RANDOM_SENDER,
+        wallet_info={"wallet_age_days": 10},
+    )
+    assert r is not None
+    assert r["score"] == 65
+
+
+def test_gas_funding_none_when_wallet_old(monkeypatch):
+    # Old wallets are skipped to bound API cost.
+    called = []
+    monkeypatch.setattr(roaster, "get_first_inbound", lambda a: called.append(a) or {})
+    r = roaster.rule_gas_funding_from_mixer(
+        RANDOM_SENDER, {"wallet_age_days": 400}
+    )
+    assert r is None
+    assert called == []  # must not even hit the fetcher
+
+
+def test_gas_funding_none_when_first_inbound_is_large(monkeypatch):
+    monkeypatch.setattr(
+        roaster,
+        "get_first_inbound",
+        lambda a: {"from": TC_1_ETH_POOL, "value": str(int(5.0 * 10**18))},
+    )
+    # 5 ETH is above gas_funding_max_eth — not gas funding.
+    assert roaster.rule_gas_funding_from_mixer(
+        RANDOM_SENDER, {"wallet_age_days": 10}
+    ) is None
+
+
+def test_gas_funding_none_when_source_not_mixer(monkeypatch):
+    monkeypatch.setattr(
+        roaster,
+        "get_first_inbound",
+        lambda a: {"from": UNKNOWN_ADDR, "value": str(int(0.05 * 10**18))},
+    )
+    assert roaster.rule_gas_funding_from_mixer(
+        RANDOM_SENDER, {"wallet_age_days": 10}
+    ) is None

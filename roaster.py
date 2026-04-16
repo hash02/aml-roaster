@@ -81,6 +81,8 @@ WATCHED_ADDRESSES = {
     "0xa96be652a08d9905f15b7fbe2255708709becd09": {"label": "ChangeNOW Hot Wallet 2", "type": "no_kyc_offramp", "risk": 85},
     "0xa12e1462d0ced572f396f58b6e2d03894cd7c8a4": {"label": "ChangeNOW 10", "type": "no_kyc_offramp", "risk": 85},
     "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2": {"label": "SideShift Hot Wallet", "type": "no_kyc_offramp", "risk": 85},
+    "0x4727250679294802377dd6ca6541b8e459077c95": {"label": "FixedFloat Hot Wallet", "type": "no_kyc_offramp", "risk": 85},
+    "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f": {"label": "FixedFloat 1", "type": "no_kyc_offramp", "risk": 85},
     # ── Cross-chain bridges ───────────────────────────────────────────────
     # Per Global Ledger 2026, bridges now handle ~50% of stolen-fund
     # laundering (3× more than mixers). Intent-based solvers (Across
@@ -91,6 +93,11 @@ WATCHED_ADDRESSES = {
     "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5": {"label": "Across SpokePool V2", "type": "bridge", "risk": 65},
     "0x66a71dcef29a0ffbdbe3c6a460a3b5bc225cd675": {"label": "LayerZero Endpoint V1", "type": "bridge", "risk": 65},
     "0x98f3c9e6e3face36baad05fe09d375ef1464288b": {"label": "Wormhole Core Bridge", "type": "bridge", "risk": 65},
+    # Intent-based cross-chain (2026 successor to classic bridges). Classed
+    # as `bridge` so the existing rule_bridge_hop covers them uniformly.
+    "0x428ab2ba90eba0a4be7af34c9ac451ab061ac010": {"label": "Across Relayer 1 (intent filler)", "type": "bridge", "risk": 65},
+    "0x15652636f3898f550b257b89926d5566821c32e1": {"label": "Across Relayer 2 (intent filler)", "type": "bridge", "risk": 65},
+    "0x9008d19f58aabd9ed0d60971565aa8510560ab41": {"label": "CoW Protocol GPv2Settlement (intent settlement)", "type": "bridge", "risk": 65},
     # ── Liquid Restaking Token protocols ──────────────────────────────────
     # LRT wash: deposit dirty ETH, mint eETH/ezETH/rsETH, redeem clean
     # ETH post-unbond. $16B+ TVL makes it a meaningful laundering vector
@@ -152,6 +159,76 @@ _ofac_added = _load_ofac_feed()
 if _ofac_added:
     print(f"[INFO] OFAC feed merged: +{_ofac_added} addresses (total {len(OFAC_ADDRESSES)})")
 
+
+# ─── Phishing & Exploit Feeds (lookup-only, NOT iterated) ───────────────────
+#
+# These dicts are large (hundreds of entries each) and must NOT be added
+# to WATCHED_ADDRESSES — the scan loop iterates WATCHED and fetches txs
+# per address, which would blow the API budget. Instead, rules check these
+# dicts during evaluation against addresses actually seen on-chain.
+
+PHISHING_ADDRESSES: dict[str, str] = {}
+EXPLOIT_ADDRESSES: dict[str, str] = {}
+
+
+def _load_json_feed(filename: str, target: dict, feed_name: str) -> int:
+    feed_path = Path(__file__).parent / "addresses" / filename
+    if not feed_path.exists():
+        return 0
+    try:
+        feed = json.loads(feed_path.read_text())
+        entries = feed.get("addresses", {})
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[WARN] {feed_name} feed load failed: {e}")
+        return 0
+    for addr, label in entries.items():
+        target[addr.lower()] = label
+    return len(target)
+
+
+_phishing_loaded = _load_json_feed("phishing.json", PHISHING_ADDRESSES, "phishing")
+_exploits_loaded = _load_json_feed("exploits.json", EXPLOIT_ADDRESSES, "exploits")
+if _phishing_loaded:
+    print(f"[INFO] Phishing feed loaded: {_phishing_loaded} addresses")
+if _exploits_loaded:
+    print(f"[INFO] Exploit feed loaded: {_exploits_loaded} addresses")
+
+
+# ─── Chainalysis Sanctions Oracle (live on-chain sanctions check) ───────────
+#
+# Replaces weekly OFAC cron for catching designations added mid-week.
+# Public, free, no API key. ABI: `isSanctioned(address) view returns (bool)`.
+# Docs: https://go.chainalysis.com/chainalysis-oracle-docs.html
+
+CHAINALYSIS_ORACLE = "0x40c57923924b5c5c5455c48d93317139addac8fb"
+CHAINALYSIS_SELECTOR = "0xdf592f7d"  # keccak256("isSanctioned(address)")[:4]
+
+# Per-scan cache of oracle lookups; cleared at scan start.
+_oracle_cache: dict[str, bool] = {}
+
+
+def chainalysis_oracle_check(address: str) -> bool:
+    """Return True if `address` is sanctioned per the Chainalysis Oracle.
+
+    Uses the existing rpc_call retry/backoff pipeline. Cached within a
+    single scan run. RPC failures return False (fail-open for oracle —
+    the vendored OFAC feed is the primary defense; the oracle is
+    a live top-up).
+    """
+    addr = address.lower()
+    if addr in _oracle_cache:
+        return _oracle_cache[addr]
+    padded = addr.removeprefix("0x").rjust(64, "0")
+    data = CHAINALYSIS_SELECTOR + padded
+    resp = rpc_call("eth_call", [{"to": CHAINALYSIS_ORACLE, "data": data}, "latest"])
+    try:
+        result = int(resp.get("result", "0x0"), 16) == 1
+    except (ValueError, TypeError):
+        result = False
+    _oracle_cache[addr] = result
+    return result
+
+
 # Etherscan API V2 (V1 deprecated Aug 2025 — must use V2 with chainid)
 ETHERSCAN_API = "https://api.etherscan.io/v2/api"
 ETHERSCAN_KEY = os.environ.get("ETHERSCAN_API_KEY", "")
@@ -199,6 +276,16 @@ THRESHOLDS = {
     "tranche_cv_max": 0.15,         # Max coefficient of variation across cluster
     "tranche_usd_bands": [7_000, 9_500, 500_000, 1_000_000],  # US CTR / FinCEN brackets
     "tranche_usd_gap_pct": 10,      # How close to the band (e.g. 9000 counts as "under 9500")
+    # Sybil fan-in (many-to-one orchestrated deposits)
+    "sybil_min_senders": 10,        # Min distinct senders hitting one watched addr to consider Sybil
+    "sybil_max_cv": 0.3,            # Max coefficient of variation across amounts to flag
+    # Machine cadence (AI agent / bot signature)
+    "cadence_min_txs": 5,           # Min txs in a sender run to assess cadence
+    "cadence_max_gap_cv": 0.1,      # Inter-tx gap coefficient of variation — below this = metronome
+    "cadence_max_gas_cv": 0.02,     # Gas-price coefficient of variation — below this = deterministic
+    # Gas-funding seeding (fresh wallet's first inbound is dust from a mixer)
+    "gas_funding_max_eth": 0.5,     # First inbound below this looks like gas funding
+    "gas_funding_max_age_days": 60, # Only check fresh-ish wallets
     # Risk score thresholds
     "risk_low": 30,
     "risk_medium": 60,
@@ -484,6 +571,44 @@ def get_wallet_info(address: str) -> dict:
             pass
 
     return info
+
+
+# Per-scan cache of first-inbound lookups. Cleared at scan start alongside
+# _oracle_cache so every fresh scan starts with no stale entries.
+_first_inbound_cache: dict[str, dict] = {}
+
+
+def get_first_inbound(address: str) -> dict | None:
+    """Return the earliest inbound transaction to `address`, or None.
+
+    Used by rule_gas_funding_from_mixer. Cached per-scan. On API failure
+    returns None — the caller treats "unknown" as "don't fire the rule".
+    """
+    addr = address.lower()
+    if addr in _first_inbound_cache:
+        return _first_inbound_cache[addr] or None
+
+    data = etherscan_get({
+        "module": "account",
+        "action": "txlist",
+        "address": addr,
+        "startblock": 0,
+        "endblock": 99999999,
+        "sort": "asc",
+        "page": 1,
+        "offset": 10,
+    })
+    result = data.get("result", [])
+    first = None
+    if isinstance(result, list):
+        for tx in result:
+            if tx.get("to", "").lower() == addr:
+                first = tx
+                break
+    # Cache negative lookups too (as {}) so a wallet with no on-chain
+    # inbound history doesn't get re-fetched.
+    _first_inbound_cache[addr] = first or {}
+    return first
 
 
 def get_eth_price() -> float:
@@ -917,6 +1042,184 @@ def rule_lrt_restaking_wash(receiver_addr: str) -> dict | None:
     return None
 
 
+def rule_phishing_contact(sender: str, receiver: str) -> dict | None:
+    """RULE: Either side of the transaction is a known phishing wallet.
+
+    Source: MyEtherWallet/ethereum-lists darklist (vendored).
+    """
+    for addr in (sender.lower(), receiver.lower()):
+        if addr in PHISHING_ADDRESSES:
+            return {
+                "rule": "phishing_contact",
+                "score": 60,
+                "detail": f"Phishing address match: {addr[:10]}... — {PHISHING_ADDRESSES[addr]}",
+            }
+    return None
+
+
+def rule_exploit_contact(sender: str, receiver: str) -> dict | None:
+    """RULE: Either side of the transaction is a known exploit contract.
+
+    Source: forta-network/labelled-datasets malicious_smart_contracts.csv
+    (exploit / heist / phish-hack Etherscan labels).
+    """
+    for addr in (sender.lower(), receiver.lower()):
+        if addr in EXPLOIT_ADDRESSES:
+            return {
+                "rule": "exploit_contact",
+                "score": 80,
+                "detail": f"Exploit contract match: {addr[:10]}... — {EXPLOIT_ADDRESSES[addr]}",
+            }
+    return None
+
+
+def rule_machine_cadence(timestamps: list, gas_prices: list) -> dict | None:
+    """RULE: Machine cadence — AI-agent / bot signature.
+
+    Flags senders whose ≥cadence_min_txs transactions have both:
+      - evenly spaced timestamps (gap CV ≤ cadence_max_gap_cv), and
+      - near-deterministic gas prices (CV ≤ cadence_max_gas_cv).
+
+    Source: TRM 2026 note on autonomous AI-agent wallets compressing
+    the laundering window; also a general anti-bot heuristic.
+    """
+    min_txs = THRESHOLDS["cadence_min_txs"]
+    if len(timestamps) < min_txs or len(gas_prices) < min_txs:
+        return None
+
+    ts = sorted(timestamps)
+    gaps = [ts[i + 1] - ts[i] for i in range(len(ts) - 1)]
+    if not gaps:
+        return None
+    mean_gap = sum(gaps) / len(gaps)
+    if mean_gap <= 0:
+        return None
+    gap_var = sum((g - mean_gap) ** 2 for g in gaps) / len(gaps)
+    gap_cv = (gap_var ** 0.5) / mean_gap
+
+    mean_gas = sum(gas_prices) / len(gas_prices)
+    if mean_gas <= 0:
+        return None
+    gas_var = sum((g - mean_gas) ** 2 for g in gas_prices) / len(gas_prices)
+    gas_cv = (gas_var ** 0.5) / mean_gas
+
+    if gap_cv > THRESHOLDS["cadence_max_gap_cv"]:
+        return None
+    if gas_cv > THRESHOLDS["cadence_max_gas_cv"]:
+        return None
+
+    return {
+        "rule": "machine_cadence",
+        "score": 55,
+        "detail": (
+            f"{len(timestamps)} txs with metronome cadence (gap CV {gap_cv:.3f}, "
+            f"gas CV {gas_cv:.4f}) — AI-agent / bot signature"
+        ),
+    }
+
+
+def rule_gas_funding_from_mixer(sender: str, wallet_info: dict) -> dict | None:
+    """RULE: Fresh wallet's first inbound was dust from a mixer / privacy protocol.
+
+    Pattern (Tornado anonymity research, ACM 2025 + arxiv 2510.09443):
+    the attacker seeds a fresh wallet with tiny gas funds sourced from a
+    mixer, then routes real value from a different origin. Splitting the
+    funding-hop from the value-hop defeats naive taint tracing.
+
+    Only checks wallets younger than gas_funding_max_age_days to keep
+    the extra Etherscan call budget bounded.
+    """
+    age = wallet_info.get("wallet_age_days", 999)
+    if age > THRESHOLDS["gas_funding_max_age_days"]:
+        return None
+
+    first = get_first_inbound(sender)
+    if not first:
+        return None
+    from_addr = first.get("from", "").lower()
+    value_eth = int(first.get("value", "0")) / 1e18
+    if value_eth <= 0 or value_eth >= THRESHOLDS["gas_funding_max_eth"]:
+        return None
+
+    seed_types = {"mixer", "mixer_infra", "privacy_protocol"}
+    addr_info = WATCHED_ADDRESSES.get(from_addr)
+    is_seed = addr_info and addr_info["type"] in seed_types
+    is_seed_ofac = from_addr in OFAC_ADDRESSES
+    if not (is_seed or is_seed_ofac):
+        return None
+
+    label = addr_info["label"] if addr_info else OFAC_ADDRESSES.get(from_addr, "sanctioned source")
+    return {
+        "rule": "gas_funding_from_mixer",
+        "score": 65,
+        "detail": (
+            f"Wallet's first inbound was {value_eth:.4f} ETH from {label} — "
+            f"privacy gas-seeding pattern"
+        ),
+    }
+
+
+def rule_sybil_fan_in(sender: str, sender_map: dict, sender_eth_totals: dict) -> dict | None:
+    """RULE: Fan-in from many similar-amount senders (Sybil cluster signature).
+
+    Fires when ≥sybil_min_senders of this watched address's senders sent
+    similar amounts (within sybil_max_cv of the population median).
+    Cluster detection uses the median and a tolerance band so a single
+    outlier (e.g. a legitimate whale deposit mixed in with Sybil smurfs)
+    doesn't destroy the signal. Only senders *inside* the tolerance
+    band are flagged.
+    """
+    min_senders = THRESHOLDS["sybil_min_senders"]
+    max_cv = THRESHOLDS["sybil_max_cv"]
+
+    if len(sender_map) < min_senders:
+        return None
+    amounts = [v for v in sender_eth_totals.values() if v > 0]
+    if len(amounts) < min_senders:
+        return None
+
+    amounts_sorted = sorted(amounts)
+    median = amounts_sorted[len(amounts_sorted) // 2]
+    if median <= 0:
+        return None
+
+    tolerance = max_cv * median
+    cluster = {s.lower(): a for s, a in sender_eth_totals.items() if abs(a - median) <= tolerance}
+    if len(cluster) < min_senders:
+        return None
+
+    if sender.lower() not in cluster:
+        return None  # this sender is an outlier, not part of the Sybil cluster
+
+    cluster_mean = sum(cluster.values()) / len(cluster)
+    return {
+        "rule": "sybil_fan_in",
+        "score": 70,
+        "detail": (
+            f"1 of {len(cluster)} senders depositing similar amounts "
+            f"(~{cluster_mean:.3f} ETH ± {max_cv * 100:.0f}%) — fan-in Sybil pattern"
+        ),
+    }
+
+
+def rule_live_sanctions_oracle(sender: str, receiver: str) -> dict | None:
+    """RULE: Live Chainalysis Oracle sanctions check.
+
+    Catches OFAC designations added between our weekly feed refreshes.
+    Skips addresses already covered by OFAC_ADDRESSES to save oracle calls.
+    """
+    for addr in (sender.lower(), receiver.lower()):
+        if addr in OFAC_ADDRESSES:
+            continue  # already handled by rule_sanctioned_entity
+        if chainalysis_oracle_check(addr):
+            return {
+                "rule": "live_sanctions_oracle",
+                "score": 200,
+                "detail": f"Chainalysis Oracle flagged {addr[:10]}... as sanctioned (post-feed designation)",
+            }
+    return None
+
+
 def compute_risk_score(rules_triggered: list) -> tuple:
     """
     Compute composite risk score and level from triggered rules.
@@ -947,6 +1250,8 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     Scans BOTH native ETH transfers AND ERC-20 token transfers.
     """
     findings = []
+    _oracle_cache.clear()  # fresh oracle lookups each scan
+    _first_inbound_cache.clear()  # fresh first-inbound lookups each scan
     latest = get_latest_block()  # fails loudly on total source failure
     default_start = latest - num_blocks + 1
     eth_price = get_eth_price() or 2000.0
@@ -1003,10 +1308,18 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
             if watched_senders:
                 print(f"  [DEBUG] {watched_senders} txs from watched→watched (kept for reference)")
 
+            # Precompute per-sender ETH totals so rule_sybil_fan_in can
+            # reason about the whole fan-in population without refetching.
+            sender_eth_totals = {
+                s: sum(int(tx.get("value", "0")) / 1e18 for tx in txs_)
+                for s, txs_ in sender_map.items()
+            }
+
             for sender, sender_txs in sender_map.items():
                 eth_values = [int(tx.get("value", "0")) / 1e18 for tx in sender_txs]
                 total_eth = sum(eth_values)
                 timestamps = [int(tx.get("timeStamp", "0")) for tx in sender_txs]
+                gas_prices = [int(tx.get("gasPrice", "0")) for tx in sender_txs if tx.get("gasPrice")]
 
                 # Smart dust filter: skip dust ONLY for non-watched receivers
                 # ANY interaction with a mixer/sanctioned address is suspicious,
@@ -1042,6 +1355,12 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                     (rule_exit_to_no_kyc_offramp, (address,)),
                     (rule_bridge_hop, (address,)),
                     (rule_lrt_restaking_wash, (address,)),
+                    (rule_phishing_contact, (sender, address)),
+                    (rule_exploit_contact, (sender, address)),
+                    (rule_live_sanctions_oracle, (sender, address)),
+                    (rule_sybil_fan_in, (sender, sender_map, sender_eth_totals)),
+                    (rule_machine_cadence, (timestamps, gas_prices)),
+                    (rule_gas_funding_from_mixer, (sender, wallet_info)),
                     (rule_exit_rush, (wallet_info, total_eth)),
                     (rule_exchange_avoidance, (address,)),
                 ]:
