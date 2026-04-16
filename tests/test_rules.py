@@ -460,3 +460,80 @@ def test_sybil_fan_in_excludes_outlier_sender():
     # A cluster-member sender still fires.
     r = roaster.rule_sybil_fan_in(senders[5], sender_map, totals)
     assert r is not None
+
+
+# ─── Rule 23: machine_cadence ────────────────────────────────────────────
+
+def test_machine_cadence_fires_on_metronome():
+    # 6 txs exactly 60s apart with identical gas price
+    timestamps = [1_700_000_000 + 60 * i for i in range(6)]
+    gas_prices = [20_000_000_000] * 6
+    r = roaster.rule_machine_cadence(timestamps, gas_prices)
+    assert r is not None
+    assert r["score"] == 55
+
+
+def test_machine_cadence_none_on_human_variance():
+    # Uneven gaps + varied gas prices
+    timestamps = [1_700_000_000, 1_700_000_037, 1_700_000_410, 1_700_001_823, 1_700_003_200, 1_700_005_100]
+    gas_prices = [20_000_000_000, 23_500_000_000, 18_000_000_000, 25_000_000_000, 19_500_000_000, 22_000_000_000]
+    assert roaster.rule_machine_cadence(timestamps, gas_prices) is None
+
+
+def test_machine_cadence_none_on_too_few_txs():
+    timestamps = [1_700_000_000 + 60 * i for i in range(3)]
+    gas_prices = [20_000_000_000] * 3
+    assert roaster.rule_machine_cadence(timestamps, gas_prices) is None
+
+
+# ─── Rule 24: gas_funding_from_mixer ─────────────────────────────────────
+
+def test_gas_funding_fires_on_mixer_seeded_fresh_wallet(monkeypatch):
+    # Stub out the network call.
+    def stub_first_inbound(addr):
+        return {
+            "from": TC_1_ETH_POOL,   # Tornado pool, type=mixer
+            "value": str(int(0.05 * 10**18)),   # 0.05 ETH — gas-funding amount
+        }
+
+    monkeypatch.setattr(roaster, "get_first_inbound", stub_first_inbound)
+    r = roaster.rule_gas_funding_from_mixer(
+        sender=RANDOM_SENDER,
+        wallet_info={"wallet_age_days": 10},
+    )
+    assert r is not None
+    assert r["score"] == 65
+
+
+def test_gas_funding_none_when_wallet_old(monkeypatch):
+    # Old wallets are skipped to bound API cost.
+    called = []
+    monkeypatch.setattr(roaster, "get_first_inbound", lambda a: called.append(a) or {})
+    r = roaster.rule_gas_funding_from_mixer(
+        RANDOM_SENDER, {"wallet_age_days": 400}
+    )
+    assert r is None
+    assert called == []  # must not even hit the fetcher
+
+
+def test_gas_funding_none_when_first_inbound_is_large(monkeypatch):
+    monkeypatch.setattr(
+        roaster,
+        "get_first_inbound",
+        lambda a: {"from": TC_1_ETH_POOL, "value": str(int(5.0 * 10**18))},
+    )
+    # 5 ETH is above gas_funding_max_eth — not gas funding.
+    assert roaster.rule_gas_funding_from_mixer(
+        RANDOM_SENDER, {"wallet_age_days": 10}
+    ) is None
+
+
+def test_gas_funding_none_when_source_not_mixer(monkeypatch):
+    monkeypatch.setattr(
+        roaster,
+        "get_first_inbound",
+        lambda a: {"from": UNKNOWN_ADDR, "value": str(int(0.05 * 10**18))},
+    )
+    assert roaster.rule_gas_funding_from_mixer(
+        RANDOM_SENDER, {"wallet_age_days": 10}
+    ) is None

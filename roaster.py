@@ -279,6 +279,13 @@ THRESHOLDS = {
     # Sybil fan-in (many-to-one orchestrated deposits)
     "sybil_min_senders": 10,        # Min distinct senders hitting one watched addr to consider Sybil
     "sybil_max_cv": 0.3,            # Max coefficient of variation across amounts to flag
+    # Machine cadence (AI agent / bot signature)
+    "cadence_min_txs": 5,           # Min txs in a sender run to assess cadence
+    "cadence_max_gap_cv": 0.1,      # Inter-tx gap coefficient of variation — below this = metronome
+    "cadence_max_gas_cv": 0.02,     # Gas-price coefficient of variation — below this = deterministic
+    # Gas-funding seeding (fresh wallet's first inbound is dust from a mixer)
+    "gas_funding_max_eth": 0.5,     # First inbound below this looks like gas funding
+    "gas_funding_max_age_days": 60, # Only check fresh-ish wallets
     # Risk score thresholds
     "risk_low": 30,
     "risk_medium": 60,
@@ -564,6 +571,44 @@ def get_wallet_info(address: str) -> dict:
             pass
 
     return info
+
+
+# Per-scan cache of first-inbound lookups. Cleared at scan start alongside
+# _oracle_cache so every fresh scan starts with no stale entries.
+_first_inbound_cache: dict[str, dict] = {}
+
+
+def get_first_inbound(address: str) -> dict | None:
+    """Return the earliest inbound transaction to `address`, or None.
+
+    Used by rule_gas_funding_from_mixer. Cached per-scan. On API failure
+    returns None — the caller treats "unknown" as "don't fire the rule".
+    """
+    addr = address.lower()
+    if addr in _first_inbound_cache:
+        return _first_inbound_cache[addr] or None
+
+    data = etherscan_get({
+        "module": "account",
+        "action": "txlist",
+        "address": addr,
+        "startblock": 0,
+        "endblock": 99999999,
+        "sort": "asc",
+        "page": 1,
+        "offset": 10,
+    })
+    result = data.get("result", [])
+    first = None
+    if isinstance(result, list):
+        for tx in result:
+            if tx.get("to", "").lower() == addr:
+                first = tx
+                break
+    # Cache negative lookups too (as {}) so a wallet with no on-chain
+    # inbound history doesn't get re-fetched.
+    _first_inbound_cache[addr] = first or {}
+    return first
 
 
 def get_eth_price() -> float:
@@ -1028,6 +1073,92 @@ def rule_exploit_contact(sender: str, receiver: str) -> dict | None:
     return None
 
 
+def rule_machine_cadence(timestamps: list, gas_prices: list) -> dict | None:
+    """RULE: Machine cadence — AI-agent / bot signature.
+
+    Flags senders whose ≥cadence_min_txs transactions have both:
+      - evenly spaced timestamps (gap CV ≤ cadence_max_gap_cv), and
+      - near-deterministic gas prices (CV ≤ cadence_max_gas_cv).
+
+    Source: TRM 2026 note on autonomous AI-agent wallets compressing
+    the laundering window; also a general anti-bot heuristic.
+    """
+    min_txs = THRESHOLDS["cadence_min_txs"]
+    if len(timestamps) < min_txs or len(gas_prices) < min_txs:
+        return None
+
+    ts = sorted(timestamps)
+    gaps = [ts[i + 1] - ts[i] for i in range(len(ts) - 1)]
+    if not gaps:
+        return None
+    mean_gap = sum(gaps) / len(gaps)
+    if mean_gap <= 0:
+        return None
+    gap_var = sum((g - mean_gap) ** 2 for g in gaps) / len(gaps)
+    gap_cv = (gap_var ** 0.5) / mean_gap
+
+    mean_gas = sum(gas_prices) / len(gas_prices)
+    if mean_gas <= 0:
+        return None
+    gas_var = sum((g - mean_gas) ** 2 for g in gas_prices) / len(gas_prices)
+    gas_cv = (gas_var ** 0.5) / mean_gas
+
+    if gap_cv > THRESHOLDS["cadence_max_gap_cv"]:
+        return None
+    if gas_cv > THRESHOLDS["cadence_max_gas_cv"]:
+        return None
+
+    return {
+        "rule": "machine_cadence",
+        "score": 55,
+        "detail": (
+            f"{len(timestamps)} txs with metronome cadence (gap CV {gap_cv:.3f}, "
+            f"gas CV {gas_cv:.4f}) — AI-agent / bot signature"
+        ),
+    }
+
+
+def rule_gas_funding_from_mixer(sender: str, wallet_info: dict) -> dict | None:
+    """RULE: Fresh wallet's first inbound was dust from a mixer / privacy protocol.
+
+    Pattern (Tornado anonymity research, ACM 2025 + arxiv 2510.09443):
+    the attacker seeds a fresh wallet with tiny gas funds sourced from a
+    mixer, then routes real value from a different origin. Splitting the
+    funding-hop from the value-hop defeats naive taint tracing.
+
+    Only checks wallets younger than gas_funding_max_age_days to keep
+    the extra Etherscan call budget bounded.
+    """
+    age = wallet_info.get("wallet_age_days", 999)
+    if age > THRESHOLDS["gas_funding_max_age_days"]:
+        return None
+
+    first = get_first_inbound(sender)
+    if not first:
+        return None
+    from_addr = first.get("from", "").lower()
+    value_eth = int(first.get("value", "0")) / 1e18
+    if value_eth <= 0 or value_eth >= THRESHOLDS["gas_funding_max_eth"]:
+        return None
+
+    seed_types = {"mixer", "mixer_infra", "privacy_protocol"}
+    addr_info = WATCHED_ADDRESSES.get(from_addr)
+    is_seed = addr_info and addr_info["type"] in seed_types
+    is_seed_ofac = from_addr in OFAC_ADDRESSES
+    if not (is_seed or is_seed_ofac):
+        return None
+
+    label = addr_info["label"] if addr_info else OFAC_ADDRESSES.get(from_addr, "sanctioned source")
+    return {
+        "rule": "gas_funding_from_mixer",
+        "score": 65,
+        "detail": (
+            f"Wallet's first inbound was {value_eth:.4f} ETH from {label} — "
+            f"privacy gas-seeding pattern"
+        ),
+    }
+
+
 def rule_sybil_fan_in(sender: str, sender_map: dict, sender_eth_totals: dict) -> dict | None:
     """RULE: Fan-in from many similar-amount senders (Sybil cluster signature).
 
@@ -1120,6 +1251,7 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     """
     findings = []
     _oracle_cache.clear()  # fresh oracle lookups each scan
+    _first_inbound_cache.clear()  # fresh first-inbound lookups each scan
     latest = get_latest_block()  # fails loudly on total source failure
     default_start = latest - num_blocks + 1
     eth_price = get_eth_price() or 2000.0
@@ -1187,6 +1319,7 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                 eth_values = [int(tx.get("value", "0")) / 1e18 for tx in sender_txs]
                 total_eth = sum(eth_values)
                 timestamps = [int(tx.get("timeStamp", "0")) for tx in sender_txs]
+                gas_prices = [int(tx.get("gasPrice", "0")) for tx in sender_txs if tx.get("gasPrice")]
 
                 # Smart dust filter: skip dust ONLY for non-watched receivers
                 # ANY interaction with a mixer/sanctioned address is suspicious,
@@ -1226,6 +1359,8 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                     (rule_exploit_contact, (sender, address)),
                     (rule_live_sanctions_oracle, (sender, address)),
                     (rule_sybil_fan_in, (sender, sender_map, sender_eth_totals)),
+                    (rule_machine_cadence, (timestamps, gas_prices)),
+                    (rule_gas_funding_from_mixer, (sender, wallet_info)),
                     (rule_exit_rush, (wallet_info, total_eth)),
                     (rule_exchange_avoidance, (address,)),
                 ]:
