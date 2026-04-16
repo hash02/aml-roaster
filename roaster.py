@@ -66,6 +66,20 @@ WATCHED_ADDRESSES = {
     "0xa7e5d5a720f06526557c513402f2e6b5fa20b008": {"label": "Lazarus Group (DPRK)", "type": "state_sponsored", "risk": 200},
     # ── Known exploit addresses ───────────────────────────────────────────
     "0x3747d3e0e868d72ed471d10888ab8c246faf52f4": {"label": "Ronin Bridge Exploiter", "type": "exploit", "risk": 150},
+    # ── Privacy protocols beyond Tornado ──────────────────────────────────
+    # Verified via Etherscan labels / canonical deployment records.
+    "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9": {"label": "Railgun Relay", "type": "privacy_protocol", "risk": 75},
+    "0xe8a8b458bcd1ececc6b6b58f80929b29ccecff40": {"label": "Railgun Treasury", "type": "privacy_protocol", "risk": 75},
+    "0xff1f2b4adb9df6fc8eafecdcbf96a2b351680455": {"label": "Aztec Connect RollupProcessor", "type": "privacy_protocol", "risk": 75},
+    "0x6818809eefce719e480a7526d76bd3e561526b46": {"label": "Privacy Pools (0xbow) Entrypoint", "type": "privacy_protocol", "risk": 75},
+    "0xf241d57c6debae225c0f2e6ea1529373c9a9c9fb": {"label": "Privacy Pools (0xbow)", "type": "privacy_protocol", "risk": 75},
+    # ── No-KYC swap / off-ramp services ───────────────────────────────────
+    # Initial list; expand as additional hot wallets are identified.
+    # Note: Cryptex is already covered by the OFAC_ADDRESSES feed.
+    "0x975d9bd9928f398c7e01f6ba236816fa558cd94b": {"label": "ChangeNOW Hot Wallet 1", "type": "no_kyc_offramp", "risk": 85},
+    "0xa96be652a08d9905f15b7fbe2255708709becd09": {"label": "ChangeNOW Hot Wallet 2", "type": "no_kyc_offramp", "risk": 85},
+    "0xa12e1462d0ced572f396f58b6e2d03894cd7c8a4": {"label": "ChangeNOW 10", "type": "no_kyc_offramp", "risk": 85},
+    "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2": {"label": "SideShift Hot Wallet", "type": "no_kyc_offramp", "risk": 85},
 }
 
 # OFAC SDN list — known sanctioned wallet addresses
@@ -160,6 +174,11 @@ THRESHOLDS = {
     # Peel chain rules
     "peel_variance_pct": 5,         # Amounts within this % variance = peel chain
     "peel_min_txs": 3,              # Minimum txs to detect peel chain
+    # Sub-threshold tranching (DPRK bracketing pattern)
+    "tranche_min_txs": 4,           # Min txs clustered under a USD band to flag
+    "tranche_cv_max": 0.15,         # Max coefficient of variation across cluster
+    "tranche_usd_bands": [7_000, 9_500, 500_000, 1_000_000],  # US CTR / FinCEN brackets
+    "tranche_usd_gap_pct": 10,      # How close to the band (e.g. 9000 counts as "under 9500")
     # Risk score thresholds
     "risk_low": 30,
     "risk_medium": 60,
@@ -686,6 +705,85 @@ def rule_stablecoin_mixing(token_transfers: list, receiver_addr: str) -> dict | 
     }
 
 
+def rule_sub_threshold_tranching(eth_values: list, eth_price: float) -> dict | None:
+    """RULE: Sub-threshold tranching (DPRK-style bracketing).
+
+    Flags clusters of transactions sitting just under well-known US reporting
+    / CTR / FinCEN thresholds ($7K, $9.5K, $500K, $1M). The current
+    `rule_structuring` catches identical near-round amounts; this rule
+    catches the more specific pattern where multiple transfers bracket just
+    below a regulatory threshold with low variance.
+
+    Reference: Chainalysis 2025 (DPRK ~60% of laundering < $500K per
+    transfer); Merkle Science (NoOnes Jan 2025 breach used sub-$7K
+    bracketing); FATF 6th Targeted Update June 2025.
+    """
+    if not eth_values or eth_price <= 0:
+        return None
+    if len(eth_values) < THRESHOLDS["tranche_min_txs"]:
+        return None
+
+    usd_values = [v * eth_price for v in eth_values]
+    gap_pct = THRESHOLDS["tranche_usd_gap_pct"] / 100
+
+    for band in THRESHOLDS["tranche_usd_bands"]:
+        lo = band * (1 - gap_pct)
+        # "Just under" means within `gap_pct` below the band.
+        cluster = [v for v in usd_values if lo <= v < band]
+        if len(cluster) < THRESHOLDS["tranche_min_txs"]:
+            continue
+        mean = sum(cluster) / len(cluster)
+        if mean == 0:
+            continue
+        var = sum((v - mean) ** 2 for v in cluster) / len(cluster)
+        cv = (var ** 0.5) / mean
+        if cv <= THRESHOLDS["tranche_cv_max"]:
+            return {
+                "rule": "sub_threshold_tranching",
+                "score": 70,
+                "detail": (
+                    f"{len(cluster)} txs clustered just under ${band:,.0f} "
+                    f"(avg ${mean:,.0f}, CV {cv:.3f}) — "
+                    f"regulatory-threshold bracketing"
+                ),
+            }
+    return None
+
+
+def rule_privacy_protocol_non_tornado(receiver_addr: str) -> dict | None:
+    """RULE: Interaction with privacy protocols beyond Tornado Cash.
+
+    Covers Railgun, Aztec Connect, Privacy Pools (0xbow). Lazarus and
+    other threat actors have been observed migrating to these protocols
+    as Tornado Cash became sanctioned (Elliptic Nov 2024).
+    """
+    addr_info = WATCHED_ADDRESSES.get(receiver_addr.lower())
+    if addr_info and addr_info["type"] == "privacy_protocol":
+        return {
+            "rule": "privacy_protocol",
+            "score": 75,
+            "detail": f"Deposit to {addr_info['label']} — non-Tornado privacy protocol",
+        }
+    return None
+
+
+def rule_exit_to_no_kyc_offramp(receiver_addr: str) -> dict | None:
+    """RULE: Deposit to a known no-KYC swap / off-ramp service.
+
+    Scored higher than mixer interaction because reaching a no-KYC
+    off-ramp is typically the *final* laundering step before fiat
+    conversion or cross-chain extraction.
+    """
+    addr_info = WATCHED_ADDRESSES.get(receiver_addr.lower())
+    if addr_info and addr_info["type"] == "no_kyc_offramp":
+        return {
+            "rule": "no_kyc_offramp",
+            "score": 85,
+            "detail": f"Deposit to {addr_info['label']} — no-KYC off-ramp",
+        }
+    return None
+
+
 def compute_risk_score(rules_triggered: list) -> tuple:
     """
     Compute composite risk score and level from triggered rules.
@@ -792,6 +890,9 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                     (rule_structuring, (eth_values,)),
                     (rule_peel_chain, (eth_values,)),
                     (rule_rapid_fire, (timestamps, eth_values)),
+                    (rule_sub_threshold_tranching, (eth_values, eth_price)),
+                    (rule_privacy_protocol_non_tornado, (address,)),
+                    (rule_exit_to_no_kyc_offramp, (address,)),
                     (rule_exit_rush, (wallet_info, total_eth)),
                     (rule_exchange_avoidance, (address,)),
                 ]:
