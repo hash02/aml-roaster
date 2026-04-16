@@ -52,7 +52,6 @@ python roaster.py
 
 ## Coming Soon
 - Twitter/X auto-posting
-- Telegram bot alerts
 - Email notifications
 - Multi-chain support (Polygon, Arbitrum, Base)
 

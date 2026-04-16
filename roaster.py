@@ -9,70 +9,148 @@ Detection rules ported from NEXUS-AGENT v1 AML engine (22 rules, 94.9% detection
 Author: HASH (hash02) — Bionic Banker
 """
 
+import json
 import os
 import sys
-import json
 import time
-import requests
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
+
+import requests
 from openai import OpenAI
-
-# ─── Telegram Configuration ──────────────────────────────────────────────────
-
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "6686810004")
-
-def send_telegram(message):
-    """Send a message to Telegram. Silently fails if not configured."""
-    if not TELEGRAM_BOT_TOKEN:
-        print("[WARN] TELEGRAM_BOT_TOKEN not set, skipping notification")
-        return
-    try:
-        url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-        resp = requests.post(url, json={
-            "chat_id": TELEGRAM_CHAT_ID,
-            "text": message,
-            "parse_mode": "Markdown",
-        }, timeout=10)
-        if resp.json().get("ok"):
-            print("[INFO] Telegram notification sent")
-        else:
-            print(f"[WARN] Telegram send failed: {resp.json().get('description')}")
-    except Exception as e:
-        print(f"[WARN] Telegram error: {e}")
 
 # ─── Configuration ───────────────────────────────────────────────────────────
 
 # Known mixer / sanctioned / flagged addresses (lowercase)
+# Tornado Cash contract addresses verified against tornadocash/docs
+# (general/tornado-cash-smart-contracts.md). All pools listed here were
+# added to OFAC SDN in August 2022.
 WATCHED_ADDRESSES = {
-    # Tornado Cash pools
-    "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b": {"label": "Tornado Cash (0.1 ETH Pool)", "type": "mixer", "risk": 100},
-    "0xd4b88df4d29f5cedd6857912842cff3b20c8cfa3": {"label": "Tornado Cash (100 ETH Pool)", "type": "mixer", "risk": 100},
-    "0xa160cdab225685da1d56aa342ad8841c3b53f291": {"label": "Tornado Cash (10 ETH Pool)", "type": "mixer", "risk": 100},
-    "0xfd8610d20aa15b7b2e3be39b396a1bc3516c7144": {"label": "Tornado Cash (1 ETH Pool)", "type": "mixer", "risk": 100},
-    "0x722122df12d4e14e13ac3b6895a86e84145b6967": {"label": "Tornado Cash Router", "type": "mixer", "risk": 100},
-    "0x905b63fff465b9ffbf41dea908ceb12de6d0e40f": {"label": "Tornado Cash (Governance)", "type": "mixer", "risk": 80},
-    # Sanctioned exchanges
+    # ── Tornado Cash ETH Pools ────────────────────────────────────────────
+    "0x12d66f87a04a9e220743712ce6d9bb1b5616b8fc": {"label": "Tornado Cash (0.1 ETH Pool)", "type": "mixer", "risk": 100},
+    "0x47ce0c6ed5b0ce3d3a51fdb1c52dc66a7c3c2936": {"label": "Tornado Cash (1 ETH Pool)", "type": "mixer", "risk": 100},
+    "0x910cbd523d972eb0a6f4cae4618ad62622b39dbf": {"label": "Tornado Cash (10 ETH Pool)", "type": "mixer", "risk": 100},
+    "0xa160cdab225685da1d56aa342ad8841c3b53f291": {"label": "Tornado Cash (100 ETH Pool)", "type": "mixer", "risk": 100},
+    # ── Tornado Cash DAI Pools ────────────────────────────────────────────
+    "0xd4b88df4d29f5cedd6857912842cff3b20c8cfa3": {"label": "Tornado Cash (100 DAI Pool)", "type": "mixer", "risk": 100},
+    "0xfd8610d20aa15b7b2e3be39b396a1bc3516c7144": {"label": "Tornado Cash (1,000 DAI Pool)", "type": "mixer", "risk": 100},
+    "0x07687e702b410fa43f4cb4af7fa097918ffd2730": {"label": "Tornado Cash (10,000 DAI Pool)", "type": "mixer", "risk": 100},
+    "0x23773e65ed146a459791799d01336db287f25334": {"label": "Tornado Cash (100,000 DAI Pool)", "type": "mixer", "risk": 100},
+    # ── Tornado Cash cDAI Pools ───────────────────────────────────────────
+    "0x22aaa7720ddd5388a3c0a3333430953c68f1849b": {"label": "Tornado Cash (5,000 cDAI Pool)", "type": "mixer", "risk": 100},
+    "0x03893a7c7463ae47d46bc7f091665f1893656003": {"label": "Tornado Cash (50,000 cDAI Pool)", "type": "mixer", "risk": 100},
+    "0x2717c5e28cf931547b621a5dddb772ab6a35b701": {"label": "Tornado Cash (500,000 cDAI Pool)", "type": "mixer", "risk": 100},
+    "0xd21be7248e0197ee08e0c20d4a96debdac3d20af": {"label": "Tornado Cash (5,000,000 cDAI Pool)", "type": "mixer", "risk": 100},
+    # ── Tornado Cash USDC Pools ───────────────────────────────────────────
+    "0x4736dcf1b7a3d580672cce6e7c65cd5cc9cfba9d": {"label": "Tornado Cash (100 USDC Pool)", "type": "mixer", "risk": 100},
+    "0xd96f2b1c14db8458374d9aca76e26c3d18364307": {"label": "Tornado Cash (1,000 USDC Pool)", "type": "mixer", "risk": 100},
+    # ── Tornado Cash USDT Pools ───────────────────────────────────────────
+    "0x169ad27a470d064dede56a2d3ff727986b15d52b": {"label": "Tornado Cash (100 USDT Pool)", "type": "mixer", "risk": 100},
+    "0x0836222f2b2b24a3f36f98668ed8f0b38d1a872f": {"label": "Tornado Cash (1,000 USDT Pool)", "type": "mixer", "risk": 100},
+    # ── Tornado Cash WBTC Pools ───────────────────────────────────────────
+    "0x178169b423a011fff22b9e3f3abea13414ddd0f1": {"label": "Tornado Cash (0.1 WBTC Pool)", "type": "mixer", "risk": 100},
+    "0x610b717796ad172b316836ac95a2ffad065ceab4": {"label": "Tornado Cash (1 WBTC Pool)", "type": "mixer", "risk": 100},
+    "0xbb93e510bbcd0b7beb5a853875f9ec60275cf498": {"label": "Tornado Cash (10 WBTC Pool)", "type": "mixer", "risk": 100},
+    # ── Tornado Cash Routers ──────────────────────────────────────────────
+    "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b": {"label": "Tornado Cash Router", "type": "mixer", "risk": 100},
+    "0x722122df12d4e14e13ac3b6895a86e84145b6967": {"label": "Tornado Cash (deprecated proxy)", "type": "mixer", "risk": 80},
+    # ── Tornado Cash Infra (cataloged; rules do not fire on mixer_infra) ─
+    "0x5efda50f22d34f262c29268506c5fa42cb56a1ce": {"label": "Tornado Cash Governance", "type": "mixer_infra", "risk": 40},
+    "0x77777feddddffc19ff86db637967013e6c6a116c": {"label": "Tornado Cash TORN Token", "type": "mixer_infra", "risk": 40},
+    "0x58e8dcc13be9780fc42e8723d8ead4cf46943df2": {"label": "Tornado Cash RelayerRegistry", "type": "mixer_infra", "risk": 40},
+    # ── Sanctioned Exchanges ──────────────────────────────────────────────
     "0xba214c1c1928a32bffe790263e38b4af9bfcd659": {"label": "eXch Exchange (flagged)", "type": "sanctioned_exchange", "risk": 90},
-    # Lazarus Group (DPRK / North Korea)
-    "0x47ce0c6ed5b0ce3d3a51fdb1c52dc66a7c3c2936": {"label": "Lazarus Group (DPRK)", "type": "state_sponsored", "risk": 200},
-    "0xa7e5d5a720f06526557c513402f2e6b5fa20b008": {"label": "Lazarus Group (DPRK) #2", "type": "state_sponsored", "risk": 200},
-    # Known exploit/hack addresses (recent)
+    # ── Lazarus Group (DPRK) ──────────────────────────────────────────────
+    # Note: 0x47ce...2936 was previously mislabelled here as "Lazarus #1";
+    # it is actually Tornado's 1 ETH pool (Lazarus deposits to it, but does
+    # not control it). Corrected above.
+    "0xa7e5d5a720f06526557c513402f2e6b5fa20b008": {"label": "Lazarus Group (DPRK)", "type": "state_sponsored", "risk": 200},
+    # ── Known exploit addresses ───────────────────────────────────────────
     "0x3747d3e0e868d72ed471d10888ab8c246faf52f4": {"label": "Ronin Bridge Exploiter", "type": "exploit", "risk": 150},
+    # ── Privacy protocols beyond Tornado ──────────────────────────────────
+    # Verified via Etherscan labels / canonical deployment records.
+    "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9": {"label": "Railgun Relay", "type": "privacy_protocol", "risk": 75},
+    "0xe8a8b458bcd1ececc6b6b58f80929b29ccecff40": {"label": "Railgun Treasury", "type": "privacy_protocol", "risk": 75},
+    "0xff1f2b4adb9df6fc8eafecdcbf96a2b351680455": {"label": "Aztec Connect RollupProcessor", "type": "privacy_protocol", "risk": 75},
+    "0x6818809eefce719e480a7526d76bd3e561526b46": {"label": "Privacy Pools (0xbow) Entrypoint", "type": "privacy_protocol", "risk": 75},
+    "0xf241d57c6debae225c0f2e6ea1529373c9a9c9fb": {"label": "Privacy Pools (0xbow)", "type": "privacy_protocol", "risk": 75},
+    # ── No-KYC swap / off-ramp services ───────────────────────────────────
+    # Initial list; expand as additional hot wallets are identified.
+    # Note: Cryptex is already covered by the OFAC_ADDRESSES feed.
+    "0x975d9bd9928f398c7e01f6ba236816fa558cd94b": {"label": "ChangeNOW Hot Wallet 1", "type": "no_kyc_offramp", "risk": 85},
+    "0xa96be652a08d9905f15b7fbe2255708709becd09": {"label": "ChangeNOW Hot Wallet 2", "type": "no_kyc_offramp", "risk": 85},
+    "0xa12e1462d0ced572f396f58b6e2d03894cd7c8a4": {"label": "ChangeNOW 10", "type": "no_kyc_offramp", "risk": 85},
+    "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2": {"label": "SideShift Hot Wallet", "type": "no_kyc_offramp", "risk": 85},
+    # ── Cross-chain bridges ───────────────────────────────────────────────
+    # Per Global Ledger 2026, bridges now handle ~50% of stolen-fund
+    # laundering (3× more than mixers). Intent-based solvers (Across
+    # filler, CoW solver, UniswapX filler) not yet listed — addresses
+    # vary per fill; future enhancement.
+    "0x8731d54e9d02c286767d56ac03e8037c07e01e98": {"label": "Stargate Router", "type": "bridge", "risk": 65},
+    "0x150f94b44927f078737562f0fcf3c95c01cc2376": {"label": "Stargate ETH Router 2", "type": "bridge", "risk": 65},
+    "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5": {"label": "Across SpokePool V2", "type": "bridge", "risk": 65},
+    "0x66a71dcef29a0ffbdbe3c6a460a3b5bc225cd675": {"label": "LayerZero Endpoint V1", "type": "bridge", "risk": 65},
+    "0x98f3c9e6e3face36baad05fe09d375ef1464288b": {"label": "Wormhole Core Bridge", "type": "bridge", "risk": 65},
+    # ── Liquid Restaking Token protocols ──────────────────────────────────
+    # LRT wash: deposit dirty ETH, mint eETH/ezETH/rsETH, redeem clean
+    # ETH post-unbond. $16B+ TVL makes it a meaningful laundering vector
+    # per TRM/Chainalysis 2026 reports. Current rule flags protocol
+    # engagement; full wash-cycle detection (deposit + later withdraw)
+    # is a follow-up once we track per-wallet cross-tx history.
+    "0x308861a430be4cce5502d0a12724771fc6daf216": {"label": "EtherFi Liquidity Pool (eETH)", "type": "lrt", "risk": 55},
+    "0x74a09653a083691711cf8215a6ab074bb4e99ef5": {"label": "Renzo RestakeManager (ezETH)", "type": "lrt", "risk": 55},
+    "0x036676389e48133b63a802f8635ad39e752d375d": {"label": "Kelp DAO LRT Deposit Pool (rsETH)", "type": "lrt", "risk": 55},
 }
 
 # OFAC SDN list — known sanctioned wallet addresses
+# Labels corrected: several Tornado pool addresses were previously labelled
+# as "Lazarus Group" here (e.g. 0x47ce...2936 is a TC 1 ETH pool, not a
+# Lazarus wallet). Full OFAC sync is planned via the `addresses/ofac.json`
+# feed in a subsequent change.
 OFAC_ADDRESSES = {
     "0x8589427373d6d84e98730d7795d8f6f8731fda16": "Tornado Cash (OFAC 2022)",
-    "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b": "Tornado Cash (OFAC 2022)",
-    "0xd4b88df4d29f5cedd6857912842cff3b20c8cfa3": "Tornado Cash (OFAC 2022)",
-    "0xa160cdab225685da1d56aa342ad8841c3b53f291": "Tornado Cash (OFAC 2022)",
-    "0xfd8610d20aa15b7b2e3be39b396a1bc3516c7144": "Tornado Cash (OFAC 2022)",
-    "0x722122df12d4e14e13ac3b6895a86e84145b6967": "Tornado Cash (OFAC 2022)",
-    "0x47ce0c6ed5b0ce3d3a51fdb1c52dc66a7c3c2936": "Lazarus Group (OFAC)",
+    "0x12d66f87a04a9e220743712ce6d9bb1b5616b8fc": "Tornado Cash 0.1 ETH Pool (OFAC 2022)",
+    "0x47ce0c6ed5b0ce3d3a51fdb1c52dc66a7c3c2936": "Tornado Cash 1 ETH Pool (OFAC 2022)",
+    "0x910cbd523d972eb0a6f4cae4618ad62622b39dbf": "Tornado Cash 10 ETH Pool (OFAC 2022)",
+    "0xa160cdab225685da1d56aa342ad8841c3b53f291": "Tornado Cash 100 ETH Pool (OFAC 2022)",
+    "0xd4b88df4d29f5cedd6857912842cff3b20c8cfa3": "Tornado Cash 100 DAI Pool (OFAC 2022)",
+    "0xfd8610d20aa15b7b2e3be39b396a1bc3516c7144": "Tornado Cash 1,000 DAI Pool (OFAC 2022)",
+    "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b": "Tornado Cash Router (OFAC 2022)",
+    "0x722122df12d4e14e13ac3b6895a86e84145b6967": "Tornado Cash deprecated proxy (OFAC 2022)",
     "0xa7e5d5a720f06526557c513402f2e6b5fa20b008": "Lazarus Group (OFAC)",
 }
+
+
+def _load_ofac_feed() -> int:
+    """Merge `addresses/ofac.json` into OFAC_ADDRESSES at startup.
+
+    Feed is a vendored snapshot of ultrasoundmoney/ofac-ethereum-addresses
+    (MIT), refreshed weekly via .github/workflows/refresh-addresses.yml.
+    Any address already present keeps its curated label; new addresses
+    adopt the upstream name. Missing / malformed file is non-fatal —
+    scanner keeps running with the hardcoded list.
+    """
+    feed_path = Path(__file__).parent / "addresses" / "ofac.json"
+    if not feed_path.exists():
+        return 0
+    try:
+        feed = json.loads(feed_path.read_text())
+        new_entries = feed.get("addresses", {})
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[WARN] OFAC feed load failed: {e}")
+        return 0
+    added = 0
+    for addr, name in new_entries.items():
+        addr = addr.lower()
+        if addr not in OFAC_ADDRESSES:
+            OFAC_ADDRESSES[addr] = name
+            added += 1
+    return added
+
+
+_ofac_added = _load_ofac_feed()
+if _ofac_added:
+    print(f"[INFO] OFAC feed merged: +{_ofac_added} addresses (total {len(OFAC_ADDRESSES)})")
 
 # Etherscan API V2 (V1 deprecated Aug 2025 — must use V2 with chainid)
 ETHERSCAN_API = "https://api.etherscan.io/v2/api"
@@ -111,10 +189,16 @@ THRESHOLDS = {
     # Velocity rules
     "rapid_tx_window_sec": 300,     # Time window for rapid-fire detection (5 min)
     "rapid_tx_count": 3,            # Min tx count in window to flag
+    "rapid_tx_min_value_eth": 0.5,  # Ignore dust — only count txs above this value
     "velocity_24h_count": 20,       # More than this in 24h = velocity flag
     # Peel chain rules
     "peel_variance_pct": 5,         # Amounts within this % variance = peel chain
     "peel_min_txs": 3,              # Minimum txs to detect peel chain
+    # Sub-threshold tranching (DPRK bracketing pattern)
+    "tranche_min_txs": 4,           # Min txs clustered under a USD band to flag
+    "tranche_cv_max": 0.15,         # Max coefficient of variation across cluster
+    "tranche_usd_bands": [7_000, 9_500, 500_000, 1_000_000],  # US CTR / FinCEN brackets
+    "tranche_usd_gap_pct": 10,      # How close to the band (e.g. 9000 counts as "under 9500")
     # Risk score thresholds
     "risk_low": 30,
     "risk_medium": 60,
@@ -122,28 +206,89 @@ THRESHOLDS = {
     "risk_critical": 150,
 }
 
+# Backfill window for addresses we've just started watching.
+# Covers ~7 days at 12s/block so a newly-added Railgun / ChangeNOW entry
+# doesn't miss recent deposits that happened before the first cron run.
+BACKFILL_BLOCKS = 50_000
+SCAN_STATE_PATH = Path(__file__).parent / "reports" / "scan_state.json"
+
+
+def load_scan_state() -> dict:
+    """Read {last_scanned_block, first_seen} state for watched addresses.
+
+    Malformed / missing file is non-fatal — returns empty defaults so the
+    scanner falls back to the default window.
+    """
+    if not SCAN_STATE_PATH.exists():
+        return {"last_scanned_block": {}, "first_seen": {}}
+    try:
+        data = json.loads(SCAN_STATE_PATH.read_text())
+        data.setdefault("last_scanned_block", {})
+        data.setdefault("first_seen", {})
+        return data
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[WARN] scan_state load failed, starting fresh: {e}")
+        return {"last_scanned_block": {}, "first_seen": {}}
+
+
+def save_scan_state(state: dict) -> None:
+    SCAN_STATE_PATH.parent.mkdir(exist_ok=True)
+    SCAN_STATE_PATH.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
+
 
 # ─── Blockchain Data Layer ───────────────────────────────────────────────────
 
-def etherscan_get(params: dict, timeout: int = 15):
-    """Helper — make Etherscan API V2 call with chainid and optional key."""
+# Retry configuration for transient network / rate-limit errors.
+# Exponential backoff: 2s, 4s, 8s. Anything past that indicates a real outage
+# and the scan should fail loudly rather than silently produce "no findings".
+_RETRY_ATTEMPTS = 3
+_RETRY_BASE_SECONDS = 2
+
+
+def _sleep_backoff(attempt: int) -> None:
+    time.sleep(_RETRY_BASE_SECONDS * (2 ** attempt))
+
+
+def etherscan_get(params: dict, timeout: int = 15) -> dict:
+    """Call Etherscan V2 with retries.
+
+    Retries with exponential backoff on network errors, HTTP 5xx, and HTTP
+    429. Returns the decoded JSON dict on success. On total failure returns
+    an empty dict — caller is expected to check for an empty/missing result
+    and either fall back to RPC or fail loudly.
+    """
     params["chainid"] = ETHERSCAN_CHAINID
     if ETHERSCAN_KEY:
         params["apikey"] = ETHERSCAN_KEY
-    try:
-        r = requests.get(ETHERSCAN_API, params=params, timeout=timeout)
-        data = r.json()
-        # Log errors from Etherscan
-        if data.get("status") == "0" and data.get("message") != "No transactions found":
-            print(f"[WARN] Etherscan API error: {data.get('result', data.get('message', 'unknown'))}")
-        return data
-    except Exception as e:
-        print(f"[ERROR] Etherscan API call failed: {e}")
-        return {}
+
+    for attempt in range(_RETRY_ATTEMPTS):
+        try:
+            r = requests.get(ETHERSCAN_API, params=params, timeout=timeout)
+            if r.status_code == 429 or r.status_code >= 500:
+                print(f"[WARN] Etherscan HTTP {r.status_code} (attempt {attempt + 1}/{_RETRY_ATTEMPTS})")
+                if attempt < _RETRY_ATTEMPTS - 1:
+                    _sleep_backoff(attempt)
+                    continue
+                return {}
+            data = r.json()
+            if data.get("status") == "0" and data.get("message") != "No transactions found":
+                print(f"[WARN] Etherscan API error: {data.get('result', data.get('message', 'unknown'))}")
+            return data
+        except requests.RequestException as e:
+            print(f"[WARN] Etherscan network error (attempt {attempt + 1}/{_RETRY_ATTEMPTS}): {e}")
+            if attempt < _RETRY_ATTEMPTS - 1:
+                _sleep_backoff(attempt)
+                continue
+    print("[ERROR] Etherscan API unreachable after retries")
+    return {}
 
 
 def rpc_call(method: str, params: list = None) -> dict:
-    """Call Ethereum JSON-RPC directly (fallback when Etherscan fails)."""
+    """Call Ethereum JSON-RPC across multiple public endpoints.
+
+    Each endpoint gets one retry with backoff before moving on. Returns the
+    first successful response. Empty dict means every endpoint is unreachable.
+    """
     payload = {
         "jsonrpc": "2.0",
         "method": method,
@@ -151,20 +296,34 @@ def rpc_call(method: str, params: list = None) -> dict:
         "id": 1,
     }
     for rpc_url in PUBLIC_RPC_ENDPOINTS:
-        try:
-            r = requests.post(rpc_url, json=payload, timeout=10)
-            data = r.json()
-            if "result" in data and data["result"] is not None:
-                return data
-        except Exception:
-            continue
+        for attempt in range(2):
+            try:
+                r = requests.post(rpc_url, json=payload, timeout=10)
+                if r.status_code == 429 or r.status_code >= 500:
+                    if attempt == 0:
+                        _sleep_backoff(attempt)
+                        continue
+                    break
+                data = r.json()
+                if "result" in data and data["result"] is not None:
+                    return data
+                break
+            except requests.RequestException:
+                if attempt == 0:
+                    _sleep_backoff(attempt)
+                    continue
+                break
     print(f"[ERROR] All RPC endpoints failed for {method}")
     return {}
 
 
 def get_latest_block() -> int:
-    """Get the latest Ethereum block number. Tries Etherscan first, then RPC fallback."""
-    # Try Etherscan
+    """Get the latest Ethereum block number. Tries Etherscan first, then RPC.
+
+    Fails loudly if no source returns a valid block — a silent "block=0" here
+    would make the scanner report "no findings" when it actually never
+    scanned anything.
+    """
     data = etherscan_get({"module": "proxy", "action": "eth_blockNumber"})
     try:
         block = int(data["result"], 16)
@@ -174,16 +333,18 @@ def get_latest_block() -> int:
     except (KeyError, ValueError, TypeError):
         pass
 
-    # Fallback to public RPC
     print("[INFO] Etherscan failed, trying public RPC...")
     data = rpc_call("eth_blockNumber")
     try:
         block = int(data["result"], 16)
-        print(f"[INFO] Latest block from RPC: {block}")
-        return block
+        if block > 0:
+            print(f"[INFO] Latest block from RPC: {block}")
+            return block
     except (KeyError, ValueError, TypeError):
-        print("[ERROR] Could not get latest block from any source")
-        return 0
+        pass
+
+    print("[FATAL] Could not get latest block from any source — aborting scan")
+    sys.exit(1)
 
 
 def get_block_transactions(block_num: int) -> list:
@@ -516,21 +677,26 @@ def rule_peel_chain(eth_values: list) -> dict | None:
     return None
 
 
-def rule_rapid_fire(timestamps: list) -> dict | None:
-    """RULE: Rapid-fire transactions — automated/scripted behavior."""
-    if len(timestamps) < THRESHOLDS["rapid_tx_count"]:
+def rule_rapid_fire(timestamps: list, eth_values: list) -> dict | None:
+    """RULE: Rapid-fire transactions — automated/scripted behavior.
+
+    Only counts transactions above rapid_tx_min_value_eth to avoid
+    false positives from dust / airdrop spam.
+    """
+    min_value = THRESHOLDS["rapid_tx_min_value_eth"]
+    paired = [ts for ts, val in zip(timestamps, eth_values, strict=False) if val >= min_value]
+    if len(paired) < THRESHOLDS["rapid_tx_count"]:
         return None
 
-    if timestamps:
-        window = max(timestamps) - min(timestamps)
-        if window <= THRESHOLDS["rapid_tx_window_sec"]:
-            minutes = window / 60
-            return {
-                "rule": "velocity",
-                "score": 50,
-                "detail": f"{len(timestamps)} txs within {minutes:.1f} minutes — "
-                          f"automated/scripted velocity",
-            }
+    window = max(paired) - min(paired)
+    if window <= THRESHOLDS["rapid_tx_window_sec"]:
+        minutes = window / 60
+        return {
+            "rule": "velocity",
+            "score": 50,
+            "detail": f"{len(paired)} txs ≥{min_value} ETH within {minutes:.1f} minutes — "
+                      f"automated/scripted velocity",
+        }
     return None
 
 
@@ -636,6 +802,121 @@ def rule_stablecoin_mixing(token_transfers: list, receiver_addr: str) -> dict | 
     }
 
 
+def rule_sub_threshold_tranching(eth_values: list, eth_price: float) -> dict | None:
+    """RULE: Sub-threshold tranching (DPRK-style bracketing).
+
+    Flags clusters of transactions sitting just under well-known US reporting
+    / CTR / FinCEN thresholds ($7K, $9.5K, $500K, $1M). The current
+    `rule_structuring` catches identical near-round amounts; this rule
+    catches the more specific pattern where multiple transfers bracket just
+    below a regulatory threshold with low variance.
+
+    Reference: Chainalysis 2025 (DPRK ~60% of laundering < $500K per
+    transfer); Merkle Science (NoOnes Jan 2025 breach used sub-$7K
+    bracketing); FATF 6th Targeted Update June 2025.
+    """
+    if not eth_values or eth_price <= 0:
+        return None
+    if len(eth_values) < THRESHOLDS["tranche_min_txs"]:
+        return None
+
+    usd_values = [v * eth_price for v in eth_values]
+    gap_pct = THRESHOLDS["tranche_usd_gap_pct"] / 100
+
+    for band in THRESHOLDS["tranche_usd_bands"]:
+        lo = band * (1 - gap_pct)
+        # "Just under" means within `gap_pct` below the band.
+        cluster = [v for v in usd_values if lo <= v < band]
+        if len(cluster) < THRESHOLDS["tranche_min_txs"]:
+            continue
+        mean = sum(cluster) / len(cluster)
+        if mean == 0:
+            continue
+        var = sum((v - mean) ** 2 for v in cluster) / len(cluster)
+        cv = (var ** 0.5) / mean
+        if cv <= THRESHOLDS["tranche_cv_max"]:
+            return {
+                "rule": "sub_threshold_tranching",
+                "score": 70,
+                "detail": (
+                    f"{len(cluster)} txs clustered just under ${band:,.0f} "
+                    f"(avg ${mean:,.0f}, CV {cv:.3f}) — "
+                    f"regulatory-threshold bracketing"
+                ),
+            }
+    return None
+
+
+def rule_privacy_protocol_non_tornado(receiver_addr: str) -> dict | None:
+    """RULE: Interaction with privacy protocols beyond Tornado Cash.
+
+    Covers Railgun, Aztec Connect, Privacy Pools (0xbow). Lazarus and
+    other threat actors have been observed migrating to these protocols
+    as Tornado Cash became sanctioned (Elliptic Nov 2024).
+    """
+    addr_info = WATCHED_ADDRESSES.get(receiver_addr.lower())
+    if addr_info and addr_info["type"] == "privacy_protocol":
+        return {
+            "rule": "privacy_protocol",
+            "score": 75,
+            "detail": f"Deposit to {addr_info['label']} — non-Tornado privacy protocol",
+        }
+    return None
+
+
+def rule_exit_to_no_kyc_offramp(receiver_addr: str) -> dict | None:
+    """RULE: Deposit to a known no-KYC swap / off-ramp service.
+
+    Scored higher than mixer interaction because reaching a no-KYC
+    off-ramp is typically the *final* laundering step before fiat
+    conversion or cross-chain extraction.
+    """
+    addr_info = WATCHED_ADDRESSES.get(receiver_addr.lower())
+    if addr_info and addr_info["type"] == "no_kyc_offramp":
+        return {
+            "rule": "no_kyc_offramp",
+            "score": 85,
+            "detail": f"Deposit to {addr_info['label']} — no-KYC off-ramp",
+        }
+    return None
+
+
+def rule_bridge_hop(receiver_addr: str) -> dict | None:
+    """RULE: Deposit to a cross-chain bridge router.
+
+    Per Global Ledger 2026, bridges now carry ~50% of stolen-fund
+    laundering flow (3× mixer volume). This rule flags the on-chain
+    leg; cross-chain taint tracing is out of scope for a single-chain
+    scanner.
+    """
+    addr_info = WATCHED_ADDRESSES.get(receiver_addr.lower())
+    if addr_info and addr_info["type"] == "bridge":
+        return {
+            "rule": "bridge_hop",
+            "score": 65,
+            "detail": f"Deposit to {addr_info['label']} — cross-chain bridge",
+        }
+    return None
+
+
+def rule_lrt_restaking_wash(receiver_addr: str) -> dict | None:
+    """RULE: Deposit to a Liquid Restaking Token (LRT) protocol.
+
+    Flags engagement with EtherFi/Renzo/Kelp style restaking pools.
+    A laundering pattern observed in 2026: deposit dirty ETH → mint
+    eETH/ezETH/rsETH → redeem clean ETH after unbond. Detecting the
+    full wash cycle needs per-wallet cross-tx history, deferred.
+    """
+    addr_info = WATCHED_ADDRESSES.get(receiver_addr.lower())
+    if addr_info and addr_info["type"] == "lrt":
+        return {
+            "rule": "lrt_restaking",
+            "score": 55,
+            "detail": f"Deposit to {addr_info['label']} — LRT restaking pool",
+        }
+    return None
+
+
 def compute_risk_score(rules_triggered: list) -> tuple:
     """
     Compute composite risk score and level from triggered rules.
@@ -666,26 +947,40 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     Scans BOTH native ETH transfers AND ERC-20 token transfers.
     """
     findings = []
-    latest = get_latest_block()
-    if not latest:
-        print("[ERROR] Could not determine latest block. Aborting scan.")
-        return findings
-
-    start_block = latest - num_blocks + 1
+    latest = get_latest_block()  # fails loudly on total source failure
+    default_start = latest - num_blocks + 1
     eth_price = get_eth_price() or 2000.0
     print(f"[SCAN] Latest block: {latest} | ETH: ${eth_price:,.2f}")
-    print(f"[SCAN] Scanning blocks {start_block} to {latest} ({num_blocks} blocks, ~{num_blocks * 12 // 60} min)")
+    print(f"[SCAN] Default window: blocks {default_start}-{latest} ({num_blocks} blocks)")
+
+    # Per-address backfill state. Newly-added watched addresses look back
+    # BACKFILL_BLOCKS (~7 days) once; thereafter we pick up where we left off.
+    scan_state = load_scan_state()
+    last_scanned = scan_state["last_scanned_block"]
+    first_seen = scan_state["first_seen"]
+    scan_started_at = datetime.now(UTC).isoformat()
 
     # ── Strategy 1: Check ETH + token transactions TO watched addresses ──
     for address, addr_info in WATCHED_ADDRESSES.items():
         label = addr_info["label"]
         print(f"[SCAN] Checking {label} ({address[:10]}...)")
 
+        addr_last = last_scanned.get(address)
+        if addr_last is None:
+            addr_start = max(1, latest - BACKFILL_BLOCKS + 1)
+            first_seen.setdefault(address, scan_started_at)
+            print(f"  [BACKFILL] Newly-watched — scanning last {BACKFILL_BLOCKS:,} blocks")
+        else:
+            addr_start = max(addr_last + 1, default_start)
+            if addr_last + 1 < default_start:
+                print(f"  [CATCHUP] Last scanned at {addr_last}, continuing from {addr_start}")
+
         # Fetch BOTH normal txs and token transfers
-        txs = get_normal_transactions(address, start_block, latest)
+        txs = get_normal_transactions(address, addr_start, latest)
         time.sleep(0.5)
-        token_txs = get_token_transfers(address, start_block, latest)
+        token_txs = get_token_transfers(address, addr_start, latest)
         time.sleep(0.5)
+        last_scanned[address] = latest
 
         has_eth = bool(txs)
         has_tokens = bool(token_txs)
@@ -741,7 +1036,12 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                     (rule_high_value, (total_eth, eth_price)),
                     (rule_structuring, (eth_values,)),
                     (rule_peel_chain, (eth_values,)),
-                    (rule_rapid_fire, (timestamps,)),
+                    (rule_rapid_fire, (timestamps, eth_values)),
+                    (rule_sub_threshold_tranching, (eth_values, eth_price)),
+                    (rule_privacy_protocol_non_tornado, (address,)),
+                    (rule_exit_to_no_kyc_offramp, (address,)),
+                    (rule_bridge_hop, (address,)),
+                    (rule_lrt_restaking_wash, (address,)),
                     (rule_exit_rush, (wallet_info, total_eth)),
                     (rule_exchange_avoidance, (address,)),
                 ]:
@@ -892,6 +1192,11 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
 
     # Sort by risk score (most dangerous first)
     unique.sort(key=lambda x: x["risk_score"], reverse=True)
+
+    # Persist per-address scan progress so new additions backfill once and
+    # resume from where we left off on subsequent runs.
+    save_scan_state({"last_scanned_block": last_scanned, "first_seen": first_seen})
+
     return unique
 
 
@@ -1013,7 +1318,7 @@ Respond in this EXACT JSON format (no markdown, no code blocks, no backticks):
 
 def generate_report(findings: list, eth_price: float, scan_meta: dict) -> str:
     """Generate a markdown report with AML engine scoring."""
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     timestamp = now.strftime("%Y-%m-%d %H:%M UTC")
 
     report = f"""# 🔥 AML Roaster Report
@@ -1147,7 +1452,7 @@ def save_scan_data(findings: list, eth_price: float, scan_meta: dict):
     else:
         existing = {"scans": []}
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
 
     # Build scan entry
     scan_entry = {
@@ -1206,9 +1511,9 @@ def save_scan_data(findings: list, eth_price: float, scan_meta: dict):
 def main():
     print("=" * 60)
     print("🔥 AML ROASTER AGENT v2 (NEXUS Engine) — Starting scan")
-    print(f"   Detection rules: 13 active (incl. stablecoin_mixing, contract_interaction)")
+    print("   Detection rules: 13 active (incl. stablecoin_mixing, contract_interaction)")
     print(f"   Watched addresses: {len(WATCHED_ADDRESSES)}")
-    print(f"   Scan window: 200 blocks (~25 min)")
+    print("   Scan window: 200 blocks (~25 min)")
     print("=" * 60)
 
     eth_price = get_eth_price()
@@ -1233,7 +1538,7 @@ def main():
 
     report = generate_report(findings, eth_price, scan_meta)
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     filename = f"report_{now.strftime('%Y-%m-%d_%H%M')}.md"
     filepath = REPORTS_DIR / filename
     filepath.write_text(report, encoding="utf-8")
@@ -1244,19 +1549,6 @@ def main():
 
     # Save structured data for dashboard
     save_scan_data(findings, eth_price, scan_meta)
-
-    # Send Telegram notification
-    if findings:
-        tg_msg = f"*AML ROASTER ALERT*\n\n"
-        tg_msg += f"Found *{len(findings)}* suspicious pattern(s)\n"
-        tg_msg += f"ETH: ${eth_price:,.2f} | Blocks: {scan_meta['block_range']}\n\n"
-        for f in findings[:5]:
-            tg_msg += f"[{f['risk_level']}] Score {f['risk_score']} — {f['sender'][:10]}... -> {f['receiver_label']}\n"
-        if len(findings) > 5:
-            tg_msg += f"\n...and {len(findings) - 5} more"
-        send_telegram(tg_msg)
-    else:
-        send_telegram(f"*AML Roaster* — Scan complete\n\nNo suspicious activity detected.\nETH: ${eth_price:,.2f} | Blocks: {scan_meta['block_range']}")
 
     print("\n" + "=" * 60)
     print("🔥 AML ROASTER AGENT v2 — Scan complete")
