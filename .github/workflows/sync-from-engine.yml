@@ -1,0 +1,65 @@
+name: Sync threat feeds from aml-detection-engine
+
+on:
+  schedule:
+    # Daily at 03:30 UTC — after the engine's own refresh-addresses has had
+    # a chance to update upstream feeds earlier in the week.
+    - cron: '30 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout aml-roaster
+        uses: actions/checkout@v4
+
+      - name: Fetch addresses from aml-detection-engine
+        run: |
+          mkdir -p engine-sync
+          # Pull watchlist + any emitted address manifests
+          # (once engine issue #11 lands, this will pull addresses/*.json)
+          curl -sL -o engine-sync/watchlist.json \
+            https://raw.githubusercontent.com/hash02/aml-detection-engine/main/config/watchlist.json \
+            || { echo "No watchlist yet — skipping"; exit 0; }
+
+          # Future: pull addresses/ocac.json, addresses/mixers.json, etc once #11 ships.
+          # for f in ofac mixers phishing exploits; do
+          #   curl -sL -o "addresses/${f}.json" \
+          #     "https://raw.githubusercontent.com/hash02/aml-detection-engine/main/addresses/${f}.json"
+          # done
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet engine-sync/ addresses/ 2>/dev/null; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Open PR if changed
+        if: steps.changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: auto/sync-engine-feeds
+          title: 'chore: sync threat feeds from aml-detection-engine'
+          commit-message: 'chore: sync threat feeds from aml-detection-engine'
+          body: |
+            Automated daily sync of authoritative threat feeds from
+            `hash02/aml-detection-engine`.
+
+            Keeps the roaster in lock-step with engine updates. Relates to
+            the AML consolidation plan at
+            [hash-2026/analysis/aml_consolidation.md](https://github.com/hash02/hash-2026/blob/main/analysis/aml_consolidation.md).
+
+            Merge after visual diff of the address lists looks reasonable.
+          labels: |
+            automated
+            engine-sync
