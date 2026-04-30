@@ -19,6 +19,11 @@ from pathlib import Path
 import requests
 from openai import OpenAI
 
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except AttributeError:
+    pass
+
 # ─── Configuration ───────────────────────────────────────────────────────────
 
 # Known mixer / sanctioned / flagged addresses (lowercase)
@@ -297,6 +302,7 @@ THRESHOLDS = {
 # Covers ~7 days at 12s/block so a newly-added Railgun / ChangeNOW entry
 # doesn't miss recent deposits that happened before the first cron run.
 BACKFILL_BLOCKS = 50_000
+MAX_WATCHED_PER_RUN = int(os.environ.get("MAX_WATCHED_PER_RUN", "8"))
 SCAN_STATE_PATH = Path(__file__).parent / "reports" / "scan_state.json"
 
 
@@ -307,15 +313,16 @@ def load_scan_state() -> dict:
     scanner falls back to the default window.
     """
     if not SCAN_STATE_PATH.exists():
-        return {"last_scanned_block": {}, "first_seen": {}}
+        return {"last_scanned_block": {}, "first_seen": {}, "next_watch_index": 0}
     try:
         data = json.loads(SCAN_STATE_PATH.read_text())
         data.setdefault("last_scanned_block", {})
         data.setdefault("first_seen", {})
+        data.setdefault("next_watch_index", 0)
         return data
     except (json.JSONDecodeError, OSError) as e:
         print(f"[WARN] scan_state load failed, starting fresh: {e}")
-        return {"last_scanned_block": {}, "first_seen": {}}
+        return {"last_scanned_block": {}, "first_seen": {}, "next_watch_index": 0}
 
 
 def save_scan_state(state: dict) -> None:
@@ -1265,8 +1272,17 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     first_seen = scan_state["first_seen"]
     scan_started_at = datetime.now(UTC).isoformat()
 
+    watched_items = list(WATCHED_ADDRESSES.items())
+    start_index = scan_state.get("next_watch_index", 0) % len(watched_items)
+    batch_size = min(MAX_WATCHED_PER_RUN, len(watched_items))
+    selected_items = [
+        watched_items[(start_index + offset) % len(watched_items)]
+        for offset in range(batch_size)
+    ]
+    print(f"[SCAN] Watched batch: {batch_size}/{len(watched_items)} addresses from index {start_index}")
+
     # ── Strategy 1: Check ETH + token transactions TO watched addresses ──
-    for address, addr_info in WATCHED_ADDRESSES.items():
+    for address, addr_info in selected_items:
         label = addr_info["label"]
         print(f"[SCAN] Checking {label} ({address[:10]}...)")
 
@@ -1514,7 +1530,12 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
 
     # Persist per-address scan progress so new additions backfill once and
     # resume from where we left off on subsequent runs.
-    save_scan_state({"last_scanned_block": last_scanned, "first_seen": first_seen})
+    next_watch_index = (start_index + batch_size) % len(watched_items)
+    save_scan_state({
+        "last_scanned_block": last_scanned,
+        "first_seen": first_seen,
+        "next_watch_index": next_watch_index,
+    })
 
     return unique
 
