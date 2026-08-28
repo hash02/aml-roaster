@@ -537,3 +537,63 @@ def test_gas_funding_none_when_source_not_mixer(monkeypatch):
     assert roaster.rule_gas_funding_from_mixer(
         RANDOM_SENDER, {"wallet_age_days": 10}
     ) is None
+
+
+# ─── Per-finding detail pages ────────────────────────────────────────────
+
+def test_finding_id_is_stable_and_sized():
+    a = roaster.finding_id(RANDOM_SENDER, TC_1_ETH_POOL, "2026-01-01T00:00:00Z")
+    b = roaster.finding_id(RANDOM_SENDER, TC_1_ETH_POOL, "2026-01-01T00:00:00Z")
+    assert a == b
+    assert len(a) == 12
+    # Case normalization — the id should not change if the caller passes
+    # a checksummed address.
+    c = roaster.finding_id(RANDOM_SENDER.upper(), TC_1_ETH_POOL.upper(), "2026-01-01T00:00:00Z")
+    assert a == c
+
+
+def test_finding_id_different_for_different_inputs():
+    a = roaster.finding_id(RANDOM_SENDER, TC_1_ETH_POOL, "2026-01-01T00:00:00Z")
+    b = roaster.finding_id(RANDOM_SENDER, TC_1_ETH_POOL, "2026-01-01T00:30:00Z")
+    assert a != b
+
+
+def test_generate_finding_page_writes_valid_html(tmp_path, monkeypatch):
+    # Redirect reports dir into tmp so we don't pollute the real one.
+    monkeypatch.setattr(roaster, "REPORTS_DIR", tmp_path)
+    f = {
+        "sender": RANDOM_SENDER,
+        "receiver": TC_1_ETH_POOL,
+        "receiver_label": "Tornado Cash (1 ETH Pool)",
+        "risk_score": 430,
+        "risk_level": "CRITICAL",
+        "tx_count": 3,
+        "total_eth": 3.0,
+        "rules_triggered": [
+            {"rule": "mixer_touch", "score": 100, "detail": "x"},
+            {"rule": "ofac_hit", "score": 200, "detail": "x"},
+            {"rule": "rapid_fire", "score": 50, "detail": "x"},
+        ],
+        "_timestamp": "2026-01-01T00:00:00Z",
+        "_roast_data": {
+            "what_happened": "They did the thing.",
+            "roast": "Classic.",
+            "risk_verdict": "CRITICAL",
+            "recommended_action": "File a SAR.",
+        },
+    }
+    fid = roaster.finding_id(f["sender"], f["receiver"], f["_timestamp"])
+    path = roaster.generate_finding_page(
+        f, fid, scan_meta={"block_range": "100 — 200"}, eth_price=3000.0
+    )
+    assert path.exists()
+    html = path.read_text(encoding="utf-8")
+    assert "Finding " + fid in html
+    assert f["sender"] in html
+    assert f["receiver"] in html
+    assert "Tornado Cash (1 ETH Pool)" in html
+    assert "mixer_touch" in html
+    assert "Classic." in html
+    # Cytoscape payload injected
+    assert "cytoscape(" in html
+    assert '"source"' in html and '"target"' in html
