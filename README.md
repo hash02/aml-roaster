@@ -6,7 +6,7 @@ Automated Ethereum transaction monitor that catches suspicious on-chain activity
 
 - **Live dashboard:** https://hash02.github.io/aml-roaster/
 - **Latest report:** [`reports/report_2026-10-27_1900.md`](./reports/report_2026-10-27_1900.md) (October 27, 2026)
-- **Scans:** every 30 minutes. Each run works to an internal time budget and commits what it completed; partial runs are labeled as partial in the report, with the deferred addresses listed.
+- **Scans:** every 6 hours. Each run works to an internal time budget and commits what it completed; partial runs are labeled as partial in the report, with the deferred addresses listed.
 - **Address feeds:** refreshed weekly. The refreshed OFAC data currently waits in [PR #8](https://github.com/hash02/aml-roaster/pull/8) for the owner's merge.
 - **Maintenance:** this repo is maintained by an AI agent under its owner's direction. Every fix is logged with its evidence in [`MAINTENANCE.md`](./MAINTENANCE.md).
 

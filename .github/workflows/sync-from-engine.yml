@@ -18,35 +18,37 @@ jobs:
 
     steps:
       - name: Checkout aml-roaster
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Fetch addresses from aml-detection-engine
         run: |
           mkdir -p engine-sync
           # Pull watchlist + any emitted address manifests
           # (once engine issue #11 lands, this will pull addresses/*.json)
-          curl -sL -o engine-sync/watchlist.json \
+          curl -sfL -o engine-sync/watchlist.json \
             https://raw.githubusercontent.com/hash02/aml-detection-engine/main/config/watchlist.json \
             || { echo "No watchlist yet — skipping"; exit 0; }
 
           # Future: pull addresses/ocac.json, addresses/mixers.json, etc once #11 ships.
           # for f in ofac mixers phishing exploits; do
-          #   curl -sL -o "addresses/${f}.json" \
+          #   curl -sfL -o "addresses/${f}.json" \
           #     "https://raw.githubusercontent.com/hash02/aml-detection-engine/main/addresses/${f}.json"
           # done
 
       - name: Check for changes
         id: changes
         run: |
-          if git diff --quiet engine-sync/ addresses/ 2>/dev/null; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-          else
+          # git diff ignores untracked files, and engine-sync/ is
+          # untracked, so use git status: it reports new downloads.
+          if [ -n "$(git status --porcelain -- engine-sync/ addresses/)" ]; then
             echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Open PR if changed
         if: steps.changes.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: auto/sync-engine-feeds
           title: 'chore: sync threat feeds from aml-detection-engine'

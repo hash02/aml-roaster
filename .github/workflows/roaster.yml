@@ -2,8 +2,9 @@ name: 🔥 AML Roaster — Scheduled Scan
 
 on:
   schedule:
-    # Run every 30 minutes — GitHub Actions uses UTC
-    - cron: '*/30 * * * *'
+    # Run every 6 hours (GitHub Actions uses UTC). A full run takes
+    # 18 to 30 minutes, so a 30-minute schedule could never hold.
+    - cron: '0 */6 * * *'
   workflow_dispatch:
     # Manual trigger for testing
 
