@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-22T20:51:16.422022+00:00",
-      "eth_price": 2063.89263945167,
-      "block_range": "24715333 \u2014 24715532",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-22T21:23:23.260647+00:00",
       "eth_price": 2031.36011877766,
       "block_range": "24715462 \u2014 24715661",
@@ -37310,16 +37303,2616 @@
           "recommended_action": "Retry analysis."
         }
       ]
+    },
+    {
+      "timestamp": "2026-10-27T20:21:19.202468+00:00",
+      "eth_price": 2344.33,
+      "block_range": "26286119 \u2014 26286318",
+      "total_findings": 127,
+      "findings": [
+        {
+          "sender": "0x9e6b5c722f0b04128bf97b31d81959f8fb345923",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 201,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 8.39999622,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 76,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 201.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xe835d789492e50e3c6732e9c8378ba5fb731091b",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 188,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 1.55999643,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 63,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 188.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xbe26204be011303d52fd0f1d4356e4917aa74eaa",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 187,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 1.11999643,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 62,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 187.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x45278f5d92beb246cbcd9f8add01ed85462337c6",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 187,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 1.003506616998837,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 62,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 187.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x9716dab2e50c4174f5639e72bf63cdeaf11343a9",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.00047243278046706,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x3f75ef41cebb36c563d608704f2a33673aa3c2c9",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000461086244907342,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xeacb9fd94ad174d346021031f91b46c41179c507",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000465177931724479,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xb80769ba8597a42cb1c0d6d346fc49ead3c92b13",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000464967931724479,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xf061be3653974230bec6212c3dac288c1ec6efa1",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.00038180441407246,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x98223b0043dcd09d63c007a7a52a1fb05d8dd4a7",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.00037280441407246,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xaaa45268b6c72929a00d54921f70ecb5c434f4fe",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000355049840531673,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x128d5543eebf8cb95dc54010d912e9e9722eb06e",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.00043590486546196,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x25705e6f18ba99bc784bcd5af694d2684791d814",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000278674924902017,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x27d464ab46a8044c675c3c12a7141fd1a926cb8e",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000305092708255899,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x77469054098f8a52b3878e6f5c262bc7dcf709a0",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000275883968661046,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x6c3e3001288f636333ba9b0a4e465e2997f961ab",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000285266298128254,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xf7db2c1bba1880b39d6bc7f01765e9054977cf8c",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000384487267235354,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x5154b03e2af38cc1dc248145f353524f9c15ed54",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000304495546594215,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xd5b11a586c93088ae40f5fc1d3ada5d47fe06976",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.00042094119744228,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xa360825ba400413f47b17fdddec88f3ea29c0267",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000276697933551781,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x86e17ae870346bd35bd8fb8588a106970c5874f7",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.00028537223929348,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x3ab94b429092cf9bb64227e9bc8da9640c2dc1be",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000276005106039768,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x539fe5400133c40bbbf31e8a0c1a7761012cf8b3",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00015704778437093,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x1baa9d21f415ff224e6ff42225fe503ca38af044",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0001397601443944,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xa7935a317599ea556bc7132fe0f5319349c27c1e",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000158053311203788,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x7ad82455437daf4ae0b102af20219f518c61054c",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000140040242974049,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xea3164f616ecc0dd3d1a4efb0b82addc5bc15b40",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000140523104480717,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x32b98665202e2db4324d09586b01b9ef164faf39",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000149001178664658,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x7c2c7fa5ee45552cfb8449506daf67b17ffa3355",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00013989688677504,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x7db373f6af4b7e823385afc3739bb68006735fa4",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000139371986446597,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xfb9b1625622efb78bb15d2cd7d411e5505789a31",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00015779987374748,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xa25ae7bf7941f8afbc22ca35536887fc9c71313a",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00014005351310012,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x0a9526b663c6aaf793824eb53c6fffefa577ed18",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.64940104,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x1a6a699f009dc6e414ca37a55bd9e354f47ffea8",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00014963099547924,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x11df0ae1d1295aa39db30fd5f5873763ff90fccc",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000149536257149931,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xc7c3e27eea597596d5359c7b9a4621195662e378",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000140255973686859,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xc939088a8fd6645b7e8c530806903aed0c92d131",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000149446792533215,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x87a921a2b05ca193d868e993e5c568580c592fd0",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000149235830380516,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x09a848c7c8d617170a7b026d22062ef615c5b7d0",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000157908137137268,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x65a475d298dcf810c4372d89c0f325b5a984ef02",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000148459740612545,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x05344c119766f8a1b2288b4db29f28d87a86b37d",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000157554861738438,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xac5c7f23c32315315fc0ee3e6cba7f4382b8ea8f",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00014802419061088,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x01d0d9078b3925aa840743d9bae93bf1d0eb7e84",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 1e-18,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xe1adc493e152e0cc4a6fb687c78081dd24bd7e84",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 1e-18,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xee38b585cf13dc6c1b082ce8e214e0030e007c7f",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000139414268119646,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x9d3c795d7cdfa1e0a5962180a3585b733ed38623",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000139440307118664,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x7e7195463696cb6bcaf9160c211001aa3e1aec15",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000139727657295496,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xce2353ab8c5e2342a9c6cd3488f77c401105aea8",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000148602542882965,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x20d95a473b9f0e3deddae419e1217b6aa9f0be22",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.13930033814447487,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x43c84289ea71d6cde6f049ef274a7671176abd6c",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00014953346112156,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xc9af455d56b4dc6559091c128317f77875a3441d",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000148865882914105,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x8bae7d52828f7e60d166901ac59b74ae97de15dc",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000157864550835685,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x57f11d6702d373d9470e1d55e0ca07504e534f89",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000139318280291355,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x1dc1e2029a64d93e987c464a75f2b6771b2ceb2f",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000157666923376893,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xc27306625a2a7b4f25f6cab0ee45ceda163d991c",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000149299558313764,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x22c46762ef863014efaa1859b1495c2fdef1fbcb",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000158110083659724,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xef2a16766cf8a24c34f236a527804304e4e68eea",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000140297214369196,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xf8ba6c364d4fe7b22bbac92a8922fdf93c8e07da",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.05299664,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xf64ed77e4595c2760a1ec0f761ac32e381968980",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000148879765112047,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xf1c4168edad5b9a258d6f82b22eda04812484325",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000149089765112047,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x9115a42f09f1415df8d63c0dc0c0ae64f079f81c",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000148785221731751,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x1151133e7fd8813c2e897b4e778ee4aa6d0fdadb",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000139782632740943,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x71ec140741425bd94410a5e6674f1986d78be08a",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00014995332060452,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x9d1119937d975aa0ee1077c8a271952bd6bdd346",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000149510909759851,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x447cf8df2db020240d7d48d17fb7e54d51a6f68a",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.01246586,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x461a93a0ad22bb679bc81e777c0941591fb1c5ae",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000158096588487074,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x7182b81cdb52af3a1e53e554ac53ef37445775e5",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0071351095081137,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x0b491b86a6ba533d43d1e6d44003eb4f9e41b378",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000157824989330312,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xe699941129364eb87381f89eefc827f0fd7be967",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000148582317461744,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xdd4b7b35ee25d21548e6d99911ecc5689c80ff65",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000166350733509244,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xfd5f5898966b0f8cb4a8aeb523002af26c6eb1c5",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000166253829413371,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x4f334a21d7fc2e230d69436aec66a88b9e94310b",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000175110431253127,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xcb0f194bbae66ae91adbdc50debafb6ea27a15e6",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000166321799387491,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x40c30b69f3440bf4819669b8a430ddf503569626",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00016633644865092,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x6f94dc630af5fcc0cff1fc79d5a7ba7e348bdb31",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00530844,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xd922f4bd2a9b8d9681ac03a7bf69c9a33df864b7",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0007243350526944,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x5161cea4f011b2c23c01b9393ffe6301403ac8d8",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.02999643,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x649cd76ce6fd36bbbeb1f23bb70313aa87ccd004",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000751558597595112,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xb51c0c283c3ab6aad446bb944e6414161c19a6ef",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00072433644865092,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xf25e8a935e3552563b57ac7c2b0d127301c73cf6",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000697669715725144,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x60189200b45b7fac29c43a75476127e658f26462",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000165598692642024,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x3eab0d56130d4e191c62ff4572148594a3f85125",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000166951038832325,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x4a6d7729ab2120e8cac49a12679413d981885317",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.01309664,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xf809596bf469f56995a579f2c1b7d34cfab9af36",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00015754508542288,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x050732e93c55b0454cdf818036fd3adcdb7f6808",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000265050562612993,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xbb62c095e342c9865b707f2b45f58ba5437fec28",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000264840562612993,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x9ebdc9942bf162545a3c502d8b8617de98c6bc05",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.99999643,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xef01426b103cca9a2ff978df0b8d3065fa3657bc",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00017457279325493,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xb3e0b02f017600e398c1980d750c8b89153b3edb",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.06299643,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xc7818375742026be53d060bc22a3fac2a6f5d837",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000620200793245652,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xce9e4ca1ff1a1c72eeb70ca3d6351d0d311eb079",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.01499643,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x87c72a6dd29a5dce1a9d5db524851e5a37fbe374",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.04199643,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xc58e5c563a4001c52f29a8f58e9bd60f201161b9",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000209880405193709,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xd55b5203dd558c0f3dbdc8ef95e539ec4cf04b5d",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.05519601,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x4ac08c658e6a47de203d94681fca219b2c4d4c9d",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000254002033637737,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x86c5f24f3f7e56010b26c9f3e505722e9a4a9112",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000218148937609162,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x1f8a4ec04de507274e4b7e03d894da13d056fa16",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000253905605808896,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x389410dddf6112af0eba0f0ab39dbc64af9a9229",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00020904998121784,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xe199ab59f6d1023341ab2661fae42f2d78f65ef7",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000245048155606768,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xde874f4f2441204020e530e52d579566a529202b",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000236048155606768,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x02b38c17e388be66f5ef51463a2f70d942c4406f",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000251835756730868,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x631780ab84acd395d8bc9ba0413cc1226a6b1ebd",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000244242676170026,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x11cf2ed03645609c9b9913a4b14ff19eb295fbed",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000242819929272278,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x5cd186116db792f2f444cb92621d5d2162be79ac",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.09999433,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xb5a73b29ab212d9773707c7a37adcb77337d2a60",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.01289412,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x0869040317c19937656af95b9b3421a1e587dd5f",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00026899965018267,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x3f78ba28c2dc67fbdaa191b93a8ec703e90e241b",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.11026282,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x02dae14e05dedc1aea333f5ac6aa2ca6def4f06a",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.05392025663260445,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x2879e7d416c10e8dba80e1ca5c6c68306f1cad64",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000258976424697704,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xce373d30ef482446168271773c163689cb1b0d66",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.023032788490485536,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x3862f1e2ca2899fc2886e2c55c3cb2c1a6215bec",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000258246916700888,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xf9a8e94d02c6f9c5c92d666d48916218270dd364",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000259126955426832,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xd441590efb0aa62a69cc06ab1b2e71ab34c7332f",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0719937,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xe44469b27d64b33f79d2adb6e523dfe746c324f4",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00017747196639152,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xe001c6bdb775119613465cb9ca882e8896792de0",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.13054112899012635,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xcf2561287973eaca9a4a351a709c5f296309781a",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.4999937,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x27444488396276fdec21ec1b0e1f6e2abb0ce14b",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00018620779729824,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xdb274f46071331d594987781088adf688be3f4fa",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000186122163048191,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x88b3eb0a3a80ff6ecf4da9c24ab94ef807365505",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000178773417418592,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xb4ab2cdabfdd97dd93b98eed6f8822c24f8957a7",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000216488956017041,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x244b2d97fcd2025ba3736b732702496a0c0c035e",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000180910583119253,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xf7655c74c108a9fa9200c0a49b1d2a596515083d",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00026752425535108,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x3584a40dd6ac1e82dbb647264d73040485bf9be7",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000258310763651891,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x061de2d0a1ad3f94e84fb5c0b6a4686d8ede7b3b",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00020030753001996,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x0e6e8d8a41045afca1e3d85a0cba7d1be1983b04",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0001761905961024,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0x196f81961ec35f6b949c3686e0a6e5dcec2771d2",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000208534272644049,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        },
+        {
+          "sender": "0xf1bbd470bd0de12312bf4ae997d79d9a6704b888",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000168685204518072,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM \u2014 API error",
+          "recommended_action": "Retry analysis."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 1445,
-    "unique_senders": 1062,
+    "total_findings": 1572,
+    "unique_senders": 1189,
     "highest_score": 660,
-    "critical_count": 694,
+    "critical_count": 716,
     "high_count": 101,
-    "first_scan": "2026-03-22T20:51:16.422022+00:00",
-    "last_scan": "2026-10-27T19:00:40.754154+00:00"
+    "first_scan": "2026-03-22T21:23:23.260647+00:00",
+    "last_scan": "2026-10-27T20:21:19.202468+00:00"
   }
 }
