@@ -13,17 +13,17 @@ permissions:
 jobs:
   roast:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     concurrency:
       group: aml-roaster-scheduled-scan
       cancel-in-progress: false
 
     steps:
       - name: 📥 Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: 🐍 Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.11'
           cache: 'pip'

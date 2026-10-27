@@ -303,7 +303,17 @@ THRESHOLDS = {
 # doesn't miss recent deposits that happened before the first cron run.
 BACKFILL_BLOCKS = 50_000
 MAX_WATCHED_PER_RUN = int(os.environ.get("MAX_WATCHED_PER_RUN", "8"))
+# Overall scan time budget in seconds. scan_recent_blocks() checks elapsed
+# time before starting each watched address; once the budget is spent it
+# stops starting new addresses and proceeds to report writing with whatever
+# completed, so a slow run lands a partial report instead of being killed
+# by the GitHub Actions job timeout with nothing saved.
+TIME_BUDGET_SECONDS = int(os.environ.get("ROASTER_TIME_BUDGET_SECONDS", "900"))
 SCAN_STATE_PATH = Path(__file__).parent / "reports" / "scan_state.json"
+
+# Set by scan_recent_blocks() when a run stops early on the time budget and
+# read by generate_report() to add the partial-run note. None = full run.
+_last_partial_scan = None
 
 
 def load_scan_state() -> dict:
@@ -1256,6 +1266,9 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     Default 200 blocks (~25-30 min) to match the 30-min cron interval.
     Scans BOTH native ETH transfers AND ERC-20 token transfers.
     """
+    global _last_partial_scan
+    _last_partial_scan = None
+    scan_t0 = time.monotonic()
     findings = []
     _oracle_cache.clear()  # fresh oracle lookups each scan
     _first_inbound_cache.clear()  # fresh first-inbound lookups each scan
@@ -1282,7 +1295,19 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     print(f"[SCAN] Watched batch: {batch_size}/{len(watched_items)} addresses from index {start_index}")
 
     # ── Strategy 1: Check ETH + token transactions TO watched addresses ──
-    for address, addr_info in selected_items:
+    partial = False
+    deferred_items = []
+    for item_index, (address, addr_info) in enumerate(selected_items):
+        if time.monotonic() - scan_t0 >= TIME_BUDGET_SECONDS:
+            # Budget spent: stop starting new addresses and go to report
+            # writing with what this run completed. Unstarted addresses
+            # keep their last_scanned state, so they catch up next run.
+            deferred_items = selected_items[item_index:]
+            partial = True
+            print(f"[SCAN] Time budget ({TIME_BUDGET_SECONDS}s) reached after "
+                  f"{item_index}/{batch_size} addresses, deferring "
+                  f"{len(deferred_items)} to the next run")
+            break
         label = addr_info["label"]
         print(f"[SCAN] Checking {label} ({address[:10]}...)")
 
@@ -1477,7 +1502,9 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                 })
 
     # ── Strategy 2: High-value block scanning ──
-    for offset in range(min(num_blocks, 5)):  # Only scan 5 blocks for high-value
+    # Skipped on a partial run: the time budget is already spent, so the
+    # scan goes straight to report writing with what Strategy 1 completed.
+    for offset in range(0 if partial else min(num_blocks, 5)):  # Only scan 5 blocks for high-value
         block_num = latest - offset
         txs = get_block_transactions(block_num)
         time.sleep(0.5)
@@ -1530,7 +1557,16 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
 
     # Persist per-address scan progress so new additions backfill once and
     # resume from where we left off on subsequent runs.
-    next_watch_index = (start_index + batch_size) % len(watched_items)
+    # On a partial run, resume at the first deferred address rather than
+    # skipping past the whole batch.
+    next_watch_index = (start_index + batch_size - len(deferred_items)) % len(watched_items)
+    if partial:
+        _last_partial_scan = {
+            "budget_seconds": TIME_BUDGET_SECONDS,
+            "scanned_count": batch_size - len(deferred_items),
+            "batch_size": batch_size,
+            "deferred": [(addr, info["label"]) for addr, info in deferred_items],
+        }
     save_scan_state({
         "last_scanned_block": last_scanned,
         "first_seen": first_seen,
@@ -1665,6 +1701,18 @@ def generate_report(findings: list, eth_price: float, scan_meta: dict) -> str:
 **{timestamp}** · Ethereum Mainnet · ETH ${eth_price:,.2f}
 **Blocks:** {scan_meta.get('block_range', 'N/A')} · **Watched Addresses:** {len(WATCHED_ADDRESSES)} · **Detection Rules:** 13
 **Engine:** NEXUS AML v2 — 94.9% detection rate
+
+---
+
+"""
+
+    if _last_partial_scan:
+        deferred_list = ", ".join(
+            f"{label} (`{addr}`)" for addr, label in _last_partial_scan["deferred"]
+        )
+        report += f"""## ⚠️ Partial Run
+
+This scan reached its {_last_partial_scan['budget_seconds']}s time budget and stopped early so a report could still be written. {_last_partial_scan['scanned_count']} of {_last_partial_scan['batch_size']} watched addresses in this batch were scanned. The rest were deferred to the next run: {deferred_list}.
 
 ---
 
