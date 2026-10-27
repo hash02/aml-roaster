@@ -54,4 +54,12 @@ jobs:
           git add reports/
           TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
           git commit -m "🔥 Roaster report — ${TIMESTAMP}"
-          git push
+          # Other workflows (feed sync) and manual pushes can land on main
+          # while a scan runs. Rebase onto the latest main before pushing,
+          # with retries, so a finished scan is never lost to a push race.
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            if git push; then break; fi
+            if [ "$attempt" = "3" ]; then exit 1; fi
+            sleep 5
+          done
