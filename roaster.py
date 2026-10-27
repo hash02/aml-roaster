@@ -1662,6 +1662,7 @@ IMPORTANT WRITING RULES:
 - In the "sar_narrative" field: this IS for compliance professionals — use proper AML terminology and cite rule names.
 - Keep the risk_verdict to ONE clear sentence.
 - Keep recommended_action to 1-2 practical sentences.
+- Describe pattern risk only. Never state or imply that money laundering or any other crime is proven. A flag is a reason for human review, not a finding of guilt.
 
 Generate these 5 fields:
 
