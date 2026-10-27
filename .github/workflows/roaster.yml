@@ -13,7 +13,7 @@ permissions:
 jobs:
   roast:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 60
     concurrency:
       group: aml-roaster-scheduled-scan
       cancel-in-progress: false
