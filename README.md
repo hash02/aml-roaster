@@ -12,7 +12,7 @@ Automated Ethereum transaction monitor that catches suspicious on-chain activity
 
 ## What It Does
 
-Every 30 minutes, this agent:
+Every 6 hours, this agent:
 1. Pulls live Ethereum blockchain data from Etherscan
 2. Monitors known mixer addresses (Tornado Cash, eXch, Lazarus Group wallets)
 3. Flags suspicious patterns: structuring, rapid-fire deposits, high-value transfers
@@ -39,7 +39,7 @@ Auto-generated reports land in [`reports/`](./reports/). Each report includes:
 ## Setup
 
 ### GitHub Actions (Automated)
-Already configured — runs every 30 minutes via `.github/workflows/roaster.yml`.
+Already configured — runs every 6 hours via `.github/workflows/roaster.yml`.
 
 **Required Secrets:**
 - `GROQ_API_KEY` — Free API key from [groq.com](https://groq.com)
