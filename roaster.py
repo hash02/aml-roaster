@@ -1705,7 +1705,6 @@ Respond in this EXACT JSON format (no markdown, no code blocks, no backticks):
             messages=[{"role": "user", "content": prompt}],
             temperature=0.8,
             max_tokens=1600,
-            response_format={"type": "json_object"},
         )
         raw = response.choices[0].message.content.strip()
         if raw.startswith("```"):
