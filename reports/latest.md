@@ -1,29 +1,35 @@
 # 🔥 AML Roaster Report
-**2026-07-04 15:41 UTC** · Ethereum Mainnet · ETH $1,559.56
-**Blocks:** 25459918 — 25460117 · **Watched Addresses:** 49 · **Detection Rules:** 13
+**2026-10-27 18:50 UTC** · Ethereum Mainnet · ETH $2,341.89
+**Blocks:** 26285677 — 26285876 · **Watched Addresses:** 49 · **Detection Rules:** 13
 **Engine:** NEXUS AML v2 — 94.9% detection rate
 
 ---
 
-## Finding #1: HIGH — Score 130
+## ⚠️ Partial Run
+
+This scan reached its 900s time budget and stopped early so a report could still be written. 5 of 8 watched addresses in this batch were scanned. The rest were deferred to the next run: FixedFloat 1 (`0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f`), Stargate Router (`0x8731d54e9d02c286767d56ac03e8037c07e01e98`), Stargate ETH Router 2 (`0x150f94b44927f078737562f0fcf3c95c01cc2376`).
+
+---
+
+## Finding #1: CRITICAL — Score 236
 
 | | |
 |---|---|
-| **Sender** | `0xb419c2867ab3cbc78921660cb95150d95a94ce86` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **58** token transfers totaling **$157,356** (371 USDC, 380 USDC, 9,009 USDC, 9,010 USDC, 2,003 USDC) |
-| **Blocks** | 25416125-25460010 |
+| **Sender** | `0xb596bca97eb27064be648f4c6ed7d0a71a24b8dd` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **11.0000 ETH** ($25,761) |
+| **Blocks** | 26279021-26279021 |
 
 ### 💬 What Happened
-Someone sent a large amount of money, $157,356 to be exact, in a series of 58 transactions to a place that helps mix and hide the origin of funds, kind of like trying to erase your footprints in the sand. This is like walking into a known money laundering front and expecting nobody to notice. The money was sent in a way that tries to avoid detection, with some transactions being round numbers, which is a common trick used to try to sneak money past the authorities.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 236.
 
 ### 🔥 The Roast
-This guy scored 130 on the stablecoin mixing alert, which means they're basically waving a big red flag saying 'I'm trying to launder money'. They sent 58 transactions to a Privacy Pools entrypoint, which is like a big mixing bowl for dirty money. And to make matters worse, they used round numbers, like $9,009 and $9,010, which is a classic sign of denomination layering (meaning they're trying to break up large amounts of money into smaller, less suspicious pieces). It's like they took a class on how to launder money and got an A+ in 'being obvious'. Oh, and scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big neon sign that says 'I'm a bad guy'
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the large total value transferred, the use of a mixing service, and the interaction with a sanctioned entity all contribute to a high risk of money laundering activity.**
+**CRITICAL — API error**
 
-Immediately freeze the sender's account and conduct a thorough review of their transaction history to identify any other potential suspicious activity. Additionally, file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report the suspected money laundering activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -31,40 +37,43 @@ Immediately freeze the sender's account and conduct a thorough review of their t
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 130):
-- **stablecoin_mixing** (+130) — 58 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $157,356 total (USDC) from 1 unique sender(s) — 6 round-number amount(s) (denomination layering)
+**Rules Triggered** (4 rules, composite score: 236):
+- **novel_wallet_dump** (+81) — Wallet is 0 days old, moving 11.0000 ETH — classic burner pattern
+- **high_value** (+30) — High-value transfer: 11.0000 ETH ($25,766)
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **exit_rush** (+40) — Wallet balance near zero (0.000001 ETH) after moving 11.0000 ETH — funds fully drained (exit rush)
 
 **SAR Narrative** *(for compliance teams)*:
-The subject transaction involves 58 stablecoin transfers totaling $157,356 to a Privacy Pools entrypoint, which is a known cryptocurrency mixing service. This activity triggers a stablecoin_mixing alert, as defined in rule 31 CFR 1020.210, and is also indicative of possible structuring, as outlined in 31 CFR 103.11. Furthermore, the use of round-number transactions and the large total value transferred suggest potential money laundering activity, as described in 18 USC 1956. The sender's interaction with a sanctioned entity, as listed on the OFAC SDN list, raises significant concerns regarding the legitimacy of these transactions.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #2: HIGH — Score 130
+## Finding #2: CRITICAL — Score 191
 
 | | |
 |---|---|
-| **Sender** | `0xe859c0bd25f260baee534fb52e307d3b64d24572` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **58** token transfers totaling **$327,292** (15,000 USDT, 2,187 USDT, 3,084 USDT, 11,820 USDT, 24,111 USDT) |
-| **Blocks** | 25414031-25455795 |
+| **Sender** | `0x6ccd7fb33b3c31c516776edf36eb0eca0b734588` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **3.5000 ETH** ($8,197) |
+| **Blocks** | 26279788-26279788 |
 
 ### 💬 What Happened
-Imagine walking into a shady money laundering front and handing over almost $330,000 in cash, but instead of cash, it's a type of digital money called stablecoin. This is basically what happened here, as someone sent a large amount of stablecoin to a place that helps mix and hide the source of the funds, kind of like a digital washing machine for money. The sender made 58 separate transactions, which is like making 58 trips to the money laundering front, each time handing over a different amount of money.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 191.
 
 ### 🔥 The Roast
-This sender scored 130 on the stablecoin mixing rule, which means they're basically screaming 'I'm laundering money' by sending $327,292 to a Privacy Pools entrypoint, a place that's like a digital laundry service for dirty cash. They even used round-number amounts, like $15,000, which is like wearing a neon sign saying 'I'm trying to hide something'. And let's not forget, this entrypoint is linked to Tornado Cash, which is like the ultimate money laundering superhighway, sanctioned by the U.S. Treasury for helping North Korea's hackers. This sender is like a laundry enthusiast, doing 58 loads of dirty money, and expecting nobody to notice.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the large number of transactions, combined with the use of a sanctioned mixing service and round-number amounts, indicates a high risk of money laundering activity.**
+**CRITICAL — API error**
 
-Immediately flag this activity for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, monitor the sender wallet for any future suspicious activity and consider blocking or restricting transactions to and from this wallet.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -72,40 +81,42 @@ Immediately flag this activity for further review and consider filing a Suspicio
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 130):
-- **stablecoin_mixing** (+130) — 58 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $327,292 total (USDT) from 1 unique sender(s) — 5 round-number amount(s) (denomination layering)
+**Rules Triggered** (3 rules, composite score: 191):
+- **novel_wallet_dump** (+66) — Wallet is 0 days old, moving 3.5000 ETH — classic burner pattern
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **exit_rush** (+40) — Wallet balance near zero (0.000000 ETH) after moving 3.5000 ETH — funds fully drained (exit rush)
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction pattern exhibited by the sender wallet, involving 58 stablecoin transfers to a Privacy Pools entrypoint, totaling $327,292, is indicative of potential money laundering activity, triggering the stablecoin_mixing rule. The use of round-number amounts and the involvement of a sanctioned entity, Tornado Cash, further supports this suspicion. This activity may be in violation of the Bank Secrecy Act (BSA) and the USA PATRIOT Act, specifically 31 CFR 1020.210, which requires reporting of suspicious transactions.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #3: HIGH — Score 110
+## Finding #3: CRITICAL — Score 191
 
 | | |
 |---|---|
-| **Sender** | `0xac9f360ae85469b27aeddeafc579ef2d052ad405` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **284** token transfers totaling **$14,029** (43 WETH, 2 WETH, 0 WETH, 0 WETH, 3 WETH) |
-| **Blocks** | 25410647-25460083 |
+| **Sender** | `0xa96513e5e814a16a12ea210daeb02f377d326b11` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **3.5000 ETH** ($8,197) |
+| **Blocks** | 26279763-26279763 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange store that's known for helping criminals launder their dirty cash, and you see someone making multiple transactions to a mysterious recipient. That's basically what happened here, but instead of a physical store, it's a cryptocurrency transaction. The sender is moving a significant amount of money to a recipient that uses a service called Railgun Relay, which is like a secure messaging system, but in this context, it's raising some red flags.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 191.
 
 ### 🔥 The Roast
-This sender scored 110 on the stablecoin mixing rule, which means they're trying to mix their stablecoins (think of it like a type of cryptocurrency that's tied to the value of a real currency, like the US dollar) with other people's money to hide the origin of the funds. It's like they're trying to put their dirty laundry in a washing machine with everyone else's clean clothes. They made four separate transactions to Railgun Relay, totaling $11,502, which is a pretty big deal. And let's be real, if you're using a service that's associated with Tornado Cash, a sanctioned crypto mixing service, you're basically waving a big red flag saying 'hey, I might be a criminal'.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the sender's transactions exhibit a high risk of money laundering due to the large amount of stablecoins being mixed with other funds through Railgun Relay, a service linked to a sanctioned entity.**
+**CRITICAL — API error**
 
-It's recommended that this transaction be flagged for further review and investigation, and that the sender's account be monitored for any additional suspicious activity. Additionally, it may be necessary to file a Suspicious Activity Report (SAR) with FinCEN to comply with regulatory requirements.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -113,40 +124,42 @@ It's recommended that this transaction be flagged for further review and investi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 4 stablecoin transfer(s) to Railgun Relay: $11,502 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (3 rules, composite score: 191):
+- **novel_wallet_dump** (+66) — Wallet is 0 days old, moving 3.5000 ETH — classic burner pattern
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **exit_rush** (+40) — Wallet balance near zero (0.000000 ETH) after moving 3.5000 ETH — funds fully drained (exit rush)
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction pattern exhibited by the sender is indicative of potential money laundering activity, as evidenced by the multiple stablecoin transfers to Railgun Relay, totaling $11,502, which triggered a score of 110 on the stablecoin mixing rule. This behavior is consistent with the Financial Crimes Enforcement Network (FinCEN) guidelines for suspicious activity reporting, specifically 31 CFR 1020.320, and may be in violation of the Bank Secrecy Act (BSA). The sender's interactions with Railgun Relay, a service associated with Tornado Cash, a sanctioned entity, further heighten the suspicious nature of these transactions.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #4: HIGH — Score 110
+## Finding #4: CRITICAL — Score 190
 
 | | |
 |---|---|
-| **Sender** | `0x5fcaab24cfd2dc52fcb6c265513c3f99cbd459a8` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **3** token transfers totaling **$113,922** (60,126 USDT, 26,877 USDT, 26,920 USDT) |
-| **Blocks** | 25417888-25460013 |
+| **Sender** | `0x34596f313c0209b10a26f50c8ec84d5475c897d0` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **3.0000 ETH** ($7,026) |
+| **Blocks** | 26285074-26285074 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange store that's been banned by the government, and you're trying to exchange a large sum of money without anyone noticing. That's basically what happened here - someone sent a big chunk of money, $113,922 to be exact, to a place called Railgun Relay, which is like a middleman that helps move money around without being traced. It's like trying to erase your footprints in the sand, but in this case, the 'sand' is the internet, and the 'footprints' are the money transactions.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 190.
 
 ### 🔥 The Roast
-This guy scored 110 on the stablecoin mixing alert (meaning they're trying to mix their money with other people's money to hide where it came from, kind of like a big cocktail party for cash). They sent not one, not two, but three big chunks of money to Railgun Relay, which is basically a front for Tornado Cash, a crypto mixing service that's been sanctioned by the U.S. Treasury (think of it like a big no-no list). That's like walking into a known money laundering front and expecting to get away with it. They must think they're some kind of crypto ninja, but really, they're just a big red flag waving in the wind.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the sender's interactions with a sanctioned cryptocurrency mixing service, combined with the large value of the transactions, indicate a high risk of money laundering activity.**
+**CRITICAL — API error**
 
-Immediately flag this transaction and the sender's wallet for further review, and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report potential money laundering activity. Additionally, monitor the sender's wallet for any future suspicious activity and consider blocking any further transactions to or from this wallet.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -154,40 +167,42 @@ Immediately flag this transaction and the sender's wallet for further review, an
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000003 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 3 stablecoin transfer(s) to Railgun Relay: $113,922 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (3 rules, composite score: 190):
+- **novel_wallet_dump** (+65) — Wallet is 0 days old, moving 3.0000 ETH — classic burner pattern
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **exit_rush** (+40) — Wallet balance near zero (0.000003 ETH) after moving 3.0000 ETH — funds fully drained (exit rush)
 
 **SAR Narrative** *(for compliance teams)*:
-The sender's wallet interacted with Railgun Relay, a known cryptocurrency mixing service, in a pattern consistent with potential money laundering activity, triggering a high-risk alert under the Bank Secrecy Act (BSA) and the USA PATRIOT Act. The transactions, totaling $113,922 in stablecoin (USDT), were flagged for potential violation of 31 CFR 1020.210 (Reports by banks of suspicious transactions) and 31 CFR 1010.310 (Reports by money transmitters of suspicious transactions). The sender's use of a sanctioned service, Tornado Cash, further supports the suspicion of illicit activity.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #5: HIGH — Score 110
+## Finding #5: CRITICAL — Score 189
 
 | | |
 |---|---|
-| **Sender** | `0x32a17f502218cbfc6d3357d15592290fdd0f6d64` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$18,653** (18,653 USDT) |
-| **Blocks** | 25460011-25460011 |
+| **Sender** | `0x106723ccb5832461821c0be00fbc01a892dfa399` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **2.1000 ETH** ($4,918) |
+| **Blocks** | 26285820-26285820 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange store that's known for helping criminals launder their dirty cash, and you give them a large sum of money to mix it up so it can't be traced back to you. That's basically what happened here, but instead of a physical store, it's a crypto transaction. Someone sent a significant amount of money, $18,653, to a service called Railgun Relay, which is like a digital version of that shady money exchange store.
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 189.
 
 ### 🔥 The Roast
-This sender just scored 110 on the stablecoin mixing rule (meaning they're trying to hide the origin of their funds by mixing it with other people's money, like throwing a handful of cash into a communal pot and hoping no one notices where it came from). They're essentially trying to erase their financial footprint, which is like trying to sneak into a crime scene without leaving any evidence behind. And to make matters worse, they're using a service that's been linked to some pretty shady characters, like the digital equivalent of hanging out with a known gang. They also scored high on the suspicious activity list, which is like having a big red flag waving over their head saying 'hey, look at me, I'm trying to launder some money!'
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**The risk verdict is HIGH because the transaction involves a large sum of money being sent to a service that's similar to a known money laundering operation, indicating a potential attempt to conceal the origin of funds.**
+**CRITICAL — API error**
 
-It's recommended to immediately flag this transaction for further review and consider filing a suspicious activity report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, the sender's account should be subject to enhanced due diligence to determine the source of the funds and the purpose of the transaction.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -195,40 +210,42 @@ It's recommended to immediately flag this transaction for further review and con
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $18,653 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (3 rules, composite score: 189):
+- **novel_wallet_dump** (+64) — Wallet is 0 days old, moving 2.1000 ETH — classic burner pattern
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+- **exit_rush** (+40) — Wallet balance near zero (0.000000 ETH) after moving 2.1000 ETH — funds fully drained (exit rush)
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction triggered a high-risk alert due to the involvement of Railgun Relay, a service similar to Tornado Cash, which was sanctioned by OFAC (Office of Foreign Assets Control) for facilitating money laundering activities. The stablecoin mixing rule (31 CFR 1010.210) was also triggered, indicating a potential attempt to conceal the origin of funds. Furthermore, the transaction meets the criteria for a suspicious activity report (SAR) under 31 CFR 1020.320, as it involves a large sum of money being sent to a high-risk service. The composite score of 110 from the AML engine also supports the determination of high-risk activity.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #6: HIGH — Score 110
+## Finding #6: CRITICAL — Score 189
 
 | | |
 |---|---|
-| **Sender** | `0xf5956e6d3216734a9ae12608c01a007fa8481919` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$32,474** (32,474 USDC) |
-| **Blocks** | 25458774-25458774 |
+| **Sender** | `0x4d60558a34a90f08f170b36a02690b47f2e4997a` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **2.1830 ETH** ($5,112) |
+| **Blocks** | 26285817-26285817 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange shop that's known for helping bad guys launder their dirty cash, and you put in a huge amount of money, $32,474 to be exact, into this shop. That's basically what happened here, but instead of a physical shop, it's a crypto transaction to a place called Railgun Relay, which is like a digital version of that shady shop. This transaction is like a big red flag waving in the air because it involves a type of cryptocurrency that's designed to be stable, like the US dollar, but is being used in a way that's trying to hide its origins.
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 189.
 
 ### 🔥 The Roast
-This sender just scored a whopping 110 on the stablecoin_mixing rule (meaning they're trying to mix their money with others to hide where it came from, like throwing a handful of cash into a crowd and hoping no one notices whose it is). They sent a massive $32,474 in stablecoin to Railgun Relay, which is like putting a 'I'm probably a money launderer' sign on their forehead. And to make matters worse, this transaction is basically a one-way ticket to getting on the U.S. Treasury's bad side, thanks to Tornado Cash being sanctioned by OFAC (that's the Office of Foreign Assets Control, which is like the money police). This is like trying to sneak into a high-security building through a known entrance for thieves.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the large, single transaction to a potentially anonymizing service like Railgun Relay poses a significant risk of money laundering.**
+**CRITICAL — API error**
 
-Immediately freeze any associated assets and conduct a thorough investigation into the transaction and the entities involved, including reviewing the sender's wallet profile and transaction history to identify any other potentially suspicious activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -236,40 +253,42 @@ Immediately freeze any associated assets and conduct a thorough investigation in
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $32,474 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (3 rules, composite score: 189):
+- **novel_wallet_dump** (+64) — Wallet is 0 days old, moving 2.1830 ETH — classic burner pattern
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+- **exit_rush** (+40) — Wallet balance near zero (0.000000 ETH) after moving 2.1830 ETH — funds fully drained (exit rush)
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction in question has been flagged for potential money laundering activity due to its involvement with Railgun Relay, a service that may be utilized for anonymizing cryptocurrency transactions. The stablecoin_mixing rule score of 110 indicates a high risk of money laundering, as it involves a large transfer of stablecoin, $32,474 USDC, which may be an attempt to conceal the origin of the funds. This activity may be in violation of OFAC regulations, specifically 31 CFR Part 544, which prohibits transactions with sanctioned entities, such as Tornado Cash. Further investigation is warranted to determine the legitimacy of this transaction.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #7: HIGH — Score 110
+## Finding #7: CRITICAL — Score 187
 
 | | |
 |---|---|
-| **Sender** | `0xff26d2a392678eff91cc949dbe8e350ee86bb361` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$22,199** (22,199 USDT) |
-| **Blocks** | 25457663-25457663 |
+| **Sender** | `0x0aeba094e3684a338af4e3d4d0d3cb0919f78166` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **1.2033 ETH** ($2,818) |
+| **Blocks** | 26277042-26277042 |
 
 ### 💬 What Happened
-This is like walking into a shady alley and handing over a briefcase full of cash to a stranger, without knowing what they'll do with it. Someone sent a large amount of money, $22,199, to a service called Railgun Relay, which is like a middleman that helps move money around without being easily tracked. It's similar to using a money laundering service, which is a big red flag.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 187.
 
 ### 🔥 The Roast
-Wow, this sender is either very trusting or very shady, because they just sent a huge chunk of cash to Railgun Relay, which is basically a crypto mixing service (think of it like a washing machine for dirty money). They scored 110 on the stablecoin mixing rule (meaning they're trying to mix and hide the origin of their stablecoin, which is a type of cryptocurrency that's pegged to the value of a real currency, like the US dollar). And to make matters worse, this transaction has all the hallmarks of a laundering scheme, which is like a big neon sign saying 'hey, I'm trying to hide something'.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the large, unexplained transfer of funds to a crypto mixing service is a major red flag for money laundering and other illicit activities.**
+**CRITICAL — API error**
 
-We recommend immediately flagging this transaction for further review and potentially filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). The sender's wallet and any associated accounts should be subject to enhanced due diligence and monitoring to prevent potential future illicit activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -277,40 +296,42 @@ We recommend immediately flagging this transaction for further review and potent
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $22,199 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (3 rules, composite score: 187):
+- **novel_wallet_dump** (+62) — Wallet is 0 days old, moving 1.2033 ETH — classic burner pattern
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **exit_rush** (+40) — Wallet balance near zero (0.000002 ETH) after moving 1.2033 ETH — funds fully drained (exit rush)
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction in question triggers the stablecoin_mixing rule, as it involves a large transfer of USDT ($22,199) to a Railgun Relay address, which is a known crypto mixing service. This activity is suspicious under the Bank Secrecy Act (BSA) and may be subject to reporting under 31 CFR 1020.320. The sender's wallet profile is largely unknown, which adds to the suspicious nature of the transaction. The composite score of 110 indicates a high risk of money laundering or other illicit activity.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #8: HIGH — Score 110
+## Finding #8: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x50fce03f069508a7ad6fec89b7d7eee45dee3e80` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$229,974** (229,761 USDC, 213 USDC) |
-| **Blocks** | 25456603-25457601 |
+| **Sender** | `0x8849cb6f0f93f41ce16e9dd10b35ed5e2ce68ea8` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0446 ETH** ($104) |
+| **Blocks** | 26285458-26285458 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange shop that's known for helping criminals launder their dirty money, and then sending almost $230,000 to someone who uses a secret identity. That's basically what happened here, but instead of cash, it's a type of digital money called stablecoin, and instead of a physical shop, it's a digital service called Railgun Relay. The person sending the money didn't leave any trail about who they are or where the money came from, which raises a lot of red flags.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-This sender scored a whopping 110 on the stablecoin mixing score, which is like getting a gold medal in money laundering Olympics. They sent not one, but two huge chunks of stablecoin, totaling $229,974, to Railgun Relay, which is like a secret agent for your money - it helps hide where it came from and where it's going. And the cherry on top? This is reminiscent of interactions with Tornado Cash, a crypto mixing service that's literally on the U.S. Treasury's sanctions blacklist for helping bad guys like North Korea's Lazarus Group, which means this sender might be trying to pull off something very shady.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the large, unexplained transactions to a mixing service strongly suggest an attempt to launder illicit funds.**
+**CRITICAL — API error**
 
-File a Suspicious Activity Report (SAR) with FinCEN as soon as possible, and consider freezing the assets to prevent further potential laundering. It's also crucial to investigate the sender's identity and the source of the funds to determine if they are linked to any illicit activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -318,40 +339,41 @@ File a Suspicious Activity Report (SAR) with FinCEN as soon as possible, and con
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000004 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Railgun Relay: $229,974 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 14 senders depositing similar amounts (~0.046 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction pattern exhibits characteristics of suspicious activity, specifically a high-risk stablecoin mixing behavior, as evidenced by the stablecoin mixing score of 110. This activity may be indicative of an attempt to launder proceeds of illicit activity, in potential violation of 31 CFR 1020.210 and 31 CFR 1023.210. The use of Railgun Relay, a service that obscures transaction details, further heightens the suspicion. Additionally, the transaction amount exceeds the $10,000 threshold, triggering a reporting requirement under 31 CFR 1020.320.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #9: HIGH — Score 110
+## Finding #9: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x3599a8d3a65cd4fb62d90bc453f922af3a58e9f2` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$17,482** (17,482 USDT) |
-| **Blocks** | 25457484-25457484 |
+| **Sender** | `0x77070a9e74b2155ac1ca681a11714e35b812551f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0410 ETH** ($96) |
+| **Blocks** | 26285144-26285144 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange store that's known for helping bad guys launder their dirty cash, and you hand over a briefcase full of nearly $17,500 in cash. That's basically what happened here, but instead of cash, it was a digital currency called stablecoin, and instead of a physical store, it was a transaction to a place called Railgun Relay, which is like a digital version of that shady store. This transaction is a big red flag because it looks like someone is trying to mix their money to hide where it came from.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-It looks like our sender is trying to play a game of digital launder-ball, scoring a whopping 110 on the stablecoin_mixing rule (meaning they're trying to mix their stablecoin, a type of digital currency that's pegged to the value of the US dollar, to make it hard to track). They sent a nice chunk of change, $17,482, to Railgun Relay, which is like a crypto washing machine for dirty money. And let's be real, if you're using a service that's been sanctioned by the U.S. Treasury, like Tornado Cash, you're basically waving a big flag that says 'I'm up to no good'. This sender is basically asking to be put on the U.S. Treasury's naughty list, right next to the Lazarus Group, a bunch of North Korean hackers who love to steal and launder money.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the large value of the transaction and the use of a mixing service are clear indicators of potential money laundering activity.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It is also recommended to monitor the sender's and receiver's accounts for any additional suspicious activity and to take steps to prevent any further potential money laundering.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -359,40 +381,41 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000004 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $17,482 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 14 senders depositing similar amounts (~0.046 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction in question has triggered a high-risk alert due to a score of 110 on the stablecoin_mixing rule, indicating a potential attempt to launder funds through the use of a mixing service. The sender's transaction to Railgun Relay, a known crypto mixing service, is reminiscent of the Tornado Cash sanctions imposed by OFAC in August 2022, and may be in violation of 31 CFR 501.801. The large value of the transaction, $17,482, and the use of a stablecoin, USDT, further exacerbate the suspicious nature of the activity. This activity may be subject to reporting requirements under the Bank Secrecy Act, 31 USC 5311-5314, and 5318.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #10: HIGH — Score 110
+## Finding #10: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x7b74d68aab42d69615374f08c4e46a48bdff3a6a` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$112,108** (49,853 USDT, 62,255 USDT) |
-| **Blocks** | 25440112-25454452 |
+| **Sender** | `0x5c6a72a93e865703f6316af517a0f155b16d2837` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0475 ETH** ($111) |
+| **Blocks** | 26285096-26285096 |
 
 ### 💬 What Happened
-This is like trying to sneak cash into a casino through a secret door. Someone sent a huge amount of money, $112,108, in two transactions to a place called Railgun Relay, which is like a middleman that helps hide where the money is really going. It's suspicious because this middleman is connected to Tornado Cash, a service that was shut down by the U.S. government for helping bad guys like North Korean hackers launder their stolen money.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-Wow, you scored 110 on the stablecoin mixing rule (meaning you tried to mix and hide a large amount of stablecoin, which is like a digital dollar, through a shady middleman). That's like walking into a known money laundering front and expecting no one to notice. You also sent this money to Railgun Relay, which is basically a cousin of Tornado Cash, a service that's literally on the U.S. Treasury's blacklist (OFAC) for helping launder over $7 billion in dirty money. You must think you're a secret agent or something, but really you're just a suspect in a money laundering investigation.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the transactions involve a large amount of money sent to a middleman connected to a sanctioned service, indicating a high risk of money laundering.**
+**CRITICAL — API error**
 
-Immediately freeze the assets and conduct a thorough investigation into the sender's identity and the purpose of these transactions. File a suspicious activity report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to comply with anti-money laundering regulations.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -400,40 +423,41 @@ Immediately freeze the assets and conduct a thorough investigation into the send
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Railgun Relay: $112,108 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 14 senders depositing similar amounts (~0.046 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transactions in question have been flagged for potential money laundering activity, triggering a high-risk score due to the involvement of stablecoin mixing (violation of 31 CFR 1020.210) and interaction with a sanctioned entity (violation of 31 CFR 501.805). The sender's wallet profile lacks transparency, further raising suspicions. The transactions' large value and proximity to a sanctioned service like Tornado Cash warrant a suspicious activity report (SAR) under the Bank Secrecy Act (BSA).
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #11: HIGH — Score 110
+## Finding #11: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x8fdeca40db1e7583fa2f487da5d05dac238c1922` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$39,298** (39,298 USDT) |
-| **Blocks** | 25454239-25454239 |
+| **Sender** | `0x7c3ed8d8f23b90834d952075dfa7b9482d79edaf` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0602 ETH** ($141) |
+| **Blocks** | 26284841-26284841 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange and handing over nearly $40,000 in cash to someone you don't know, with the hope that it gets mixed up with other people's money so it can't be traced back to you. That's basically what happened here, but instead of cash, it's cryptocurrency, and instead of a physical exchange, it's a digital service called Railgun Relay. Someone sent $39,298 in a type of cryptocurrency called stablecoin to this service, which is like a digital laundry machine for money.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-This sender just scored 110 on the stablecoin mixing rule (meaning they're trying to mix their cryptocurrency with others to hide its origin), which is like getting a gold star in money laundering 101. They sent a whopping $39,298 in stablecoin to Railgun Relay, which is basically a cryptocurrency washing machine. It's like they're trying to outsmart the system, but really they're just waving a big red flag saying 'hey, look at me, I'm trying to hide something!' And let's not forget, this is eerily similar to the Tornado Cash debacle, where the U.S. Treasury sanctioned a crypto mixing service for helping North Korea's Lazarus Group launder billions - this sender is basically following in their footsteps.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the transaction's large value and use of a cryptocurrency mixing service indicate a high risk of money laundering activity.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, monitor the sender's and receiver's wallet addresses for any future suspicious activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -441,40 +465,41 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $39,298 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 14 senders depositing similar amounts (~0.046 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction in question has been flagged for potential money laundering activity, triggering the stablecoin_mixing rule (31 CFR 1020.210). The sender's transaction to Railgun Relay, a known cryptocurrency mixing service, has raised suspicions of attempted layering and integration (FIN-2019-A003). The transaction's large value of $39,298 in stablecoin (USDT) further heightens the risk, as outlined in the Bank Secrecy Act (31 USC 5311-5330).
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #12: HIGH — Score 110
+## Finding #12: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0xcbbb9095200f5c61e655c2be30b514dba35e1dda` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$41,587** (41,587 USDT) |
-| **Blocks** | 25454124-25454124 |
+| **Sender** | `0xa42e9ec3f2a6e36783cda663412bb9fbbc51d02f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0573 ETH** ($134) |
+| **Blocks** | 26284839-26284839 |
 
 ### 💬 What Happened
-Imagine you walked into a bank and tried to deposit a large sum of money, but instead of giving it directly to the bank, you gave it to a shady middleman who promised to mix it with other people's money so it couldn't be traced. That's basically what happened here, but with cryptocurrency. Someone sent a large amount of money, $41,587, to a service called Railgun Relay, which is like a cryptocurrency mixing service, similar to Tornado Cash, which was banned by the U.S. government for helping bad people launder money.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-This sender scored 110 on the stablecoin mixing rule (meaning they're using a service that tries to hide the origin of the funds by mixing them with other people's money), which is like waving a big red flag saying 'hey, I might be trying to launder money!' They sent $41,587 to Railgun Relay, which is basically a cryptocurrency laundry machine. And the best part? They did it just once, like they thought they could get away with it. Newsflash: you can't sneak around that easily, especially when you're dealing with a whopping $41,587. That's like trying to sneak an elephant into a room and hoping no one notices.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the sender's use of a cryptocurrency mixing service and the large amount of money involved pose a significant risk of money laundering activity.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, monitor the sender's wallet for any future suspicious activity and consider blocking any further transactions to or from this wallet.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -482,40 +507,41 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $41,587 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 14 senders depositing similar amounts (~0.046 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction triggered a high-risk alert due to the sender's interaction with Railgun Relay, a cryptocurrency mixing service, which is a potential indicator of money laundering activity, as outlined in the Bank Secrecy Act (BSA) and the USA PATRIOT Act. The sender's wallet profile is largely unknown, adding to the suspicious nature of the transaction. The transaction also scored high on the stablecoin mixing rule, indicating a possible attempt to conceal the origin of the funds. This activity may be subject to reporting under 31 CFR Chapter X, particularly 31 CFR 1020.320, which requires reporting of suspicious transactions.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #13: HIGH — Score 110
+## Finding #13: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0xf88f4ce13e9785c7d6585d6ce12c1c07d2ac5d7b` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **3** token transfers totaling **$13,041** (1,626 USDT, 5,365 USDT, 6,051 USDT) |
-| **Blocks** | 25432440-25453698 |
+| **Sender** | `0xcc3d0ec391c53c7051bd12bb78e7cf1caa411ae5` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0372 ETH** ($87) |
+| **Blocks** | 26284833-26284833 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange office that's known for helping criminals clean their dirty cash. That's basically what's happening here, but instead of cash, it's cryptocurrency. Someone is sending a large amount of money, $13,041 to be exact, to a place called Railgun Relay, which is like a middleman that helps move money around without being too obvious.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-This sender is basically waving a giant red flag saying 'hey, I might be a money launderer!' by sending over $13,000 in stablecoins to Railgun Relay. They scored 110 on the stablecoin mixing rule, which means they're trying to mix their money with others to hide its origin. It's like trying to sneak into a nightclub through the back door, but the bouncer, aka the AML engine, caught them. And let's not forget, this is the same kind of shady behavior that got Tornado Cash sanctioned by the U.S. Treasury, so it's not like they're being subtle here.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the sender's attempt to mix a large amount of money through Railgun Relay poses a significant risk of money laundering and other illicit activities.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, monitor the sender's wallet for any future suspicious activity and consider blocking any further transactions to Railgun Relay.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -523,40 +549,41 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 3 stablecoin transfer(s) to Railgun Relay: $13,041 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 14 senders depositing similar amounts (~0.046 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction pattern exhibited by the sender, 0xf88f4ce13e9785c7d6585d6ce12c1c07d2ac5d7b, is indicative of potential money laundering activity, triggering the stablecoin_mixing rule (score: 110). The transfer of $13,041 in USDT to Railgun Relay, a known crypto mixing service, raises concerns of attempted layering and integration, as outlined in the Bank Secrecy Act (BSA) and the USA PATRIOT Act. Further review is warranted to determine if this activity is reportable under 31 CFR 1020.320.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #14: HIGH — Score 110
+## Finding #14: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0xafcf87fd86582488bedd19ca4d893b2a326ca1b7` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$39,810** (39,810 DAI) |
-| **Blocks** | 25453506-25453506 |
+| **Sender** | `0xae15ce4230b9d4ebfa740662a7fc2474e2c91850` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0400 ETH** ($94) |
+| **Blocks** | 26284685-26284685 |
 
 ### 💬 What Happened
-Imagine someone walking into a shady money exchange and trying to swap a large sum of cash for a different currency, but this exchange is known for helping bad people launder their dirty money. That's basically what happened here, but with cryptocurrency. Someone sent a significant amount of money, $39,810, to a place called Railgun Relay, which is like a middleman that helps move money around, but in this case, it's linked to a bigger problem because it involves a type of transaction (stablecoin mixing) that can be used to disguise where the money is coming from or going to.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-This sender just scored 110 on the stablecoin mixing rule, which means they're essentially trying to erase the footprints of their cryptocurrency transaction by mixing it with other transactions, like trying to hide in a crowd. This is like trying to use a super secure, untraceable mailbox (Railgun Relay) that's already on the radar for suspicious activity. And let's not forget, this transaction involves DAI, a type of stablecoin (a cryptocurrency that's tied to the value of a real-world currency, like the US dollar), which was sent to Railgun Relay, a red flag in itself because it can be used for nefarious purposes, like money laundering. They must think they're in a real-life game of 'Grand Theft Auto', but in reality, they're just getting a big, fat flag for potential money laundering.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — The transaction's involvement with stablecoin mixing and its significant value of $39,810 pose a substantial risk for potential money laundering and illicit financial activity.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) due to the high risk of money laundering. It's also crucial to monitor the sender's and receiver's future activities closely for any additional suspicious transactions.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -564,40 +591,41 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000003 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $39,810 total (DAI) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 14 senders depositing similar amounts (~0.046 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction in question has triggered a high-risk alert due to its involvement with stablecoin mixing, as evidenced by the AML engine scoring a composite score of 110, specifically due to the stablecoin_mixing rule. This activity is suspicious under the Bank Secrecy Act (BSA) and may violate 31 CFR Chapter X, particularly regulations related to money laundering and illicit financial transactions. The use of Railgun Relay, a service that can facilitate the anonymization of cryptocurrency transactions, further raises concerns about the potential for money laundering and other illicit activities.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #15: HIGH — Score 110
+## Finding #15: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x0d8973c20bd1aa7d468142d7e7314ab733dd4167` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$89,333** (89,333 USDT) |
-| **Blocks** | 25453159-25453159 |
+| **Sender** | `0xebb847c3019191d9adb41aa195b56aa4fc7603bf` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0500 ETH** ($117) |
+| **Blocks** | 26282885-26282885 |
 
 ### 💬 What Happened
-This is like someone walking into a shady money exchange and handing over a briefcase full of cash, but instead of cash, it's digital money. They're trying to mix it up with other people's money to hide where it came from, kind of like throwing a single drop of water into a big pool to make it hard to find. The problem is, this particular 'pool' is a known trouble spot because it's been used by bad guys in the past.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-Looks like someone scored 110 on the stablecoin mixing rule (meaning they're trying to hide the origin of their digital cash by mixing it with others), and they just happens to be sending it to Railgun Relay, which is like a digital laundry service. They're basically waving a big red flag saying 'hey, I've got something to hide!' And with $89,333 on the line, that's a whole lot of dirty laundry. I guess you could say they're trying to 'clean' their money, but really they're just getting it dirtier. Oh, and by the way, this is the kind of thing that gets you on the U.S. Treasury's bad side, thanks to OFAC (which is like a list of people and places the U.S. government doesn't want you doing business with).
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the large amount of stablecoin being sent to a crypto mixing service is a significant indicator of potential money laundering activity.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider reporting it to the relevant authorities, as it may be linked to illicit activity. It's also a good idea to monitor the sender's wallet for any future suspicious activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -605,40 +633,41 @@ Immediately flag this transaction for further review and consider reporting it t
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $89,333 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 14 senders depositing similar amounts (~0.046 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction in question has triggered the stablecoin_mixing rule, with a score of 110, indicating a high likelihood of money laundering activity. The sender's wallet profile is unknown, but the fact that they are sending a large amount of stablecoin to Railgun Relay, a known crypto mixing service, raises significant red flags. This activity may be in violation of 31 CFR Chapter X, particularly 1010.210, which requires reporting of certain transactions involving crypto assets. Further investigation is warranted to determine the source and purpose of these funds.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #16: HIGH — Score 110
+## Finding #16: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x531a83d9ba25083c783dd68ed148bcb664941870` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **3** token transfers totaling **$45,029** (15,178 USDT, 14,888 USDT, 14,962 USDT) |
-| **Blocks** | 25436177-25452598 |
+| **Sender** | `0x228adf19115c35d71ce1d3f5659e2e0389c23b0e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0438 ETH** ($103) |
+| **Blocks** | 26280488-26280488 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange store that's known for helping criminals clean their dirty cash, and you see someone making three large transactions in a row, totaling $45,000. That's basically what happened here, but instead of cash, it's cryptocurrency, and the 'store' is a service called Railgun Relay, which is similar to a sanctioned crypto mixer called Tornado Cash. This is a major red flag because it looks like someone is trying to mix their crypto to hide where it came from or where it's going.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-This sender scored a whopping 110 on the stablecoin mixing rule (meaning they're trying to mix a type of cryptocurrency called stablecoin, which is like a digital dollar, to make it untraceable). They sent not one, not two, but three large chunks of cash to Railgun Relay, totaling $45,029, which is like shouting 'I have something to hide!' from the rooftops. And the best part? They did it through a service that's basically a cousin of Tornado Cash, which was sanctioned by the U.S. Treasury for helping North Korea's hackers launder billions. Nice try, but not nice enough.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the multiple large-value transactions to a crypto mixing service similar to a sanctioned entity pose a significant risk of money laundering or other illicit finance activity.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with FinCEN, as the activity appears to be indicative of potential money laundering or other illicit finance activity. Additionally, consider blocking any future transactions from this sender to prevent potential further illicit activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -646,40 +675,41 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 3 stablecoin transfer(s) to Railgun Relay: $45,029 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 14 senders depositing similar amounts (~0.046 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The subject transaction exhibited high-risk characteristics, including multiple large-value stablecoin transfers to a Railgun Relay address, triggering a stablecoin mixing rule score of 110. This activity is indicative of potential money laundering or other illicit finance activity, as outlined in the Bank Secrecy Act (BSA) and the USA PATRIOT Act. The transaction pattern is consistent with techniques used to evade detection and obscure the origin and destination of funds, which is a key concern under the Financial Crimes Enforcement Network (FinCEN) regulations.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #17: HIGH — Score 110
+## Finding #17: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0xc69716c7a43e3c26acc7f52a70523ea5651042a5` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$33,094** (33,094 DAI) |
-| **Blocks** | 25452309-25452309 |
+| **Sender** | `0x90c2b1e300f2010156157af430801d45b5b5f22c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0438 ETH** ($103) |
+| **Blocks** | 26278641-26278641 |
 
 ### 💬 What Happened
-Someone just sent a large amount of money, $33,094 to be exact, to a service called Railgun Relay, which is like a crypto version of a money laundry. This service is known to help mix and hide the origin of funds, making it similar to walking into a known money laundering front. The money was sent in a type of digital currency called stablecoin, which is like a special kind of money that's tied to the value of a real currency, like the US dollar.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-Looks like someone's trying to wash their dirty laundry, literally, by sending $33,094 to Railgun Relay, a crypto mixing service that's basically a funnel for illicit funds. They scored 110 on the stablecoin mixing rule, which means they're basically shouting 'I'm trying to hide something' by using a service that's known to help launder money. And by the way, this is similar to Tornado Cash, a service that was sanctioned by the U.S. Treasury's OFAC (Office of Foreign Assets Control, which is like a list of bad guys the US government doesn't want to do business with) for helping North Korea's Lazarus Group steal and launder billions. Nice try, but not nice enough to avoid getting caught.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — The transaction's use of a known crypto mixing service and large value suggest a high risk of money laundering or other illicit activity.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, the recipient address should be monitored for any future suspicious activity and potentially blocked from receiving further transactions.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -687,40 +717,41 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $33,094 total (DAI) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 14 senders depositing similar amounts (~0.046 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The subject transaction involves a single transfer of $33,094 in DAI stablecoin to Railgun Relay, a known crypto mixing service, triggering a hit on the stablecoin_mixing rule (score: 110). This activity is suspicious and potentially indicative of money laundering, as outlined in the Bank Secrecy Act (BSA) and the USA PATRIOT Act. The transaction's characteristics, including the large value and use of a mixing service, warrant further investigation and reporting, as per the requirements of 31 CFR Chapter X, specifically 31 CFR 1020.320.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #18: HIGH — Score 110
+## Finding #18: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x23af7800be916b2b257eaf16d0a0850d21052f64` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$124,412** (124,412 USDT) |
-| **Blocks** | 25452112-25452112 |
+| **Sender** | `0x754db7388e57bfb9b02d13e457f0bc448bbc5b06` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0432 ETH** ($101) |
+| **Blocks** | 26278215-26278215 |
 
 ### 💬 What Happened
-Someone just sent a large sum of money, $124,412, to a place called Railgun Relay, which is like a secret mixer that helps hide where the money came from and where it's going, similar to a money laundering front. This is suspicious because it's a big amount of money and using such a service can be a way to conceal illegal activities. It's like trying to erase your footprints in the sand, but in this case, it's with money.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-Wow, they really wanted to keep their transaction under wraps, didn't they? They scored 110 on the stablecoin mixing alert, which means they're essentially trying to wash their money clean by sending it through a mixer, in this case, Railgun Relay. This is like trying to put dirty clothes in a washing machine and expecting them to come out sparkling clean, except the washing machine is actually a sanctioned crypto mixing service, kind of like Tornado Cash, which was banned for helping bad guys like North Korea's hackers. They're basically playing a game of hide and seek with their money, but we can still see them.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**The risk is HIGH because the large transaction amount and the use of a mixing service like Railgun Relay strongly indicate an attempt to conceal the origin and destination of the funds, which is a common technique used in money laundering and other illicit financial activities.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It's also recommended to monitor the involved wallet addresses for any future suspicious activity and to collaborate with law enforcement if necessary.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -728,40 +759,41 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000004 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $124,412 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 14 senders depositing similar amounts (~0.046 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The subject transaction has been flagged for potential money laundering activity, triggering a SAR filing under the Bank Secrecy Act (BSA). The transaction involves a large sum of stablecoin (USDT) being sent to a Railgun Relay address, which is indicative of potential layering activity, as outlined in the FinCEN guidelines. The stablecoin mixing alert score of 110 suggests a high risk of money laundering, warranting further investigation. This activity may be in violation of 31 CFR Chapter X, particularly Section 1010.210, which requires reporting of suspicious transactions.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #19: HIGH — Score 110
+## Finding #19: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x18dc9ed496776ff703852114ab6c16631f419ce3` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$33,260** (33,260 DAI) |
-| **Blocks** | 25451639-25451639 |
+| **Sender** | `0x68bf5a354e339bb67fcfde958f50afe2d4b6ffd7` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0479 ETH** ($112) |
+| **Blocks** | 26277727-26277727 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange and swapping a large sum of cash for a different currency, but instead of a physical location, this happens on the internet using cryptocurrencies. Someone just sent a significant amount of money, $33,260 to be exact, to a service called Railgun Relay, which is like a digital mixer that can obscure the origin of the funds. This is suspicious because it's similar to using a service that's known to help hide money trails, like a digital version of a money laundering front.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-This sender just scored 110 on the stablecoin mixing rule, which means they're trying to mix their tracks by sending a huge sum of stablecoins (think of these like digital dollars) to Railgun Relay. That's like trying to sneak into a nightclub through the back door, but the bouncer (our AML engine) is onto them. And let's be real, who needs to send that much money to a mixer unless they're trying to hide something? They also interacted with a service that's one step away from Tornado Cash, a crypto mixing service that was sanctioned by the U.S. Treasury (OFAC) for helping launder billions, including funds stolen by North Korea's Lazarus Group - that's like being friends with a friend who's friends with a criminal.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the large sum of money sent to a mixing service with ties to sanctioned entities poses a significant risk of money laundering or other illicit activity.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It's also crucial to monitor the sender's wallet for any future suspicious activity and to investigate potential connections to sanctioned entities or money laundering schemes.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -769,40 +801,41 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000006 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $33,260 total (DAI) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 14 senders depositing similar amounts (~0.046 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction triggers the stablecoin_mixing rule due to a single stablecoin transfer of $33,260 to Railgun Relay, indicating potential structuring to evade detection. This activity is reportable under the Bank Secrecy Act (BSA) as a suspicious transaction, potentially violating 31 CFR 1020.320, and may be connected to sanctioned entities or activities, such as those involving Tornado Cash, which was designated under Executive Order 13694. The sender's wallet profile lacks transparency, adding to the suspicious nature of the transaction.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #20: HIGH — Score 110
+## Finding #20: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x11967bc69e6b6efc326a9094b431823941fd3370` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$83,891** (83,891 USDT) |
-| **Blocks** | 25451458-25451458 |
+| **Sender** | `0xbe9d696055297d1c40680fa8da1f7c4e6b066c0c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0388 ETH** ($91) |
+| **Blocks** | 26277542-26277542 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange office that's been banned by the government, and handing over a large briefcase full of cash - that's basically what happened here. Someone sent a huge amount of money, $83,891, to a service called Railgun Relay, which is like a secret mixer that makes it hard to track where the money came from or where it's going. This is a major red flag because it's similar to using a service like Tornado Cash, which was banned for helping bad guys like North Korean hackers launder their stolen money.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-Looks like someone's trying to wash their dirty laundry, but they ended up using a mixer that's basically a neon sign screaming 'I'm hiding something!' - they scored a whopping 110 on the stablecoin mixing detector, which means they're basically wearing a 'I'm a money launderer' t-shirt. The OFAC (that's the Office of Foreign Assets Control, like a list of bad guys the US government doesn't want you to do business with) would not be happy about this. And by the way, using a stablecoin like USDT is like trying to sneak a briefcase full of cash into a casino - it's not exactly subtle.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the large value transfer to a mixing service is a strong indicator of potential money laundering activity.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN), and block any future transactions from this sender to prevent potential money laundering.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -810,40 +843,41 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000003 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $83,891 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 14 senders depositing similar amounts (~0.046 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction exhibited high-risk characteristics, including a large value transfer of $83,891 in USDT to a Railgun Relay address, which is indicative of potential money laundering activity. This behavior is consistent with patterns outlined in the Bank Secrecy Act (BSA) and the USA PATRIOT Act, and warrants further investigation under 31 CFR Chapter X. The stablecoin mixing detector score of 110 further supports the suspicion of illicit activity, as it suggests an attempt to conceal the origin and destination of the funds.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #21: HIGH — Score 110
+## Finding #21: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0xb43c123de48d5487e78b3635e5607ec350e9fd29` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$81,236** (81,236 USDT) |
-| **Blocks** | 25451099-25451099 |
+| **Sender** | `0xa236edeadc04ab0c72ee2baaa28f46b6ca246c85` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0453 ETH** ($106) |
+| **Blocks** | 26276986-26276986 |
 
 ### 💬 What Happened
-This is like someone walking into a shady money exchange and trying to swap a large sum of cash for a different currency, but instead of cash, they're using cryptocurrency. The person sent a big chunk of money, $81,236, to a place called Railgun Relay, which is like a middleman that helps hide where the money is really going. It's suspicious because this relay is connected to a sanctioned crypto mixing service, kind of like a blacklisted laundromat for money.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-Wow, great job trying to sneak one past us with a whopping $81,236 stablecoin transfer to Railgun Relay, which just so happens to be connected to the infamous Tornado Cash, a crypto mixing service that's basically a magnet for dirty money. You scored a perfect 110 on the stablecoin_mixing score (meaning you're using a service that's likely trying to conceal the origin of funds, a major red flag). And let's not forget, Tornado Cash is on the U.S. Treasury's sanctions list, aka the OFAC hit list (meaning this address is literally on the U.S. Treasury's blacklist), so nice job rubbing shoulders with known bad actors.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the transaction's connection to a sanctioned entity and large value transfer indicate a high risk of money laundering or other illicit activity.**
+**CRITICAL — API error**
 
-Immediately freeze the assets and conduct a thorough investigation into the sender's identity and the purpose of the transaction. File a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) if the investigation confirms suspicious activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -851,40 +885,41 @@ Immediately freeze the assets and conduct a thorough investigation into the send
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $81,236 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 14 senders depositing similar amounts (~0.046 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction in question has been flagged for suspicious activity due to its connection to Railgun Relay, a service linked to the sanctioned Tornado Cash mixing service, in violation of 31 CFR Part 542 (prohibiting transactions with sanctioned entities). The transfer of $81,236 in stablecoin (USDT) suggests potential money laundering activity, triggering a high-risk alert under the Bank Secrecy Act (BSA) and requiring further investigation under the USA PATRIOT Act. The composite AML score of 110, driven by the stablecoin_mixing score, supports this conclusion.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #22: HIGH — Score 110
+## Finding #22: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x569e8db7db4afe7590ed62f7ef1aefc87c6ef75e` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$29,925** (29,925 USDT) |
-| **Blocks** | 25450488-25450488 |
+| **Sender** | `0x3270b48fc9e0b8700c42bae8f0833c3fbc9586c8` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285771-26285771 |
 
 ### 💬 What Happened
-Someone just sent a large amount of money, $29,925, to a service called Railgun Relay, which is like a middleman that helps move money around without being easily tracked. This is similar to walking into a shady store that's known for helping people launder money. The person sending the money is using a type of digital money called stablecoin, which is like a digital version of the US dollar.
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-This sender is either really bad at hiding their tracks or they're trying to win an award for 'most obvious money laundering attempt'. They scored a whopping 110 on the stablecoin mixing rule, which means they're basically waving a red flag saying 'Hey, I'm trying to hide something!' by sending a huge amount of stablecoin to a relay service. And let's not forget, this relay service is like a cousin of Tornado Cash, which is literally on the US Treasury's naughty list for helping bad guys like North Korea's Lazarus Group launder billions. This sender scored 0 on subtlety, but 100 on 'we know what you're trying to do'.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the large, unexplained transfer of stablecoin to a relay service with potential ties to sanctioned entities poses a significant risk of money laundering or other illicit activity.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report potential money laundering activity. Additionally, monitor the sender's wallet for any future suspicious activity and consider blocking or restricting transactions to and from this address.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -892,40 +927,41 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $29,925 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 147 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction triggered a high-risk alert due to the large transfer of stablecoin to a Railgun Relay address, which is indicative of potential money laundering activity, as outlined in the Bank Secrecy Act (BSA) and the USA PATRIOT Act. The stablecoin mixing rule was exceeded, with a score of 110, suggesting a high likelihood of attempted financial obfuscation. This activity may be subject to reporting under 31 CFR 1020.320, and further review is recommended to determine if a Suspicious Activity Report (SAR) is warranted.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #23: HIGH — Score 110
+## Finding #23: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x1dcf3af1a00bdba42f01f37c1a5b87018bfb4ad2` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$64,835** (64,835 USDC) |
-| **Blocks** | 25450030-25450030 |
+| **Sender** | `0xcb54969f69e92e9d568b5eb35a676b7564646535` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285655-26285655 |
 
 ### 💬 What Happened
-Imagine walking into a shady store that's known for helping people hide their money, like a secret laundry service for cash. That's basically what happened here, but with cryptocurrency. Someone sent a large amount of money, $64,835, to a place called Railgun Relay, which is like a middleman that can help mix and hide the origin of the funds. This is a big red flag because it's similar to using a service like Tornado Cash, which was shut down by the US government for helping bad guys launder money.
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-Wow, you really know how to pick 'em, don't you? You sent a whopping $64,835 to Railgun Relay, which is basically a crypto mixing service, a.k.a. a money launderer's best friend. You scored 110 on the stablecoin_mixing rule, which means you're essentially waving a flag that says 'hey, I might be trying to hide something!' And let's be real, who needs that kind of attention? This is like wearing a neon sign that says 'I'm up to no good' - not exactly the most subtle move. You even used a stablecoin like USDC, which is like using a super-transparent briefcase to carry your allegedly dirty money.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the use of a crypto mixing service and the large transaction amount of $64,835 indicate a high risk of money laundering activity.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with FinCEN. It's also a good idea to reach out to the relevant authorities and provide them with all the necessary information to investigate this potential money laundering activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -933,40 +969,41 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $64,835 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 147 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction in question has been flagged for potential money laundering activity due to the use of a crypto mixing service, Railgun Relay, which is a high-risk indicator. The stablecoin_mixing rule was triggered with a score of 110, indicating a potential attempt to conceal the origin of the funds. This activity may be in violation of the Bank Secrecy Act (BSA) and the USA PATRIOT Act, and warrants further investigation. The transaction's characteristics, including the large amount of $64,835 and the use of a mixing service, are consistent with patterns of suspicious activity identified in FinCEN guidance.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #24: HIGH — Score 110
+## Finding #24: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x8d749dfd8810df8cab4cba2a59391bed6f2694e7` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$79,800** (79,800 DAI) |
-| **Blocks** | 25447536-25447536 |
+| **Sender** | `0x0eed5107e884e6d64df570f6329ce4543aaf44a2` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285654-26285654 |
 
 ### 💬 What Happened
-Imagine someone walking into a shady money exchange store that's known for helping bad guys launder their dirty cash, and they try to swap a large sum of money for a cleaner bill. That's basically what happened here, but with cryptocurrency. Someone sent a significant amount of money, $79,800, to a place called Railgun Relay, which is like a middleman that can help obscure where the money is really going.
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-This sender scored 110 on the stablecoin mixing rule, which means they're trying to blend their dirty money with clean money, like throwing a bucket of mud into a washing machine. They sent a whopping $79,800 in stablecoin (think of it like a digital dollar that's tied to the real dollar's value) to Railgun Relay, which is essentially a crypto laundry service. This is like trying to sneak contraband past a border patrol - it's a huge red flag. And let's not forget, this kind of behavior is reminiscent of Tornado Cash, a infamous crypto mixer that was sanctioned by the U.S. Treasury (that's like being put on a blacklist) for helping North Korea's hackers launder billions.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the large sum of money being sent to a crypto mixer is a significant indicator of potential money laundering activity.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It's also a good idea to monitor the sender's wallet for any future suspicious activity and to review the wallet's transaction history to identify any potential patterns of money laundering.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -974,40 +1011,41 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $79,800 total (DAI) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 147 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction in question triggers the stablecoin_mixing rule, as evidenced by the single stablecoin transfer of $79,800 in DAI to Railgun Relay. This behavior is indicative of potential money laundering activity, as outlined in the Bank Secrecy Act (BSA) and specifically 31 CFR § 1020.210. The composite score of 110 further supports the suspicious nature of this transaction, warranting a Suspicious Activity Report (SAR) filing.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #25: HIGH — Score 110
+## Finding #25: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x26d726ac452face68b5d7f35aa75184018abef50` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **3** token transfers totaling **$21,961** (6,944 USDT, 2,974 USDT, 12,043 USDT) |
-| **Blocks** | 25431559-25445575 |
+| **Sender** | `0x01f86ada9e65d216dc0a6e7dff65741b686fe422` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0004 ETH** ($1) |
+| **Blocks** | 26285646-26285646 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange office and seeing someone repeatedly sending large sums of cash to a mysterious intermediary, who's known for helping people hide the source of their money. That's basically what happened here, but with cryptocurrency. Someone sent almost $22,000 in three transactions to a place called Railgun Relay, which is like a digital version of that shady office. This is a big red flag because it looks like they might be trying to hide where that money came from or where it's going.
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-This sender scored 110 on the stablecoin mixing rule (meaning they're trying to mix their money with others to hide its origin, like throwing a bunch of different colored socks into a washing machine to make them all look the same). They sent three big chunks of stablecoin, which is like a digital dollar that's tied to the real dollar's value, to Railgun Relay. It's like they're trying to erase their financial footprints, but our AML engine is like a forensic accountant with a sense of humor - we caught them! And let's be real, interacting with a sanctioned mixing service like Tornado Cash, which is linked to North Korea's Lazarus Group, is a huge no-no. They basically got caught with their hand in the cookie jar, or in this case, the mixing bowl.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — The transactions exhibit strong indicators of money laundering and potential ties to sanctioned entities, posing a significant risk to the financial system.**
+**CRITICAL — API error**
 
-Immediately flag the sender's wallet for further investigation and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It's also recommended to monitor all future transactions involving this wallet and related entities for potential illicit activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1015,40 +1053,41 @@ Immediately flag the sender's wallet for further investigation and consider fili
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 3 stablecoin transfer(s) to Railgun Relay: $21,961 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 147 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The subject's transactions triggered a high-risk alert due to the stablecoin mixing rule (31 CFR 1020.210), indicating potential structuring to evade reporting requirements. The transactions, totaling $21,961 in USDT, were sent to Railgun Relay, a service with known links to sanctioned entities like Tornado Cash, in violation of OFAC regulations (31 CFR 510). This activity may be indicative of money laundering or other illicit financial activity, warranting further investigation under the Bank Secrecy Act (BSA).
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #26: HIGH — Score 110
+## Finding #26: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x8afa08bfc66982c6cbc8c792b90ab1489995f9e1` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$25,033** (25,033 USDT) |
-| **Blocks** | 25445062-25445062 |
+| **Sender** | `0xb9526bda3da6b432841f0bc6dc173fa4153e0c37` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0004 ETH** ($1) |
+| **Blocks** | 26285641-26285641 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange store that's known for helping bad guys launder their dirty cash, and you hand over a large sum of money to be mixed with other people's money so it can't be traced back to you. That's basically what happened here, but instead of a physical store, it was done through a crypto mixing service. The sender sent a significant amount of money, $25,033, to a place called Railgun Relay, which is like a middleman that helps obscure the origin of the funds.
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-This sender just scored 110 on the stablecoin mixing rule (meaning they're trying to hide the origin of their funds by mixing it with other people's money), which is like waving a big red flag saying 'hey, I've got something to hide'. They sent a whopping $25,033 in stablecoins to Railgun Relay, which is basically a crypto laundry machine. And let's not forget, this relay is connected to Tornado Cash, a sanctioned crypto mixing service that's been used by North Korea's Lazarus Group to launder stolen funds - nice company you're keeping, sender. It's like they're trying to win an award for 'most creative way to launder money'
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the transaction's large value and connection to a sanctioned crypto mixing service pose a significant risk of money laundering**
+**CRITICAL — API error**
 
-Immediately freeze the assets and launch a thorough investigation into the sender's identity and the purpose of the transaction. It's also recommended to file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to comply with regulatory requirements.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1056,40 +1095,41 @@ Immediately freeze the assets and launch a thorough investigation into the sende
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $25,033 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 147 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction has been flagged for suspicious activity due to the sender's interaction with Railgun Relay, a service that has been linked to Tornado Cash, a sanctioned entity under the Office of Foreign Assets Control (OFAC) rules. The large value transfer of $25,033 in stablecoins (USDT) triggers the stablecoin_mixing rule, indicating a potential attempt to obscure the origin of the funds. This activity may be in violation of 31 CFR Chapter X, particularly Section 1010.100, which requires reporting of suspicious transactions. Further investigation is warranted to determine the legitimacy of the transaction and the parties involved.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #27: HIGH — Score 110
+## Finding #27: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0xcc7b29e3534fbb3ffefaadaa077ae44bee209db6` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$39,900** (39,900 USDT) |
-| **Blocks** | 25445057-25445057 |
+| **Sender** | `0xf9505ed30b527747c95236be75511748d10f41f7` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0004 ETH** ($1) |
+| **Blocks** | 26285635-26285635 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange store that's known for helping criminals wash their dirty cash, and then handing over nearly $40,000 in cash, which is like using a super-secret, untraceable ATM. That's basically what happened here, but instead of a physical store, it was done through a cryptocurrency transaction. The sender moved a large amount of money, $39,900 to be exact, to a place called Railgun Relay, which is like a digital version of that shady store.
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-This sender just scored 110 on the stablecoin mixing rule (meaning they tried to mix and hide their tracks using a type of cryptocurrency called stablecoin), which is like trying to sneak into a nightclub with a fake ID - it's not fooling anyone. They sent a whopping $39,900 to Railgun Relay, which is basically a cryptocurrency laundry service, and that's a major red flag. It's like they're trying to win an award for 'most suspicious transaction of the year'. And let's not forget, Tornado Cash, a similar service, was sanctioned by the U.S. Treasury (OFAC) for helping bad guys like North Korea's Lazarus Group, so this doesn't look good.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the large amount of money being sent to a cryptocurrency mixing service is a strong indicator of potential money laundering activity.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It's also a good idea to monitor the sender's and receiver's accounts for any other suspicious activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1097,40 +1137,41 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $39,900 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 147 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction in question has been flagged for potential money laundering activity, triggering the stablecoin_mixing rule (31 CFR 1020.210). The sender's transfer of $39,900 in USDT to Railgun Relay, a cryptocurrency mixing service, raises concerns about the potential for illicit funds. This activity may be indicative of an attempt to evade detection and reporting requirements, as outlined in the Bank Secrecy Act (BSA) and relevant OFAC regulations.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #28: HIGH — Score 110
+## Finding #28: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x8aa1af39fb3a4a96d65ea163a521d4c986c079cb` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$70,723** (39,900 USDT, 30,823 USDT) |
-| **Blocks** | 25430024-25445046 |
+| **Sender** | `0x39158c1e84140cf9dfcb5261a9781a42b8aa0099` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0004 ETH** ($1) |
+| **Blocks** | 26285632-26285632 |
 
 ### 💬 What Happened
-This is like trying to sneak cash into a secret bank account. Someone sent a lot of money, $70,723 to be exact, to a place called Railgun Relay, which is like a middleman that helps hide where the money is really going. It's similar to using a money laundering service, which is a big red flag.
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-Wow, you really thought you could fly under the radar by sending almost $71,000 in stablecoins to Railgun Relay, didn't you? That's like walking into a known money laundering front and expecting no one to notice. You scored a whopping 110 on the stablecoin mixing rule, which means you're basically waving a flag that says 'I'm trying to hide something'. And by the way, stablecoin mixing (that's when you use a service to mix your money with other people's money to hide its origin) is a huge no-no, especially when it involves this kind of cash.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**The risk is HIGH because the transaction involves a large amount of money being sent to a service that is likely being used to hide the origin of the funds.**
+**CRITICAL — API error**
 
-We recommend immediately flagging this transaction for further review and potentially filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN), and also monitoring the involved parties for any future suspicious activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1138,40 +1179,41 @@ We recommend immediately flagging this transaction for further review and potent
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Railgun Relay: $70,723 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 147 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction(s) in question have been flagged for potential money laundering activities, specifically for violating the Bank Secrecy Act (BSA) and the USA PATRIOT Act, due to the high-value transfer of stablecoins to a relay service, which is a characteristic commonly associated with illicit financial activity, as evidenced by the AML engine scoring a 110 on the stablecoin_mixing rule.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #29: HIGH — Score 110
+## Finding #29: CRITICAL — Score 155
 
 | | |
 |---|---|
-| **Sender** | `0x914fe62996e4caa58db8bf0928b1f068bac599b2` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **3** token transfers totaling **$132,974** (132,825 USDC, 100 USDC, 49 USDC) |
-| **Blocks** | 25430886-25444952 |
+| **Sender** | `0xa9de57190d9b9a9e34ee9c45a4d2189d4b80a5ae` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0004 ETH** ($1) |
+| **Blocks** | 26285631-26285631 |
 
 ### 💬 What Happened
-Imagine walking into a shady store that's known for helping people hide their money, and you hand over a large sum of cash to be mixed with other people's money so it can't be traced back to you. That's basically what happened here, but with cryptocurrency. Someone sent a lot of money, $132,974 to be exact, to a place called Railgun Relay, which is like a middleman that helps move money around without being detected.
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
 
 ### 🔥 The Roast
-This sender scored 110 on the stablecoin_mixing rule (meaning they're trying to mix their stablecoin, a type of cryptocurrency that's tied to the value of a real-world currency, with other people's money to hide its origin). It's like they're trying to put their dirty laundry in a washing machine with everyone else's clothes to make it look clean. They sent three separate payments, totaling $132,974, to Railgun Relay, which is basically a front for hiding money. And get this, the receiver is linked to Tornado Cash, a crypto mixing service that was sanctioned by the U.S. Treasury (OFAC) for helping launder over $7 billion, including funds stolen by North Korea's Lazarus Group. Yeah, this doesn't look shady at all.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the transaction involves a large sum of money being sent to a sanctioned entity's linked address, indicating a high risk of money laundering and terrorist financing.**
+**CRITICAL — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, monitor the sender's and receiver's addresses for any future suspicious activity and consider blocking or restricting transactions with these entities.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1179,16 +1221,17 @@ Immediately flag this transaction for further review and consider filing a Suspi
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 3 stablecoin transfer(s) to Railgun Relay: $132,974 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (2 rules, composite score: 155):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+- **sybil_fan_in** (+70) — 1 of 147 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction pattern exhibits characteristics of suspicious activity, triggering the stablecoin_mixing rule (31 CFR 1020.210). The sender's transactions, totaling $132,974 in USDC, were transferred to Railgun Relay, a known cryptocurrency mixer, which is a high-risk indicator for money laundering. Furthermore, the receiver's address is linked to Tornado Cash, a sanctioned entity under the Office of Foreign Assets Control (OFAC), violating 31 CFR 510.201. This activity warrants further investigation under the Bank Secrecy Act (BSA) and USA PATRIOT Act.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -1198,21 +1241,21 @@ The transaction pattern exhibits characteristics of suspicious activity, trigger
 
 | | |
 |---|---|
-| **Sender** | `0x4d417982def63fca867d6ddabffa9f8b13bca9b5` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$69,825** (39,900 USDT, 29,925 USDT) |
-| **Blocks** | 25422425-25444510 |
+| **Sender** | `0x8f10b468b06c6fd214b65f87778827f7d113f996` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **16** token transfers totaling **$20,872** (23 USDC, 6,447 USDC, 11 USDC, 1,978 USDC, 10,013 USDT) |
+| **Blocks** | 26258818-26285576 |
 
 ### 💬 What Happened
-Imagine walking into a store that's known for helping people hide their money, and then you proceed to transfer a large sum of cash to someone else through that store. That's basically what happened here, but instead of a physical store, it's a cryptocurrency service called Railgun Relay, and the money is in the form of a digital currency called stablecoin. The person sending the money used this service to transfer nearly $70,000 to someone else, which raises some serious red flags.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 110.
 
 ### 🔥 The Roast
-This sender scored a whopping 110 on the stablecoin mixing rule (meaning they're using a service that's likely trying to obscure the origin of the funds, like a digital money launderer). They're essentially trying to sneak around using a service like Railgun Relay, which is like trying to sneak into a nightclub through the back door, except the bouncer is the U.S. Treasury, and they're not having it. And let's not forget, this is similar to the shady dealings that got Tornado Cash in trouble with the U.S. Treasury (OFAC) in the first place, for helping launder billions, including funds from North Korea's Lazarus Group. That's some pretty sketchy company to be in.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**The risk is HIGH because the sender is using a service that is likely trying to obscure the origin of nearly $70,000 in funds, which is a major red flag for money laundering.**
+**HIGH — API error**
 
-Immediate further investigation is recommended, including reviewing the sender's transaction history and gathering more information about the recipient. It's also crucial to file a suspicious activity report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to comply with regulatory requirements.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1226,10 +1269,10 @@ Immediate further investigation is recommended, including reviewing the sender's
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Railgun Relay: $69,825 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 16 stablecoin transfer(s) to SideShift Hot Wallet: $20,872 total (USDT, USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-The subject transaction has been flagged for potential money laundering activity, citing violations of the Bank Secrecy Act (BSA) and the USA PATRIOT Act. The sender's use of a stablecoin mixing service, specifically Railgun Relay, warrants further investigation under the auspices of 31 CFR Chapter X, particularly with regards to the suspicious activity reporting requirements outlined in 31 CFR 1020.320. The transaction's composite score of 110 on the stablecoin mixing rule indicates a high likelihood of illicit activity.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -1239,21 +1282,21 @@ The subject transaction has been flagged for potential money laundering activity
 
 | | |
 |---|---|
-| **Sender** | `0xbb341a2475cabf7683b3c7a5bfa86f59f906c9ba` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$89,775** (59,850 USDT, 29,925 USDT) |
-| **Blocks** | 25421800-25444362 |
+| **Sender** | `0x9a3f30dde7f3287b83ed33b4f28c343d6d9ffea4` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$36,000** (36,000 USDT) |
+| **Blocks** | 26285419-26285419 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange store that's been known to help bad guys like hackers and thieves launder their dirty money. That's basically what happened here, but instead of a physical store, it's a crypto transaction. Someone sent a large amount of money, $89,775 to be exact, to a place called Railgun Relay, which is like a digital version of that shady store. This transaction is suspicious because it involves a service that helps mix and hide the origin of funds, kind of like trying to erase the serial number on a stolen item.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 110.
 
 ### 🔥 The Roast
-Wow, this sender really wanted to make sure their money was squeaky clean, said no one ever. They scored 110 on the stablecoin mixing rule, which means they're basically shouting 'I'm trying to launder money' by sending nearly $90,000 in stablecoins to Railgun Relay. For those who don't know, stablecoins are like digital dollars, but instead of being physical, they exist only on the internet. And Railgun Relay is like a digital washing machine for dirty money, but instead of getting caught by the cops, they get caught by our AML detectors. This transaction also triggered the OFAC (Office of Foreign Assets Control) rule, which is like a big no-no list of people and places the US government says you can't do business with, and let's just say Tornado Cash, which is connected to Railgun Relay, is on that list for helping North Korea's hackers launder billions.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**The risk is HIGH because the transaction involves a large amount of money being sent to a sanctioned service that is known to help launder funds for malicious actors.**
+**HIGH — API error**
 
-Immediately freeze the sender's assets and conduct a thorough investigation into their activities to determine the source of the funds and the intent behind the transaction. Additionally, report this suspicious activity to the relevant authorities, such as FinCEN, to ensure compliance with AML regulations.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1267,10 +1310,10 @@ Immediately freeze the sender's assets and conduct a thorough investigation into
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Railgun Relay: $89,775 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $36,000 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-This transaction is being reported as suspicious activity due to the sender's interaction with a sanctioned crypto mixing service, which is a clear violation of the Bank Secrecy Act (BSA) and the USA PATRIOT Act. The transaction's high score on the stablecoin mixing rule, combined with the connection to Tornado Cash, a known OFAC-sanctioned entity, warrants further investigation. The Financial Crimes Enforcement Network (FinCEN) guidelines for reporting suspicious transactions are being followed, and this activity is being flagged for potential money laundering and terrorist financing.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -1280,21 +1323,21 @@ This transaction is being reported as suspicious activity due to the sender's in
 
 | | |
 |---|---|
-| **Sender** | `0x9e6fa879980a743774fcef3cf361fb462054b2f8` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$98,752** (59,850 USDT, 38,902 USDT) |
-| **Blocks** | 25421662-25444320 |
+| **Sender** | `0xf2b340c82e4718688bdee2cf884cc78bec02acc6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$57,400** (57,400 USDT) |
+| **Blocks** | 26284119-26284119 |
 
 ### 💬 What Happened
-Imagine walking into a shady store that's known for helping people launder money, and you see someone handing over a large briefcase full of cash to the store owner. This is similar to what happened here - a large amount of money, $98,752 to be exact, was sent to a place called Railgun Relay, which is like a middleman that can help hide where the money is really going. This is suspicious because it looks like someone is trying to mix their money with other people's money to disguise its origin.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 110.
 
 ### 🔥 The Roast
-Wow, it looks like someone is trying to win an award for 'most creative way to launder money'. They sent not one, but two large transactions to Railgun Relay, which is basically a crypto mixing service that's like a washing machine for dirty money. And to make matters worse, this relay is connected to Tornado Cash, which is like a notorious money laundering front that's been sanctioned by the U.S. Treasury - that's like being on the U.S. government's 'naughty list'. They scored a whopping 110 on the stablecoin mixing score, which means they're basically waving a big red flag saying 'hey, I'm trying to hide something'.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH - the large transactions and interaction with a sanctioned entity pose a significant risk of money laundering.**
+**HIGH — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, monitor the sender's wallet for any future suspicious activity and consider blocking any further transactions to Railgun Relay or other sanctioned entities.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1308,10 +1351,10 @@ Immediately flag this transaction for further review and consider filing a Suspi
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Railgun Relay: $98,752 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $57,400 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-The sender's wallet interacted with Railgun Relay, a service that is associated with Tornado Cash, a sanctioned entity under the Office of Foreign Assets Control (OFAC). This activity triggered a high score on the stablecoin mixing rule, indicating a potential attempt to launder funds. The transaction pattern, which involved two large stablecoin transfers totaling $98,752, is consistent with suspicious activity as defined by the Bank Secrecy Act (BSA) and the USA PATRIOT Act. This activity may be subject to reporting under 31 CFR 1020.320.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -1321,21 +1364,21 @@ The sender's wallet interacted with Railgun Relay, a service that is associated 
 
 | | |
 |---|---|
-| **Sender** | `0xcb6dbe2441d13350bca9f8e85effaa7f2f2fc80e` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$19,950** (19,950 USDC) |
-| **Blocks** | 25443960-25443960 |
+| **Sender** | `0x227cb18edcf41e152a43d1a3d4e71025d4b7e0fe` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$20,500** (20,500 USDT) |
+| **Blocks** | 26279359-26279359 |
 
 ### 💬 What Happened
-This is like someone trying to erase their footprints in the sand by using a middleman to move a large amount of money, in this case, $19,950. They're using a service called Railgun Relay, which is like a secret messenger, to hide where the money is really going. It's suspicious because this kind of service can be used to launder money, like washing dirty clothes to make them clean again.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 110.
 
 ### 🔥 The Roast
-Looks like someone tried to sneak one past us with a whopping $19,950 in stablecoins, but scored 110 on the stablecoin_mixing rule (meaning they're trying to mix their money with others to hide its origin). This is like trying to sneak a fake mustache past a cop - not fooling anyone. And let's be real, using Railgun Relay is like wearing a neon sign that says 'I'm hiding something', especially since it's linked to Tornado Cash, which is basically a laundry machine for dirty money. They scored big on the 'I'm probably a money launderer' test.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the large amount of stablecoins transferred to a potentially sanctioned service strongly indicates money laundering activity.**
+**HIGH — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It's also recommended to suspend any further transactions from this sender until the situation is fully investigated.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1349,10 +1392,10 @@ Immediately flag this transaction for further review and consider filing a Suspi
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $19,950 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $20,500 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction triggered a high-risk alert due to the large amount of stablecoins ($19,950 USDC) transferred to Railgun Relay, a service potentially linked to Tornado Cash, which is subject to OFAC sanctions. This activity may be indicative of money laundering or other illicit financial activity, as outlined in the Bank Secrecy Act (BSA) and specifically the 31 CFR Chapter X rules. The stablecoin_mixing rule score of 110 supports this suspicion, suggesting a possible violation of 18 USC 1956 (money laundering) and 50 USC 1701-1706 (International Emergency Economic Powers Act).
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -1362,21 +1405,21 @@ The transaction triggered a high-risk alert due to the large amount of stablecoi
 
 | | |
 |---|---|
-| **Sender** | `0x172b9e2339afad8b9c29f1e53fea67bda69b852f` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$11,161** (11,161 USDT) |
-| **Blocks** | 25443692-25443692 |
+| **Sender** | `0x632a2f3647e08a24a86fdb54ce80ba94134279ef` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$60,832** (60,832 USDT) |
+| **Blocks** | 26277825-26277825 |
 
 ### 💬 What Happened
-This is like someone walking into a shady money exchange and trying to swap a large sum of cash for a different currency, but instead of cash, they're using a type of digital money called stablecoin, and the exchange is a service called Railgun Relay. The problem is, this service is similar to Tornado Cash, which was sanctioned by the U.S. government for helping bad actors launder money. Essentially, this person is trying to mix their digital money with others to hide its origin, which raises a lot of red flags.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 110.
 
 ### 🔥 The Roast
-Wow, this guy scored 110 on the stablecoin mixing alert, which means they're basically trying to throw their digital money into a washing machine to get it clean, but really they're just getting it dirtier. They sent a whopping $11,161 in stablecoin to Railgun Relay, which is like trying to sneak a suitcase full of cash into a casino without anyone noticing. And let's be real, using a service like Railgun Relay is like wearing a neon sign that says 'I'm trying to launder money', especially since it's similar to Tornado Cash, which was sanctioned by the U.S. Treasury's OFAC (that's like a list of bad guys the government keeps an eye on). This person is basically begging to get caught, it's like they're leaving a trail of breadcrumbs to their doorstep.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the transaction's involvement with a potential money laundering service and the significant amount of funds transferred justify a high-risk classification.**
+**HIGH — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) due to the potential money laundering risks associated with the use of Railgun Relay. Additionally, suspend or reject any further transactions from this sender until the situation can be fully investigated and clarified.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1390,10 +1433,10 @@ Immediately flag this transaction for further review and consider filing a Suspi
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $11,161 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $60,832 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-The subject transaction involves a single transfer of $11,161 in USDT stablecoin to Railgun Relay, a service that may be used for mixing and laundering funds, triggering a stablecoin_mixing alert with a score of 110. This activity is potentially in violation of 31 CFR Chapter X, particularly with regards to the Bank Secrecy Act (BSA) and the USA PATRIOT Act. The similarity in functionality between Railgun Relay and sanctioned services like Tornado Cash raises significant concerns about the intent behind this transaction.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -1403,21 +1446,21 @@ The subject transaction involves a single transfer of $11,161 in USDT stablecoin
 
 | | |
 |---|---|
-| **Sender** | `0x1453591922107d5c66adb3c292a71235531140b4` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$33,389** (14,437 USDT, 18,953 USDC) |
-| **Blocks** | 25443674-25443679 |
+| **Sender** | `0xef1e29b1ecee3cbe9d2c311b407f0c1bfb55d15f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$11,454** (11,454 USDC) |
+| **Blocks** | 26276980-26276980 |
 
 ### 💬 What Happened
-Imagine you're at a coffee shop and someone hands you a briefcase full of cash, then you immediately give it to a stranger who promises to make it 'untraceable'. That's basically what happened here - someone sent a large amount of money in a type of cryptocurrency called stablecoin to a service called Railgun Relay, which is like a digital laundry machine for money. This service is similar to Tornado Cash, which was shut down by the government for helping bad people hide their money.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 110.
 
 ### 🔥 The Roast
-This sender scored a whopping 110 on the stablecoin mixing rule, which means they're basically waving a big flag saying 'I'm trying to hide something'. They sent not one, but two big chunks of stablecoin - $14,437 and $18,953 - to Railgun Relay, which is like a digital version of a shady back alley. And let's be real, if you're using a service that's similar to Tornado Cash, which was sanctioned by the U.S. Treasury for helping North Korea's hackers, you're probably up to no good. This is like getting a big fat 'F' on the 'not laundering money' test.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the large amount of stablecoin transferred to a mixing service similar to Tornado Cash indicates a high risk of money laundering or other illicit activity.**
+**HIGH — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). The recipient's account should also be frozen pending further investigation.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1431,10 +1474,10 @@ Immediately flag this transaction for further review and consider filing a Suspi
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Railgun Relay: $33,389 total (USDT, USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $11,454 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-The sender's transaction pattern triggered a high-risk alert due to the stablecoin mixing rule (31 CFR 1010.210), which indicates a potential attempt to conceal the origin and destination of funds. The transaction involved two stablecoin transfers, USDT and USDC, totaling $33,389, which were sent to Railgun Relay, a service that may be used to launder funds. This activity is suspicious and may be related to illicit activity, such as money laundering or terrorist financing, as outlined in the Bank Secrecy Act (31 USC 5311-5330).
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -1444,21 +1487,21 @@ The sender's transaction pattern triggered a high-risk alert due to the stableco
 
 | | |
 |---|---|
-| **Sender** | `0x1a0d4f8bade13502c2106c2e34bd7d703aa5eb3e` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$198,502** (99,750 USDT, 98,752 USDT) |
-| **Blocks** | 25422841-25443517 |
+| **Sender** | `0x95c0343aa7173cef786997269faafa3b57957078` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$81,024** (81,024 USDT) |
+| **Blocks** | 26275948-26275948 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange store that's known for helping criminals hide their dirty cash. That's basically what happened here, but with cryptocurrency. Someone sent a large amount of money, nearly $200,000, to a place called Railgun Relay, which is like a middleman that can help hide where the money is really going. This is a big red flag because it looks like they're trying to mix their money with other people's money to disguise its origin.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 110.
 
 ### 🔥 The Roast
-Wow, they really wanted to launder their money, didn't they? They sent not one, but two big chunks of cash to Railgun Relay, which is like a crypto washing machine. And get this, they used something called stablecoins (essentially a type of cryptocurrency that's tied to the value of a real currency, like the US dollar) to try and keep the value stable while they mixed it up. Too bad they scored 110 on the stablecoin mixing alert, which means they basically set off a big alarm that says 'hey, I'm trying to hide something!' And let's not forget, this kind of behavior is exactly what got Tornado Cash in trouble with the U.S. Treasury - it's like they're trying to follow in its sanctioned footsteps.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**The risk is HIGH because the transaction pattern strongly suggests an attempt to launder a large amount of money through a mixing service, which is a classic indicator of illicit financial activity.**
+**HIGH — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It's also advisable to monitor the involved wallet addresses for any future suspicious activity and to verify the identities of the parties involved to ensure compliance with Know Your Customer (KYC) regulations.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1472,10 +1515,10 @@ Immediately flag this transaction for further review and consider filing a Suspi
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Railgun Relay: $198,502 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $81,024 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction pattern exhibited by the sender wallet, 0x1a0d4f8bade13502c2106c2e34bd7d703aa5eb3e, has triggered a stablecoin mixing alert, scoring 110 on our AML engine. This activity is indicative of potential money laundering, as outlined in the Bank Secrecy Act (BSA) and specifically violates the provisions of 31 CFR Chapter X, which requires reporting of suspicious transactions. The use of Railgun Relay as a mixing service further exacerbates the risk, as it is reminiscent of the sanctioned Tornado Cash service, which was penalized under the Office of Foreign Assets Control (OFAC) regulations for facilitating illicit transactions.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -1485,21 +1528,21 @@ The transaction pattern exhibited by the sender wallet, 0x1a0d4f8bade13502c2106c
 
 | | |
 |---|---|
-| **Sender** | `0x6b640213f69a8f75e6f173072a9ea020486cd9a0` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$199,001** (199,001 USDT) |
-| **Blocks** | 25443197-25443197 |
+| **Sender** | `0x85b8c0ef5fc2ce1dae8691f073389bd19d30d64a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$65,145** (65,145 USDC) |
+| **Blocks** | 26273280-26273280 |
 
 ### 💬 What Happened
-This is like trying to sneak a large sum of money into a secret bank account, but instead of using a briefcase full of cash, someone used a cryptocurrency called stablecoin to send nearly $200,000 to a place called Railgun Relay, which is like a digital mixing bowl that helps hide where the money came from. It's suspicious because this kind of transaction can be used to launder money, or make it seem like the money came from a legitimate source when it really didn't. The fact that it went to Railgun Relay is a big red flag because it's similar to Tornado Cash, a service that was shut down by the U.S. government for helping bad actors launder billions of dollars.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 110.
 
 ### 🔥 The Roast
-Wow, someone really wanted to keep their $199,001 transaction under wraps, didn't they? They scored a whopping 110 on the stablecoin_mixing rule (meaning they tried to mix their money with others to hide its origin, kind of like trying to sneak a drop of ink into a bucket of water). And let's be real, using Railgun Relay is like wearing a neon sign that says 'I'm trying to launder money' - it's not exactly subtle. They're basically shouting 'I've got something to hide!' to the entire cryptocurrency world. And with a transaction that big, it's like they're begging to get caught - scored 110, indeed!
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**The risk verdict is HIGH because the transaction involves a large sum of money being sent to a mixing service, which is a common tactic used by money launderers to conceal the origin of their funds.**
+**HIGH — API error**
 
-It is recommended that this transaction be reported to the Financial Crimes Enforcement Network (FinCEN) as a suspicious activity and that further investigation be conducted to determine the source and purpose of the funds. Additionally, the involved parties should be monitored for any future suspicious activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1513,10 +1556,10 @@ It is recommended that this transaction be reported to the Financial Crimes Enfo
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $199,001 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $65,145 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-The subject transaction, involving a $199,001 stablecoin transfer to Railgun Relay, has been flagged for potential money laundering activity under the Bank Secrecy Act (BSA) and the USA PATRIOT Act. The transaction triggered a high-risk score of 110 on the stablecoin_mixing rule, indicating a possible attempt to conceal the origin of the funds. This activity may be indicative of structuring (31 CFR 1020.100) or money laundering (18 USC 1956) and warrants further investigation.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -1526,21 +1569,21 @@ The subject transaction, involving a $199,001 stablecoin transfer to Railgun Rel
 
 | | |
 |---|---|
-| **Sender** | `0x487a089110045a18d62374eefd49e724000100b9` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **4** token transfers totaling **$126,500** (8,000 USDT, 40,000 USDT, 3,500 USDT, 75,000 USDT) |
-| **Blocks** | 25422503-25442826 |
+| **Sender** | `0x12f6480c504605e332301d53144e8e1b983ba5e6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$21,733** (21,733 USDC) |
+| **Blocks** | 26273201-26273201 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange store that's known for helping bad guys launder their dirty cash, and you're giving them a huge amount of money in a series of transactions. That's basically what happened here, but instead of a physical store, it's a crypto service called Railgun Relay that's similar to Tornado Cash, which was banned by the U.S. government for helping launder billions of dollars. The person sending the money made four big transactions totaling $126,500, which is a major red flag.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 110.
 
 ### 🔥 The Roast
-This sender scored 110 on the stablecoin mixing rule (meaning they're trying to mix and hide the origin of their stablecoins, which is like trying to wash dirty money), and they're doing it with a service that's basically a cousin of Tornado Cash, which is like the crypto equivalent of a known money laundering front. They're trying to sneak around, but really, they're just sneaking into a compliance officer's nightmare. With transactions of $8,000, $40,000, $3,500, and a whopping $75,000, it's like they're trying to win a prize for 'most creative ways to launder money'. And let's not forget, Tornado Cash was sanctioned by the U.S. Treasury's OFAC (Office of Foreign Assets Control, which is like a list of who's who in international bad guys) for helping North Korea's Lazarus Group, so any interaction with similar services is a big no-no.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the transactions involve a large amount of money being sent to a service similar to a sanctioned crypto mixing service, indicating a potential attempt to launder funds and evade sanctions.**
+**HIGH — API error**
 
-Immediately flag and review these transactions, and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) due to the potential sanctions evasion and money laundering risks. It's also recommended to monitor the sender's wallet and related transactions for further suspicious activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1554,10 +1597,10 @@ Immediately flag and review these transactions, and consider filing a Suspicious
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 4 stablecoin transfer(s) to Railgun Relay: $126,500 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $21,733 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-The subject has engaged in suspicious activity by conducting four stablecoin transfers totaling $126,500 to Railgun Relay, a service similar to the sanctioned Tornado Cash mixing service, thereby triggering the stablecoin_mixing rule (score: 110). This activity may be indicative of an attempt to evade sanctions and launder funds, as outlined in 31 CFR Chapter X, specifically 1010.100(a)(1) and 1010.810(a)(1). The transactions, which occurred within a short block range (25422503-25442826), exhibit characteristics of layering and integration, suggestive of money laundering activity.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -1567,21 +1610,21 @@ The subject has engaged in suspicious activity by conducting four stablecoin tra
 
 | | |
 |---|---|
-| **Sender** | `0xe1a99e5c5b9222c5d61200770e6003bed512a23e` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$18,904** (18,904 USDT) |
-| **Blocks** | 25441506-25441506 |
+| **Sender** | `0x07ae8551be970cb1cca11dd7a11f47ae82e70e67` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$16,872** (16,872 USDT) |
+| **Blocks** | 26268915-26268915 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange store that's known for helping bad guys launder their dirty cash, and you give them a large sum of money to mix it up so it can't be traced back to you. That's basically what happened here, but instead of a physical store, it's a crypto transaction. Someone sent a significant amount of money, $18,904, to a place called Railgun Relay, which is like a digital version of that shady store.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 110.
 
 ### 🔥 The Roast
-This guy scored 110 on the stablecoin mixing rule (meaning they're trying to mix up their money in a way that makes it hard to track, like using a super powerful washing machine for their dirty cash). They're using Railgun Relay, which is basically a crypto laundry service, to try and hide the origin of their funds. It's like they're trying to put their money through a spin cycle to get rid of any dirt on it. And with a sanction like Tornado Cash looming in the background, this transaction is like a big red flag waving in the air, screaming 'hey, something fishy is going on here!'
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**The risk verdict is HIGH because the transaction involves a large amount of money being sent to a known crypto mixing service, indicating a potential attempt to launder or hide the origin of the funds.**
+**HIGH — API error**
 
-It's recommended to immediately flag this transaction for further review and to consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Additionally, the sender's wallet and associated transactions should be monitored closely for any other suspicious activity.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1595,10 +1638,10 @@ It's recommended to immediately flag this transaction for further review and to 
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $18,904 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $16,872 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction in question has been flagged for potential money laundering activity, triggering the stablecoin_mixing rule (31 CFR 1020.210). The sender's transaction to Railgun Relay, a known crypto mixing service, raises suspicions of attempted structuring (31 CFR 1020.315) to evade detection. The large transaction amount of $18,904 in USDT stablecoin further increases the suspicion of illicit activity. This activity may be subject to reporting under the Bank Secrecy Act (BSA) as a suspicious transaction.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -1608,21 +1651,21 @@ The transaction in question has been flagged for potential money laundering acti
 
 | | |
 |---|---|
-| **Sender** | `0x4b7befdb5086035b232e0a35d7eece09a9d81a4c` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **10** token transfers totaling **$105,250** (4,000 USDT, 2,000 USDT, 3,000 USDT, 4,000 USDT, 3,000 USDT) |
-| **Blocks** | 25440107-25440163 |
+| **Sender** | `0x6db41fd82313e6189b4ff8a027735ed464068587` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10,000** (10,000 USDT) |
+| **Blocks** | 26266329-26266329 |
 
 ### 💬 What Happened
-Imagine walking into a store that's known for helping people hide their money, like a secret laundry service but for cash. This is basically what happened here, but with cryptocurrency. Someone sent a lot of money, over $105,000, to a place called Railgun Relay, which is like a middleman that can help mix up the money trails, making it hard to track where the money came from or where it's going.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 110.
 
 ### 🔥 The Roast
-This sender scored 110 on the stablecoin mixing rule, meaning they're trying to mix up their cryptocurrency trail by sending it through Railgun Relay, a bit like trying to erase their footprints in the sand. They sent 10 big chunks of money, totaling $105,250, which is a huge red flag. It's like they're trying to hide something, and the fact that they're using a relay service that can obscure the origin of funds is suspicious, to say the least. They essentially got caught trying to sneak their money through a crypto laundry service, which is a big no-no, especially since services like Tornado Cash, a similar mixing service, have been sanctioned by the U.S. Treasury for helping bad guys launder billions.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**The risk is HIGH because the sender is using a mixing service to obscure the origin of over $100,000 in cryptocurrency, which is a clear indicator of potential money laundering or illicit activity.**
+**HIGH — API error**
 
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with FinCEN. It's also recommended to monitor the sender's wallet and the recipient's wallet for any further suspicious activity and to review the transaction history to identify any potential patterns or connections to known illicit entities.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1636,10 +1679,10 @@ Immediately flag this transaction for further review and consider filing a Suspi
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 10 stablecoin transfer(s) to Railgun Relay: $105,250 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10,000 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction pattern exhibited by the sender wallet, involving 10 stablecoin transfers totaling $105,250 to Railgun Relay, triggers concerns under the Bank Secrecy Act (BSA) and specifically the Suspicious Activity Report (SAR) filing requirements. This activity is indicative of potential money laundering or other illicit financial activity, as outlined in 31 CFR Chapter X, and warrants further investigation. The sender's use of a mixing service, as evidenced by the stablecoin mixing score of 110, suggests an attempt to obscure the origin and destination of the funds, which is a key indicator of suspicious activity as per the FinCEN guidelines.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -1649,21 +1692,21 @@ The transaction pattern exhibited by the sender wallet, involving 10 stablecoin 
 
 | | |
 |---|---|
-| **Sender** | `0x05839e02ff4e49e5b2a274fb2eaa148adcf52753` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$10,025** (10,025 USDC) |
-| **Blocks** | 25440080-25440080 |
+| **Sender** | `0xdc1d8a54aad3fd368b093b223765cec2e6dd1019` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$83,970** (83,970 USDT) |
+| **Blocks** | 26264977-26264977 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange store that's known for helping criminals launder their dirty cash, and you hand over $10,025 in cash to be mixed with other people's money so it can't be traced back to you. That's basically what happened here, but instead of a physical store, it's a crypto transaction. The sender sent $10,025 in a type of cryptocurrency called stablecoin to a place called Railgun Relay, which is like a cryptocurrency mixing service. This service is similar to Tornado Cash, which was banned by the U.S. government for helping bad people launder money.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 110.
 
 ### 🔥 The Roast
-Wow, this sender really wanted to keep their transaction under the radar, didn't they? They scored 110 on the stablecoin mixing rule, which means they're basically waving a big red flag saying 'hey, I'm trying to hide something!' By sending $10,025 in stablecoin to Railgun Relay, they're essentially trying to mix their money with others to avoid detection. That's like trying to sneak into a nightclub through the back door, but getting caught on camera anyway. And let's be real, using a service like Railgun Relay is like wearing a neon sign that says 'I'm up to no good' - it's a clear violation of the Bank Secrecy Act (which requires financial institutions to report suspicious transactions) and the USA PATRIOT Act (which aims to prevent money laundering and terrorist financing).
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**The risk verdict is HIGH because the transaction involves a large amount of money being sent to a cryptocurrency mixing service, which is a clear indicator of potential money laundering activity.**
+**HIGH — API error**
 
-It is recommended that this transaction be flagged for further review and that the sender's wallet be monitored for any future suspicious activity. Additionally, a report should be filed with the Financial Crimes Enforcement Network (FinCEN) as required by the Bank Secrecy Act.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1677,10 +1720,10 @@ It is recommended that this transaction be flagged for further review and that t
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $10,025 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $83,970 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction in question involves a single stablecoin transfer of $10,025 to Railgun Relay, which is a cryptocurrency mixing service. This activity is indicative of potential money laundering and is in violation of 31 CFR Chapter X (Bank Secrecy Act) and 31 USC 5311-5330 (USA PATRIOT Act). The sender's wallet profile is largely unknown, which adds to the suspicious nature of the transaction. The AML engine scoring indicates a high risk of stablecoin mixing, with a score of 110.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -1690,21 +1733,21 @@ The transaction in question involves a single stablecoin transfer of $10,025 to 
 
 | | |
 |---|---|
-| **Sender** | `0xc72ccd1d38814d455dfeb68713648491f7e170af` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$17,177** (10,308 USDT, 6,869 USDT) |
-| **Blocks** | 25425605-25439942 |
+| **Sender** | `0x1c542f954ae355147a42e7e6a7f57be897394674` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$12,589** (12,589 USDC) |
+| **Blocks** | 26264294-26264294 |
 
 ### 💬 What Happened
-This is like trying to sneak into a heavily guarded bank through a secret door - someone is attempting to move a large amount of money ($17,177) through a service called Railgun Relay, which is connected to Tornado Cash, a known money laundering hub. Essentially, the sender is trying to mix their funds with others to disguise the origin of the money. It's similar to walking into a known money laundering front and expecting to remain anonymous.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 110.
 
 ### 🔥 The Roast
-Scored 110 on the stablecoin mixing rule (meaning this address is trying to blend its stablecoins, like USDT, with others to hide the money trail). This is like trying to put lipstick on a pig and calling it a supermodel - it's still a pig, and in this case, a potentially dirty one. The sender is interacting with Railgun Relay, which is like a cousin of Tornado Cash, a service that's been sanctioned by the U.S. Treasury for helping North Korea's hackers launder billions. Nice try, but not nice enough to avoid the watchful eyes of the AML gods.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — the transaction involves a large amount of money being sent to a service linked to a sanctioned crypto mixing service, indicating a potential money laundering attempt.**
+**HIGH — API error**
 
-Flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Investigate the sender's wallet profile and transaction history to determine the source of the funds and potential connections to other high-risk activities.
+Retry analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -1718,10 +1761,10 @@ Flag this transaction for further review and consider filing a Suspicious Activi
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Railgun Relay: $17,177 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $12,589 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-The sender's interaction with Railgun Relay, a service linked to the sanctioned Tornado Cash, triggers a high-risk alert under the Bank Secrecy Act (BSA) and the USA PATRIOT Act. The transaction pattern, involving two stablecoin transfers totaling $17,177, meets the criteria for suspicious activity reporting under 31 CFR 1020.320. The stablecoin mixing rule (score: 110) indicates a potential attempt to disguise the origin of the funds, which, combined with the connection to a sanctioned service, warrants further investigation.
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -1731,136 +1774,13 @@ The sender's interaction with Railgun Relay, a service linked to the sanctioned 
 
 | | |
 |---|---|
-| **Sender** | `0x588a3032aa9210151aafef96484a66299ec1346b` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$19,950** (19,950 DAI) |
-| **Blocks** | 25438934-25438934 |
+| **Sender** | `0x3e4a9faa89aaba5ba61ad7cdd5438e8fd46dfa7f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$25,100** (25,100 USDT) |
+| **Blocks** | 26261321-26261321 |
 
 ### 💬 What Happened
-Imagine walking into a shady money exchange that's been blacklisted by the government, and handing over a large sum of cash to someone you don't know. That's basically what happened here, but with crypto. Someone sent a big chunk of money, $19,950 to be exact, to a place called Railgun Relay, which is like a middleman that can help hide where the money is really going. This is a major red flag because it's similar to using a service like Tornado Cash, which was shut down by the government for helping bad guys launder money.
-
-### 🔥 The Roast
-Wow, you really know how to make a bad first impression, don't you? You scored 110 on the stablecoin mixing rule, which means you're basically waving a big flag that says 'I'm trying to hide something' by sending a huge amount of stablecoin (think of it like a digital dollar) to a relay service that can obscure the trail. That's like trying to sneak into a club with a fake ID, but the bouncer is the U.S. Treasury, and they're not having it. You're also interacting with a service that's similar to Tornado Cash, which is like the crypto equivalent of a known money laundering front - not a good look.
-
-### 🎯 Verdict & Next Steps
-**HIGH — The transaction's large value and the sender's use of a relay service that can obscure the trail pose a significant risk of money laundering.**
-
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It's also a good idea to monitor this sender's activity closely for any other potential red flags.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $19,950 total (DAI) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-The transaction in question has been flagged for potential money laundering activity due to the sender's interaction with Railgun Relay, a service that may be used to obscure the origin and destination of funds. This activity is potentially in violation of the Bank Secrecy Act (BSA) and the USA PATRIOT Act, and may also trigger the requirements of 31 CFR Chapter X, particularly with regards to the reporting of suspicious transactions. The transaction's high value and the use of a stablecoin, such as DAI, further elevate the suspicious nature of this activity.
-
-</details>
-
----
-
-## Finding #44: HIGH — Score 110
-
-| | |
-|---|---|
-| **Sender** | `0x6355025258de38ba3890379f9873f260a174f331` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$24,060** (24,060 USDT) |
-| **Blocks** | 25438719-25438719 |
-
-### 💬 What Happened
-Imagine walking into a shady store that's known for helping people mix their money to hide where it came from. That's basically what happened here, but with cryptocurrency. Someone sent a large amount of money, $24,060, to a place called Railgun Relay, which is like a middleman that can help obscure the trail of the money.
-
-### 🔥 The Roast
-This sender just scored a big fat red flag, like they're trying out for a role in a money laundering movie. They sent $24,060 to Railgun Relay, which is essentially a crypto mixing service, kind of like Tornado Cash, which was sanctioned by the U.S. Treasury (that's like being on the U.S. government's naughty list) for helping bad guys like North Korea's Lazarus Group launder billions. This transaction scored 110 on the stablecoin_mixing rule (meaning it's a big deal when someone sends a lot of stablecoin, or cryptocurrency tied to the value of a real currency like the U.S. dollar, to a mixing service), and honestly, it's not looking good for this sender.
-
-### 🎯 Verdict & Next Steps
-**HIGH — the large transfer of funds to a mixing service is a strong indicator of potential money laundering activity.**
-
-Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). It's also a good idea to monitor this sender's and receiver's future activities closely for any other signs of illicit activity.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $24,060 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-This transaction has been flagged for potential money laundering activity, triggering the stablecoin_mixing rule due to the large transfer of $24,060 in USDT to Railgun Relay. The transaction is considered high-risk due to the involvement of a mixing service, which is a known tactic used to obscure the origin and destination of illicit funds, as outlined in the Bank Secrecy Act (BSA) and the USA PATRIOT Act. The OFAC sanctions on similar services, such as Tornado Cash, further support the suspicious nature of this activity.
-
-</details>
-
----
-
-## Finding #45: HIGH — Score 110
-
-| | |
-|---|---|
-| **Sender** | `0xb787ae654b07a8daa83547581ddc68b16847ca17` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$19,557** (19,557 USDT) |
-| **Blocks** | 25438587-25438587 |
-
-### 💬 What Happened
-Someone just sent a large amount of money, $19,557 to be exact, to a place called Railgun Relay, which is like a money blender that mixes funds to hide where they came from, similar to a shady character trying to launder cash at a sketchy casino. This transaction is like walking into a known money laundering front, it raises a lot of red flags. The money was sent in a type of digital currency called stablecoin, which is like a digital dollar, and it's all happening on a public ledger called a blockchain.
-
-### 🔥 The Roast
-This sender is either very bad at hiding their tracks or they're trying to win an award for 'most obvious money laundering attempt'. They scored a whopping 110 on the stablecoin mixing rule, which basically means they're trying to mix their money with others to avoid detection, like trying to sneak into a party without being noticed, but really they're just standing out like a sore thumb. The fact that they sent the money to Railgun Relay, a known crypto mixer, is like wearing a neon sign that says 'I'm up to no good', and by the way, this address is also linked to Tornado Cash, which is like a big no-no, it's been sanctioned by the U.S. Treasury, meaning it's literally on the U.S. government's bad guy list, and the OFAC hit rule, meaning this address is literally on the U.S. Treasury's sanctions blacklist, is definitely applicable here.
-
-### 🎯 Verdict & Next Steps
-**HIGH — the large amount of money being sent to a known crypto mixer, combined with the link to a sanctioned entity, poses a significant risk of money laundering and terrorist financing.**
-
-Immediately flag this transaction for further review and consider filing a suspicious activity report with the Financial Crimes Enforcement Network (FinCEN). It's also recommended to monitor the sender's wallet and the recipient's wallet for any further suspicious activity.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $19,557 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-The transaction in question has been flagged for suspicious activity due to a high-risk scoring on the stablecoin mixing rule, indicating a potential attempt to launder funds. The sender's wallet profile lacks transparency, with unknown wallet age, total transaction count, and days since last activity, which further raises concerns. Additionally, the transaction's link to Railgun Relay, a known crypto mixer, and its connection to Tornado Cash, a sanctioned entity, warrants a suspicious activity report, as per the Bank Secrecy Act (BSA) and the USA PATRIOT Act, specifically referencing 31 CFR 1020.320 and 31 CFR 1023.320.
-
-</details>
-
----
-
-## Finding #46: HIGH — Score 110
-
-| | |
-|---|---|
-| **Sender** | `0xb99932220c8e7e1a666847262256a42a407afe36` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$59,602** (59,602 USDT) |
-| **Blocks** | 25438288-25438288 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 110.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -1882,32 +1802,32 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $59,602 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $25,100 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #47: HIGH — Score 110
+## Finding #44: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x58ea9699b84dead64f2c7e5add56c2567f196c11` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$19,886** (9,944 USDC, 9,941 USDC) |
-| **Blocks** | 25433031-25438267 |
+| **Sender** | `0x3f3ee0a9cac2d01db44001eca3e8382fbe40207b` |
+| **Target** | ChangeNOW 10 (`0xa12e1462d0ced572f3...`) |
+| **Activity** | **6** txs totaling **5.2493 ETH** ($12,293) |
+| **Blocks** | 26237806-26285712 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with ChangeNOW 10. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -1917,38 +1837,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 78 days |
+| Total Transactions | 121663 |
+| Current Balance | 83.510073 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Railgun Relay: $19,886 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to ChangeNOW 10 — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #48: HIGH — Score 110
+## Finding #45: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xce72c9adbcd18d1307047866b44278ce19fbe33f` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$24,938** (24,938 USDT) |
-| **Blocks** | 25436892-25436892 |
+| **Sender** | `0x280708390b120003996efb6fdaaab55cbcb2e3b9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0631 ETH** ($148) |
+| **Blocks** | 26285450-26285450 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -1958,38 +1878,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000005 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $24,938 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #49: HIGH — Score 110
+## Finding #46: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x8653bced10b7d9ebc1bdb3282d226cd27c8cdbc5` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$173,814** (173,814 USDT) |
-| **Blocks** | 25436666-25436666 |
+| **Sender** | `0xa6bfe8c38c8e3b7c9437cbc4cb073e4fe478ff3e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0019 ETH** ($4) |
+| **Blocks** | 26285412-26285412 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -1999,38 +1919,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000005 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $173,814 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #50: HIGH — Score 110
+## Finding #47: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xe741e599ab539f5acf7fe70ed19064844930a899` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$19,950** (19,950 USDC) |
-| **Blocks** | 25436515-25436515 |
+| **Sender** | `0x22bd85d58cf7fd15802f460ec876240cd33a9610` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0015 ETH** ($3) |
+| **Blocks** | 26285376-26285376 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2040,38 +1960,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000003 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $19,950 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #51: HIGH — Score 110
+## Finding #48: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xb790bf98ca57a18ccfbe773b84487ca3346e9148` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$20,682** (20,682 USDC) |
-| **Blocks** | 25435832-25435832 |
+| **Sender** | `0x0338488d2f14db65213aa1b3223c15db2b0666f9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.1330 ETH** ($311) |
+| **Blocks** | 26285255-26285255 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2081,38 +2001,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000007 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $20,682 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #52: HIGH — Score 110
+## Finding #49: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x2c8934692425cac3e157a11363414ed396b32a87` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$12,464** (12,464 USDC) |
-| **Blocks** | 25435406-25435406 |
+| **Sender** | `0xd33bc6d6c3676c0ef5b7eb1a1cd1783ec1d8627d` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0642 ETH** ($150) |
+| **Blocks** | 26285103-26285103 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2122,38 +2042,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $12,464 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #53: HIGH — Score 110
+## Finding #50: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xa4f2ea0a81179362558ebc1d2bc817c9a0134ee3` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$123,690** (123,690 USDT) |
-| **Blocks** | 25434614-25434614 |
+| **Sender** | `0xaaaa30ca050cc0c992181dbd12704dc1818dd15b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0309 ETH** ($72) |
+| **Blocks** | 26285102-26285102 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2163,38 +2083,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $123,690 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #54: HIGH — Score 110
+## Finding #51: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xdd9a61204bc2914ec4d253d087cca056474dbbef` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$16,459** (16,459 USDC) |
-| **Blocks** | 25433476-25433476 |
+| **Sender** | `0x6b260772a25a6abe382dbce97c066e67e20bd966` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0266 ETH** ($62) |
+| **Blocks** | 26285096-26285096 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2204,38 +2124,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $16,459 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #55: HIGH — Score 110
+## Finding #52: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x65b868ba659631fd7ba3a2cbd71e631b309df48f` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$11,557** (11,557 USDC) |
-| **Blocks** | 25433473-25433473 |
+| **Sender** | `0x216e45863c49eb7c41e04939854fb5e3c1d9e236` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0258 ETH** ($60) |
+| **Blocks** | 26285030-26285030 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2245,38 +2165,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000003 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $11,557 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #56: HIGH — Score 110
+## Finding #53: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xe74cba7fe9044315bf96a642d1befcf9c94a360c` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **3** token transfers totaling **$18,689** (7,272 USDC, 1,197 USDC, 10,221 USDC) |
-| **Blocks** | 25414052-25431857 |
+| **Sender** | `0x1e24db8973c00672ecf22d8465bae404d7a27bd6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.4128 ETH** ($967) |
+| **Blocks** | 26284869-26284869 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2286,38 +2206,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 3 stablecoin transfer(s) to Railgun Relay: $18,689 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #57: HIGH — Score 110
+## Finding #54: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x708578f05fb1009124e75e0cb5aadc35a8c48be5` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$18,324** (18,324 USDC) |
-| **Blocks** | 25431192-25431192 |
+| **Sender** | `0x202425a682ec9a2b481f2acefdc80f6e4fdc416d` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.3691 ETH** ($864) |
+| **Blocks** | 26284860-26284860 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2327,38 +2247,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $18,324 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #58: HIGH — Score 110
+## Finding #55: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x12899817cedf03c3e106e8f152d279cb3fec1722` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$79,642** (79,642 USDT) |
-| **Blocks** | 25431031-25431031 |
+| **Sender** | `0x9b30510a4391accded3c20723bb2d4922572c669` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.2384 ETH** ($558) |
+| **Blocks** | 26284857-26284857 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2368,38 +2288,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $79,642 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #59: HIGH — Score 110
+## Finding #56: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x475524cfa18a8109caaf6be8a8f7a2a6f38873c3` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$14,961** (14,961 USDT) |
-| **Blocks** | 25429863-25429863 |
+| **Sender** | `0x6694a3423b0aef9e6213db14f56684de5894f8ad` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0654 ETH** ($153) |
+| **Blocks** | 26284841-26284841 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2409,38 +2329,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $14,961 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #60: HIGH — Score 110
+## Finding #57: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x9cbaa177ea1671f4c489f2c2888963f68422dc90` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$21,028** (21,028 USDT) |
-| **Blocks** | 25429708-25429708 |
+| **Sender** | `0x39c0fa249b34057480d5a8b9444c911373b8cad2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0716 ETH** ($168) |
+| **Blocks** | 26284829-26284829 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2450,38 +2370,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $21,028 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #61: HIGH — Score 110
+## Finding #58: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xe5a84ed1f0696c0bb71138217c43e0cec3f34adb` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$26,837** (26,837 USDC) |
-| **Blocks** | 25429699-25429699 |
+| **Sender** | `0x57d53c6b1454e98c408fdbda0d243ed50ef003fb` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.1513 ETH** ($354) |
+| **Blocks** | 26284749-26284749 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2491,38 +2411,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $26,837 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #62: HIGH — Score 110
+## Finding #59: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xc247aa36d3378e64df967050ddeba695abf14eb4` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$79,801** (79,801 USDT) |
-| **Blocks** | 25429132-25429132 |
+| **Sender** | `0x31952a7ceddfa75d7501e816608661b6c0d1eb12` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **2** txs totaling **0.0057 ETH** ($13) |
+| **Blocks** | 26284613-26284647 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2532,38 +2452,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000004 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $79,801 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #63: HIGH — Score 110
+## Finding #60: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x47bd834b539df0b749cd852933930eeea02137fa` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$86,888** (86,888 USDT) |
-| **Blocks** | 25425193-25425193 |
+| **Sender** | `0x9097f6d7ee9adcce92bbedd422b76d4040c3735b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0328 ETH** ($77) |
+| **Blocks** | 26284641-26284641 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2573,38 +2493,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000003 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $86,888 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #64: HIGH — Score 110
+## Finding #61: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x19cca9cad3516fd735376b1122f94759328955d2` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$109,748** (109,748 USDT) |
-| **Blocks** | 25425174-25425174 |
+| **Sender** | `0x1ddbecd67beccf51bd0408060e1eb34523b49724` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.1500 ETH** ($351) |
+| **Blocks** | 26284592-26284592 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2614,38 +2534,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000008 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $109,748 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #65: HIGH — Score 110
+## Finding #62: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xa922742c7ed04be9ff9a051a72a43171283f8be6` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$113,924** (113,924 USDT) |
-| **Blocks** | 25425143-25425143 |
+| **Sender** | `0xa39a5d25c25bbfb09dd86b6e290b456651d31093` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0013 ETH** ($3) |
+| **Blocks** | 26284571-26284571 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2655,38 +2575,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000004 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $113,924 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #66: HIGH — Score 110
+## Finding #63: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x541098c5e5067f73697f8ede6ea6f997e97a4929` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$19,850** (19,850 USDT) |
-| **Blocks** | 25424635-25424635 |
+| **Sender** | `0x66670c4c077ecadbdbad9f42a3b74f1eb4df91aa` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0747 ETH** ($175) |
+| **Blocks** | 26284473-26284473 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2696,38 +2616,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000003 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $19,850 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #67: HIGH — Score 110
+## Finding #64: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xb23ee62d1bb7dfb4471f83b03a4be8ef2c9cf8d7` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$198,502** (99,750 USDT, 98,752 USDT) |
-| **Blocks** | 25421754-25422654 |
+| **Sender** | `0xc45884f26959dc154c34d007615514414ea3a436` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.1285 ETH** ($301) |
+| **Blocks** | 26284210-26284210 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2737,38 +2657,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Railgun Relay: $198,502 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #68: HIGH — Score 110
+## Finding #65: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x9edb20dd6c75404d1e7698f39a9c79a6b6d2309d` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$30,409** (30,409 USDC) |
-| **Blocks** | 25422554-25422554 |
+| **Sender** | `0x4430a88a6830428aff01b2a0549658b347efb16d` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0030 ETH** ($7) |
+| **Blocks** | 26284167-26284167 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2778,38 +2698,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $30,409 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #69: HIGH — Score 110
+## Finding #66: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xa3d8b4cd72929354cf6454c9a602f5459955da4c` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$10,474** (10,474 USDT) |
-| **Blocks** | 25422423-25422423 |
+| **Sender** | `0xd1ce28bcec226675236b9a651a9930761100e650` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0051 ETH** ($12) |
+| **Blocks** | 26284146-26284146 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2819,38 +2739,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $10,474 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #70: HIGH — Score 110
+## Finding #67: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x9b734c268831ff68727e266948a02e8394d21ff1` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$59,850** (29,925 USDT, 29,925 USDT) |
-| **Blocks** | 25421821-25421885 |
+| **Sender** | `0x1790dcb239248f47b4e5775bff05d2def8ee93b8` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0250 ETH** ($59) |
+| **Blocks** | 26284026-26284026 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2860,38 +2780,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Railgun Relay: $59,850 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #71: HIGH — Score 110
+## Finding #68: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x90ff4877bfe4f6b4e82a0ff456861690efdd18b5` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$40,093** (40,093 USDC) |
-| **Blocks** | 25420570-25420570 |
+| **Sender** | `0x7c774ac0f7e36a229ffcaff95bf06c85d76dc342` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0039 ETH** ($9) |
+| **Blocks** | 26283976-26283976 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2901,38 +2821,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $40,093 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #72: HIGH — Score 110
+## Finding #69: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x10805177890f4e8bb246853a72c525b302719dc6` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$44,888** (44,888 USDT) |
-| **Blocks** | 25418233-25418233 |
+| **Sender** | `0x710f33a2f03e984c8f2e52d1414c89012c6cc6ae` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.1118 ETH** ($262) |
+| **Blocks** | 26283975-26283975 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2942,38 +2862,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $44,888 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #73: HIGH — Score 110
+## Finding #70: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x64de91cfa1bf4ce220ad3a0148bc812bf510f8f2` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$798,000** (798,000 DAI) |
-| **Blocks** | 25417910-25417910 |
+| **Sender** | `0x4fd43418f28eb0f20f24de011f07889223c2edc1` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0130 ETH** ($30) |
+| **Blocks** | 26283617-26283617 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -2983,38 +2903,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $798,000 total (DAI) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #74: HIGH — Score 110
+## Finding #71: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x383b7f6a0da871359bcb31a657a39201d94d4955` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$10,505** (4,161 USDC, 6,344 USDC) |
-| **Blocks** | 25410301-25417442 |
+| **Sender** | `0x632519f6cc189d9477c4c96d576992596bddfd1d` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0664 ETH** ($156) |
+| **Blocks** | 26283376-26283376 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -3024,38 +2944,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Railgun Relay: $10,505 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #75: HIGH — Score 110
+## Finding #72: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xb0f0731cfb36adae142c30be030c3ea857fa04d2` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$72,192** (72,192 USDC) |
-| **Blocks** | 25416960-25416960 |
+| **Sender** | `0x8db0b6e7d7b1a6094b1bcc73a28968fb96ff855f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0030 ETH** ($7) |
+| **Blocks** | 26283375-26283375 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -3065,38 +2985,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $72,192 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #76: HIGH — Score 110
+## Finding #73: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x2c40ec5df7b6accbc04423be98200b028aca2856` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$15,960** (15,960 USDT) |
-| **Blocks** | 25415562-25415562 |
+| **Sender** | `0xf8b5946ec2114125da396b784b6f82fa112a26ef` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0875 ETH** ($205) |
+| **Blocks** | 26283158-26283158 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -3106,38 +3026,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $15,960 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #77: HIGH — Score 110
+## Finding #74: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x17b4db7081643738f1d6007c1a5a6d0b8580b056` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$226,842** (226,842 USDT) |
-| **Blocks** | 25415263-25415263 |
+| **Sender** | `0x7f9278adb745a6018e83c183e655494e08e51edf` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0110 ETH** ($26) |
+| **Blocks** | 26282989-26282989 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -3147,38 +3067,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $226,842 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #78: HIGH — Score 110
+## Finding #75: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xeb8db03bcf157ff68f58a623783b5a84928a1a41` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$52,868** (52,868 USDC) |
-| **Blocks** | 25413578-25413578 |
+| **Sender** | `0x3f0b882ddaf2e5f17214164b26b32b72cb414003` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.7800 ETH** ($1,827) |
+| **Blocks** | 26282852-26282852 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -3188,38 +3108,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $52,868 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #79: HIGH — Score 110
+## Finding #76: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x70f311c2261f7c149723a7ef7302e74e959ad73c` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$21,940** (21,940 USDC) |
-| **Blocks** | 25412723-25412723 |
+| **Sender** | `0xa39879844cbad2c15044929597d9d03ce7664f80` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0022 ETH** ($5) |
+| **Blocks** | 26282680-26282680 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -3229,38 +3149,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Railgun Relay: $21,940 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #80: HIGH — Score 110
+## Finding #77: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x46e563dadedd8816c83bc86b46538a7ac12f8e76` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$20,000** (20,000 USDC) |
-| **Blocks** | 25459360-25459360 |
+| **Sender** | `0x2b5394203a6b3087745f0da0338b56034c188671` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0026 ETH** ($6) |
+| **Blocks** | 26282668-26282668 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -3270,38 +3190,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $20,000 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #81: HIGH — Score 110
+## Finding #78: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xbb34960afec64f3f1cc78b0c9c342c4657021696` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **2** token transfers totaling **$85,988** (21,497 USDC, 64,491 USDC) |
-| **Blocks** | 25451249-25452488 |
+| **Sender** | `0xb7a37559136e6c322071e1aaf9c32bb7601a41e6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.2465 ETH** ($577) |
+| **Blocks** | 26282304-26282304 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -3311,38 +3231,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $85,988 total (USDC) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #82: HIGH — Score 110
+## Finding #79: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xabe9b4ff7b32c9eb45b29a1f8065fd7d2cd4cfb6` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **3** token transfers totaling **$10,597** (3,073 USDT, 2,524 USDC, 5,000 USDC) |
-| **Blocks** | 25427738-25442470 |
+| **Sender** | `0x6aa6aebf49045d22bbaa4bde74b2689601f7e639` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.3101 ETH** ($726) |
+| **Blocks** | 26282292-26282292 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -3352,38 +3272,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 3 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $10,597 total (USDT, USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #83: HIGH — Score 110
+## Finding #80: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xc46bc7d74ffaa62868f3f34ea701cc434afb1489` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **2** token transfers totaling **$45,100** (25,000 USDT, 20,100 USDT) |
-| **Blocks** | 25417993-25431721 |
+| **Sender** | `0x818ce92ffe4efc1b95b9edeb001c97fd4aad134e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.8839 ETH** ($2,070) |
+| **Blocks** | 26282249-26282249 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -3393,38 +3313,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $45,100 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #84: HIGH — Score 110
+## Finding #81: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x016452a1139dfbe6f6be85de8e59147dca52cf43` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$165,190** (165,190 USDT) |
-| **Blocks** | 25428659-25428659 |
+| **Sender** | `0xc30dff4d848b27398aed299fb53dfb14786256bd` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.5000 ETH** ($1,171) |
+| **Blocks** | 26282032-26282032 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -3434,38 +3354,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $165,190 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #85: HIGH — Score 110
+## Finding #82: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x99b480b35f6cbf0634e7c00c50e5c06cc0da2f44` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$10,061** (10,061 USDT) |
-| **Blocks** | 25421674-25421674 |
+| **Sender** | `0x0f0d419e8ac4deeb15467e5d65a205f04b313f80` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.4339 ETH** ($1,016) |
+| **Blocks** | 26281969-26281969 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -3475,38 +3395,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $10,061 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #86: HIGH — Score 110
+## Finding #83: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xc619b01f1a4f894c5e83338c42f98dcb82b710f5` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$80,555** (80,555 USDT) |
-| **Blocks** | 25421603-25421603 |
+| **Sender** | `0x46f3cd19d37a425ac7ae1b7ba0e3a2395a1264ee` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0660 ETH** ($155) |
+| **Blocks** | 26281703-26281703 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -3516,38 +3436,38 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $80,555 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #87: HIGH — Score 110
+## Finding #84: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0x68a07be57cd056ee3512f2b9ee70a667203d7d14` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$14,871** (14,871 USDT) |
-| **Blocks** | 25419324-25419324 |
+| **Sender** | `0x12c54e845ebd3fa115bc2c0d17e4983f502e5a85` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0863 ETH** ($202) |
+| **Blocks** | 26281600-26281600 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 110.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**HIGH — API error**
+**MEDIUM — API error**
 
 Retry analysis.
 
@@ -3557,32 +3477,6182 @@ Retry analysis.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
+| Days Since Last Activity | 0 |
 
-**Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $14,871 total (USDT) from 1 unique sender(s)
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #88: MEDIUM — Score 80
+## Finding #85: MEDIUM — Score 85
 
 | | |
 |---|---|
-| **Sender** | `0xed94aa62bc1cd15f23f461560418770655054732` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$9,975** (9,975 USDC) |
-| **Blocks** | 25460019-25460019 |
+| **Sender** | `0x1b7aefad3411c85c11e434687ec10c4b1614070c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0234 ETH** ($55) |
+| **Blocks** | 26281596-26281596 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #86: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x55bb529d5f947041e2ac0e9864276c8888254031` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0042 ETH** ($10) |
+| **Blocks** | 26281431-26281431 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #87: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xb59c4450ead202af7bd3d4c08d2294512d2a052e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0950 ETH** ($223) |
+| **Blocks** | 26281168-26281168 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #88: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xeb96b638492747a47b318f19dd473e1eb0884e7a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0086 ETH** ($20) |
+| **Blocks** | 26280914-26280914 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #89: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xd5e5d831bbcf08f77ebc431def1bf238774675d5` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0013 ETH** ($3) |
+| **Blocks** | 26280716-26280716 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #90: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x64d1e28ac4224843bd83b7922a70158af1d22e02` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0021 ETH** ($5) |
+| **Blocks** | 26280706-26280706 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #91: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xf64171f06c11bb58f00f3dd8ba8c7f884b740873` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.6772 ETH** ($1,586) |
+| **Blocks** | 26280031-26280031 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #92: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x15a3b65fb92a855e1e9484667081bcb525e4360f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0035 ETH** ($8) |
+| **Blocks** | 26279924-26279924 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #93: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xd4b13cc88146f2748a544b531d50fd7d26cf16bd` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0028 ETH** ($7) |
+| **Blocks** | 26279738-26279738 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #94: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x62d623cb3128533b4b22bf2a1cd2006e7da35ddf` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0299 ETH** ($70) |
+| **Blocks** | 26279686-26279686 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #95: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x42b043af562bd87effcb97d3449c0e30396dd755` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.1426 ETH** ($334) |
+| **Blocks** | 26279622-26279622 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #96: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x3fb3d467e207a4cf80ff2b5481627719d948192b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0969 ETH** ($227) |
+| **Blocks** | 26279582-26279582 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #97: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xc7c09477df20cd32793fb6ecf87aaae10957c2f1` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.1647 ETH** ($386) |
+| **Blocks** | 26279385-26279385 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #98: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xa1d9b8f8ab15ba96720fbe0f853559d7e88835c7` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.1754 ETH** ($411) |
+| **Blocks** | 26279350-26279350 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #99: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xe06441967479f2a63ba3773addea7c69d8009f11` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0032 ETH** ($8) |
+| **Blocks** | 26279251-26279251 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #100: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x4f71c0703ce4ed809fa534a6abf949f9b2f72669` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0078 ETH** ($18) |
+| **Blocks** | 26279113-26279113 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #101: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x8199201fe729b988d8024756fd0888df2aa9e18a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0103 ETH** ($24) |
+| **Blocks** | 26278801-26278801 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #102: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x1d96a3e1765ef22c220b5352127434168e0aec3a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.2000 ETH** ($468) |
+| **Blocks** | 26278775-26278775 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #103: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x90aaa5875c18436671f1d3122209afbcbde93744` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0300 ETH** ($70) |
+| **Blocks** | 26278695-26278695 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #104: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x6612c02ba1d8d66a9d4f4b3b1fb8d52f5cf371af` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0031 ETH** ($7) |
+| **Blocks** | 26278636-26278636 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #105: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xaa5cd4d66efea0c7e7b82014edb7455434ba74ec` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0036 ETH** ($9) |
+| **Blocks** | 26278632-26278632 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #106: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x36125e9261eee7eadf188e3686cc82ae450b347a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0759 ETH** ($178) |
+| **Blocks** | 26278567-26278567 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #107: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x2120f722ea70062a4ecf9202c70c298468634eb6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0917 ETH** ($215) |
+| **Blocks** | 26278558-26278558 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #108: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x2e27b0ae9284aa8d41b163931fb70c5a7c5c0d09` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0861 ETH** ($202) |
+| **Blocks** | 26278549-26278549 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #109: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x7efe443660db2f78074fb001d5aba3a67048a407` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0909 ETH** ($213) |
+| **Blocks** | 26278441-26278441 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #110: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x614ef95c757b2ec1b7386417d0d368fa95a57a76` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0858 ETH** ($201) |
+| **Blocks** | 26278414-26278414 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #111: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xadd9ae4cfa0f2c762f3942d7081334eaa373befb` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0067 ETH** ($16) |
+| **Blocks** | 26278180-26278180 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000003 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #112: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xd2a270e86535953b79917fd311805bf4f96a2708` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0090 ETH** ($21) |
+| **Blocks** | 26277686-26277686 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000005 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #113: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xa0310b735b9864c0fd814aad7d94425ba5c80493` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0215 ETH** ($50) |
+| **Blocks** | 26277683-26277683 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000005 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #114: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x66d25940e9915c5dbdcc21b380a86ac1b19873ba` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0129 ETH** ($30) |
+| **Blocks** | 26277557-26277557 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #115: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xe6520252b854e4169c940c3380cc786332e53a09` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0058 ETH** ($14) |
+| **Blocks** | 26277472-26277472 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #116: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x1e45fe8f5a2ad532e5c4088f6f86c0af2516b24a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.3598 ETH** ($842) |
+| **Blocks** | 26277343-26277343 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000003 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #117: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xbdabaa25107170fb62ea6a7dc1b9e03ce5f83fe2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0036 ETH** ($8) |
+| **Blocks** | 26277318-26277318 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000003 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #118: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x4379553f3a78c3a2bc6b2d9e00e817cab8f75826` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.3613 ETH** ($846) |
+| **Blocks** | 26277293-26277293 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000004 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #119: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x6b5698584c1cf04ba6460373790eb3a0506ff8b3` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.3606 ETH** ($844) |
+| **Blocks** | 26277292-26277292 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000004 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #120: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x77eaa1db9b0f029c38cfd981c300328126cabb21` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0050 ETH** ($12) |
+| **Blocks** | 26277289-26277289 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000004 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #121: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xa44903b885f1f24c1ee0dce47f8871f86dd7cfc3` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0043 ETH** ($10) |
+| **Blocks** | 26277242-26277242 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000005 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #122: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x8386e636655de443c45d278b77e5e21c6c85d2f0` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0026 ETH** ($6) |
+| **Blocks** | 26277191-26277191 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000004 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #123: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x68fba14c7d426aba2720dd7f7d24ac0aff8a8224` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.3559 ETH** ($834) |
+| **Blocks** | 26277187-26277187 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000004 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #124: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x2996bcd8580cf45cf4c9181e70e2bc52a802ad3b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.2680 ETH** ($628) |
+| **Blocks** | 26277080-26277080 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000002 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #125: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xaf99e5848f3ffe5b37ad9d5d8b03eeaa1c924b9f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0047 ETH** ($11) |
+| **Blocks** | 26277011-26277011 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #126: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x1668e519b5420d1c1578e87a8c3d9039e96f6477` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0013 ETH** ($3) |
+| **Blocks** | 26276953-26276953 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #127: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x63ab233907bc1823ed61ec7042d2b87521d2d851` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0859 ETH** ($201) |
+| **Blocks** | 26276891-26276891 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #128: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x8e388bc16e462d6509d8c64353b4bc21340c0634` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0950 ETH** ($222) |
+| **Blocks** | 26276880-26276880 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #129: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xd273dba1bb398b6d2668ed7931dc9bf19f47bdd6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.4999 ETH** ($1,171) |
+| **Blocks** | 26276845-26276845 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #130: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x524b53c901ad0ec730d4b321356f7ccf1cd95140` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0049 ETH** ($12) |
+| **Blocks** | 26276679-26276679 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #131: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xbd43f54fbc112d238e7fc7248179d119cb00bb6c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.3502 ETH** ($820) |
+| **Blocks** | 26276668-26276668 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #132: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x5908446e83117ae27b77f6a2fdafdc3c301a5281` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0700 ETH** ($164) |
+| **Blocks** | 26276569-26276569 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #133: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xdaf4206ada1973f6fa263a2c8c44b341926f5415` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.3544 ETH** ($830) |
+| **Blocks** | 26276437-26276437 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #134: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x7e5a63e901386dfbeb6e2ba3756443be871964f5` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.1900 ETH** ($445) |
+| **Blocks** | 26276141-26276141 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #135: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x4205baac4b4e03720905f78d6007b532cc1b6037` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0014 ETH** ($3) |
+| **Blocks** | 26276094-26276094 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #136: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x925a31e95ac5c7daa742b89402d2016d14090fd7` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0263 ETH** ($62) |
+| **Blocks** | 26276079-26276079 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #137: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x24a153de1d08fb880a64aea661dbac5c44e85288` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0013 ETH** ($3) |
+| **Blocks** | 26276004-26276004 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #138: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xb9070c15a8837bba52884ce8674fd83030742005` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.1956 ETH** ($458) |
+| **Blocks** | 26275959-26275959 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #139: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x7e8e00dec0afbee4a5d47967e57efdc5e1f8545a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.0014 ETH** ($3) |
+| **Blocks** | 26275947-26275947 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #140: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xf4ed63993bf26ef14bbcbd2354fd8120ade1f83b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** tx totaling **0.3500 ETH** ($820) |
+| **Blocks** | 26275945-26275945 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000001 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to SideShift Hot Wallet — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #141: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xb7733054f249f97714161f6c28bc4c6096ad2f7a` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285873-26285873 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #142: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x2b4267faa477d3eb1487c4b2301ac42474fa8af4` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285872-26285872 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #143: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x8fb4387c73705c482d41b90b2c64c7eafd29c98c` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285871-26285871 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #144: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x0c4f06360dfdb1fb49c1ad23987e750e7ed936bb` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0500 ETH** ($117) |
+| **Blocks** | 26285871-26285871 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #145: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xef68f402f973addd15ed3e15feed569334d979c6` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.2608 ETH** ($611) |
+| **Blocks** | 26285861-26285861 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #146: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x3623e71ce7511f488aa105406794205822ded20a` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0001 ETH** ($0) |
+| **Blocks** | 26285860-26285860 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #147: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x206dfb97f45fd67c4a480592469220c792eab58c` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285860-26285860 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #148: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xe4f59a2078214c5531ea437f8b275a915f44d546` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285856-26285856 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #149: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xe5cd09974aa56c6be993acc9052c9e136e12066b` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285854-26285854 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #150: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x8db6eaf45df5b9ca4a91ff3d6c538c6c284a1b5a` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0056 ETH** ($13) |
+| **Blocks** | 26285849-26285849 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #151: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x955bfe9ba5321363a3dbc1e43803b8e88326baf5` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0640 ETH** ($150) |
+| **Blocks** | 26285847-26285847 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #152: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x305f7f5b15e4e28d777407e13bc7c702640f5c4b` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285847-26285847 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #153: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x33e553a9f32843ddab4808f1ad3d98730d66469f` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285846-26285846 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #154: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xae5676869afe5a737c880797990bc741dc83e863` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285843-26285843 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #155: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x4ae3bdfa2dc7d9d54c6d8b78fb26464b291c3b3c` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285842-26285842 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #156: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xbb4d0c8aa8dee884440245d14de640fbe0fef928` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285837-26285837 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #157: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x8d7a2d7092a9aeb5b9ffa919b58d3d4c250b8801` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285835-26285835 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #158: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x0841e4ec9901ee007cbbda9f1a9a23655597f263` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285835-26285835 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #159: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xa9c73cc1e48e85b9e763c271d376b542c21ff778` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285832-26285832 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #160: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x30476e3cd562e01d97dbf02ec830330409dda6ba` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285826-26285826 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #161: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xd305b29055b302c55c1d25f83dc361b9079dba7f` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0250 ETH** ($59) |
+| **Blocks** | 26285825-26285825 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #162: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x6bd4829ea2c2ccf05969c890eb5aa1ab227ddbf8` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285821-26285821 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #163: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xd791d5016a1b49d3a4571b2a8f20e1bc3d9e802f` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285817-26285817 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #164: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x781004126fb15b2bfcf5982df607c9d9a3b7d82c` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285814-26285814 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #165: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x4f3cc01253f7ffe33bcce4d5bc3fbd2e46f775a4` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285813-26285813 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #166: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xe08889525f959fb4fb5d3c4555db0b1f98ed1c03` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.2598 ETH** ($608) |
+| **Blocks** | 26285811-26285811 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #167: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x2e98354e10df53b99287dc0123dc490f635a57ac` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285810-26285810 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #168: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x9aa18ba114a6150a3dda5744851dee7afbb8a4b4` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285807-26285807 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #169: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x7233ac96c9167ca0e79a150e3e82bbbe9da0e562` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285806-26285806 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #170: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x1c7bd31bf0073c0a804ba71b2c768f5be8cd5f62` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0558 ETH** ($131) |
+| **Blocks** | 26285803-26285803 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #171: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x3c4699c19cf52c3819f6117536cac700a11e1aa6` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285802-26285802 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #172: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xc7786aa0b394edbf28629e61c00e56656798f0b6` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285800-26285800 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #173: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x56820ef1493bf3c31fa7b791bcc1774cd31042a1` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.2131 ETH** ($499) |
+| **Blocks** | 26285800-26285800 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #174: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xb75605574e054bb40bc7f3c01fac8a5cf44a890b` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($1) |
+| **Blocks** | 26285796-26285796 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #175: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x45d58051a56fd77091c9d990029fc62046855c42` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0100 ETH** ($23) |
+| **Blocks** | 26285790-26285790 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #176: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x0861e1cd42d2e4c29f5fc84af07dfc3db635e18c` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($1) |
+| **Blocks** | 26285788-26285788 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #177: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x5b2d0e13343fd7e4f66aa6629b17dc9f2f54b040` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285787-26285787 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #178: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x5b006d6860a126848cdc5cc96422f0752fd140c2` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285787-26285787 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #179: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xc36ffa4c50e1540d016a8fe1b74cab6388b4b011` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.4568 ETH** ($1,070) |
+| **Blocks** | 26285785-26285785 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #180: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xae8f4dba3d5ef67bd81a5c0aca85bf785cbd3b0a` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285784-26285784 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #181: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x291047ca88771d330eeb43e5590110b702809ce4` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285775-26285775 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #182: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x22e640019467787a3dcd636366e937537e2c9a26` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285773-26285773 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #183: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x944aacd509e26fc579e4e6345188de3df92fa3bc` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285769-26285769 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #184: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x3ce58bdf48f8da78fb12a813c993861b1ef2e1a6` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.1030 ETH** ($241) |
+| **Blocks** | 26285768-26285768 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #185: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xecb7685632a0917652b664b8b385475a536ef28e` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0066 ETH** ($16) |
+| **Blocks** | 26285764-26285764 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #186: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x7d607ce3619934cccabf221f101f8105abe4e48f` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285759-26285759 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #187: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x1d5e2f5b41a2ffd9a3907f95615cb6bd8d5ca162` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0179 ETH** ($42) |
+| **Blocks** | 26285758-26285758 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #188: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x449e1fdd1e4b44affe588001e2529027577e4e52` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0163 ETH** ($38) |
+| **Blocks** | 26285753-26285753 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #189: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x1cc8bb64cd931f80c9271089743f3e7bf5d68ea8` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($1) |
+| **Blocks** | 26285752-26285752 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #190: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xa3626b25e611ce129f2ffd0384d9e68c65e9140c` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($1) |
+| **Blocks** | 26285751-26285751 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #191: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x61bcd1f6fefd16ad8ca7ad7b62cd2cfa997ee8ca` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($1) |
+| **Blocks** | 26285750-26285750 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #192: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x436b0eadcb919ebe4985012865cde99da86fa551` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285749-26285749 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #193: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x8cbed4b973c26365c62f5928830d40ae4403309d` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($1) |
+| **Blocks** | 26285748-26285748 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #194: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x05c8bde6be4796a77f6e2dc02b1ad59999eb206e` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285747-26285747 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #195: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x42f869670dd5105351479835cd9b410b2662eff9` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285746-26285746 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #196: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x5b2bb71b9b5ed00a817cd59b70f9680792054558` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($1) |
+| **Blocks** | 26285743-26285743 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #197: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x21de83579062d2c1cae9a6b60c3239cdf984887f` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285741-26285741 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #198: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x148e129aad35d6f1ed3671e657cd6f0ae5102474` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285736-26285736 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #199: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x7760977f2d36acb66d99b78e4b0de8e25aada98b` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
+| **Blocks** | 26285730-26285730 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #200: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x9f94c7461b1dc8f7160ad996e3bede20cc993b3e` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285729-26285729 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #201: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xcdd812c1146d6268f2dcb0203e1e194d8b3743d6` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0236 ETH** ($55) |
+| **Blocks** | 26285729-26285729 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #202: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xc50a0e7b7d22b2c5af6290ddb4a16fdd456c0016` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($1) |
+| **Blocks** | 26285726-26285726 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #203: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xeffb07698c940c4ab93c5237d7615a3cdb8ac439` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($1) |
+| **Blocks** | 26285725-26285725 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #204: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xa1f1994a11711952cfbac342b0b698100a841c7a` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.2100 ETH** ($492) |
+| **Blocks** | 26285724-26285724 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #205: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x0a9c0c0dfd527b3a25e82a26bc1204b05cc9bace` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0216 ETH** ($50) |
+| **Blocks** | 26285723-26285723 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #206: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xd1bae80b267aef5c739975bf0b8214afa3be349f` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.2650 ETH** ($621) |
+| **Blocks** | 26285723-26285723 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #207: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xf1e560c68611733e52130e0220671080e69bfe9a` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($1) |
+| **Blocks** | 26285720-26285720 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #208: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x5a6544b9ab6b86be45f59d5e5d9ea4541d0a7333` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285709-26285709 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #209: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xb67bf3185747a4f90faa05148f1846d65efb006f` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285709-26285709 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #210: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x8f7c7b3420b04ff219aef7a0df8312cff3422cc9` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.1081 ETH** ($253) |
+| **Blocks** | 26285707-26285707 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #211: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x91c756d1ee0a5b348b47ee80cb29a37dcd0f4f74` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285700-26285700 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #212: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xfe43b797015a7bc57100fb728a2a1fa23b414772` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285699-26285699 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #213: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x15620258c0300560e6e00d3749a3a9b219e61c4a` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285698-26285698 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #214: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x282c0754f47b050c5dcdb227a96fe12266653a15` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285697-26285697 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #215: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xcc399940927f20f58dcf9ffd12294655d44c059b` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285693-26285693 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #216: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xd32e7ab818757e935d928408ff64b2787497ece1` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285693-26285693 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #217: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x26e93254f6a0c05671beacccfc271cfe352a9f73` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($1) |
+| **Blocks** | 26285688-26285688 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #218: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x0d054802cccebab91533b8f6420fe67a9b4bc469` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285687-26285687 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #219: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x43b62c75264d99f8721b754556ecb1a959a8feca` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285686-26285686 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #220: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x1a3c52e3d653957631709094e13f4eb930117a19` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0216 ETH** ($51) |
+| **Blocks** | 26285682-26285682 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #221: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xd49f7de3db51c20ffc5184239513a7a0ca61b6bb` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285675-26285675 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #222: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xc035b4c4720c3d306e4be0d78731ae42e02afd45` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285674-26285674 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #223: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x1525d3bfef9c592fdf16401a8b1bf66c1918fa9b` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0002 ETH** ($1) |
+| **Blocks** | 26285673-26285673 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #224: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x417a2091aad6716669bcd0ce337edb89955eb9ee` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0150 ETH** ($35) |
+| **Blocks** | 26285672-26285672 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #225: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xe8c7c54dd14e9f44d329d4938142c82a07d46b60` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285669-26285669 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #226: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x8540610a9f0894bf41229d8517650a4e1743d4bf` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285668-26285668 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #227: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xcf631ab1350fc2bf457d9f28864d05dfa26b74f1` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0391 ETH** ($92) |
+| **Blocks** | 26285662-26285662 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #228: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x756bb34df11afd2092612ce8d0f69ea76d1c04cd` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0510 ETH** ($119) |
+| **Blocks** | 26285658-26285658 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #229: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xcd6eeb2ac6bf29ab2307d61d8232e578d2b6edbc` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0055 ETH** ($13) |
+| **Blocks** | 26285652-26285652 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #230: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x2d0d70b0c8fea84bc1d1aa244b7edbce5e0b76ce` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0003 ETH** ($1) |
+| **Blocks** | 26285651-26285651 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #231: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x14ee6eaa45096bd3571af1aa0e9472f6467b752e` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0064 ETH** ($15) |
+| **Blocks** | 26285637-26285637 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #232: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0x0142de09537596cc06c54e9462c49844d3f5df9a` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.4750 ETH** ($1,112) |
+| **Blocks** | 26285633-26285633 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #233: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xf5635c40137b0645e0589a9d2a1f96fae132651d` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.1264 ETH** ($296) |
+| **Blocks** | 26285627-26285627 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #234: MEDIUM — Score 85
+
+| | |
+|---|---|
+| **Sender** | `0xcbbebbc1d67585062ae068e5bc50906ac1023bcf` |
+| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
+| **Activity** | **1** tx totaling **0.0368 ETH** ($86) |
+| **Blocks** | 26285626-26285626 |
+
+### 💬 What Happened
+A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 1 |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 85):
+- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #235: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x64cdaa89629fe003eaa31b480d8b63372d109a53` |
+| **Target** | ChangeNOW 10 (`0xa12e1462d0ced572f3...`) |
+| **Activity** | **24** token transfers totaling **$9,462,799,809** (9,460,735,227 STARL, 44,923 SPX, 54,294 SPX, 519,286 ZYPTO, 252,450 XYO) |
+| **Blocks** | 26239608-26285699 |
+
+### 💬 What Happened
+A wallet was caught interacting with ChangeNOW 10. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -3604,26 +9674,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $9,975 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to ChangeNOW 10: $8,182 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #89: MEDIUM — Score 80
+## Finding #236: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x3d41a420b552f2e03ba347df71afcba468756499` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **3** token transfers totaling **$648** (125 USDC, 249 USDC, 274 USDC) |
-| **Blocks** | 25424920-25459606 |
+| **Sender** | `0x643021a794dabfcaabff9279e3d84ef5f1e6a3b2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26285876-26285876 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -3645,26 +9715,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 3 stablecoin transfer(s) to Railgun Relay: $648 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #90: MEDIUM — Score 80
+## Finding #237: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x7eb45ff2db0e1e81b63d5cad4d1f0577bb1c47b8` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$76** (76 USDC) |
-| **Blocks** | 25459585-25459585 |
+| **Sender** | `0x1393105eb871a40ab26b41d8c18927fb710de378` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5** (5 USDC) |
+| **Blocks** | 26285868-26285868 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -3686,26 +9756,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $76 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #91: MEDIUM — Score 80
+## Finding #238: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xd9dd50d69994592eabf3b99a01340d9749de511e` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$1,148** (1,148 USDC) |
-| **Blocks** | 25459122-25459122 |
+| **Sender** | `0x361475e978f57371bc9bb4a5572754c27e4a989a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$30** (30 USDT) |
+| **Blocks** | 26285825-26285825 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -3727,26 +9797,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $1,148 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $30 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #92: MEDIUM — Score 80
+## Finding #239: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x697eb399e183ef580c5c495521b3dacf1c2b1bcc` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$9,975** (9,975 USDC) |
-| **Blocks** | 25457905-25457905 |
+| **Sender** | `0xe7c68f980e5f456773a88daa974c2f93ae03a20a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5** (5 USDC) |
+| **Blocks** | 26285797-26285797 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -3768,26 +9838,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $9,975 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #93: MEDIUM — Score 80
+## Finding #240: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x61dc1fb8e12db9b7074f4816012c56682e39f875` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$5,986** (5,986 USDT) |
-| **Blocks** | 25457682-25457682 |
+| **Sender** | `0xadcccb099064a460740944b42cacd99e58e4856e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,494** (1,494 USDT) |
+| **Blocks** | 26285755-26285755 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -3809,26 +9879,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $5,986 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,494 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #94: MEDIUM — Score 80
+## Finding #241: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x4b7de1b554d052a4a9d30a2f650f3e163ad70d85` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **4** token transfers totaling **$1,424** (200 USDT, 221 USDT, 504 USDT, 499 USDT) |
-| **Blocks** | 25411687-25456160 |
+| **Sender** | `0x5129d4c6b4ec4d9712d0ae978f9be6802c146283` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$2,654** (2,654 USDT) |
+| **Blocks** | 26285617-26285617 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -3850,26 +9920,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 4 stablecoin transfer(s) to Railgun Relay: $1,424 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $2,654 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #95: MEDIUM — Score 80
+## Finding #242: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x59e8f50330a1ab54e8fea36a29075e977a764839` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **3** token transfers totaling **$6,184** (1,696 USDT, 1,696 USDT, 2,793 USDT) |
-| **Blocks** | 25416388-25455773 |
+| **Sender** | `0xeceefe7efd900f2a661429a70ab8164c49b2ef6e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$7,351** (7,351 USDC) |
+| **Blocks** | 26285583-26285583 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -3891,26 +9961,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 3 stablecoin transfer(s) to Railgun Relay: $6,184 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $7,351 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #96: MEDIUM — Score 80
+## Finding #243: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x8b2aefe7afd32e6990f34b8740dd7cd20f60b836` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$7,728** (5,933 USDT, 1,796 USDT) |
-| **Blocks** | 25452566-25455759 |
+| **Sender** | `0x70f9475ff5227eb274d2d910712f8d38ddc68a29` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,770** (1,770 USDT) |
+| **Blocks** | 26285565-26285565 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -3932,26 +10002,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $7,728 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,770 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #97: MEDIUM — Score 80
+## Finding #244: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x1d533a08b29bc8e1bcce96ad19ac07ff85517415` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$1,896** (1,896 USDC) |
-| **Blocks** | 25455674-25455674 |
+| **Sender** | `0x18117cdb3627adfa4d8c092b042346dc247e7b0f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDC) |
+| **Blocks** | 26285538-26285538 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -3973,26 +10043,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $1,896 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $20 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #98: MEDIUM — Score 80
+## Finding #245: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x57cb2d5eff65c897a342a9cef9f013813679b895` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$2,750** (2,750 USDC) |
-| **Blocks** | 25455303-25455303 |
+| **Sender** | `0x26d595d6843fd02667532456cce0da1955bb88d1` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26285457-26285457 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4014,26 +10084,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $2,750 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #99: MEDIUM — Score 80
+## Finding #246: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x83d41bf763b1960f2f43543ed80711bdb55d58a1` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$4,489** (4,489 DAI) |
-| **Blocks** | 25455093-25455093 |
+| **Sender** | `0x3354bc0c86640b1a69491b22f236c67be4f64ca9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$200** (200 USDT) |
+| **Blocks** | 26285447-26285447 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4055,26 +10125,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $4,489 total (DAI) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $200 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #100: MEDIUM — Score 80
+## Finding #247: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xf38b1372f74a378d1e742f525c4969ded6efd9f4` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$72** (72 USDT) |
-| **Blocks** | 25454587-25454587 |
+| **Sender** | `0xeb9aa0c9b9fc5370a3d0cde9ed2026626dd6d258` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDC) |
+| **Blocks** | 26285433-26285433 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4096,26 +10166,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $72 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $20 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #101: MEDIUM — Score 80
+## Finding #248: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x83d7ca23ab27f30e05b17951209576b8a5a88750` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **3** token transfers totaling **$6,639** (2,529 USDT, 2,011 USDT, 2,100 USDT) |
-| **Blocks** | 25415751-25454434 |
+| **Sender** | `0x3c719230ce1edebc40a348964225d0dea942d367` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26285375-26285375 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4137,26 +10207,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 3 stablecoin transfer(s) to Railgun Relay: $6,639 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #102: MEDIUM — Score 80
+## Finding #249: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x11834e0526575d4f13242ee2a2f956042fdafdbb` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$1,496** (1,496 USDT) |
-| **Blocks** | 25453597-25453597 |
+| **Sender** | `0x3b93db2126633fb87118eabc2bf23a074e7b6261` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$39** (39 DAI) |
+| **Blocks** | 26285312-26285312 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4178,26 +10248,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $1,496 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $39 total (DAI) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #103: MEDIUM — Score 80
+## Finding #250: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x40f094155b3f26cb41f5db0d57265aade6918ede` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$449** (449 USDC) |
-| **Blocks** | 25453278-25453278 |
+| **Sender** | `0x6a000f20005980200259b80c5102003040001068` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **22** token transfers totaling **$6,053** (498 USDC, 34 USDC, 32 USDC, 35 USDC, 10 USDC) |
+| **Blocks** | 26258658-26285308 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4219,26 +10289,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $449 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 22 stablecoin transfer(s) to SideShift Hot Wallet: $6,053 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #104: MEDIUM — Score 80
+## Finding #251: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xa2c000607259b8447ebcb71d95574f3828b9f2dc` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$50** (50 USDC) |
-| **Blocks** | 25452901-25452901 |
+| **Sender** | `0x9515b5d0856e13f01dd4f2a7d4d851b8810a8e6a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$700** (700 DAI) |
+| **Blocks** | 26285290-26285290 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4260,26 +10330,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $50 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $700 total (DAI) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #105: MEDIUM — Score 80
+## Finding #252: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xe2da0af3f715041ece30c91ad06e634f087100af` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$34** (7 USDT, 27 USDT) |
-| **Blocks** | 25451662-25452875 |
+| **Sender** | `0xabd5ecaaf8aed8ab1b51e5039bb2ef52435cde82` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$300** (300 DAI) |
+| **Blocks** | 26285275-26285275 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4301,26 +10371,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $34 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $300 total (DAI) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #106: MEDIUM — Score 80
+## Finding #253: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x95280dd435e7510f41b3f41e5666a34130d08a0b` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **4** token transfers totaling **$6,960** (1,035 USDT, 2,401 USDT, 1,452 USDT, 2,071 USDT) |
-| **Blocks** | 25429151-25452047 |
+| **Sender** | `0xb05060ba1504ff5e6cb715546ac6cb0da6b30d16` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$22** (22 USDC) |
+| **Blocks** | 26285130-26285130 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4342,26 +10412,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 4 stablecoin transfer(s) to Railgun Relay: $6,960 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $22 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #107: MEDIUM — Score 80
+## Finding #254: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x761d006532b07543f7fd8447f9637ed538e66b4f` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$5,985** (5,985 USDC) |
-| **Blocks** | 25451371-25451371 |
+| **Sender** | `0xfc01fa83338d865b4019b118a4e5eed27c690122` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$200** (200 USDT) |
+| **Blocks** | 26285105-26285105 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4383,26 +10453,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $5,985 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $200 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #108: MEDIUM — Score 80
+## Finding #255: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x541d1d0af511c04d7eeb0f01ba913b10f72e314a` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$6,035** (6,035 USDT) |
-| **Blocks** | 25451329-25451329 |
+| **Sender** | `0xd22c48a8e5c094e793cf3f8f32e38a5378b3f4aa` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$600** (600 USDC) |
+| **Blocks** | 26285076-26285076 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4424,26 +10494,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $6,035 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $600 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #109: MEDIUM — Score 80
+## Finding #256: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x63475e6f75eb98fb8d6d75cfa27b1493d952fe08` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$239** (239 USDT) |
-| **Blocks** | 25451228-25451228 |
+| **Sender** | `0x588cc69734271b72f38639e23b7ddc903e091e69` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$14** (14 USDT) |
+| **Blocks** | 26285011-26285011 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4465,26 +10535,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $239 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $14 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #110: MEDIUM — Score 80
+## Finding #257: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x3bc13ad2b0f0777ac24b6916d9f028d1a03496a7` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$423** (423 USDT) |
-| **Blocks** | 25451158-25451158 |
+| **Sender** | `0x4882a811f5981aa57428f64138a58f048f5e7e66` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$24** (24 USDC) |
+| **Blocks** | 26284988-26284988 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4506,26 +10576,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $423 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $24 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #111: MEDIUM — Score 80
+## Finding #258: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x457faf38bfc567533bffc737617f42f7d0d4ca8e` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$3,985** (3,985 USDT) |
-| **Blocks** | 25451143-25451143 |
+| **Sender** | `0x4a3a332e25caa34e3449bd751a956864ee364f49` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$760** (760 USDC) |
+| **Blocks** | 26284909-26284909 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4547,26 +10617,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $3,985 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $760 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #112: MEDIUM — Score 80
+## Finding #259: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x48c2cc7e4a45202753befa8911cf2253a5d165b3` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$1,768** (1,768 USDC) |
-| **Blocks** | 25450710-25450710 |
+| **Sender** | `0xf5d177e5c32ad463dec4709769bbd9b91e2fa734` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$440** (440 USDT) |
+| **Blocks** | 26284847-26284847 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4588,26 +10658,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $1,768 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $440 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #113: MEDIUM — Score 80
+## Finding #260: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xffb634b144065597781cb38ccdd28a117de5f4cd` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$1,750** (1,700 USDC, 50 USDC) |
-| **Blocks** | 25449866-25450290 |
+| **Sender** | `0x2320f8236dfe8fba7f555a90d34785d3af8e3689` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5** (5 USDT) |
+| **Blocks** | 26284796-26284796 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4629,26 +10699,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $1,750 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #114: MEDIUM — Score 80
+## Finding #261: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x63ce4d4e4f974c3322202aed0e5a4a3aa0f621c4` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$2,760** (2,760 USDC) |
-| **Blocks** | 25449447-25449447 |
+| **Sender** | `0xe4fb8d3f241e35d5bc3c288a5252bf7afdd5a937` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5** (5 USDC) |
+| **Blocks** | 26284763-26284763 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4670,26 +10740,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $2,760 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #115: MEDIUM — Score 80
+## Finding #262: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x3ed6a27a83d8ad90094b997935d15f00be59c46d` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **3** token transfers totaling **$1,469** (671 USDT, 499 USDT, 299 USDT) |
-| **Blocks** | 25447770-25447806 |
+| **Sender** | `0xe3da40ea33e4b1656a86df5ebd301b71f8c4f4b8` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,758** (1,758 USDT) |
+| **Blocks** | 26284646-26284646 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4711,26 +10781,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 3 stablecoin transfer(s) to Railgun Relay: $1,469 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,758 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #116: MEDIUM — Score 80
+## Finding #263: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x82617c5ead9f3f1a89c4b4069bc3e8d442a7fb57` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **4** token transfers totaling **$99** (0 WETH, 66 USDC, 0 WETH, 33 USDC) |
-| **Blocks** | 25444246-25446425 |
+| **Sender** | `0x09a6b88d04b7c9e65538fd054fed4ce841b38345` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$2,231** (2,231 USDC) |
+| **Blocks** | 26284640-26284640 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4752,26 +10822,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $99 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $2,231 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #117: MEDIUM — Score 80
+## Finding #264: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xc74147999890ae1be8f0b1d85d3c70d30b397082` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$730** (730 USDC) |
-| **Blocks** | 25445862-25445862 |
+| **Sender** | `0x4d7e1e63d890d625626149578e0a93715b2bb9a8` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5,579** (5,579 USDC) |
+| **Blocks** | 26284627-26284627 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4793,26 +10863,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $730 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5,579 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #118: MEDIUM — Score 80
+## Finding #265: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x3fb0b347fc4ffb3b4e7dda50e0bf284d355e083b` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$2,638** (647 USDT, 1,991 USDT) |
-| **Blocks** | 25429330-25445742 |
+| **Sender** | `0x2fbfe1556f6195a607050f7a3d5867644348db53` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDC) |
+| **Blocks** | 26284601-26284601 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4834,26 +10904,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $2,638 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #119: MEDIUM — Score 80
+## Finding #266: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xd7d9026dd3dacd914ab4efc2acf937f454947a7e` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$2,910** (1,599 USDT, 1,311 USDT) |
-| **Blocks** | 25436602-25445571 |
+| **Sender** | `0xc4f9d4ecab09f05f693dabababc165b249aa917a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5** (5 USDT) |
+| **Blocks** | 26284558-26284558 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4875,26 +10945,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $2,910 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #120: MEDIUM — Score 80
+## Finding #267: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x266b4660826caa561b99e9c578be55eb15672fdf` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$998** (998 USDT) |
-| **Blocks** | 25445009-25445009 |
+| **Sender** | `0xb788711cdeee6407f4fb886b905bd31155e23a61` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26284518-26284518 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -4916,1051 +10986,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $998 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #121: MEDIUM — Score 80
+## Finding #268: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x1a641d1a2e8c42230afa5b7e25bfa6feff20b7b6` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$379** (379 USDC) |
-| **Blocks** | 25444615-25444615 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $379 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #122: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x4da74a11e3ea2367d168680cc1a37556d79488f7` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$27** (27 DAI) |
-| **Blocks** | 25444402-25444402 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $27 total (DAI) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #123: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x9c2be8533271e0a98495c2161cd0736d852b0a21` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$425** (425 USDT) |
-| **Blocks** | 25444182-25444182 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $425 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #124: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xefee981bc74cd29ecbda6aeabdf61eebdb3fe4aa` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$3,676** (3,676 USDT) |
-| **Blocks** | 25443974-25443974 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $3,676 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #125: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x0fe85f954587c13fbccaf0fce7b2efc876c8567c` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$6,736** (6,736 USDT) |
-| **Blocks** | 25443504-25443504 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $6,736 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #126: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x383f1484572ebbf960c8a879e8f2b250163ffe07` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$554** (554 USDT) |
-| **Blocks** | 25443307-25443307 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $554 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #127: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x287004f90203accfb79b5c764a2ee9d4d2cd2b48` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$1,231** (221 USDC, 1,011 USDC) |
-| **Blocks** | 25412077-25443286 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $1,231 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #128: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x265da802c34db57f1c87331a8ffbaf7fd2d88147` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$7,209** (21 USDT, 7,188 USDT) |
-| **Blocks** | 25442130-25442168 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $7,209 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #129: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x8043a5705e636b933c4987c04e974fbae60ad7b0` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **3** token transfers totaling **$7,684** (452 USDT, 7,227 USDT, 5 USDC) |
-| **Blocks** | 25435169-25440751 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 3 stablecoin transfer(s) to Railgun Relay: $7,684 total (USDT, USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #130: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xb761e22ae45fac3f9d4e2612608a8d88064b72c3` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$4,259** (4,259 USDT) |
-| **Blocks** | 25440452-25440452 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $4,259 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #131: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x6f1df3151d6db661427d9a850c94272ebd5dd896` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$2,094** (2,094 USDC) |
-| **Blocks** | 25440287-25440287 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $2,094 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #132: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x165ccab54d0f548c9b46057c6b919da6a603cf3a` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$2,929** (2,929 USDT) |
-| **Blocks** | 25439936-25439936 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $2,929 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #133: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xd289d9e3e00c96ebdfd4f96a191b67014bf4e1b7` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$3,630** (2,928 DAI, 702 DAI) |
-| **Blocks** | 25417969-25439552 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $3,630 total (DAI) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #134: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x5e4cfb658cede655d763f19c6c55fe41898e1d2d` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$2,359** (2,359 USDC) |
-| **Blocks** | 25438057-25438057 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $2,359 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #135: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x01818ddb6bffefb3cea0b5f848a545aaa317555a` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$1,297** (1,297 USDC) |
-| **Blocks** | 25437891-25437891 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $1,297 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #136: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xf7e4498897a058e7fa1a56d2b33ae8bea36289ed` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$1,485** (1,485 USDT) |
-| **Blocks** | 25437731-25437731 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $1,485 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #137: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xb93ccf421a3b22aeac7022da78eb6107645b76a6` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$3,495** (3,495 USDT) |
-| **Blocks** | 25437504-25437504 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $3,495 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #138: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x847bbc5c4747164fbd901766da9114de2226663b` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$6,504** (6,504 USDT) |
-| **Blocks** | 25437105-25437105 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $6,504 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #139: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x5b69fd92bc84c56dbb416972bba8180ed8431e0d` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$1,150** (1,150 USDC) |
-| **Blocks** | 25436229-25436229 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $1,150 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #140: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xc6bcad6709eeb7955d6407c19fdd1d27c1ae8f34` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$8,978** (8,978 USDC) |
-| **Blocks** | 25436068-25436068 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $8,978 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #141: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x6e44297d2886f0eaab2267b782a84855b66b81f2` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **4** token transfers totaling **$1,046** (1,045 USDC, 0 WETH, 1 USDC, 0 WETH) |
-| **Blocks** | 25433194-25435678 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $1,046 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #142: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x75bb24c8647663a0a50e23a8abc38734ec817751` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$1,506** (1,506 USDC) |
-| **Blocks** | 25434714-25434714 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $1,506 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #143: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x8b08b1c0a19c8aa108e0fb8116d294fa35f68d50` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$3,990** (3,990 USDC) |
-| **Blocks** | 25434500-25434500 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $3,990 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #144: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x6f55eb730dbc8c96b4a2b07d02848572246d52ad` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$0** (0 USDC, 0 USDC) |
-| **Blocks** | 25431977-25433310 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $0 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #145: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xd453e95cc7e150b1dbdf6e68067b0e8bef1487d0` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$4,012** (4,012 DAI) |
-| **Blocks** | 25432794-25432794 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $4,012 total (DAI) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #146: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x0c5995936aaf7c2ecfc022cad7f5a737cf8efab2` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
+| **Sender** | `0xc6f2b2d40da7d8445563aed8bb175a4828bed222` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
 | **Activity** | **1** token transfer totaling **$100** (100 USDC) |
-| **Blocks** | 25432485-25432485 |
+| **Blocks** | 26284432-26284432 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -5982,26 +11027,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $100 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $100 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #147: MEDIUM — Score 80
+## Finding #269: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xb86322ec10dd5f8a5aadf111fa51403ae36e0ae8` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$116** (116 USDC) |
-| **Blocks** | 25432161-25432161 |
+| **Sender** | `0x29e5402b4544ad892ecbfac6d95dc81a22e06a01` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$115** (115 DAI) |
+| **Blocks** | 26284410-26284410 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -6023,26 +11068,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $116 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $115 total (DAI) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #148: MEDIUM — Score 80
+## Finding #270: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x2076862eb9ed20f0f43b4e3a6c459a01fd727b81` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$1,905** (1,905 USDT) |
-| **Blocks** | 25431654-25431654 |
+| **Sender** | `0x8c9ced738033cf59174aa55c3a89c38bc7c375eb` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$176** (176 USDT) |
+| **Blocks** | 26284253-26284253 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -6064,26 +11109,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $1,905 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $176 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #149: MEDIUM — Score 80
+## Finding #271: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xe60a256b4f99187b00cb324502e554346e913d0b` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$1,708** (1,009 USDC, 698 USDC) |
-| **Blocks** | 25424640-25431547 |
+| **Sender** | `0x5317bc65e329247c21324a2dbdde10c493193f71` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$100** (100 USDT) |
+| **Blocks** | 26284238-26284238 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -6105,26 +11150,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $1,708 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $100 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #150: MEDIUM — Score 80
+## Finding #272: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x4874a0930c720d76c8e9c4617d272161eb9634e3` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$9,393** (9,393 USDC) |
-| **Blocks** | 25431513-25431513 |
+| **Sender** | `0xe5bd5b24ea6da8ec3a285d0f49fd3d47b901f4d2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$289** (289 USDT) |
+| **Blocks** | 26284168-26284168 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -6146,26 +11191,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $9,393 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $289 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #151: MEDIUM — Score 80
+## Finding #273: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xf2068d6a6bf2bd40e2e484c185256bce6fe9b68e` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$4,981** (4,981 USDC) |
-| **Blocks** | 25430907-25430907 |
+| **Sender** | `0x89b690de57ba17dbb784e423f767992d8b40f55e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$100** (100 USDT) |
+| **Blocks** | 26284150-26284150 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -6187,26 +11232,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $4,981 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $100 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #152: MEDIUM — Score 80
+## Finding #274: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x223f633af6b7296e80facf257bfdcbe101b67f70` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$9,283** (8,080 USDT, 1,203 USDT) |
-| **Blocks** | 25430570-25430673 |
+| **Sender** | `0x398a5f022dbd27ada560481c6988ed9d75014239` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5** (5 USDT) |
+| **Blocks** | 26284147-26284147 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -6228,26 +11273,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $9,283 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #153: MEDIUM — Score 80
+## Finding #275: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x1e0b853316cb13f85d62abebf026a316fd98b3ae` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$2,993** (2,993 USDC) |
-| **Blocks** | 25429583-25429583 |
+| **Sender** | `0xbc18e11989a87a3d1dccc240ce65c4a485a4dd3a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$150** (150 USDT) |
+| **Blocks** | 26284143-26284143 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -6269,26 +11314,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $2,993 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $150 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #154: MEDIUM — Score 80
+## Finding #276: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x791ee52ee13385173ae869e95829d7da78f17f82` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$6,537** (6,537 USDT) |
-| **Blocks** | 25429519-25429519 |
+| **Sender** | `0x299d14963ea20edff95c17ca9cb8b04bc1980560` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$15** (15 USDT) |
+| **Blocks** | 26284005-26284005 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -6310,2158 +11355,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $6,537 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $15 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #155: MEDIUM — Score 80
+## Finding #277: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xd37fd3201284678aa27273674f5bd37241b729e3` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$958** (958 USDC) |
-| **Blocks** | 25429365-25429365 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $958 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #156: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xa7fae0c69c0fe9cae77921d90408fbe3b9165367` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$14** (9 USDC, 5 USDC) |
-| **Blocks** | 25419079-25429265 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $14 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #157: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xb7b52658d87be2f99ce88279e391a4e27ab2cf52` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$6,358** (6,358 USDT) |
-| **Blocks** | 25427910-25427910 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $6,358 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #158: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x388975c5dd77e123a065a8890d11197c478fd527` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$4,988** (3,990 USDC, 998 USDC) |
-| **Blocks** | 25427046-25427637 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $4,988 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #159: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xd2edc601fcd4f277b7840f00d6c2ab18d8c26eca` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$2,993** (2,993 USDC) |
-| **Blocks** | 25427294-25427294 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $2,993 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #160: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xfb03bc25d4240c6ab1173be79c324b8ff01d3300` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **3** token transfers totaling **$6,773** (13 USDC, 5,849 USDT, 910 USDT) |
-| **Blocks** | 25411926-25426820 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 3 stablecoin transfer(s) to Railgun Relay: $6,773 total (USDT, USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #161: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xd64460fabb9859a86de22bcbbe682d9b5a07bdae` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$4,999** (4,999 USDC) |
-| **Blocks** | 25426162-25426162 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $4,999 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #162: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x9b324fa8a2324bc81e17ab8a28219e91c17b2633` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$147** (147 USDT) |
-| **Blocks** | 25425256-25425256 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $147 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #163: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x1fac0c6206091ef20fa81adf11a7123c10164761` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$1,217** (1,217 USDC) |
-| **Blocks** | 25424990-25424990 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $1,217 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #164: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xb82667eda70dd2ddf54fc3e01eb4bcc5ac1c7097` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$99** (99 USDT) |
-| **Blocks** | 25424678-25424678 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $99 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #165: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xf1cc67c5ce549d59fd358f90ed0627807b8c1d0a` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$2,992** (2,992 USDT) |
-| **Blocks** | 25424547-25424547 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $2,992 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #166: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xdb28b7c4715e5e88b649f119b2651679c82117ae` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$9,515** (4,527 USDC, 4,988 USDC) |
-| **Blocks** | 25420395-25424265 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $9,515 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #167: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xcfbef505316ea2212cd92a6efbaa42be7ce3a774` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$244** (244 USDT) |
-| **Blocks** | 25424216-25424216 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $244 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #168: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xa92d0f65b7f053154ed9c32370b98f31b7dd18f0` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$4,289** (4,289 USDT) |
-| **Blocks** | 25423079-25423079 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $4,289 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #169: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x2c86af62f2ba9d03d950fe9dceadfcf5c34541c1` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$1,146** (1,146 USDC) |
-| **Blocks** | 25422845-25422845 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $1,146 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #170: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x45f121ea8ac1cf10d64f7c128e84d917037064e7` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$474** (474 USDC) |
-| **Blocks** | 25422231-25422231 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $474 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #171: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x98efabeb2ebdb82d74b083d7fc71b0ce748090f1` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$79** (79 USDC) |
-| **Blocks** | 25421399-25421399 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $79 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #172: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xc990b15f812cf9aee702154fa760d0f97dc7f281` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$6,773** (6,773 USDC) |
-| **Blocks** | 25421229-25421229 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $6,773 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #173: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xa9c39c0510783cb05dd717cf2b790908a21df1c2` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$8,115** (4,987 USDC, 3,128 USDC) |
-| **Blocks** | 25419638-25419694 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $8,115 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #174: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x483ce6297c5cca154bfd56ac9b5c10d7d2a67936` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$2,178** (2,178 USDC) |
-| **Blocks** | 25418309-25418309 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $2,178 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #175: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x5e34b2f3b5590a9c0fdab4e749ebd7ebd62a9925` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$185** (185 USDC) |
-| **Blocks** | 25417705-25417705 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $185 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #176: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xb5a75805f3c4dab0b55fc7b7de515151f09ec544` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$650** (650 USDC) |
-| **Blocks** | 25417697-25417697 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $650 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #177: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x6d2d8b6a355efbbb45f1fcab64a71083f1270aee` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$1,271** (1,271 USDC) |
-| **Blocks** | 25417576-25417576 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $1,271 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #178: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xaaeee61755d4e27a61d726cea7736a71c678bc50` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **2** token transfers totaling **$99** (89 USDT, 10 USDT) |
-| **Blocks** | 25412605-25416805 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Railgun Relay: $99 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #179: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xbcddf94fc18a3cab8103071eace81d6f5de3fc39` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$998** (998 USDC) |
-| **Blocks** | 25412574-25412574 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $998 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #180: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x5b1d2f6603f6bf6574a7a951b99d024d2e39d801` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$17** (17 USDC) |
-| **Blocks** | 25412266-25412266 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $17 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #181: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xf33f26c8e8d0a5f2899ff6b0535f2d52cc04a8bd` |
-| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
-| **Activity** | **1** token transfer totaling **$1,496** (1,496 USDC) |
-| **Blocks** | 25411645-25411645 |
-
-### 💬 What Happened
-A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $1,496 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #182: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x9f8735671da3c5c4a7c2c7ed119a2e6dacec3a2c` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$5,025** (5,025 USDC) |
-| **Blocks** | 25455228-25455228 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $5,025 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #183: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xac506ad0c904c7815615da761e9198856de6ef4d` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$3,542** (3,542 USDT) |
-| **Blocks** | 25454428-25454428 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $3,542 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #184: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x2efac5fcd21bc4cfac0216be957b0ddc7b7fa8c0` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$338** (338 USDC) |
-| **Blocks** | 25448232-25448232 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $338 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #185: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x413dc96c438224492502018d9815c1e6bc3eaf91` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$25** (25 USDC) |
-| **Blocks** | 25446581-25446581 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $25 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #186: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x50bd33dbbcf8dc54437d94ec2b620c8691103827` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$1,999** (1,999 USDC) |
-| **Blocks** | 25443841-25443841 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $1,999 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #187: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x495cc95ba61fd9b79fce8a6ffc12220beb4795e0` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$1,500** (1,500 USDC) |
-| **Blocks** | 25443818-25443818 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $1,500 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #188: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x0bb6f5d34cd0a50f41430a992a845be265157388` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$31** (31 USDC) |
-| **Blocks** | 25438998-25438998 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $31 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #189: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x2fdd46110967a4c47f4a1f0668610b6259f9dd69` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$1,545** (1,545 USDC) |
-| **Blocks** | 25438498-25438498 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $1,545 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #190: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xefe878d93d8a7c520bb337ae0c8801303ebfe356` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$1,200** (1,200 USDT) |
-| **Blocks** | 25435891-25435891 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $1,200 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #191: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xda489771e6d3abc882095d67c4c13d91f610d24f` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$722** (722 USDC) |
-| **Blocks** | 25435393-25435393 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $722 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #192: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xeb1b41136ee38b1040fb4eeb10feb4eee93df309` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$253** (253 USDC) |
-| **Blocks** | 25434146-25434146 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $253 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #193: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xa804a0e0dfc1ab7dfca64305e0fb988c6da59e22` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$32** (32 USDC) |
-| **Blocks** | 25433571-25433571 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $32 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #194: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x7e2d1e9764d3e1c483913f9d466ba8b39025a482` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$30** (30 USDC) |
-| **Blocks** | 25433127-25433127 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $30 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #195: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x1106241a3352bf63860cd5bdd652d80d7cf13a7e` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$27** (27 USDC) |
-| **Blocks** | 25433075-25433075 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $27 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #196: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x9add724da6e15d3219e0872c6c2a7dc47ef426c1` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$43** (43 USDC) |
-| **Blocks** | 25432751-25432751 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $43 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #197: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x0542d22400543645e9d6915e2b59ee1b2d5ed317` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$166** (166 USDC) |
-| **Blocks** | 25431699-25431699 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $166 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #198: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x8f05417a05c561e564f5a1542d4c5d7c9f37d12f` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$28** (28 USDC) |
-| **Blocks** | 25431696-25431696 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $28 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #199: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x9091e34e43f13c6f43aba662c3f1f70bb1c28563` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$43** (43 USDC) |
-| **Blocks** | 25431671-25431671 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $43 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #200: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xca0fa3d41fdcfaf09aa894946da0c0906bb56a85` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$28** (28 USDC) |
-| **Blocks** | 25431633-25431633 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $28 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #201: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x609ed017ef3dc50fda28517d89a25154e722a5f5` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$2,856** (2,856 USDC) |
-| **Blocks** | 25431447-25431447 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $2,856 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #202: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x13e204dcb9de0cd6a206d43c33d45b2e269149dc` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$1,997** (1,997 USDT) |
-| **Blocks** | 25430964-25430964 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $1,997 total (USDT) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #203: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x7f4a2d70c5c41551e1d42898d502b4c2f05c8e50` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$255** (255 USDC) |
-| **Blocks** | 25430771-25430771 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $255 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #204: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x39b8c44c1abe83257a4e39d175361683aa22e5ba` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$543** (543 USDC) |
-| **Blocks** | 25424450-25424450 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $543 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #205: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xd21956ab41e8029e19abeafe0d1b64f4227c08a0` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$199** (199 USDC) |
-| **Blocks** | 25423250-25423250 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $199 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #206: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0x0ee492914366c1cdcad4ca935e481e9481ebd715` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$34** (34 USDC) |
-| **Blocks** | 25422795-25422795 |
-
-### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM — API error**
-
-Retry analysis.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | ? days |
-| Total Transactions | ? |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | ? |
-
-**Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $34 total (USDC) from 1 unique sender(s)
-
-**SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
-
-</details>
-
----
-
-## Finding #207: MEDIUM — Score 80
-
-| | |
-|---|---|
-| **Sender** | `0xc065e849ba55a2029d7cce890f5c0c950716005c` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
+| **Sender** | `0x1ecb02391b419c343e0843ec678129d38deeb6b0` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
 | **Activity** | **1** token transfer totaling **$49** (49 USDT) |
-| **Blocks** | 25420343-25420343 |
+| **Blocks** | 26283973-26283973 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -8483,26 +11396,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $49 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $49 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #208: MEDIUM — Score 80
+## Finding #278: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x826ab47dfcfc55eec165332d814e847b8debaf32` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$45** (45 USDC) |
-| **Blocks** | 25419699-25419699 |
+| **Sender** | `0x569cacbbe887d4e42dd8763a95e83a2a7f26eafb` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$14** (14 USDT) |
+| **Blocks** | 26283828-26283828 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -8524,26 +11437,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $45 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $14 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #209: MEDIUM — Score 80
+## Finding #279: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x6ed27df837d9562dfe9c50277ec1e22046ae4ab2` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **2** token transfers totaling **$50** (25 USDC, 25 USDT) |
-| **Blocks** | 25418483-25418518 |
+| **Sender** | `0xd0c56179b483d8c36762d987f3b93c712a70caf0` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$12** (12 USDC) |
+| **Blocks** | 26283737-26283737 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -8565,26 +11478,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $50 total (USDT, USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $12 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #210: MEDIUM — Score 80
+## Finding #280: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x869703c0f950e3f0d5df371c3d83357b0edac16a` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$29** (29 USDC) |
-| **Blocks** | 25418307-25418307 |
+| **Sender** | `0x49820ceb0ad564307420c8f7275a34586015267a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,116** (1,116 USDT) |
+| **Blocks** | 26283731-26283731 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -8606,26 +11519,26 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $29 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,116 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
 ---
 
-## Finding #211: MEDIUM — Score 80
+## Finding #281: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xacfd74c8cb54c8bb8c79da0ec0cd97b775060a28` |
-| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
-| **Activity** | **1** token transfer totaling **$550** (550 USDC) |
-| **Blocks** | 25417096-25417096 |
+| **Sender** | `0x29b6f896a459c79c894a0e2e4000003752ed52d5` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$78** (78 USDT) |
+| **Blocks** | 26283714-26283714 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 80.
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
@@ -8647,10 +11560,11818 @@ Retry analysis.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Privacy Pools (0xbow) Entrypoint: $550 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $78 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in o
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #282: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xd7651109f08f7359e4530205fa6fe244510778a2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$791** (791 USDT) |
+| **Blocks** | 26283696-26283696 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $791 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #283: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x2c66e39782742be86a9db2e4ad0ee9153f35cdd7` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$97** (97 USDC) |
+| **Blocks** | 26283386-26283386 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $97 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #284: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x30e9c8a24d05fef12da10081a58047e9f66b8967` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$25** (25 DAI) |
+| **Blocks** | 26283295-26283295 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $25 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #285: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xe9afc55d67e81cfcd3f362606b77d10937e47eb9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$7** (7 USDT) |
+| **Blocks** | 26283236-26283236 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $7 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #286: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xd0cfb032806cc92dbe4eb7f810a804ba413db1a9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$230** (230 USDC) |
+| **Blocks** | 26283219-26283219 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $230 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #287: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x902d366558e892e937f1e49c133a49490cc4ea54` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$25** (25 USDT) |
+| **Blocks** | 26283100-26283100 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $25 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #288: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xd9d57103eb17804eeeba284c10c0c05cfdbdef9a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$999** (999 USDC) |
+| **Blocks** | 26282955-26282955 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $999 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #289: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xd1aa467882eecb9364fface3e01da6f7d61b62e6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$110** (110 USDT) |
+| **Blocks** | 26282919-26282919 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $110 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #290: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xb3c4a06a96bf9a2e4e31ca48e0d5e8a483299a32` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$575** (575 USDC) |
+| **Blocks** | 26282727-26282727 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $575 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #291: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf509eeb8c1caee871f6ee3553626031f55fc7366` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$766** (766 USDC) |
+| **Blocks** | 26282710-26282710 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $766 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #292: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x343b46b4d390aee1a1b3b6d70b6022cbe430802e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26282267-26282267 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #293: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x947205b2065d47ac0817fb667c0f0e0c2125ecfa` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$4** (4 USDC) |
+| **Blocks** | 26282107-26282107 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $4 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #294: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x3b4cc5c8f7522cc774a99c9240e2ed73b6e414f7` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$769** (769 USDT) |
+| **Blocks** | 26282095-26282095 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $769 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #295: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x11a119e3c83588d0acb2708ba6526afca80a2eac` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$400** (400 USDC) |
+| **Blocks** | 26282058-26282058 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $400 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #296: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf448c22124993e081d10a97ea111099cbf956ac9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$42** (42 USDT) |
+| **Blocks** | 26282033-26282033 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $42 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #297: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xc724967afdf93489f9d9978634c3d0ad67451501` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$11** (11 USDC) |
+| **Blocks** | 26281891-26281891 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $11 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #298: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x9888c30844ff351afbfd726e855f3ba427f53004` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$125** (125 USDC) |
+| **Blocks** | 26281201-26281201 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $125 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #299: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x277a1f5bbf70798fdc6aedfbe57b85d6b21376dd` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDT) |
+| **Blocks** | 26281140-26281140 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $20 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #300: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x1cb531dcb770d433466f35936b97b7c33eba0a8d` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$70** (70 USDT) |
+| **Blocks** | 26280737-26280737 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $70 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #301: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xe93b4f710bae2a694af182d6b5c12e05408a5339` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,042** (1,042 USDT) |
+| **Blocks** | 26280605-26280605 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,042 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #302: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x496e75a24791cae87f446e9f9804ef74007b4fe3` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$12** (12 USDC) |
+| **Blocks** | 26280462-26280462 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $12 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #303: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x48f7fd4f7a5874bb5b9d19468c272a50488f7f64` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$15** (15 USDC) |
+| **Blocks** | 26280364-26280364 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $15 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #304: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xbd16ec3962e1e1ba903e3c7147f3f97c1cec2661` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$2,237** (2,237 USDT) |
+| **Blocks** | 26280306-26280306 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $2,237 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #305: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xc94fd10becafdde0e837c69e785abd8297534b73` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,342** (1,342 USDT) |
+| **Blocks** | 26280299-26280299 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,342 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #306: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x89fe99be27722ce75351243d82377a9673ed58a5` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$200** (200 USDT) |
+| **Blocks** | 26280267-26280267 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $200 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #307: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x514370c80a27ffa6b80f10d34c196ce1e78d2f73` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$23** (23 USDT) |
+| **Blocks** | 26280264-26280264 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $23 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #308: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xb9a34c5e08217be3d658eeca0e4053d7dfc26e9e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$526** (526 USDC) |
+| **Blocks** | 26280149-26280149 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $526 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #309: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x9856b0a01ddd6a610ff42cd52871fc64b6946b59` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$4,050** (4,050 USDT) |
+| **Blocks** | 26279928-26279928 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $4,050 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #310: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xca08655d9226e0c16fae65b400739ba3e80c8b8c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,100** (1,100 USDC) |
+| **Blocks** | 26279881-26279881 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,100 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #311: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6cfdb84f9aff1ca7df08e3b8a57675d258b2991e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$100** (100 USDC) |
+| **Blocks** | 26279851-26279851 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $100 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #312: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x8bf28990f8787f0fce8413f16d5de53e96df2e06` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,022** (1,022 USDC) |
+| **Blocks** | 26279813-26279813 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,022 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #313: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x702aa9c88fdaafa61070ad656afe2e12ee9e32d2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDC) |
+| **Blocks** | 26279777-26279777 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #314: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x042ab0c51186603cacd3f0f2e969b09b23baf7e3` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$269** (269 USDT) |
+| **Blocks** | 26279660-26279660 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $269 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #315: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x43c9e2e1fa6a6b66a0f02d2a53a1c42b8290fd27` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$41** (41 USDT) |
+| **Blocks** | 26279624-26279624 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $41 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #316: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x048b21ba0e0d05c75599532e996a407b75194e27` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDT) |
+| **Blocks** | 26279595-26279595 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $20 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #317: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x8ba7dfd7bfa1b551145bf5cc8800305f50a4abd8` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5** (5 USDT) |
+| **Blocks** | 26279566-26279566 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #318: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x458ccd364a2847aff207330cfea809f08b3150ce` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$515** (515 USDT) |
+| **Blocks** | 26279564-26279564 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $515 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #319: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x075cb94d1a72f9e3a7043263e5941388eb2bc283` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$4,500** (4,500 USDC) |
+| **Blocks** | 26279554-26279554 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $4,500 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #320: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x898138380827a7ec3d19196a09651544ba680114` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$73** (73 DAI) |
+| **Blocks** | 26279541-26279541 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $73 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #321: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x8c578f57f1cc973d25269b59fc058b057ae906a7` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$300** (300 USDT) |
+| **Blocks** | 26279348-26279348 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $300 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #322: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x5fceecca6ed899f267fa8caa7df4ac3d06d42384` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$105** (105 USDT) |
+| **Blocks** | 26279245-26279245 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $105 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #323: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xfe13ccae687cdb73edd2555462defc704e223694` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5,000** (5,000 USDC) |
+| **Blocks** | 26279188-26279188 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5,000 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #324: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6a2286085d85750b76460820eca7a1e129e45fe9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$14** (14 USDC) |
+| **Blocks** | 26279156-26279156 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $14 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #325: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xc0bd6a8edba2beeac491967201bb40c1b1f5fa85` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDC) |
+| **Blocks** | 26279153-26279153 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #326: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xb0e6ab1e020434b8d4a76ca8b7f7d264a68d6dd5` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26279053-26279053 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #327: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x97ec7ac7910d09053582726ce5c5d05398a4d759` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$90** (90 USDC) |
+| **Blocks** | 26279005-26279005 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $90 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #328: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x54db45d7f9203329d8ca214a3b540636595034f6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$526** (526 USDC) |
+| **Blocks** | 26278980-26278980 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $526 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #329: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x581029aa8d363d99a1f3b859f46db9ffd101f465` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$250** (250 DAI) |
+| **Blocks** | 26278958-26278958 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $250 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #330: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xb0aee7d95c6583bf407e8c96043746302cfa09b8` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$200** (200 USDT) |
+| **Blocks** | 26278944-26278944 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $200 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #331: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xdd18229414e11865ba2712029a10cbc1ee470991` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$578** (578 DAI) |
+| **Blocks** | 26278781-26278781 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $578 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #332: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x47c1ee66ae151d6c0e62f6ef1a1106852b44ec1f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$500** (500 DAI) |
+| **Blocks** | 26278742-26278742 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $500 total (DAI) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #333: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x72ac27b8d5ac8433bbd4deb8c4e636367f62d738` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$500** (500 DAI) |
+| **Blocks** | 26278730-26278730 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $500 total (DAI) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #334: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x1c179a67847a8a1e667ba21ee9c6baa58e77f1f0` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$100** (100 DAI) |
+| **Blocks** | 26278718-26278718 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $100 total (DAI) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #335: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x61216e3b135d03f710a44eea7c5ff4239397df6b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$436** (436 USDT) |
+| **Blocks** | 26278679-26278679 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $436 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #336: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x541c0b29c5b8291a23887134cb8fb12d3f46a433` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5,598** (5,598 USDC) |
+| **Blocks** | 26278663-26278663 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5,598 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #337: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xe8061a6b7e4384f841111052251356bb093a58b9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$140** (140 USDT) |
+| **Blocks** | 26278576-26278576 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $140 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #338: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x574b874130be1fc7b222b16b0ae8b39bab41c37f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$50** (50 USDC) |
+| **Blocks** | 26278538-26278538 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $50 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #339: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x526e552f18f2ddf6faeda0b8ef5393a5ee9098ca` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$4** (4 USDT) |
+| **Blocks** | 26278490-26278490 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $4 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #340: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x0000000000bbf5c5fd284e657f01bd000933c96d` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$91** (91 USDC) |
+| **Blocks** | 26278309-26278309 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $91 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #341: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xe855835af30cd7d8d322f383cbfe35a8f7df2301` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,560** (1,560 USDT) |
+| **Blocks** | 26278265-26278265 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,560 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #342: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xaaff5e6e92fd705f7f194bf60a918ca21421bae7` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$63** (63 USDT) |
+| **Blocks** | 26278203-26278203 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $63 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #343: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x4ec1b4f5aa2500d94bb780260c8c4b1d6ca52e44` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5** (5 USDT) |
+| **Blocks** | 26278174-26278174 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #344: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x350fa39c7cfe3ecbc207aef9dfcd678d4dda8ab7` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$455** (455 USDT) |
+| **Blocks** | 26278128-26278128 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $455 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #345: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x4b3741a38d1ffcbc8a0340e1c94626722cae8917` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDT) |
+| **Blocks** | 26278100-26278100 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $20 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #346: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x145677a37dcfc4c4d019046907ded543e198abd2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$2,503** (2,503 USDT) |
+| **Blocks** | 26278086-26278086 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $2,503 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #347: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf69381e18456f0a8e6eea0782570b3569714db07` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$274** (274 USDC) |
+| **Blocks** | 26278011-26278011 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $274 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #348: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x0707e50365be3a8aaddcb07e0e1c6849b65cc866` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$83** (83 USDT) |
+| **Blocks** | 26277970-26277970 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $83 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #349: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x3960f5e361452109b8b2f5df8d655980d96bb909` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$6** (6 USDT) |
+| **Blocks** | 26277954-26277954 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $6 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #350: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6ea6980741e8054a7c580f48c98518def475c241` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$21** (21 USDC) |
+| **Blocks** | 26277911-26277911 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $21 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #351: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xe5ad4d6a27bc964aafe885868994bf62242acdb6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$989** (989 DAI) |
+| **Blocks** | 26277888-26277888 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $989 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #352: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xec127bfb4ed62a349f0e68ca17ccc03c859c3267` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$976** (976 DAI) |
+| **Blocks** | 26277869-26277869 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $976 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #353: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x9a26863961728b03011d3818d9d6b14f850ce662` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDT) |
+| **Blocks** | 26277805-26277805 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $20 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #354: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xb585c426af4ffa8dd5756c02d97843d5f7523292` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 DAI) |
+| **Blocks** | 26277729-26277729 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (DAI) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #355: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x68d417a7ec71a1cee0780e5ff457a620919f5ad7` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$7,500** (7,500 USDC) |
+| **Blocks** | 26277698-26277698 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $7,500 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #356: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xa99483338a0f5885f17f66dc858127032c8f6f2e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5** (5 DAI) |
+| **Blocks** | 26277665-26277665 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #357: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6ccd0c38154b13930f171342537b7ac84dcb2d13` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$100** (100 USDC) |
+| **Blocks** | 26277663-26277663 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $100 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #358: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6825375cf7759910564e9b62f395aeadec3fccd7` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$961** (961 USDT) |
+| **Blocks** | 26277633-26277633 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $961 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #359: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xb50b7d76a66bb17f5e83ca169afb84c778ce8e47` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$2,570** (2,570 USDC) |
+| **Blocks** | 26277632-26277632 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $2,570 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #360: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xce5d915132c66d10fc499ae2e95a0862b9550eec` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$50** (50 USDT) |
+| **Blocks** | 26277558-26277558 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $50 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #361: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xb2032c3b3ea8b060a52ff5193329834ccc9d8ceb` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$362** (362 DAI) |
+| **Blocks** | 26277414-26277414 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $362 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #362: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xd13fecc8a4556ff44f6d488ed066b51907b9812b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$8** (8 USDT) |
+| **Blocks** | 26277332-26277332 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $8 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #363: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x44e0de281e372ca212bd7448bf46e78d74e891bc` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$250** (250 USDC) |
+| **Blocks** | 26277331-26277331 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $250 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #364: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x92f6293d3f97206587e39b9d58f637acebe9d84e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$47** (47 USDT) |
+| **Blocks** | 26277255-26277255 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $47 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #365: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6ba9920b7f5f8459e06a027d8857766c5ec54821` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$553** (553 USDT) |
+| **Blocks** | 26277236-26277236 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $553 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #366: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x8bed157dede7573f5895c9f9c0d4d8aa7173a6b7` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDT) |
+| **Blocks** | 26277175-26277175 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $20 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #367: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x7139a4fd91a2d651ed96f610ca19bdff21072879` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,175** (1,175 USDT) |
+| **Blocks** | 26277093-26277093 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,175 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #368: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x00b70b3db5e6c44445592ba2406e2ee8c7d6b87e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$200** (200 USDT) |
+| **Blocks** | 26276832-26276832 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $200 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #369: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x80ac607e1ede67116d179083925670befda25c2f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26276821-26276821 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #370: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x14f3c7d124ad3bc2609ef702d90a93a436a9a6d8` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$21** (21 USDC) |
+| **Blocks** | 26276816-26276816 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $21 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #371: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x08b25c89fee19259bed662ac776c8182ea921ae6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$567** (567 USDT) |
+| **Blocks** | 26276758-26276758 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $567 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #372: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x7681f959f4054a79d05d18894a69bb780d2c293a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$974** (974 USDC) |
+| **Blocks** | 26276740-26276740 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $974 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #373: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x2168af28b0b9861539629cd179a74ae3c8ace797` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$152** (152 USDT) |
+| **Blocks** | 26276714-26276714 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $152 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #374: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x9df08d40eccef05c766bdab1945b29da09c7fefa` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$15** (15 USDT) |
+| **Blocks** | 26276565-26276565 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $15 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #375: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x36065feff25ccbd63dada6d1c0abd8d914e2d400` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDT) |
+| **Blocks** | 26276539-26276539 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $20 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #376: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xb3773efe2e63d23ce12a0970161f4fe8b64d6049` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDT) |
+| **Blocks** | 26276366-26276366 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $20 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #377: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6cde28a0ce6f0711057bb5283ef5c3d6a680e95c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$69** (69 USDC) |
+| **Blocks** | 26276363-26276363 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $69 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #378: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xaa887bae35ac227bda59f14d3c8274846ad5d425` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$578** (578 USDC) |
+| **Blocks** | 26276237-26276237 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $578 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #379: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x3cb0bd3ff9ff4fe82aa303d00557cffbf7cb92d6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$3** (3 USDC) |
+| **Blocks** | 26276051-26276051 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $3 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #380: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x41b8aa10fda136a5c13e93c7a6b9c5839ccfcc84` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$85** (85 USDT) |
+| **Blocks** | 26275877-26275877 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $85 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #381: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x968274bc7030486852000c4ee648d994d5b972d9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDC) |
+| **Blocks** | 26275827-26275827 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #382: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x907574be67ea65bb4f508210e354d1aa27b90a6c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$2,800** (2,800 USDT) |
+| **Blocks** | 26275646-26275646 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $2,800 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #383: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x33fbb258c3c5b35c210db88546fe50738b4c7aa1` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5** (5 USDT) |
+| **Blocks** | 26275536-26275536 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #384: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x076d9279bda470819e4f2f8444f9fdcf28428161` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,000** (1,000 USDC) |
+| **Blocks** | 26275327-26275327 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,000 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #385: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xd9f1728af02ea47c1f9fd04df1f001f7fa11bce6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$3,500** (3,500 USDT) |
+| **Blocks** | 26275272-26275272 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $3,500 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #386: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf1067e316eb941724781bc1c4c056bab3eb3d40e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$464** (464 USDT) |
+| **Blocks** | 26275212-26275212 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $464 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #387: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x60944fa275e85392535b3c4d23a19400b8e1c63b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$3,484** (3,484 USDC) |
+| **Blocks** | 26275168-26275168 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $3,484 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #388: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xcc75339fd2a2c35179589ae58afe5eb16069b4c2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26275103-26275103 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #389: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x4186bdc87e3a807a3e881c789862e3ebe3babe8e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,362** (1,362 USDC) |
+| **Blocks** | 26275090-26275090 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,362 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #390: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x30ce5493c5492c53252c1fcb40045a3d40dd416e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26275089-26275089 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #391: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xe332063bea3fb7f05ca01effc6a5d5b465601c12` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$862** (862 USDC) |
+| **Blocks** | 26274899-26274899 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $862 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #392: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xddc9c2dbbf1ef04cf0e218aad8f66daa9a141226` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$108** (108 USDT) |
+| **Blocks** | 26274624-26274624 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $108 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #393: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xd628c9a3a18735e2364ca649e378956f5b4c72c4` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$6** (6 USDT) |
+| **Blocks** | 26274512-26274512 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $6 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #394: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xd2f632de332987836d24eafd6d4fdea98fc59605` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$515** (515 USDT) |
+| **Blocks** | 26274451-26274451 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $515 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #395: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x7117e41e46640ce77c84ba6df313e85c60472da3` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,000** (1,000 USDT) |
+| **Blocks** | 26274280-26274280 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,000 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #396: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xa9f1d0cc8f375d851256e79cc3d6b8cfae2aa6a2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$42** (42 USDT) |
+| **Blocks** | 26274063-26274063 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $42 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #397: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x47c6f4411f4febdb3967eb8bbe2497cf1dce075d` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$2,960** (2,960 USDT) |
+| **Blocks** | 26273954-26273954 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $2,960 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #398: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x0af6228814e32da5f406772f7d5452a59c7b2ff9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,500** (1,500 USDT) |
+| **Blocks** | 26273947-26273947 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,500 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #399: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x8c290a523b2977b7b778caab6f35baad507f5ea2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$45** (45 DAI) |
+| **Blocks** | 26273667-26273667 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $45 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #400: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x8f8810aa524e2be2a28a02b9dda8fe0388a910d5` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$15** (15 USDT) |
+| **Blocks** | 26273512-26273512 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $15 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #401: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xb3d6b7623442104f474e5284569a54b438ca5e9b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$108** (108 USDT) |
+| **Blocks** | 26273335-26273335 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $108 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #402: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x0b3a762361e8700fa77ccdc31cb2d827968bc66a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5** (5 USDT) |
+| **Blocks** | 26273229-26273229 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #403: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xdd8de69744e57bc5025f1e44d12564867288664c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5** (5 USDT) |
+| **Blocks** | 26273159-26273159 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #404: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xb0180871f0025e676081aa88499d761a0e0e1417` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$55** (55 USDT) |
+| **Blocks** | 26273129-26273129 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $55 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #405: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x04a45f578799fe66a6d05813a1f660ec2c5f25a7` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,684** (1,684 USDT) |
+| **Blocks** | 26273109-26273109 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,684 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #406: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x7f6e81ae857e0b00f9336034368d02dd847a0647` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$47** (47 USDT) |
+| **Blocks** | 26272912-26272912 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $47 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #407: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xfd03abcadaf3f930fa4e37eb2f6ea3a44a41b7f0` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$8,075** (8,075 USDC) |
+| **Blocks** | 26272853-26272853 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $8,075 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #408: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x2bec5a7732d2b6b3e1ac1f9a9b49f4bbeec733ca` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,001** (1,001 USDT) |
+| **Blocks** | 26272814-26272814 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,001 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #409: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xb6a11bde5a54f35baa9481317a06be4d48585da2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5,608** (5,608 USDC) |
+| **Blocks** | 26272735-26272735 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5,608 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #410: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x075b4589b0e4cc3de264c932cac1c2e685397dee` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$15** (15 USDT) |
+| **Blocks** | 26272607-26272607 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $15 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #411: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x04f85be5c1cfa673c569ea377d42e6ceb2794702` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26272580-26272580 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #412: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xc85c4417f91730a012eb0bb7e421399a0b78d01a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$220** (220 USDT) |
+| **Blocks** | 26272532-26272532 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $220 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #413: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf2ee70bb17db4a6963a54dd9dc7c908fb2f5844f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$100** (100 USDT) |
+| **Blocks** | 26272385-26272385 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $100 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #414: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x406bc841be19fae8300ec97b1276a5d127c11a6e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$785** (785 USDT) |
+| **Blocks** | 26272378-26272378 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $785 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #415: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x2278e56b3fb2a89cb7c34e2485149c1e31dd21dd` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$71** (71 USDT) |
+| **Blocks** | 26272317-26272317 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $71 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #416: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x4baaf1608b8a4e10ac0da60845be152e51e15fd6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$220** (220 USDC) |
+| **Blocks** | 26272310-26272310 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $220 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #417: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x76d94ce16fc649753bddbb7f266f440eb3ad7d8e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$594** (594 USDT) |
+| **Blocks** | 26272092-26272092 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $594 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #418: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xfb763e19c4b898e9f239372e1736fdf237d88658` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$130** (130 USDT) |
+| **Blocks** | 26272085-26272085 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $130 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #419: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xa8ddbd7a52b8ee0e8e0f04628d5d1bfc51c1729e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$2,247** (2,247 USDT) |
+| **Blocks** | 26271974-26271974 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $2,247 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #420: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xff6d3952340f9cb02ecce7a7f71ceec0b35a57b5` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$2,000** (2,000 USDT) |
+| **Blocks** | 26271919-26271919 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $2,000 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #421: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x41c9e9509020c639bb15f46a154de79adf3c2ccb` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$32** (32 USDC) |
+| **Blocks** | 26271797-26271797 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $32 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #422: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xe8c73e1e2c3e8509a93a25f9100173ab015f045b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$550** (550 USDT) |
+| **Blocks** | 26271789-26271789 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $550 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #423: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x9e24fb13d54248b330f0bfa1fb8770a6716ebab4` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$2,168** (2,168 USDT) |
+| **Blocks** | 26271776-26271776 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $2,168 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #424: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xeebc3638276f282aaaa1467be0aca89d8d410653` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$2,912** (2,912 USDT) |
+| **Blocks** | 26271592-26271592 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $2,912 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #425: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x5b7a19d3ec8eaa34a94a23b766d477cb67f8bfa8` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,502** (1,502 USDT) |
+| **Blocks** | 26271561-26271561 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,502 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #426: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xdd2dd0c17a480cf650c66e3a3876a6c63737ee18` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,001** (1,001 USDT) |
+| **Blocks** | 26271539-26271539 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,001 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #427: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x37086c51accf013503014f07247d9b36dc1d0b74` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,001** (1,001 USDT) |
+| **Blocks** | 26271508-26271508 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,001 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #428: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x069b51dd121f9ce05bdbf4d686211f407b77e69b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26271480-26271480 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #429: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x7de7225a2190ef75ef36dcb34a62d851ccfa0acf` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$130** (130 DAI) |
+| **Blocks** | 26271301-26271301 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $130 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #430: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6ef83d842b32c6f1ae6ae78869140ddfa631eef1` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$2,360** (2,360 USDT) |
+| **Blocks** | 26271257-26271257 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $2,360 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #431: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xd747ea3c82ae533c0ce128cebf84a40f1b0e0ea1` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$501** (501 USDC) |
+| **Blocks** | 26271169-26271169 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $501 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #432: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x4c021b3d15001ead953f464e23b82b3cc1c4a3b2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$80** (80 DAI) |
+| **Blocks** | 26271044-26271044 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $80 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #433: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x46e4ec9af26c982b289766bc1da9f444d85b25f8` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$122** (122 USDT) |
+| **Blocks** | 26271039-26271039 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $122 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #434: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x353fffc098edd3487f6239c20a1de1f1c51b7fe5` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,000** (1,000 USDT) |
+| **Blocks** | 26271034-26271034 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,000 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #435: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xa598f1e3bc34d1ab4f0041fa754e97ce30a80682` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$50** (50 USDC) |
+| **Blocks** | 26271009-26271009 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $50 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #436: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x81ba71292a92bde8bcadffa0a8b8e40ab8e3b6cc` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$17** (17 USDC) |
+| **Blocks** | 26270987-26270987 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $17 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #437: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf3f3aafc935e7d2e797051ebdd5dc6061f81655f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$40** (40 USDT) |
+| **Blocks** | 26270978-26270978 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $40 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #438: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x512454ea7eab1f959b8f52e7637b8640c5842825` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$90** (90 DAI) |
+| **Blocks** | 26270971-26270971 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $90 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #439: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x0ff1799492392fd184deca596c57fa2093ad7ebc` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$500** (500 USDT) |
+| **Blocks** | 26270895-26270895 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $500 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #440: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xddad08a8943388c2bbf48e0eef405150beb01b95` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,200** (1,200 USDT) |
+| **Blocks** | 26270814-26270814 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,200 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #441: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x4c5931dcab6baabf38f6b898632c82df3d7fb7b9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,106** (1,106 USDC) |
+| **Blocks** | 26270811-26270811 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,106 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #442: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x4742b37c6966a9843b63d74e63bc49d20ad44427` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$4** (4 USDC) |
+| **Blocks** | 26270684-26270684 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $4 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #443: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x59bf3edf4383b0f26944e2a0a4d05802445665e2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$50** (50 USDT) |
+| **Blocks** | 26270666-26270666 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $50 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #444: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x0c387b27f887a2b9c7f5a9d3a1d63c209d4140d8` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,000** (1,000 DAI) |
+| **Blocks** | 26270640-26270640 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,000 total (DAI) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #445: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x133c7855bee948b77e89515881b8f7ec11386f63` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$100** (100 USDC) |
+| **Blocks** | 26270612-26270612 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $100 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #446: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xb19863172d6b7e898d6e2060f6006668122d5834` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$121** (121 USDT) |
+| **Blocks** | 26270486-26270486 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $121 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #447: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x407d9f8ebff89dc555a08d17400817aa4212ae5a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$121** (121 USDT) |
+| **Blocks** | 26270443-26270443 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $121 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #448: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x11aabca5300b7225ae80157c770ad15c3a9830b1` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDC) |
+| **Blocks** | 26270424-26270424 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #449: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf65410729e05c6b68fe4bed3cac16035cf5394d5` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$100** (100 DAI) |
+| **Blocks** | 26270395-26270395 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $100 total (DAI) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #450: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xbbd4c22960d008dbe8e0e9a04a0413e22a06ebe5` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,311** (1,311 USDC) |
+| **Blocks** | 26270379-26270379 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,311 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #451: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x2e460ee4af8554643793532ba852d40de11a249a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$62** (62 USDT) |
+| **Blocks** | 26270242-26270242 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $62 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #452: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x91bf0094e167c074daf37d23299d7d7b91af8789` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,000** (1,000 USDT) |
+| **Blocks** | 26270233-26270233 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,000 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #453: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x5ccea53b5360417ae504b0ece258fe29d2b31423` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$247** (247 USDT) |
+| **Blocks** | 26270143-26270143 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $247 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #454: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xebf166c15b701ea990a27214ac3606b1e2ce0a2d` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$24** (24 USDC) |
+| **Blocks** | 26270118-26270118 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $24 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #455: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x12de11a9b1b9cf6c6de11c9d0df963c1b850d5b9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$247** (247 USDT) |
+| **Blocks** | 26270115-26270115 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $247 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #456: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x26e09d9e5d4505b51ed07a479aad013d4ef9f1e1` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$38** (38 USDC) |
+| **Blocks** | 26270043-26270043 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $38 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #457: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xc864b901d43c6d5e4decf1163cb1cf5e15207a36` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,200** (1,200 USDT) |
+| **Blocks** | 26270002-26270002 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,200 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #458: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xa129750c421c8f21de465a4c04e8509318b38efb` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$7,856** (7,856 USDC) |
+| **Blocks** | 26269956-26269956 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $7,856 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #459: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x80ceab4345f1d9e123c11243bf39c43b36608549` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$122** (122 USDT) |
+| **Blocks** | 26269912-26269912 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $122 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #460: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf7779bcbfb31fd224a0be5861ade200844ec2c2c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$122** (122 USDT) |
+| **Blocks** | 26269874-26269874 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $122 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #461: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x2c40607fe98041eb37c5592f64b6e9aae684ef2a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26269541-26269541 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #462: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x1ffb33e02947619a764f47d67c6b0859b412116e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$120** (120 USDT) |
+| **Blocks** | 26269494-26269494 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $120 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #463: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xeeaaa6ad22c2095cb6cbe49fb0fc73bdce65ce29` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$120** (120 USDT) |
+| **Blocks** | 26269417-26269417 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $120 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #464: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x38eb7dc92cedeab3f56ea471af9d80e489ef52fc` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$13** (13 USDC) |
+| **Blocks** | 26269154-26269154 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $13 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #465: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x4aecc7560067566180a7cbd9a016f073812e3beb` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDT) |
+| **Blocks** | 26269130-26269130 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $20 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #466: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x82be7313661472c627bb4f9f66bd0e979cc3c7e2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,500** (1,500 USDT) |
+| **Blocks** | 26268766-26268766 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,500 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #467: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x5ed82114f4bd1502c3ef32808046189d5131c60e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$39** (39 USDC) |
+| **Blocks** | 26268615-26268615 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $39 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #468: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x10c791906635f4529e6d53c54deeed0d2ac4c243` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$580** (580 USDC) |
+| **Blocks** | 26268580-26268580 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $580 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #469: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x03b1c191a09304ca6764d8f0fd24a03096632d54` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,014** (1,014 USDC) |
+| **Blocks** | 26268557-26268557 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,014 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #470: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x3f7357cd7a4faa270582adc0c33099b48f963102` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,000** (1,000 USDT) |
+| **Blocks** | 26268414-26268414 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,000 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #471: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf76f65cba9bebebc89c7c17c7a77388403acc1b4` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$34** (34 USDT) |
+| **Blocks** | 26268405-26268405 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $34 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #472: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x7850984ff2d4d71964d9906358ce728d078a4004` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$605** (605 USDC) |
+| **Blocks** | 26268184-26268184 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $605 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #473: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x85e7962553575ad4ee52a8139074cbce6c711491` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDC) |
+| **Blocks** | 26268124-26268124 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #474: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xd09ae7cacba716a742eeb98c5a9cc25e5286fdd5` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$483** (483 USDC) |
+| **Blocks** | 26268035-26268035 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $483 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #475: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xc7e88465e6f47dab387d092e9bd6a0811d460961` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,811** (1,811 USDC) |
+| **Blocks** | 26268012-26268012 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,811 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #476: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf3d566288605ab2b0a6535505f5cf0790a563015` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,268** (1,268 USDC) |
+| **Blocks** | 26267968-26267968 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,268 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #477: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6df27acfcba185dbb3f66dc72fd377217a4695e3` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$4** (4 USDT) |
+| **Blocks** | 26267685-26267685 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $4 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #478: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x5edf63ddd0de055b7f496633d5436604a56ae2e1` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$14** (14 USDT) |
+| **Blocks** | 26267064-26267064 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $14 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #479: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x5b2d3740a887628a6d2ca89ee51a6852d3407102` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$2,927** (2,927 USDC) |
+| **Blocks** | 26266797-26266797 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $2,927 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #480: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x97685020dd16452b5c7c545d533b30f644073dae` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$8** (8 USDT) |
+| **Blocks** | 26266730-26266730 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $8 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #481: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x9fd496ac8275a1af37ddb15933b249e077c1bdd2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$90** (90 USDC) |
+| **Blocks** | 26266683-26266683 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $90 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #482: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6ef714b85b43c779c82336ba85151ffe4a292620` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$104** (104 USDT) |
+| **Blocks** | 26266073-26266073 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $104 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #483: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xfcd2190157705d30e65ec686e951e51a9db71588` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDC) |
+| **Blocks** | 26265985-26265985 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #484: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xe460105cec25bb26fcd3468eedc418573830970d` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$40** (40 DAI) |
+| **Blocks** | 26265750-26265750 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $40 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #485: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x3a7bbd3cb0138399abc5bd8b4e18067c13575125` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$4** (4 USDT) |
+| **Blocks** | 26265592-26265592 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $4 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #486: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x53890b79d2a7d19e0b71153cbeb04a163ce9cdf7` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$515** (515 USDT) |
+| **Blocks** | 26265401-26265401 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $515 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #487: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x255814d58b991148fcf32849a4fe94affb9fb44e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$82** (82 USDC) |
+| **Blocks** | 26265366-26265366 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $82 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #488: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6b79b5ae32ec35037b699e52c7c89d5ee7e89821` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$45** (45 DAI) |
+| **Blocks** | 26265202-26265202 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $45 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #489: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xfb07fc055233fc0b956fefcc3ae26bc6debf1a1a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$30** (30 USDC) |
+| **Blocks** | 26265044-26265044 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $30 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #490: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x5d7a6cda317b24cb72cb0bd9a23b1c4e510a9fa0` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$100** (100 USDC) |
+| **Blocks** | 26264976-26264976 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $100 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #491: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x10f7848bf5029879d1dca574be2393394db08bf0` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5,000** (5,000 USDC) |
+| **Blocks** | 26264951-26264951 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5,000 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #492: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6a7a32cef6232cf275a49fb5c508354cc401bdb6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$50** (50 USDC) |
+| **Blocks** | 26264936-26264936 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $50 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #493: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x01b0d1a8069f99205ee8c8e6e22382ebe3c5c82f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$440** (440 USDT) |
+| **Blocks** | 26264870-26264870 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $440 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #494: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x1ad7fbc021ea1e9f577deedb76a842a647879018` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$50** (50 USDT) |
+| **Blocks** | 26264865-26264865 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $50 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #495: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xb5f5f6e7ad82a68dda79eb019fb473050441ac3a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,992** (1,992 USDT) |
+| **Blocks** | 26264805-26264805 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,992 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #496: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xae05d6a1551f6eb422245adb02d63d44b582f0e4` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$144** (144 USDT) |
+| **Blocks** | 26264189-26264189 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $144 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #497: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x73c5e4fe66788d373a355aa185e97d65945e3c3e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDC) |
+| **Blocks** | 26264174-26264174 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $20 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #498: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x4c5e8c56d7e931fd53ae7a6fdbc6e75a25f14e43` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$11** (11 DAI) |
+| **Blocks** | 26264156-26264156 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $11 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #499: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xd450275d490d76c4f08440ef58dacea0cca78e35` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$122** (122 USDT) |
+| **Blocks** | 26264134-26264134 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $122 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #500: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x5c1663b8b7d96b522b60213be4896e3459f4fcce` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$255** (255 USDT) |
+| **Blocks** | 26264091-26264091 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $255 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #501: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x57a4d7650dcdb309a47240ddfc2095033cb5d01c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$728** (728 USDC) |
+| **Blocks** | 26264039-26264039 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $728 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #502: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x30f77426582f2bf32f3030419889306b405b291a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$57** (57 USDT) |
+| **Blocks** | 26264032-26264032 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $57 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #503: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xc2fc8742d5d8a5c0c6495b32f776b6fd65060c12` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$36** (36 USDC) |
+| **Blocks** | 26263921-26263921 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $36 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #504: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x3b37bbb7043e4efb5df2e2624a15ecf9d916304c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$300** (300 USDT) |
+| **Blocks** | 26263915-26263915 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $300 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #505: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x37f88da58b75f07bc228dc97f30350fc109bc11b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$300** (300 USDT) |
+| **Blocks** | 26263898-26263898 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $300 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #506: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x4b5af6df0743206688ad8fad17d30b93cf91c6cd` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$145** (145 USDT) |
+| **Blocks** | 26263883-26263883 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $145 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #507: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x69d3a10d3d4ccc5fc52c9efb12095e7be4521422` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$30** (30 USDT) |
+| **Blocks** | 26263864-26263864 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $30 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #508: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6da39f982b552810b9d96365af71614645d64149` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$670** (670 USDT) |
+| **Blocks** | 26263844-26263844 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $670 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #509: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x962275d55c55e96c67d6d7f385a25ec7fe11c3fa` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,410** (1,410 USDT) |
+| **Blocks** | 26263816-26263816 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,410 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #510: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xa0881f0cbb480ccbc3808419991072780e3e69a4` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5,604** (5,604 USDC) |
+| **Blocks** | 26263785-26263785 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5,604 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #511: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x1f163e12e7a1c6e9b8955b06946bafc98b7274bf` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,000** (1,000 USDT) |
+| **Blocks** | 26263700-26263700 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,000 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #512: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xe42a8e53813e1698fc30f1fd2019b7987211089b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5,288** (5,288 USDC) |
+| **Blocks** | 26263616-26263616 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5,288 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #513: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x640c6ac1168e48d4ce7fe311091f1a29ea224468` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$100** (100 USDC) |
+| **Blocks** | 26263611-26263611 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $100 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #514: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x01e48cfb8c1341c8abad5b7d9c160d782474acc9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$500** (500 USDT) |
+| **Blocks** | 26263598-26263598 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $500 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #515: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6c842bfead80bebd6845f6bc1e32ec69d57fe73c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$264** (264 USDT) |
+| **Blocks** | 26263595-26263595 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $264 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #516: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x85a2b3f3ffd773eeb1bcd100bd9995c857b9fc6a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$500** (500 USDT) |
+| **Blocks** | 26263593-26263593 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $500 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #517: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x1c8589c336a7561d27e54ac28f4ed20922349e42` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26263580-26263580 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #518: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x3d2e30a7807036b73f054270130b57c8ce13e88e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,681** (1,681 USDC) |
+| **Blocks** | 26263387-26263387 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,681 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #519: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xa06406e23ae16a0f2cf1c4bf6100f8ba1b2532ca` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$115** (115 USDT) |
+| **Blocks** | 26263334-26263334 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $115 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #520: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xced386379d4b0580510ca951007cf8169adecf32` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDC) |
+| **Blocks** | 26263227-26263227 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #521: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf6e96edd636c94fcf9d13bd6c9f61b6db4b224ff` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$23** (23 USDC) |
+| **Blocks** | 26263169-26263169 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $23 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #522: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x8a4bbc98e0c58b7dd624799bf95ade209c53bbbd` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$6,005** (6,005 USDT) |
+| **Blocks** | 26263163-26263163 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $6,005 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #523: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x0143a76098e85d471f0af286be173f5f81448359` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$238** (238 USDT) |
+| **Blocks** | 26263160-26263160 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $238 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #524: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x010b2b3e4c84c1abdc9f8068351123a3bc24077e` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$22** (22 USDC) |
+| **Blocks** | 26263096-26263096 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $22 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #525: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x4cf086f89789485ddd0c09b543df2464907e815c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$378** (378 USDC) |
+| **Blocks** | 26263045-26263045 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $378 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #526: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xe43f7f9a3ab3b6b93cea0efb7306953b20b9b698` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,009** (1,009 USDT) |
+| **Blocks** | 26262971-26262971 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,009 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #527: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x5972c058ec6c979dd63af5130d892c7b2410fe0d` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$250** (250 USDT) |
+| **Blocks** | 26262966-26262966 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $250 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #528: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x490669a05cccb1d0d5d5cccd9c116617843282de` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$150** (150 USDT) |
+| **Blocks** | 26262889-26262889 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $150 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #529: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x25e9bf0868ac2a7e513e02d611476a38f4e0ffe5` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,906** (1,906 USDT) |
+| **Blocks** | 26262836-26262836 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,906 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #530: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x4641c289932e3add57119cf2274d80058e6f4f7c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,121** (1,121 USDT) |
+| **Blocks** | 26262832-26262832 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,121 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #531: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x71a5cf9425b956971dfbba7cf3558a878d22d0ff` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$53** (53 USDC) |
+| **Blocks** | 26262808-26262808 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $53 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #532: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xc3ae0b5dec81a6c60ce6456957ad8e92aceed568` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$103** (103 USDC) |
+| **Blocks** | 26262647-26262647 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $103 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #533: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x6e961ac2fabbd2b51c546f8f1d2adf1b9ca31154` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$200** (200 DAI) |
+| **Blocks** | 26262414-26262414 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $200 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #534: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf672e24c8f07b49ce2d023cda17ee387d5644f95` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$50** (50 USDC) |
+| **Blocks** | 26262190-26262190 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $50 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #535: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x3f9ccb4c1b94abfd18672679e16cfcf4720addc9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$50** (50 DAI) |
+| **Blocks** | 26262141-26262141 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $50 total (DAI) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #536: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xc17421b53f5a57f56ef32e2e3c3048db9e274680` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDT) |
+| **Blocks** | 26262022-26262022 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $20 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #537: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x03275411042ec6b654db178966dcf723606f74d8` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26262000-26262000 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #538: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x286fe041c61a6226414a459850d31052787b11b6` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$200** (200 USDT) |
+| **Blocks** | 26261979-26261979 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $200 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #539: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x7e565decfc66ef12f06e35d75e7b020cb7c5be4b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$186** (186 DAI) |
+| **Blocks** | 26261796-26261796 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $186 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #540: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x9d57a3bc42ba1748daf8bb00f20752141411827d` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$19** (19 USDC) |
+| **Blocks** | 26261651-26261651 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $19 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #541: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf9d4df0994d5c3c22e184da8d3a56b849b8f9ee4` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$204** (204 USDT) |
+| **Blocks** | 26261553-26261553 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $204 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #542: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xd1d7cd279099ece0d54e5e2f844866a952d1f777` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$15** (15 USDC) |
+| **Blocks** | 26261509-26261509 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $15 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #543: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x1a5fc14baad8993066978366a739f0c7507e3f90` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$1,201** (1,201 USDT) |
+| **Blocks** | 26261474-26261474 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $1,201 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #544: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x5a936d0db554e4bda42de4d15b5dcc4c6e25c4eb` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$50** (50 USDC) |
+| **Blocks** | 26261174-26261174 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $50 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #545: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x7605c014fe317a11535df284d69ba308b91a9195` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDC) |
+| **Blocks** | 26261102-26261102 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #546: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x463bc14e095249281bd3adc2864f3b98834b8c7a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26261088-26261088 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $10 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #547: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x999c123ad3d5c98e8826273b84e7e1c910967a1a` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5** (5 USDT) |
+| **Blocks** | 26260981-26260981 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #548: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xdad268bf40a468cba9a2745bc9c04a5e92cd219c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$650** (650 USDT) |
+| **Blocks** | 26260945-26260945 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $650 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #549: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xb05ec2f4f657d8536cd367a052d8f99d6cb3be22` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$88** (88 USDT) |
+| **Blocks** | 26260856-26260856 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $88 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #550: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x832b7753f8b556f3ea9d01c701d6bf9a00fb18f0` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$78** (78 USDC) |
+| **Blocks** | 26260750-26260750 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $78 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #551: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xbd2cf330a121ac9258c5e5ac3c688d8ebbe50518` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$30** (30 USDC) |
+| **Blocks** | 26260715-26260715 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $30 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #552: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x42fbc1659a04d80d5c1c05f74f0746a8cd9a5d50` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$250** (250 USDT) |
+| **Blocks** | 26260117-26260117 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $250 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #553: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x70ee8221fad365b48c719d61798aea9d0c85dd7d` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$250** (250 USDT) |
+| **Blocks** | 26260105-26260105 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $250 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #554: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xdf5d2c66609d279db12a1a3d16a26f66040f00b1` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$68** (68 USDC) |
+| **Blocks** | 26260036-26260036 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $68 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #555: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xcc436e30611359d0896a80edafaa948f6ebc9711` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$5** (5 USDT) |
+| **Blocks** | 26260018-26260018 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $5 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #556: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xc13271839c9a39a5b7d29f887b681fc9621f38b5` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$89** (89 USDC) |
+| **Blocks** | 26259888-26259888 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $89 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #557: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x7ac9ef1cc6336e1ec17bb8e9142f56a55289c41b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$4** (4 USDC) |
+| **Blocks** | 26259634-26259634 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $4 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #558: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x074b6b7b98017f3e495e193c8e71302a379d99fe` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$78** (78 DAI) |
+| **Blocks** | 26259551-26259551 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $78 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #559: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x646328a1fb65883f9c2905ea7fd3f1aa64bb5ef4` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$30** (30 USDT) |
+| **Blocks** | 26259522-26259522 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $30 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #560: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xd55dcd336883c5dc6abf73f4c5522e030f3c0535` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$84** (84 USDC) |
+| **Blocks** | 26259424-26259424 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $84 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #561: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x84cd04c93b2e99d1579b25c60efae5e5f5746063` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$610** (610 USDT) |
+| **Blocks** | 26259422-26259422 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $610 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #562: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x4e3d9b36491f04d6b4e97d41fc6045aa6c64ccbe` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$100** (100 USDT) |
+| **Blocks** | 26259413-26259413 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $100 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #563: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x0ed6e630a52ef2865a20b88d9182ff363396ec9b` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$636** (636 USDC) |
+| **Blocks** | 26259268-26259268 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $636 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #564: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xae74fa6274ee2d3a50711699897db5a4d445123f` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$81** (81 USDT) |
+| **Blocks** | 26259078-26259078 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $81 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #565: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf7f96a4027c6b7b29d32bed71a107fa4accabd5c` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$50** (50 USDC) |
+| **Blocks** | 26259015-26259015 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $50 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #566: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x1a6b1c19bdf7c1d66b44eeac7b0b40aabc0decb2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$4** (4 USDC) |
+| **Blocks** | 26258976-26258976 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $4 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #567: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x1953c6200edab17ef4494e5e192dbce0ca0ba1a2` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 DAI) |
+| **Blocks** | 26258797-26258797 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $20 total (DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #568: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x9f4f8e41b35fa6b449cedc96809a35a1d6bc6d75` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$12** (12 USDT) |
+| **Blocks** | 26258776-26258776 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $12 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
+
+</details>
+
+---
+
+## Finding #569: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x29135eb6a81faa23d936608fa0a647c1af6552e9` |
+| **Target** | SideShift Hot Wallet (`0xcdd37ada79f589c15b...`) |
+| **Activity** | **1** token transfer totaling **$25** (25 USDC) |
+| **Blocks** | 26258595-26258595 |
+
+### 💬 What Happened
+A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — API error**
+
+Retry analysis.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to SideShift Hot Wallet: $25 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated analysis error: Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it
 
 </details>
 
@@ -8658,15 +23379,15 @@ Automated analysis error: Error code: 429 - {'error': {'message': 'Rate limit re
 
 ## Scan Summary
 
-**211 suspicious findings** detected across 211 unique wallets. Highest risk score: **130**.
+**569 suspicious findings** detected across 569 unique wallets. Highest risk score: **236**.
 
 | | |
 |---|---|
-| 🔴 CRITICAL | 0 |
-| 🟠 HIGH | 87 |
-| Wallets flagged | 211 |
-| Suspicious value | 0.0000 ETH ($0) + $6,589,718 in stablecoins |
-| Blocks scanned | 25459918 — 25460117 |
+| 🔴 CRITICAL | 29 |
+| 🟠 HIGH | 14 |
+| Wallets flagged | 569 |
+| Suspicious value | 47.1583 ETH ($110,439) + $9,463,546,884 in stablecoins |
+| Blocks scanned | 26285677 — 26285876 |
 
 ---
 *AML Roaster v2 — NEXUS Engine · 13 detection rules · automated scan*
