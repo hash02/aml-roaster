@@ -121,6 +121,24 @@ the code and the run records before being fixed.
   deliver reliably at that cadence. The cron is now every 6
   hours, and the README status says so.
 
-**Verification.** All 66 existing tests pass. A verification scan
-run with these changes has been dispatched; its conclusion will
-be appended here when it lands.
+- Commentary parsing was hardened after the verification run
+  below: the new model answered, but 17 of 25 replies did not
+  parse as strict JSON, and the parse-failure fallback printed
+  the raw reply into the report. The call now requests JSON
+  mode, allows 1600 tokens, and extracts the outermost JSON
+  object from the reply before parsing. A reply that still
+  cannot be parsed now falls back to the same clean generic
+  text as a failed call. Raw model output never appears in a
+  report.
+
+**Verification.** All 66 existing tests pass. Verification run
+40582225156 (2026-10-27, success) produced
+reports/report_2026-10-27_2114.md: clean header with no rate
+claim, zero analysis-error strings, a Partial Run note (3 of 8
+scanned) with a coverage note reconciling its 236 preliminary
+findings, and an honest summary line for the 17 commentary
+replies that failed to parse. The parse hardening above was
+smoke-tested locally (wrapped JSON parses; unparseable output
+falls back cleanly with no raw text in the report). A
+confirmation run with the hardening has been dispatched; its
+conclusion will be appended here when it lands.

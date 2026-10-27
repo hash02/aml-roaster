@@ -1704,7 +1704,8 @@ Respond in this EXACT JSON format (no markdown, no code blocks, no backticks):
             model=GROQ_MODEL,
             messages=[{"role": "user", "content": prompt}],
             temperature=0.8,
-            max_tokens=900,
+            max_tokens=1600,
+            response_format={"type": "json_object"},
         )
         raw = response.choices[0].message.content.strip()
         if raw.startswith("```"):
@@ -1712,16 +1713,23 @@ Respond in this EXACT JSON format (no markdown, no code blocks, no backticks):
             if raw.startswith("json"):
                 raw = raw[4:]
         raw = raw.strip()
+        # Tolerate prose or reasoning around the JSON object: parse the
+        # outermost {...} span rather than requiring the whole reply to
+        # be the object.
+        start = raw.find("{")
+        end = raw.rfind("}")
+        if start != -1 and end > start:
+            raw = raw[start:end + 1]
         return json.loads(raw)
 
     except json.JSONDecodeError:
         _analysis_stats["failed"] += 1
         return {
             "what_happened": f"A wallet was caught interacting with {finding['receiver_label']}. Our engine flagged it at score {finding['risk_score']}.",
-            "roast": raw[:300] if 'raw' in dir() else "The AI was speechless.",
-            "sar_narrative": "Automated SAR generation failed — manual review required.",
-            "risk_verdict": f"{finding['risk_level']} — Score {finding['risk_score']}",
-            "recommended_action": "Manual investigation required.",
+            "roast": "Even our AI refused to look at this transaction.",
+            "sar_narrative": "Automated commentary unavailable for this finding; the verdict is based on the rule score alone.",
+            "risk_verdict": f"{finding['risk_level']} (rule score {finding['risk_score']})",
+            "recommended_action": "Flag for manual review.",
         }
     except Exception as e:
         _analysis_stats["failed"] += 1
