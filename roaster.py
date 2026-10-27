@@ -1269,6 +1269,10 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     global _last_partial_scan
     _last_partial_scan = None
     scan_t0 = time.monotonic()
+
+    def over_budget() -> bool:
+        return time.monotonic() - scan_t0 >= TIME_BUDGET_SECONDS
+
     findings = []
     _oracle_cache.clear()  # fresh oracle lookups each scan
     _first_inbound_cache.clear()  # fresh first-inbound lookups each scan
@@ -1298,7 +1302,7 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     partial = False
     deferred_items = []
     for item_index, (address, addr_info) in enumerate(selected_items):
-        if time.monotonic() - scan_t0 >= TIME_BUDGET_SECONDS:
+        if over_budget():
             # Budget spent: stop starting new addresses and go to report
             # writing with what this run completed. Unstarted addresses
             # keep their last_scanned state, so they catch up next run.
@@ -1310,6 +1314,7 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
             break
         label = addr_info["label"]
         print(f"[SCAN] Checking {label} ({address[:10]}...)")
+        cut_short = False
 
         addr_last = last_scanned.get(address)
         if addr_last is None:
@@ -1357,6 +1362,12 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
             }
 
             for sender, sender_txs in sender_map.items():
+                if over_budget():
+                    # A busy address can have hundreds of senders; without
+                    # this check one address can consume the whole job.
+                    cut_short = True
+                    print(f"  [SCAN] Time budget reached while profiling senders for {label}; remaining senders skipped")
+                    break
                 eth_values = [int(tx.get("value", "0")) / 1e18 for tx in sender_txs]
                 total_eth = sum(eth_values)
                 timestamps = [int(tx.get("timeStamp", "0")) for tx in sender_txs]
@@ -1439,7 +1450,7 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                 })
 
         # ── Process ERC-20 token transfers (NEW — catches USDT/DAI/USDC through mixers) ──
-        if has_tokens:
+        if has_tokens and not cut_short:
             # Group token transfers by sender
             token_sender_map = {}
             for tx in token_txs:
@@ -1448,6 +1459,10 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                     token_sender_map.setdefault(sender, []).append(tx)
 
             for sender, sender_token_txs in token_sender_map.items():
+                if over_budget():
+                    cut_short = True
+                    print(f"  [SCAN] Time budget reached while profiling token senders for {label}; remaining senders skipped")
+                    break
                 # Run stablecoin mixing rule
                 stablecoin_result = rule_stablecoin_mixing(sender_token_txs, address)
                 if not stablecoin_result:
@@ -1500,6 +1515,22 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                     "wallet_profile": {},
                     "token_transfers": token_summary,
                 })
+
+        if cut_short:
+            # Sender processing for this address was cut short by the time
+            # budget. Restore its previous scan cursor so the address is
+            # retried on the next run instead of silently skipping the part
+            # that was not processed, and defer it (plus everything after
+            # it) in the rotation.
+            if addr_last is None:
+                last_scanned.pop(address, None)
+            else:
+                last_scanned[address] = addr_last
+            deferred_items = selected_items[item_index:]
+            partial = True
+            print(f"[SCAN] Time budget ({TIME_BUDGET_SECONDS}s) reached during "
+                  f"{label}, deferring {len(deferred_items)} address(es) to the next run")
+            break
 
     # ── Strategy 2: High-value block scanning ──
     # Skipped on a partial run: the time budget is already spent, so the
