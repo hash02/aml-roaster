@@ -1,5 +1,14 @@
 name: 📇 Refresh Address Feeds
 
+# Weekly refresh of the vendored OFAC address feed. The refresh itself is
+# plain Python stdlib; delivery is a pull request opened by
+# peter-evans/create-pull-request. That step requires the repository
+# setting "Allow GitHub Actions to create and approve pull requests"
+# (Settings > Actions > General > Workflow permissions) to be enabled;
+# without it the PR step fails even though the refresh succeeds.
+# Repo default token permissions stay "read": the write scopes this job
+# needs are declared in the permissions block below, nothing more.
+
 on:
   schedule:
     # Weekly on Sunday 03:00 UTC — upstream OFAC feed is updated as the
@@ -11,6 +20,12 @@ permissions:
   contents: write
   pull-requests: write
 
+# One run at a time; a manual dispatch queues behind a scheduled run
+# instead of racing it onto the same delivery branch.
+concurrency:
+  group: refresh-addresses
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -18,10 +33,10 @@ jobs:
 
     steps:
       - name: 📥 Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: 🐍 Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.11'
 
@@ -29,7 +44,7 @@ jobs:
         run: python scripts/refresh_addresses.py
 
       - name: 📬 Open PR if changed
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: auto/refresh-addresses
           title: 'chore: refresh vendored address feeds'
