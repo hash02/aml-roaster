@@ -1,6 +1,6 @@
 # 🔥 AML Roaster Report
-**2026-10-27 23:06 UTC** · Ethereum Mainnet · ETH $2,348.03
-**Blocks:** 26287029 — 26287228 · **Watched Addresses:** 49 · **Detection Rules:** 13
+**2026-10-27 23:29 UTC** · Ethereum Mainnet · ETH $2,346.05
+**Blocks:** 26287142 — 26287341 · **Watched Addresses:** 49 · **Detection Rules:** 13
 **Engine:** NEXUS AML v2 (rule set from aml-detection-engine)
 
 ---
