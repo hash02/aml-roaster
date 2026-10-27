@@ -1,0 +1,29 @@
+{
+  "addresses": [
+    {
+      "address": "0x098b716b8aaf21512996dc57eb0615e2383e2f96",
+      "label": "Ronin Bridge Exploiter (Lazarus Group)",
+      "chain": 1,
+      "source": "etherscan"
+    },
+    {
+      "address": "0x3dfd23a6c5e8bbcfc9581d2e864a68feb6a076d3",
+      "label": "Bitfinex Hack 2016",
+      "chain": 1,
+      "source": "etherscan"
+    },
+    {
+      "address": "0x4f6742badb049791cd9a37ea913f2bac38d01279",
+      "label": "Structuring Cluster",
+      "chain": 1,
+      "source": "blockscout"
+    }
+  ],
+  "alert_threshold": 0.7,
+  "output_dir": "data/monitoring/",
+  "last_checked": {
+    "0x098b716b8aaf21512996dc57eb0615e2383e2f96": "2026-10-27 19:18:27",
+    "0x3dfd23a6c5e8bbcfc9581d2e864a68feb6a076d3": "2026-10-27 19:18:27",
+    "0x4f6742badb049791cd9a37ea913f2bac38d01279": "2026-10-27 19:18:27"
+  }
+}
