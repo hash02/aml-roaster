@@ -4,7 +4,7 @@ AML Roaster Agent v2 — Live Ethereum Transaction Monitor + NEXUS AML Engine
 Pulls real blockchain data, scores with 15+ detection rules, generates roast + SAR reports.
 Designed to run on GitHub Actions every 30 minutes.
 
-Detection rules ported from NEXUS-AGENT v1 AML engine (22 rules, 94.9% detection rate).
+Detection rules ported from NEXUS-AGENT v1 AML engine (22 rules).
 
 Author: HASH (hash02) — Bionic Banker
 """
@@ -250,7 +250,12 @@ PUBLIC_RPC_ENDPOINTS = [
 # Groq (free LLM)
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 GROQ_BASE_URL = "https://api.groq.com/openai/v1"
-GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_MODEL = "openai/gpt-oss-20b"
+# Cap per-finding AI commentary per run. A heavy batch can produce
+# hundreds of findings, and one call (plus pauses) per finding was
+# most of the report-generation time. Highest scores are analyzed
+# first; findings past the cap keep their rule-based verdict only.
+MAX_ANALYSES_PER_RUN = 25
 
 # Output
 REPORTS_DIR = Path(__file__).parent / "reports"
@@ -258,7 +263,7 @@ REPORTS_DIR.mkdir(exist_ok=True)
 
 
 # ─── AML Engine Thresholds (from NEXUS-AGENT v1) ────────────────────────────
-# These are the tuned thresholds from the 22-rule engine (94.9% detection rate)
+# These are the tuned thresholds from the 22-rule engine
 
 THRESHOLDS = {
     # Wallet age rules
@@ -314,6 +319,12 @@ SCAN_STATE_PATH = Path(__file__).parent / "reports" / "scan_state.json"
 # Set by scan_recent_blocks() when a run stops early on the time budget and
 # read by generate_report() to add the partial-run note. None = full run.
 _last_partial_scan = None
+
+# Commentary bookkeeping for generate_report(): how many AI analyses
+# were attempted this run and how many failed. Reset per report. A
+# failed analysis never changes a finding's verdict (rule score only);
+# failures surface as one summary line, not as per-finding error text.
+_analysis_stats = {"attempted": 0, "failed": 0}
 
 
 def load_scan_state() -> dict:
@@ -1687,6 +1698,7 @@ Respond in this EXACT JSON format (no markdown, no code blocks, no backticks):
 }}"""
 
     try:
+        _analysis_stats["attempted"] += 1
         client = OpenAI(api_key=GROQ_API_KEY, base_url=GROQ_BASE_URL)
         response = client.chat.completions.create(
             model=GROQ_MODEL,
@@ -1703,6 +1715,7 @@ Respond in this EXACT JSON format (no markdown, no code blocks, no backticks):
         return json.loads(raw)
 
     except json.JSONDecodeError:
+        _analysis_stats["failed"] += 1
         return {
             "what_happened": f"A wallet was caught interacting with {finding['receiver_label']}. Our engine flagged it at score {finding['risk_score']}.",
             "roast": raw[:300] if 'raw' in dir() else "The AI was speechless.",
@@ -1711,13 +1724,14 @@ Respond in this EXACT JSON format (no markdown, no code blocks, no backticks):
             "recommended_action": "Manual investigation required.",
         }
     except Exception as e:
+        _analysis_stats["failed"] += 1
         print(f"[ERROR] Groq API: {e}")
         return {
             "what_happened": f"A wallet was caught interacting with {finding['receiver_label']}. Our engine flagged it at score {finding['risk_score']}.",
             "roast": "Even our AI refused to look at this transaction.",
-            "sar_narrative": f"Automated analysis error: {str(e)[:100]}",
-            "risk_verdict": f"{finding['risk_level']} — API error",
-            "recommended_action": "Retry analysis.",
+            "sar_narrative": "Automated commentary unavailable for this finding; the verdict is based on the rule score alone.",
+            "risk_verdict": f"{finding['risk_level']} (rule score {finding['risk_score']})",
+            "recommended_action": "Flag for manual review.",
         }
 
 
@@ -1725,13 +1739,15 @@ Respond in this EXACT JSON format (no markdown, no code blocks, no backticks):
 
 def generate_report(findings: list, eth_price: float, scan_meta: dict) -> str:
     """Generate a markdown report with AML engine scoring."""
+    _analysis_stats["attempted"] = 0
+    _analysis_stats["failed"] = 0
     now = datetime.now(UTC)
     timestamp = now.strftime("%Y-%m-%d %H:%M UTC")
 
     report = f"""# 🔥 AML Roaster Report
 **{timestamp}** · Ethereum Mainnet · ETH ${eth_price:,.2f}
 **Blocks:** {scan_meta.get('block_range', 'N/A')} · **Watched Addresses:** {len(WATCHED_ADDRESSES)} · **Detection Rules:** 13
-**Engine:** NEXUS AML v2 — 94.9% detection rate
+**Engine:** NEXUS AML v2 (rule set from aml-detection-engine)
 
 ---
 
@@ -1744,6 +1760,18 @@ def generate_report(findings: list, eth_price: float, scan_meta: dict) -> str:
         report += f"""## ⚠️ Partial Run
 
 This scan reached its {_last_partial_scan['budget_seconds']}s time budget and stopped early so a report could still be written. {_last_partial_scan['scanned_count']} of {_last_partial_scan['batch_size']} watched addresses in this batch were scanned. The rest were deferred to the next run: {deferred_list}.
+
+---
+
+"""
+        # Findings are appended while a watched address is being
+        # profiled, so an address cut short by the budget can leave
+        # findings in this report even though it counts as deferred.
+        # Name that plainly: those findings are preliminary.
+        deferred_addrs = {addr for addr, _label in _last_partial_scan["deferred"]}
+        preliminary_count = sum(1 for f in findings if f["receiver"] in deferred_addrs)
+        if preliminary_count:
+            report += f"""**Coverage note:** {preliminary_count} of the findings below were raised while profiling an address whose scan was then cut short by the time budget, so that address counts as deferred above even though it produced findings. Those findings are preliminary: the address keeps its previous scan position, is scanned again on the next run, and its findings are re-derived in full then.
 
 ---
 
@@ -1763,8 +1791,27 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
 """
         return report
 
+    # Commentary goes to the highest-scoring findings first, capped
+    # per run (MAX_ANALYSES_PER_RUN). Findings past the cap still get
+    # their full rule-based verdict, just no AI write-up.
+    analyzed_ids = {
+        id(f)
+        for f in sorted(findings, key=lambda x: x["risk_score"], reverse=True)[
+            :MAX_ANALYSES_PER_RUN
+        ]
+    }
     for i, finding in enumerate(findings, 1):
-        roast_data = generate_roast(finding, eth_price)
+        if id(finding) in analyzed_ids:
+            roast_data = generate_roast(finding, eth_price)
+            time.sleep(1)
+        else:
+            roast_data = {
+                "what_happened": f"A wallet was caught interacting with {finding['receiver_label']}. Our engine flagged it at score {finding['risk_score']}.",
+                "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+                "sar_narrative": "Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.",
+                "risk_verdict": f"{finding['risk_level']} (rule score {finding['risk_score']})",
+                "recommended_action": "Flag for manual review.",
+            }
         # Store roast text on finding dict so save_scan_data() can capture it
         finding["_roast_data"] = roast_data
         token_transfers = finding.get("token_transfers", [])
@@ -1826,7 +1873,6 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
 ---
 
 """
-        time.sleep(1)
 
     # Summary
     total_eth = sum(f["total_eth"] for f in findings)
@@ -1852,6 +1898,10 @@ Check back in 30 minutes — crime doesn't sleep, but it does take breaks.
 
 ---
 *AML Roaster v2 — NEXUS Engine · 13 detection rules · automated scan*
+"""
+    if _analysis_stats["failed"]:
+        report += f"""
+Automated commentary unavailable for {_analysis_stats['failed']} of {_analysis_stats['attempted']} attempted analyses this run.
 """
     return report
 
