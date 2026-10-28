@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-22T23:24:21.767648+00:00",
-      "eth_price": 2063.02648915873,
-      "block_range": "24716114 \u2014 24716313",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-22T23:51:17.464448+00:00",
       "eth_price": 2054.58030421274,
       "block_range": "24716247 \u2014 24716446",
@@ -62694,16 +62687,50 @@
       "block_range": "26287142 \u2014 26287341",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-10-28T04:39:33.410942+00:00",
+      "eth_price": 2355.12,
+      "block_range": "26288687 \u2014 26288886",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x69ce09ab548ffb0b46978fdabb44beb2344608d5",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A wallet was caught interacting with Tornado Cash Router. Our engine flagged it at score 400.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 400)",
+          "recommended_action": "Flag for manual review."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 2704,
-    "unique_senders": 2129,
+    "total_findings": 2705,
+    "unique_senders": 2130,
     "highest_score": 660,
-    "critical_count": 744,
+    "critical_count": 745,
     "high_count": 204,
-    "first_scan": "2026-03-22T23:24:21.767648+00:00",
-    "last_scan": "2026-10-27T23:29:30.807503+00:00"
+    "first_scan": "2026-03-22T23:51:17.464448+00:00",
+    "last_scan": "2026-10-28T04:39:33.410942+00:00"
   }
 }
