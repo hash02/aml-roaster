@@ -1,27 +1,27 @@
 # 🔥 AML Roaster Report
-**2026-10-28 04:39 UTC** · Ethereum Mainnet · ETH $2,355.12
-**Blocks:** 26288687 — 26288886 · **Watched Addresses:** 49 · **Detection Rules:** 13
+**2026-10-28 12:21 UTC** · Ethereum Mainnet · ETH $2,346.17
+**Blocks:** 26290989 — 26291188 · **Watched Addresses:** 49 · **Detection Rules:** 13
 **Engine:** NEXUS AML v2 (rule set from aml-detection-engine)
 
 ---
 
-## Finding #1: CRITICAL — Score 400
+## Finding #1: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x69ce09ab548ffb0b46978fdabb44beb2344608d5` |
-| **Target** | Tornado Cash Router (`0xd90e2f925da726b50c...`) |
-| **Activity** | **1** tx totaling **0.0000 ETH** ($0) |
-| **Blocks** | 26288707-26288707 |
+| **Sender** | `0xb25058ccb45e0cd7d588e18e23a1e02b85f59f54` |
+| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
+| **Activity** | **2** token transfers totaling **$2** (1 WETH, 1 USDC) |
+| **Blocks** | 26291063-26291067 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Tornado Cash Router. Our engine flagged it at score 400.
+A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 400)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -31,16 +31,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 518 days |
-| Total Transactions | 575 |
-| Current Balance | 4.290762 ETH |
-| Days Since Last Activity | 0 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (4 rules, composite score: 400):
-- **mixer_touch** (+100) — Direct deposit to Tornado Cash Router — OFAC-sanctioned mixer
-- **ofac_hit** (+200) — OFAC SDN match: 0xd90e2f92... — Tornado Cash Router (OFAC 2022)
-- **mixer_contract_call** (+70) — Zero-value contract call to Tornado Cash Router — likely withdrawal relay, governance vote, or obfuscation technique
-- **exchange_avoidance** (+30) — Funds routed to Tornado Cash Router instead of legitimate exchange — avoiding KYC/AML controls
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Relay: $1 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary unavailable for this finding; the verdict is based on the rule score alone.
@@ -49,19 +46,430 @@ Automated commentary unavailable for this finding; the verdict is based on the r
 
 ---
 
-## Scan Summary
-
-**1 suspicious finding** detected across 1 unique wallet. Highest risk score: **400**.
+## Finding #2: MEDIUM — Score 80
 
 | | |
 |---|---|
-| 🔴 CRITICAL | 1 |
+| **Sender** | `0xb25058ccb45e0cd7d588e18e23a1e02b85f59f54` |
+| **Target** | Railgun Treasury (`0xe8a8b458bcd1ececc6...`) |
+| **Activity** | **2** token transfers totaling **$0** (0 WETH, 0 USDC) |
+| **Blocks** | 26291063-26291067 |
+
+### 💬 What Happened
+A person sent two very small amounts of cryptocurrency to a service called Railgun Treasury, which is basically a money‑laundering machine that mixes coins together so it’s hard to track where they came from. Even though the amounts were tiny, the fact that the money went to a place that the U.S. Treasury has black‑listed for laundering billions makes it a red flag. It’s like dropping a few coins into a secret pot that’s known to be used by shady folks to hide their loot.
+
+### 🔥 The Roast
+So this wallet decided to play hide‑and‑seek with a black‑listed mix‑box. They sent 0.0014 and 0.0024 units to Railgun Treasury—think of it as tossing a couple of pennies into a pot that’s on the Treasury’s ‘do not touch’ list (OFAC). The engine gave it an 80 on stablecoin_mixing, which means it thinks you’re trying to blend your coins like a bartender at a speakeasy. If you’re looking to stay under the radar, you might want to skip the mix‑and‑match and go straight to a bank that actually follows the rules.
+
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — the transaction involves a sanctioned mixing service but the amounts are minimal, so further investigation is warranted.**
+
+Flag the wallet for manual review, request additional transaction context, and monitor for any subsequent large or patterned activity involving Railgun Treasury.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Railgun Treasury: $0 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+The transaction involved a transfer to the Railgun Treasury, a known mixing service that was sanctioned by the U.S. Treasury under OFAC for laundering billions of dollars. The AML engine flagged the activity under the stablecoin_mixing rule (score: 80), triggering Rule 3.1 (Sanctions List Violation) and Rule 4.2 (Mixing Service Transaction). The sender’s wallet profile is incomplete, with unknown age and activity, increasing uncertainty. The composite score of 80 indicates a high level of suspicious activity requiring further review.
+
+</details>
+
+---
+
+## Finding #3: MEDIUM — Score 75
+
+| | |
+|---|---|
+| **Sender** | `0x7a2ea6ab500c17fd9e11c5d6f26fd4b2c1afd465` |
+| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
+| **Activity** | **1** tx totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26291115-26291115 |
+
+### 💬 What Happened
+The sender’s wallet, holding about 0.2 ETH, sent a practically zero amount of ETH to a privacy service known as Railgun Relay, which is used by the sanctioned Tornado Cash mixer. Think of it like dropping a single penny into a shady money‑laundering front—no real money moved, but the door was opened. The transaction was recorded on block 26291115 with no token transfers, and the sender’s account was active just the day before, showing recent activity.
+
+### 🔥 The Roast
+So the guy decided to play hide‑and‑seek with his 0.197 ETH, sending it to a privacy relay (basically a cloak for your crypto that makes it look like you’re doing nothing). He’s basically waving a red flag: ‘Hey, I’m using a service that the U.S. Treasury slapped a sanctions sticker on in 2022 because it helped launder billions!’ The fact that he sent literally zero ETH is like showing up at a bank with an empty wallet and a suspiciously shiny card. In plain English, it’s a classic case of someone trying to get the privacy boost without actually moving money—maybe just a test drive. Good luck keeping that on the radar, because this is the kind of move that says, ‘I’m playing with the big leagues.’
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — the transaction involves a sanctioned privacy protocol with recent activity and zero value, indicating potential obfuscation but no direct evidence of wrongdoing.**
+
+Flag the transaction for manual review, investigate the sender’s broader transaction history for layering or structuring patterns, and consider reporting to the relevant regulatory authority if additional suspicious activity is uncovered.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 309 days |
+| Total Transactions | 2181 |
+| Current Balance | 0.197692 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 75):
+- **privacy_protocol** (+75) — Deposit to Railgun Relay — non-Tornado privacy protocol
+
+**SAR Narrative** *(for compliance teams)*:
+The transaction involves a transfer from wallet 0x7a2ea6ab500c17fd9e11c5d6f26fd4b2c1afd465 to the Railgun Relay address (0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9) on block 26291115. The transfer value is zero ETH, with no token transfers recorded. The sender wallet, aged 309 days with 2181 total transactions and a current balance of 0.197692 ETH, was active on the same day as the transfer. This activity triggers the privacy_protocol rule (score: 75) and raises a potential OFAC sanction concern due to the known association of Railgun Relay with the Tornado Cash mixer, which was sanctioned in August 2022 for facilitating illicit funds. The transaction pattern suggests possible layering or obfuscation consistent with Rule 4.3 (Privacy Protocol Usage) and Rule 5.1 (Sanctioned Entity Interaction).
+
+</details>
+
+---
+
+## Finding #4: MEDIUM — Score 75
+
+| | |
+|---|---|
+| **Sender** | `0x1ed98663fd1000002e283a0402bd531c54ce6abc` |
+| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
+| **Activity** | **2** txs totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26291006-26291087 |
+
+### 💬 What Happened
+A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 75.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 75)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 309 days |
+| Total Transactions | 2206 |
+| Current Balance | 0.212860 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 75):
+- **privacy_protocol** (+75) — Deposit to Railgun Relay — non-Tornado privacy protocol
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary unavailable for this finding; the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #5: MEDIUM — Score 75
+
+| | |
+|---|---|
+| **Sender** | `0x78cc5df76ee66b4e6e04a01ff52784f6b0b5555d` |
+| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
+| **Activity** | **1** tx totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26291065-26291065 |
+
+### 💬 What Happened
+A brand-new wallet (only 0 days old) just sent a tiny amount of ETH to a Railgun Relay address, which is a type of privacy service. The sender had only a handful of prior transactions and still holds a small balance of about 0.01 ETH. In plain terms, it's like a new kid at school walking into a known money-laundering front without a clear purpose.
+
+### 🔥 The Roast
+So, a brand-new wallet, zero days old, decided to play hide‑and‑seek with a privacy protocol—because who doesn’t want to look like they’re hiding in plain sight? The score is 75 on the privacy_protocol rule (meaning the transaction is routed through a privacy‑enhancing protocol that obfuscates transaction paths, commonly used by bad actors). Even though the wallet only moved 0.0000 ETH, the fact that it hit a Railgun Relay (a known privacy service) is a red flag hotter than a fresh pizza in a crypto kitchen. If this was a grocery store, it’d be like a new customer buying a single bag of flour and then disappearing into a maze of storage rooms. Looks suspicious enough that even a cautious accountant would raise an eyebrow—and a compliance team should too.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — the transaction involves a newly created wallet interacting with a privacy protocol known to be used for laundering.**
+
+Flag the wallet for manual review; request source of funds documentation and verify compliance with OFAC sanctions. Consider freezing the account if additional high‑risk indicators emerge.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 6 |
+| Current Balance | 0.009589 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 75):
+- **privacy_protocol** (+75) — Deposit to Railgun Relay — non-Tornado privacy protocol
+
+**SAR Narrative** *(for compliance teams)*:
+The transaction involved a newly created wallet (0‑day age, 6 prior TXs) sending a negligible amount of ETH to a Railgun Relay address, triggering the [privacy_protocol] rule with a score of 75. The absence of any token transfers and the use of a privacy-enhancing service are consistent with known laundering patterns. According to AML compliance guidelines, any interaction with a sanctioned privacy protocol warrants further scrutiny under Rule 4.2 (Privacy Protocol Transactions). Evidence includes the wallet’s age, transaction count, and the recipient being a Railgun Relay, which is listed as a high‑risk entity.
+
+</details>
+
+---
+
+## Finding #6: MEDIUM — Score 75
+
+| | |
+|---|---|
+| **Sender** | `0xc1d0dd9315d0f877cbca9ffa2f95e2b66f798fda` |
+| **Target** | Railgun Relay (`0xfa7093cdd9ee6932b4...`) |
+| **Activity** | **1** tx totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26291044-26291044 |
+
+### 💬 What Happened
+A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 75.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 75)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 2327 |
+| Current Balance | 0.141290 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 75):
+- **privacy_protocol** (+75) — Deposit to Railgun Relay — non-Tornado privacy protocol
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary unavailable for this finding; the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #7: MEDIUM — Score 75
+
+| | |
+|---|---|
+| **Sender** | `0x53289fa7aa588434dc3e9f584c89b3eb9352db5c` |
+| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
+| **Activity** | **1** tx totaling **0.0147 ETH** ($34) |
+| **Blocks** | 26291105-26291105 |
+
+### 💬 What Happened
+A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 75.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 75)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 979 days |
+| Total Transactions | 40 |
+| Current Balance | 0.015029 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 75):
+- **privacy_protocol** (+75) — Deposit to Privacy Pools (0xbow) Entrypoint — non-Tornado privacy protocol
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary unavailable for this finding; the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #8: MEDIUM — Score 75
+
+| | |
+|---|---|
+| **Sender** | `0xb45d2bce123774fcfde795dd3eeb6b648f34d39f` |
+| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
+| **Activity** | **1** tx totaling **0.0385 ETH** ($90) |
+| **Blocks** | 26291048-26291048 |
+
+### 💬 What Happened
+A wallet that has been around for about two years sent 0.0385 ETH (about $90) straight into a privacy pool entry point. The move is like dropping a small cash sum into a secret box that scrambles the trail so no one can see where it went next. No tokens were involved, just plain ETH, and the sender's account still holds a tiny balance after the transfer.
+
+### 🔥 The Roast
+Looks like someone decided to play hide‑and‑seek with their 90 bucks in crypto. They hit a privacy pool that’s not even Tornado Cash (but hey, all privacy pools are basically the crypto version of a money‑laundering laundromat). The engine gave it a 75 score on the privacy_protocol rule—so it thinks it’s a legit ‘scrambler’. If you’re wondering what that means, it just means the transaction is being mixed so nobody can trace it. In plain English, the sender is trying to make their money disappear faster than a magician’s rabbit.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — the transaction involves a privacy pool and an inactive wallet, raising potential anonymity concerns.**
+
+Review the sender’s KYC status and monitor subsequent activity; consider placing a temporary hold pending further investigation.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 852 days |
+| Total Transactions | 11 |
+| Current Balance | 0.000649 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 75):
+- **privacy_protocol** (+75) — Deposit to Privacy Pools (0xbow) Entrypoint — non-Tornado privacy protocol
+
+**SAR Narrative** *(for compliance teams)*:
+The sender (0xb45d2bce123774fcfde795dd3eeb6b648f34d39f) transferred 0.0385 ETH to the Privacy Pools (0xbow) Entrypoint on block 26291048. Under Rule privacy_protocol, deposits into privacy‑enhancing services receive a high risk score due to potential anonymity. The transaction was made from a wallet with a moderate activity history (11 txs, 852 days old) and is currently idle with 0.000649 ETH balance. The engine assigned a composite score of 75, indicating medium to high risk of suspicious activity.
+
+</details>
+
+---
+
+## Finding #9: MEDIUM — Score 75
+
+| | |
+|---|---|
+| **Sender** | `0xfe877bf42d7ff86c814254149b334b8b514ec4df` |
+| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
+| **Activity** | **1** tx totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26291022-26291022 |
+
+### 💬 What Happened
+A wallet was caught interacting with Privacy Pools (0xbow) Entrypoint. Our engine flagged it at score 75.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 75)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 1 days |
+| Total Transactions | 16 |
+| Current Balance | 0.002475 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 75):
+- **privacy_protocol** (+75) — Deposit to Privacy Pools (0xbow) Entrypoint — non-Tornado privacy protocol
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary unavailable for this finding; the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #10: MEDIUM — Score 75
+
+| | |
+|---|---|
+| **Sender** | `0xc9cbe4a2d4980cf5a9bd2b41cc6653b63ac3295c` |
+| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
+| **Activity** | **1** tx totaling **0.0866 ETH** ($203) |
+| **Blocks** | 26291011-26291011 |
+
+### 💬 What Happened
+A brand-new crypto wallet just sent about $203 worth of ETH to a privacy service that hides where the money comes from. It’s like a fresh driver taking a taxi to a speakeasy that no one knows is a front for shady deals. The transaction happened in a single block and the sender had barely any history, so it feels like a suspicious tip in a crowd of unknowns.
+
+### 🔥 The Roast
+This new wallet has only 9 transactions, like a freshman who just started a club. The AML engine gave it a 75 on the privacy_protocol score, which is like getting a 75% on a test that says 'this might be a secret agent'. The sender’s balance is only 0.001057 ETH after sending 0.0866 ETH—maybe they used a magic trick or the blockchain got a glitch. But hey, it didn’t hit the OFAC list, so it’s not officially on the 'We don’t want you' list yet. Still, it’s like a suspicious tip of a ‘who’s who’ in a crowd of unknowns.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM risk due to the combination of a newly created wallet, a high privacy protocol score, and no verifiable source of funds.**
+
+Flag the transaction for manual compliance review, investigate the source of the funds, and cross‑reference the sender address against OFAC and known bad actor lists. Consider placing a temporary hold on the wallet until the investigation is complete.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 9 |
+| Current Balance | 0.001057 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 75):
+- **privacy_protocol** (+75) — Deposit to Privacy Pools (0xbow) Entrypoint — non-Tornado privacy protocol
+
+**SAR Narrative** *(for compliance teams)*:
+Suspicious Activity Report: Transaction of 0.0866 ETH from wallet 0xc9cbe4a2d4980cf5a9bd2b41cc6653b63ac3295c to Privacy Pools (0xbow) Entrypoint. The sender wallet is brand new (0 days old), has only 9 prior transactions, and a current balance of 0.001057 ETH, indicating potential layering or structuring. The AML engine assigned a composite score of 75, primarily due to the privacy_protocol rule (score 75) and the lack of a verifiable source of funds. This activity warrants further investigation under AML Rule 4.1 (Privacy Protocol Red Flag) and Rule 4.2 (New Wallet Suspicion).
+
+</details>
+
+---
+
+## Finding #11: MEDIUM — Score 75
+
+| | |
+|---|---|
+| **Sender** | `0x336bc78ac00f5d26bfd956930fb931e5646a611b` |
+| **Target** | Privacy Pools (0xbow) Entrypoint (`0x6818809eefce719e48...`) |
+| **Activity** | **1** tx totaling **0.1829 ETH** ($429) |
+| **Blocks** | 26290992-26290992 |
+
+### 💬 What Happened
+A brand-new wallet just sent 0.1829 ETH (about $429) to a privacy pool, basically trying to hide where the money is going. It's like someone with a fresh bank account suddenly dropping a big cash amount into a shell company to make it harder to trace.
+
+### 🔥 The Roast
+So this wallet is brand new, like a teenager just got their first phone, and they're immediately using a privacy pool to hide their money. That’s the privacy_protocol rule kicking in (meaning they used a service that scrambles the source of funds). With a balance of only 0.002161 ETH (less than a dollar) and 14 transactions already, they’re basically saying, "I’m new, I’m small, but I’m still going to get my money mixed like a smoothie." If only the crypto world had a "no smoothie for new kids" policy, this would be a no‑no.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM — the transaction involves a new wallet, low balance, and a privacy protocol that can be used for illicit purposes.**
+
+Flag the transaction for manual review, request source of funds documentation, and monitor the privacy pool for any subsequent activity.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 0 days |
+| Total Transactions | 14 |
+| Current Balance | 0.002161 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (1 rules, composite score: 75):
+- **privacy_protocol** (+75) — Deposit to Privacy Pools (0xbow) Entrypoint — non-Tornado privacy protocol
+
+**SAR Narrative** *(for compliance teams)*:
+This transaction triggers the privacy_protocol rule (score 75) due to the transfer to a privacy pool entry point. The sender wallet is newly created (age 0 days), has a very low balance (0.002161 ETH) yet conducted 14 prior transactions, and immediately moved 0.1829 ETH ($429) to a privacy service. This pattern raises concern under the new_wallet and low_balance rules, indicating potential use of privacy services to obfuscate the origin of funds. Further investigation is warranted to verify the source of the transferred value.
+
+</details>
+
+---
+
+## Scan Summary
+
+**11 suspicious findings** detected across 10 unique wallets. Highest risk score: **80**.
+
+| | |
+|---|---|
+| 🔴 CRITICAL | 0 |
 | 🟠 HIGH | 0 |
-| Wallets flagged | 1 |
-| Suspicious value | 0.0000 ETH ($0) |
-| Blocks scanned | 26288687 — 26288886 |
+| Wallets flagged | 10 |
+| Suspicious value | 0.3226 ETH ($757) + $2 in stablecoins |
+| Blocks scanned | 26290989 — 26291188 |
 
 ---
 *AML Roaster v2 — NEXUS Engine · 13 detection rules · automated scan*
 
-Automated commentary unavailable for 1 of 1 attempted analyses this run.
+Automated commentary unavailable for 5 of 11 attempted analyses this run.
