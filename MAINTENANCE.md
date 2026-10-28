@@ -142,3 +142,38 @@ smoke-tested locally (wrapped JSON parses; unparseable output
 falls back cleanly with no raw text in the report). A
 confirmation run with the hardening has been dispatched; its
 conclusion will be appended here when it lands.
+
+## 2026-10-28: confirmation results and scheduled-run proof
+
+- Confirmation run 40597029199 (2026-10-27 22:56 UTC, dispatched)
+  produced a clean report: no 94.9% figure, no analysis-error
+  strings, no raw JSON, and genuine AI commentary on its first
+  finding. One generated verdict sentence in that report overstated
+  pattern risk as laundering risk; the prompt guard in 5b0c520 now
+  instructs pattern-risk language only, never proven crime.
+- JSON mode was removed in 7b93941 after Groq returned HTTP 400
+  "Failed to validate JSON" on 12 of 25 capped calls. Tolerant
+  extraction without JSON mode is the shipped configuration.
+- The generated-file rebase conflict that failed run 40599783489
+  was fixed in 5b0c520: conflicts under reports/ resolve in favour
+  of the newest run; conflicts outside reports/ abort the push.
+- Scheduled proof: the six-hour cron (0 */6 * * *) produced its
+  first automatically triggered successful runs on 2026-10-28.
+  Run 40633500623 (created 04:38:56Z, event: schedule, success)
+  pushed reports/report_2026-10-28_0439.md (1 finding). Run
+  40686971258 (created 12:20:18Z, event: schedule, success)
+  pushed reports/report_2026-10-28_1223.md (11 findings). No run
+  was created at the 00:00Z slot itself; GitHub's scheduler
+  delivered the cadence late, but the automatic path is now
+  demonstrated end to end, twice.
+- Commentary yield on those scheduled runs, shipped
+  configuration: 6 of 12 findings carry generated commentary; the
+  other 6 fall back to clean template text. Neither report
+  contains error strings, raw model output, or the removed 94.9%
+  figure. One 12:23 commentary overstates its rule basis: it
+  describes Railgun Treasury as black-listed by the US Treasury,
+  while the firing rule was stablecoin_mixing (+80) on a transfer
+  of about $2 to a privacy protocol, and Railgun is not an
+  OFAC-listed entity. The prompt guard reduces but does not
+  eliminate overstatement; treat AI commentary as illustrative,
+  not evidentiary.
