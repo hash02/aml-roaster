@@ -1,66 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-23T09:36:34.491563+00:00",
-      "eth_price": 2032.54283399819,
-      "block_range": "24719162 \u2014 24719361",
-      "total_findings": 2,
-      "findings": [
-        {
-          "sender": "0xf50ef13e5c29f9cf52b6476997d7d9a9352587e7",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Someone just sent a transaction to a place that's like a shady money laundering bar - it's called Tornado Cash, and it's been blacklisted by the U.S. government. This is like walking into a known money laundering front and trying to make a deal without anyone noticing. The transaction itself has no real value, but the fact that it's going to this specific place is a huge red flag.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big fat 'I'm a money launderer' sign on their forehead. They also got a 100 on the mixer_touch (basically, they directly interacted with a sanctioned crypto mixing service), because who needs clean money, right? And let's not forget the 70 on the mixer_contract_call (likely trying to withdraw, vote, or obfuscate - like trying to sneak out of the money laundering bar without being seen).",
-          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with a sanctioned crypto mixing service poses a significant risk of money laundering and terrorist financing.",
-          "recommended_action": "Immediately flag this transaction and the sender's wallet for further review, and consider reporting this activity to the Financial Crimes Enforcement Network (FinCEN) as a suspicious transaction. It's also a good idea to monitor this wallet's activity closely for any future high-risk transactions."
-        },
-        {
-          "sender": "0x0c202c90367a5371210851219ec523e74aa1630f",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Someone sent a tiny bit of cryptocurrency to a place called Tornado Cash, which is like a money laundering laundromat that helps bad guys hide their dirty money. This is a big deal because Tornado Cash was put on a US government blacklist for helping North Korea's hackers and other bad actors. It's like walking into a store that's known for selling stolen goods, and now we're wondering what this person was trying to do.",
-          "roast": "This person scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm up to no good'. They also got a mixer_touch score of 100 for directly depositing into Tornado Cash, which is like trying to sneak into a nightclub through the back door. And with a mixer_contract_call score of 70, it looks like they were trying to cover their tracks by making a zero-value transaction, like trying to erase their footprints in the sand. They even got a score for exchange_avoidance, which means they're trying to avoid the usual checks and balances that legitimate exchanges have, like a kid trying to sneak a cheat sheet into a test.",
-          "risk_verdict": "CRITICAL \u2014 The transaction involves a direct interaction with a sanctioned entity, posing a high risk of money laundering and terrorist financing.",
-          "recommended_action": "Immediately flag this transaction and the sender's wallet for further review, and consider reporting it to the relevant authorities as a suspicious activity. It's also a good idea to monitor this wallet for any future interactions with sanctioned entities or other suspicious behavior."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-23T10:50:47.532489+00:00",
       "eth_price": 2042.93321635395,
       "block_range": "24719534 \u2014 24719733",
@@ -66314,16 +66254,84 @@
           "recommended_action": "Flag the transaction for manual AML review, verify the source of funds, and confirm whether the address remains on the OFAC list. Consider freezing the wallet if further evidence of sanctions exposure is found."
         }
       ]
+    },
+    {
+      "timestamp": "2026-10-29T17:54:36.913811+00:00",
+      "eth_price": 2334.48,
+      "block_range": "26299822 \u2014 26300021",
+      "total_findings": 3,
+      "findings": [
+        {
+          "sender": "0x7a2ea6ab500c17fd9e11c5d6f26fd4b2c1afd465",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "The sender moved two tiny, zero\u2011value ETH amounts into a Railgun Relay, which is a privacy tool that hides the source of funds. It\u2019s like dropping a pair of invisible envelopes into a locked box that only the box owner can open, but the envelopes themselves contain nothing. The sender\u2019s wallet still holds 0.177 ETH, so the move doesn\u2019t change their balance but might be a step toward mixing or layering the coins.",
+          "roast": "So we have a wallet that\u2019s been around for 310 days, already sent 2,242 transactions, and now it\u2019s playing hide\u2011and\u2011seek with a Railgun Relay. Railgun is basically a fancy Swiss\u2011Army knife for privacy, but it\u2019s not the same as the outlawed Tornado Cash that got delisted in 2025. MEDIUM (rule score 75) The big joke? The sender is moving zero\u2011value ETH like a magician slipping invisible coins into a hat\u2014only the hat knows where they came from. If this is a legit test, the wallet is basically practicing its disappearing act before the next big trick.",
+          "risk_verdict": "MEDIUM (rule score 75)",
+          "recommended_action": "Flag the wallet for manual review, monitor future transactions for further layering or conversion to fiat, and cross\u2011reference with known P2P exchange activity."
+        },
+        {
+          "sender": "0x1ed98663fd1000002e283a0402bd531c54ce6abc",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A user sent a very small amount of ETH (virtually nothing) to a Railgun Relay, which is a privacy tool that hides where the money comes from. Think of it like dropping a package into a hidden slot that makes it hard to trace the sender. The transaction was recorded in block numbers 26299921 to 26299989.",
+          "roast": "Scored 75 on the privacy_protocol rule (meaning this transfer was routed through a privacy service that obscures its origin). The sender\u2019s wallet is 310 days old and has 2267 transactions, yet it still holds 0.185852 ETH\u2014like a bank account that never empties. The transfer amount was 0.0000 ETH, which is basically sending an invisible envelope through a secret tunnel. Regulators probably need a magnifying glass to see who\u2019s behind this. MEDIUM (rule score 75)",
+          "risk_verdict": "MEDIUM (rule score 75)",
+          "recommended_action": "Conduct a manual review of the source and destination addresses, gather additional transaction metadata, and assess whether this transfer is part of a larger suspicious activity pattern."
+        },
+        {
+          "sender": "0x38291ed1e67f2691f2bcae513c32e8cb8d7d3d31",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A person sent a tiny, invisible packet of ETH (essentially nothing) to a privacy service called Railgun. Imagine dropping a letter into a mailbox that scrambles the sender\u2019s name so nobody can trace who it came from. The transaction happened on a single block and didn\u2019t actually move any money, but it still used a system designed to hide who\u2019s sending what.",
+          "roast": "So this guy decided to play hide\u2011and\u2011seek with his crypto, sending a zero\u2011value packet to a privacy relay\u2014like trying to hide a peanut in a haystack that weighs nothing. The AML engine gave it a 75 on the privacy_protocol rule, meaning the system thinks this is a classic \u201cI want my money to look like a ghost\u201d move. MEDIUM (rule score 75)",
+          "risk_verdict": "MEDIUM \u2013 the use of a privacy protocol without accompanying transfer of value signals potential layering, but lacks direct evidence of wrongdoing.",
+          "recommended_action": "Review the sender\u2019s transaction history and any linked addresses for patterns of layering or known suspicious activity; consider flagging the wallet for further monitoring and, if needed, request additional context from the user."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 2877,
+    "total_findings": 2878,
     "unique_senders": 2259,
     "highest_score": 660,
-    "critical_count": 800,
+    "critical_count": 798,
     "high_count": 219,
-    "first_scan": "2026-03-23T09:36:34.491563+00:00",
-    "last_scan": "2026-10-29T17:50:22.920607+00:00"
+    "first_scan": "2026-03-23T10:50:47.532489+00:00",
+    "last_scan": "2026-10-29T17:54:36.913811+00:00"
   }
 }
