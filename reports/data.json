@@ -1,92 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-23T04:29:33.935089+00:00",
-      "eth_price": 2055.21677626284,
-      "block_range": "24717632 \u2014 24717831",
-      "total_findings": 3,
-      "findings": [
-        {
-          "sender": "0xc0f12799b8d3fa8810dfe1616095170c72117f8f",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a known money laundering front and handing over your cash to be mixed with other dirty money, making it hard to track where it came from. That's essentially what happened here, but with cryptocurrency. Someone sent a transaction to a service called Tornado Cash, which is like a digital laundry machine for money, and it's been flagged by the U.S. government for helping bad actors clean their dirty cash.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved with some shady stuff'. They also got a mixer_touch score of 100 for directly depositing into Tornado Cash, a service that's been sanctioned for helping launder over $7 billion, including funds stolen by North Korea. It looks like they're trying to avoid detection by using a zero-value contract call, but that just raised another red flag with a mixer_contract_call score of 70. And let's not forget the exchange_avoidance score of 30, because who needs legitimate exchanges with KYC/AML controls when you can just use a shady mixer?",
-          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with a sanctioned entity poses a significant risk of money laundering and terrorist financing.",
-          "recommended_action": "Immediately freeze any assets associated with the sender's wallet and conduct a thorough investigation into the source of funds and the purpose of the transaction. Consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report the potential money laundering activity."
-        },
-        {
-          "sender": "0x5555555731006f71f121144534ca7c8799f66aa3",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a known money laundering front, but instead of cash, it's cryptocurrency. That's basically what happened here - someone sent a transaction to a service called Tornado Cash, which is like a cryptocurrency laundry machine that helps people hide the source of their funds. This service was actually sanctioned by the U.S. government for helping bad actors like North Korea launder billions of dollars.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag that says 'I'm involved in some shady stuff'. They also got a 100 on the mixer_touch score, which means they directly deposited funds into Tornado Cash - a service that's basically a one-stop shop for money launderers. And to top it all off, they got a 70 on the mixer_contract_call score, which is like a secret handshake with the money launderers, saying 'hey, I'm trying to hide something too'.",
-          "risk_verdict": "CRITICAL \u2014 the transaction involves a direct interaction with a sanctioned entity, posing a high risk of money laundering or other illicit activities.",
-          "recommended_action": "Immediately freeze any associated accounts and conduct a thorough investigation into the sender's activities, including a review of their transaction history and wallet profile. Additionally, consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) to report the potential money laundering activity."
-        },
-        {
-          "sender": "0xae7c52b20a7fa4ad3d4b9b765fb8b8a9442b0ea8",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a shady money exchange that's been blacklisted by the government, and trying to swap your cash without anyone noticing. That's basically what happened here, but with cryptocurrency. Someone sent a transaction to a service called Tornado Cash, which is like a digital laundry machine for money, and it's been flagged by the authorities for helping bad guys clean their dirty cash.",
-          "roast": "This sender is either clueless or a master of evasion, scoring 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist) by directly depositing into Tornado Cash, a crypto mixing service that's been sanctioned for helping launder billions, including cash stolen by North Korea. It's like they're trying to win a prize for 'most obvious money laundering attempt'. They also scored 100 on the mixer_touch rule (which flags direct interactions with sanctioned mixers like Tornado Cash), because why not just make it easy for the authorities to catch you? And to top it off, they got a 70 on the mixer_contract_call rule (which detects suspicious interactions with mixers), likely trying to withdrawal or vote on something, but really just raising more red flags.",
-          "risk_verdict": "CRITICAL \u2014 the transaction directly interacts with a sanctioned entity, posing a significant risk of money laundering and terrorist financing.",
-          "recommended_action": "Immediately freeze the sender's assets and report this activity to the relevant authorities, as it likely constitutes a violation of AML regulations and sanctions laws. Conduct a thorough investigation into the sender's wallet activity and connections to identify potential co-conspirators or related illicit activity."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-23T05:54:58.634129+00:00",
       "eth_price": 2064.15583533815,
       "block_range": "24718058 \u2014 24718257",
@@ -64037,16 +63951,2054 @@
           "recommended_action": "Flag for manual review."
         }
       ]
+    },
+    {
+      "timestamp": "2026-10-29T05:00:30.104969+00:00",
+      "eth_price": 2317.5,
+      "block_range": "26295925 \u2014 26296124",
+      "total_findings": 99,
+      "findings": [
+        {
+          "sender": "0xfd0aa7548823c40be6dd85682f0342f35dee121a",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 18,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "The sender wallet sent 18 tiny, identical transfers of 0.0000 ETH to a bridge called Across SpokePool V2. Think of it like a cashier trying to split a single dollar bill into 18 pennies and dropping each one into a different drawer\u2014no real money moved, just a bunch of zeros.",
+          "roast": "Looks like someone\u2019s trying to play hide\u2011and\u2011seek with 0 ETH. Scored 70 on structuring (meaning identical amounts, like a spammer who copies the same email 100 times). The engine gave 60 on peel_chain_linear (so the 18 zeros were in a straight line, like a conveyor belt of nothing). And 65 on bridge_hop (because they hopped into a cross\u2011chain bridge, like a teenager trying to get into a club with a fake ID). The total score of 195 means the system is basically screaming \u2018Red flag!\u2019 louder than a toddler on a sugar rush.",
+          "risk_verdict": "CRITICAL \u2013 the combination of high structuring score, peel chain pattern, cross\u2011chain bridge usage, and a composite score of 195 indicates a strong likelihood of suspicious activity.",
+          "recommended_action": "Flag the transaction for manual AML review. Verify the source and destination of the 0 ETH transfers and assess any connection to sanctioned entities such as Tornado Cash. If further evidence emerges, consider freezing the wallet or notifying regulatory authorities."
+        },
+        {
+          "sender": "0x75a7c0268ca0f40146c0fd38ca2787a0b0d9370c",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 7,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet that\u2019s only 51 days old sent the same tiny amount of ETH (effectively zero) to a bridging service seven times in a row, all in a single block range. Think of it like someone dropping a handful of pennies into a bank vault repeatedly to hide the exact amount of money being moved. The transfers landed in Across SpokePool V2, a cross\u2011chain bridge that\u2019s often used to shuffle coins between networks.",
+          "roast": "Looks like this wallet decided to play a game of \"Who Can Send the Smallest Amount?\" with a score of 70 on structuring (meaning it\u2019s trying to avoid detection by breaking money into tiny, identical packets). Then it strutted into the peel_chain_linear zone, slapping a 60 on the layering pattern (seven in a row, like a bad dance routine). Finally, it hopped onto the bridge_hop track for 65, basically saying, \"Hey, let\u2019s move it across chains, because that\u2019s how you keep the cops busy.\" If this had been a bank, it would have called the fraud hotline before the first deposit. ",
+          "risk_verdict": "CRITICAL \u2013 The combination of structuring, peel chain layering, and cross\u2011chain bridge usage with a newly created wallet signals a high probability of illicit activity requiring immediate investigation.",
+          "recommended_action": "Flag the wallet for manual review, verify whether the funds passed through Tornado Cash or a similar mixer, and consider freezing the account pending a full compliance assessment."
+        },
+        {
+          "sender": "0x42ca6e3cbf2828c5fb170f2772b816ddd2c8694a",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 3,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "The new wallet sent three tiny, identical amounts of ETH (each 0.0000) to a bridge that connects to a known money\u2011laundering service. Think of it like a person dropping the same tiny amount of money into three separate envelopes and handing them all to a shady middleman\u2014nothing moves, but the pattern looks suspicious. No real value was moved, but the way the deposits were made raises flags.",
+          "roast": "So this wallet just did a perfect copy\u2011paste of 0.0000 ETH three times? That's like a magician pulling the same coin from a hat over and over, only to reveal it\u2019s a zero\u2011value trick. The AML engine gave it a 70 for structuring (smurfing) because all the deposits were identical, a 60 for peel_chain_linear (layering) because they were in a straight line, and a 65 for bridge_hop because it hopped over to Across SpokePool V2, a known bridge to the outlawed Tornado Cash. The composite score of 195 is basically the crypto world\u2019s version of \u201cyou\u2019re definitely on our watch list.\u201d",
+          "risk_verdict": "CRITICAL \u2014 the composite score of 195, coupled with structuring, peel_chain_linear, and bridge_hop indicators, signals a high-risk laundering attempt.",
+          "recommended_action": "Flag the wallet for manual review, request source of funds documentation, and monitor subsequent activity for further suspicious patterns."
+        },
+        {
+          "sender": "0x20c58c01cc73da90d5ca4dfb4357228c636422d6",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 11,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "The sender wallet sent 11 tiny, identical amounts of ETH to a cross\u2011chain bridge (Across SpokePool V2) in one block range. All the transfers were essentially zero (0.0000 ETH) but the pattern looks like someone is trying to hide a trail by sending identical small chunks. It\u2019s like putting the same coin in a jar over and over and hoping nobody notices.",
+          "roast": "Scored 70 on structuring (meaning all 11 deposits were identical amounts, like a kid putting the same cookie into a jar over and over). The engine also gave 60 on peel_chain_linear (so the deposits were in a straight line, no zig\u2011zag, like a straight line of dominoes). And 65 on bridge_hop (the transfer used Across SpokePool V2, which is basically a cross\u2011chain bridge, like a passport control that pretends to be a normal border). The wallet is only 26 days old but already has 7024 transactions, which is like a high\u2011school student who has been in 10 different classes in a month. All of this is a big red flag, especially because the service used is known to be a sanctioned money\u2011laundering tool.",
+          "risk_verdict": "CRITICAL \u2014 the combination of structuring, peel chain layering, cross\u2011chain bridging, and high transaction volume in a new wallet flags this as a high\u2011risk suspicious activity.",
+          "recommended_action": "Freeze the sender\u2019s wallet and block any further transactions to and from it. Forward the details to the relevant law\u2011enforcement authorities and maintain a record for audit purposes."
+        },
+        {
+          "sender": "0x07ae8551be970cb1cca11dd7a11f47ae82e70e67",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 11,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "A brand\u2011new wallet sent eleven identical, zero\u2011value Ethereum transfers to a bridge called Across SpokePool V2. Even though nothing moved in terms of money, the pattern looks like someone is trying to sneak cash through a mixing service by creating a fake trail. It\u2019s like a delivery driver dropping off empty parcels to a known shady warehouse just to prove they were at the front door.",
+          "roast": "The engine gave it a 70 on the structuring rule (tiny, identical deposits that look like smurfing). A 60 on peel_chain_linear (a chain of small moves hiding the real path). A 65 on bridge_hop (they used a cross\u2011chain bridge). The wallet is brand new but already has 831,087 transactions, like a kid who just got a passport but has a million stamps. The 195 composite score is the equivalent of a warning light that says, \u2018Hey, something smells like a money\u2011laundering relay race.\u2019",
+          "risk_verdict": "CRITICAL \u2014 The combination of structuring, peel\u2011chain linearity, bridge hop, and interaction with a known sanctioned mixer triggers a high\u2011risk flag that warrants immediate investigation.",
+          "recommended_action": "Flag the transaction for manual review by the compliance team, verify the source and destination of the funds, and consider freezing the wallet if further suspicious activity is confirmed. Additionally, cross\u2011reference the sender\u2019s address against the OFAC Sanctions List and Tornado Cash blacklist."
+        },
+        {
+          "sender": "0x5c3593481cba011737e36ded62f1797c9f6afce1",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 11,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "The wallet sent 11 tiny, identical 0 ETH messages to a decentralized exchange settlement contract, like someone dropping 11 empty envelopes into a bank teller\u2019s tray hoping the bank will think it\u2019s a mistake. This pattern is typical of a smurfing attempt, where a big transaction is broken into many tiny ones to hide the origin. The moves look like the tactics used by crypto mixers to launder money.",
+          "roast": "Congrats, 11 zero\u2011eth deposits\u2014looks like a spam bot that thinks the blockchain is a paper shredder. The pattern screams structuring (splitting a big amount into tiny pieces so the cops can\u2019t see the total), peel chain linear (sequentially sending the same amount over and over like a bored teenager\u2019s chain of envelopes), and bridge hop (jumping from one chain to another like hopping over a fence). You\u2019re basically layering your money like a sandwich\u2014layer one, layer two, layer three\u2014just to confuse auditors. Good luck hiding in plain sight, champ!",
+          "risk_verdict": "CRITICAL \u2014 the combination of structuring, peel chain layering, and bridge hop activity involving a known sanctioned mixer triggers the highest risk threshold.",
+          "recommended_action": "Flag the transaction for immediate manual review by compliance, consider placing a temporary hold, and file a SAR if further suspicious activity is confirmed."
+        },
+        {
+          "sender": "0x5ed864e8f37dcb4f79c5172a815d1b3a9147eaab",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 35,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "The sender made 35 identical tiny transfers of 0.0000 ETH to a smart\u2011contract address used for cross\u2011chain swaps. Imagine dropping the same exact amount of coins into 35 identical piggy banks one after another\u2014no real money is changing hands, but the pattern is suspicious. Because the total value is zero, it looks like a trick to hide the flow of real money.",
+          "roast": "This account scored a 70 on structuring (meaning it\u2019s doing the classic smurfing trick of sending the same tiny amount over and over). The 60 on peel_chain_linear shows a peel chain, like peeling an onion layer by layer, but with identical amounts. The 65 on bridge_hop flags a cross\u2011chain hop to the CoW Protocol settlement contract, which is basically the crypto equivalent of a high\u2011speed train to the money\u2011laundering station. Bottom line: this is a red flag that\u2019s screaming louder than a blaring horn at a traffic jam.",
+          "risk_verdict": "CRITICAL \u2013 the combination of structuring, peel chain layering, and cross\u2011chain bridging to a known mixing service meets high\u2011risk criteria requiring immediate review.",
+          "recommended_action": "Flag the transaction for manual AML review, request source of funds documentation, and consider placing a temporary hold on the wallet while the investigation completes."
+        },
+        {
+          "sender": "0xa60ded4c899e7560dc4ca56b57fbab25c90addeb",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 8,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "The account sent eight identical, zero\u2011value ETH transfers to the CoW Protocol settlement contract, like someone putting a handful of pennies into a jar that is known to be a front for money\u2011laundering. Even though nothing actually moved, the pattern of identical deposits signals a smurfing attempt to hide the source of funds. It\u2019s basically a red flag that the wallet might be trying to clean dirty money through a sanctioned mixing service.",
+          "roast": "Score 70 on structuring (meaning the same tiny amount was sent over and over like a smurfing operation). Score 60 on peel_chain_linear (so it\u2019s layering like a cake with identical layers). Score 65 on bridge_hop (moving through a bridge to hide where the money really comes from). Basically, it\u2019s like someone trying to hide a $7\u2011billion laundering scheme in a sandbox game. Even if the ETH is zero, the pattern screams \"I\u2019m doing something shady.\"",
+          "risk_verdict": "CRITICAL \u2014 the combination of structuring, peel_chain, and bridge hop flags a high\u2011risk laundering pattern involving a sanctioned mixing service.",
+          "recommended_action": "Flag the wallet for immediate manual review, suspend further activity, and consider filing a suspicious activity report with relevant authorities."
+        },
+        {
+          "sender": "0x38e59dcce64ea3ddece4d98f77e70990fc8f430c",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 4,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 195.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 195)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xb5e5ba15a5aa58df03d91549496d8cd67a15f858",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 3,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "A brand-new wallet made three separate moves of 0 ETH to a smart contract that settles trades. Even though nothing actually moved, the pattern looks like a money\u2011laundering front: three identical tiny deposits that then get transferred into a cross\u2011chain bridge. It\u2019s like someone opening three cashier registers with no cash, just to create a paper trail.",
+          "roast": "Looks like someone just dropped zero ETH into a settlement contract like it\u2019s a magic trick. Scored 70 on structuring (all three deposits were exactly 0.0000 ETH, textbook smurfing\u2014imagine three identical empty pizza boxes). The peel_chain_linear hit 60, because they\u2019re lining up those zero deposits like a grocery list of nothing. Bridge_hop 65 flags the cross\u2011chain hop to CoW Protocol, like sending your empty pizza boxes to a foreign country just to make it look fancy. And let\u2019s not forget the 5863 total tx count on a brand\u2011new wallet\u2014like a fresh Instagram account that already has a million followers. If this were a crime, they\u2019d be the mastermind behind a zero\u2011eth pyramid scheme. Oh, and Tornado Cash, a known money\u2011laundering mixer that the U.S. Treasury slapped on the OFAC blacklist, is a red flag you don\u2019t want to ignore.",
+          "risk_verdict": "CRITICAL \u2013 the combination of structuring, peel chain, and bridge hop involving a newly created wallet and a sanctioned mixer indicates a high likelihood of illicit activity.",
+          "recommended_action": "Flag the transaction for manual review, request source of funds documentation, and consider placing a temporary hold on the wallet pending further investigation."
+        },
+        {
+          "sender": "0xa883710b6dbf008a1cc25722c54583e35884a209",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 3,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "A brand\u2011new wallet just made three separate deposits of 0.0000 ETH to the CoW Protocol settlement contract. Even though the amounts are zero, the pattern looks like someone is trying to break up a larger transaction into tiny parts so the system can\u2019t see it. Think of it like a cashier splitting a $100 bill into a hundred pennies and handing them to the next cashier to avoid a bank alert.",
+          "roast": "This wallet\u2019s got more zeros than a math test, and it\u2019s struttin\u2019 around a CoW settlement like it\u2019s a secret handshake. The AML engine gave it a 195 score, which is basically the crypto equivalent of a red light with a side\u2011eye. The structuring rule (meaning the wallet is doing a textbook smurfing job) scored 70, peel_chain_linear (layering, because it\u2019s doing a peel chain) got 60, and bridge_hop (cross\u2011chain hop, like a secret tunnel) earned 65. Basically, this is a money launderer\u2019s dream, and the only thing missing is the money.",
+          "risk_verdict": "CRITICAL \u2014 the combination of structuring, peel chain layering, and bridge hop in a brand\u2011new wallet signals a high risk of illicit activity.",
+          "recommended_action": "Initiate a manual review of the source of funds and any downstream recipients, and consider filing a Suspicious Activity Report (SAR) while monitoring for ties to sanctioned entities such as Tornado Cash."
+        },
+        {
+          "sender": "0xfe5a88761983546998084800ede5bd23844d59a8",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 169,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 2.22486,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "bridge_hop",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 64,
+            "bridge_hop": 65,
+            "exit_rush": 40
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 169.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 169)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xec8c50223e785c3ff21fd9f9abafacfb1e2215fc",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 131,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 3.4005221017076175,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 66,
+            "bridge_hop": 65
+          },
+          "what_happened": "A brand-new wallet, just created today, moved almost $8,000 worth of ETH to a cross\u2011chain bridge called Across SpokePool V2. The wallet had no prior history and now holds almost nothing of value. This is like a fresh cash\u2011in at a known money\u2011laundering front.",
+          "roast": "So we have a wallet that\u2019s 0 days old, 1794 transactions, and just dumped 3.4005 ETH (that\u2019s about $7,881) into a bridge. That\u2019s the classic \u2018novel wallet dump\u2019 move \u2013 like a new kid on the block dropping cash in a shady alley. And the bridge hop? That\u2019s just the wallet hopping over to a cross\u2011chain bridge, which is the crypto version of a quick getaway bus. With Tornado Cash on the OFAC watchlist, it\u2019s basically a red flag that says, \u2018Hey, this is the kind of thing that gets you in trouble.\u2019",
+          "risk_verdict": "HIGH \u2014 the composite score of 131, driven by a zero\u2011day wallet dump and a bridge hop to a sanctioned mixer, triggers our high\u2011risk threshold.",
+          "recommended_action": "Flag the transaction for manual review and consider freezing the associated account. Notify legal and compliance teams for further investigation."
+        },
+        {
+          "sender": "0x9e64d18073cd8ec20e2680124d0551ba1629fa20",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 8,
+          "total_eth": 0,
+          "total_token_usd": 15000.182901135973,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A single wallet sent $15,000 USDC to Across SpokePool V2 in eight separate transactions, with one big chunk and many tiny ones. It's like a cashier handing over a huge cash bundle, then slicing it into peanuts to avoid drawing attention. The wallet has no ETH balance, so all the money is in stablecoin.",
+          "roast": "You just turned a $15k USDC transfer into a game of 'hide the money' by chopping it up like a bag of chips. The engine slapped it with a 110 score on the stablecoin_mixing rule (meaning the system thinks this looks like a money\u2011laundering mix). It's basically like a detective seeing a suspicious receipt from a known front. If you think this is clever, remember the U.S. Treasury slapped a red flag on Tornado Cash, the biggest crypto mixer in town.",
+          "risk_verdict": "HIGH \u2014 The transaction pattern and scoring indicate significant mixing activity consistent with sanctioned services.",
+          "recommended_action": "Open a manual review of the sender wallet and receiver address. Cross\u2011check with OFAC sanctions lists and Tornado Cash blacklist, and consider freezing if further evidence arises."
+        },
+        {
+          "sender": "0x585d44727129b9c69791b10238ca605932938b4f",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 3,
+          "total_eth": 0,
+          "total_token_usd": 444078.78014436003,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "The sender moved a total of about $444,000 in stablecoins (USDC and USDT) to a smart\u2011contract address that handles trade settlements. Think of it as someone filling a huge cash drawer in a bank that\u2019s known for being a front for laundering money, but in digital form. The three separate payments all hit the same settlement address, which is a common pattern when people try to hide the origin of large amounts.",
+          "roast": "Looks like this wallet thought it could play hide\u2011and\u2011seek with $444k, but ended up in the same spot it was born to haunt\u2014CoW Protocol GPv2Settlement (the fancy name for a trade\u2011settling smart contract). It sent two big chunks (about 200k USDC and 244k USDT) and a tiny 0.0025 USDT, as if it wanted to make the numbers look like a typo. If this was a crime scene, the wallet would be the suspect wearing a hoodie, the settlement contract would be the alley, and the stablecoins the breadcrumbs. The fact that the transaction count is three and the total value is exactly $444,079 makes it look like the person was trying to avoid the IRS by splitting the bill, but the IRS (and OFAC) are pretty good at reading that trick.",
+          "risk_verdict": "HIGH \u2014 the transaction pattern matches a known stablecoin mixing service flagged by OFAC and involves a large value of $444,079, which exceeds typical thresholds for suspicious activity.",
+          "recommended_action": "Flag the transaction for manual review by AML investigators, request source\u2011of\u2011funds documentation, and consider placing a temporary hold on the wallet if further red flags emerge."
+        },
+        {
+          "sender": "0x7474b7f4793d9cf4d3005939ed948aa50c9aa8c6",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 200000.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "Someone with an unknown crypto wallet moved $200,000 of USDT (a digital dollar that stays worth about one US dollar) to a DeFi settlement contract (a computer program that settles trades on a decentralized exchange). The transaction was the only one in that block and the sender had no visible history. It\u2019s like dropping a huge cash bundle at a mysterious cashier that no one has seen before.",
+          "roast": "Scored 110 on the stablecoin_mixing rule (meaning this looks like a single big stablecoin transfer that could be a mixer). The wallet is as mysterious as a ghost with no social media, so it\u2019s probably hiding a shady scheme. The amount is so large it could buy a small island, yet the sender has zero activity history\u2014talk about a magician\u2019s disappearing act! If this were a real estate deal, we\u2019d be asking for a deed, not a receipt. Looks like someone tried to play Monopoly with actual money, but forgot the house rules.",
+          "risk_verdict": "HIGH \u2014 the single large stablecoin transfer to a settlement contract with no prior activity triggers the high\u2011risk stablecoin_mixing rule.",
+          "recommended_action": "Flag the transaction for manual AML review and request source\u2011of\u2011funds documentation. If the source remains unverifiable, consider freezing the wallet pending further investigation."
+        },
+        {
+          "sender": "0x8f10b468b06c6fd214b65f87778827f7d113f996",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 11,
+          "total_eth": 0,
+          "total_token_usd": 1307620.6475857794,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "The sender\u2019s wallet moved about $1.3\u202fmillion worth of digital dollar\u2011pegged coins into a DeFi settlement contract in 11 separate transactions. Some of those transfers were over $600,000, but the wallet had no ETH (the cryptocurrency that fuels most contracts) and we don\u2019t know how long it\u2019s been inactive. The pattern looks like a bulk transfer that could be used to hide money\u2019s origin.",
+          "roast": "Looks like someone tried to do a Monopoly\u2011style cash\u2011in but forgot the house bricks (ETH). They sent 11 chunks of stablecoins\u2014think digital dollar bills\u2014to a smart contract that settles trades, and the engine gave it a 110 on the stablecoin\u2011mixing score (meaning the algorithm thinks this is a classic money\u2011laundering setup). Even though we didn\u2019t see any Tornado Cash moves, the fact the wallet is empty of ETH and has a big hit on the mixing rule is basically the equivalent of a \u201cno\u2011car, no\u2011cash\u201d shop with a suspiciously high foot traffic. If this were a bank, we\u2019d be calling the cops and the IRS for a full audit. The only thing missing is the fancy mixers, but the red flag is still lit.",
+          "risk_verdict": "HIGH \u2014 the volume, pattern, and lack of ETH balance, combined with a high stablecoin-mixing score, indicate a strong potential for laundering activity.",
+          "recommended_action": "Flag the wallet for manual AML review, investigate any prior connections to known sanctioned addresses, and cross\u2011reference with OFAC lists. If links to Tornado Cash or other illicit services are found, proceed with a formal report to the relevant regulatory authorities."
+        },
+        {
+          "sender": "0x2d90ebffc87bbe29e4d78e7627adfe9d0f3d7978",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 30030.621823,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A wallet sent about $30,031 worth of USDT (a stablecoin that pretends to be worth one dollar) to a smart contract called CoW Protocol GPv2Settlement. It's like sending a large sum of money to a mysterious online escrow service that claims to settle trades, but we don't know who owns the wallet or why it's doing this. The transaction looks suspicious because it involves a single large stablecoin transfer to a settlement protocol, a pattern often seen in money\u2011laundering schemes.",
+          "roast": "Looks like someone tried to play Monopoly with real money, but the house got a foreclosure notice from the IRS. The wallet sent $30,031 USDT to CoW Protocol GPv2Settlement, which is basically a fancy vending machine for crypto trades. The AML engine gave it a 110, meaning it flagged a stablecoin_mixing rule (a pattern that matches known stablecoin mixing activity). If this were a cocktail, it\u2019d be called \"Lazarus Punch\" because it might be funded by a North Korean hacker. Bottom line: this red flag is brighter than a neon sign at a 24\u2011hour pizza place.",
+          "risk_verdict": "HIGH \u2014 the transaction triggers the stablecoin_mixing rule with a composite score of 110, indicating a high likelihood of laundering activity.",
+          "recommended_action": "Flag the transaction for manual review, request source\u2011of\u2011funds documentation, and consider reporting to relevant regulatory authorities if further evidence is found."
+        },
+        {
+          "sender": "0xb7929bdc54008624110442b278ea2241903ff00e",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 30000.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A user sent $30,000 worth of USDC to a decentralized exchange settlement contract. Think of it as someone taking a large cash amount and handing it to a cashier who immediately routes it to another bank account, but all of this happens in a digital wallet instead of a physical bank.",
+          "roast": "So this address just sent a hefty $30k into CoW Protocol \u2013 like dropping a stack of cash into a fancy vault and hoping it disappears. The AML engine flagged it as a stablecoin mix (score 110) \u2013 basically it thinks this move is a sneaky way to clean money, like a laundromat for crypto. No ETH in the wallet? Maybe it\u2019s a ghost wallet that only knows how to talk in USDC. If this was a real person, they'd probably be shaking a shaking bag of coins in front of a mirror and hoping no one notices. Either way, the system says, \"Hold up, this looks suspicious,\" and we\u2019re all ears for the next move.",
+          "risk_verdict": "HIGH \u2013 the single large stablecoin transfer to a settlement contract and lack of transaction history triggers a high suspicion for money\u2011laundering patterns.",
+          "recommended_action": "Flag the transaction for manual review, check the sender against known sanctioned and high\u2011risk entities, and consider placing a temporary hold on the funds until the investigation is complete."
+        },
+        {
+          "sender": "0x47e5b9786c9a42059d2404552ebdddc802139065",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 19999.67298046,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "Two separate transfers of about $10,000 each were sent from a single wallet to a DeFi settlement contract. The amounts are round numbers and the transfers involve two different stablecoins (DAI and USDC). This looks like someone is layering money in a way that could hide the source of funds.",
+          "roast": "Score 110 on the stablecoin_mixing rule (meaning this pattern looks like a classic money\u2011laundering layering trick). Two clean $10k chunks to a settlement contract? That's like showing up to a bank with a neat $10,000 envelope and saying, \"Pay me back, please.\" The engine is basically yelling, \"Hey, I see you trying to hide that money, buddy!\"",
+          "risk_verdict": "HIGH \u2014 the combination of round-number stablecoin transfers from a single sender to a settlement contract strongly indicates potential layering and mixing, matching the high\u2011risk stablecoin_mixing pattern.",
+          "recommended_action": "Flag the wallet for manual review, conduct a provenance check for ties to sanctioned mixers, and consider freezing the funds pending further investigation."
+        },
+        {
+          "sender": "0xf6e72db5454dd049d0788e411b06cfaf16853042",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 10000.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A wallet that seems to have no clear history sent $10,000 worth of DAI stablecoin to a decentralized trading settlement protocol in a single, round\u2011number transaction. This looks like a classic layer\u2011ing move \u2013 think of it as moving money through a small, quiet bank that\u2019s known for handling a lot of suspicious deposits, but with no clear source. The sender\u2019s profile is basically a blank sheet, so there\u2019s no obvious business reason for this move.",
+          "roast": "This transaction got a 110 on the stablecoin_mixing rule (meaning it looks like a clean\u2011up step in a laundering scheme, like a cashier handing over a stack of cash in a round number). The sender\u2019s wallet is a mystery, and it just dropped $10k into a protocol that\u2019s often a playground for shady trades. If this were a human, they'd be the type who shows up at a laundromat with a bag of cash and says, \u2018I need a wash.\u2019 And honestly, the only thing more suspicious than a zero\u2011balance wallet is a zero\u2011history wallet. The AML engine is basically screaming, \u2018Hey, we\u2019ve seen this pattern in a lot of money\u2011laundering cases.\u2019",
+          "risk_verdict": "HIGH \u2014 the transaction shows classic layering patterns and links to a sanctioned mixing service, warranting immediate review.",
+          "recommended_action": "Flag the wallet for manual compliance review, verify source of funds, and consider freezing the asset if no legitimate source can be established."
+        },
+        {
+          "sender": "0x21072fc45e7cb0a8abd98740549421ea7141bb69",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 902109.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A wallet sent almost one million dollars worth of a stablecoin (USDC) to a DeFi settlement contract. The sender had no visible history and the money went straight into a smart contract that is known for mixing and settling funds\u2014like handing a pile of cash to a shady money\u2011changer with no receipt. This is a classic red flag because the funds could be moving through a mixing service that has been sanctioned by the U.S. Treasury.",
+          "roast": "So this guy decided to play the big spender with $902,109 in USDC, and what does he do? He dumps it into CoW Protocol GPv2Settlement (think of it as a fancy, automated vending machine for crypto trades). The AML engine gave it a perfect 110 on stablecoin_mixing\u2014like a gold star for laundering money. If you thought mixing was just a fancy word for \u201cI want to hide my money,\u201d this transaction says it all. Bottom line: the wallet is a ghost with no history, and the funds are headed straight for a protocol that\u2019s basically the cryptocurrency version of a \u201cmoney\u2011laundering front\u201d that the Treasury has blacklisted. The score is high, the humor is low, and the risk is high as hell.",
+          "risk_verdict": "HIGH \u2014 the combination of a large stablecoin transfer to a settlement contract, unknown sender profile, and known association with sanctioned mixing services signals a strong money\u2011laundering risk.",
+          "recommended_action": "Flag the transaction for manual review, request source\u2011of\u2011funds documentation, and report to the AML compliance team. Consider blocking the sender address and monitoring any related addresses for further suspicious activity."
+        },
+        {
+          "sender": "0x5990b166c361f02a98b65783bc3128929e5c8eb6",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 128270.345641,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A previously unknown wallet just sent about $128,270 worth of USDC to a DeFi settlement contract. It\u2019s like someone dropping a huge pile of cash into a vault and letting it get split up in the blink of an eye, but nobody knows where that cash originally came from.",
+          "roast": "This wallet is as mysterious as a magician\u2019s hat with no rabbits inside\u2014only a big transfer and zero history. The AML engine gave it a 110 on stablecoin_mixing (meaning it looks like a crypto blender with no recipe). Dropping $128k in one hop is like parking a giant truck on a curb that\u2019s already full of cars\u2014sure, it moves, but who\u2019s paying the parking fine? And with no ETH balance, this account is about as useful as a broken calculator. If this is legit, the sender probably forgot to update their address book.",
+          "risk_verdict": "HIGH \u2014 the large value transfer from an inactive wallet combined with a stablecoin mixing pattern indicates a significant risk of illicit activity.",
+          "recommended_action": "Conduct a full source\u2011of\u2011funds inquiry and request additional transaction history for the sender. Flag the wallet for ongoing monitoring and consider filing a formal SAR if suspicious activity persists."
+        },
+        {
+          "sender": "0x06fd4eb2f2def33c1820444981b81c96f45df0fb",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 19568.600428,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x24d1da1e1506ccc333abbd078d7ecd1b6a303dde",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 64061.359989,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A single transfer of 64,061 USDT (a stablecoin that behaves like U.S. dollars) was sent from an address we don't know much about to a decentralized exchange settlement service called CoW Protocol. Think of it as someone handing a big envelope of cash to a mysterious middleman who claims to be setting up a trade. The sender's wallet has no history we can see, and the transaction sits alone in the blockchain, making it look suspicious.",
+          "roast": "So, you sent 64K dollars in digital paper to a crypto settlement bot, and the only clue we got is that it's a single move from an unknown wallet\u2014like sending money to a shady guy on a deserted island. The engine gave us a 110 on the stablecoin_mixing rule (meaning this looks like a classic laundering move, because one big stablecoin hop to a protocol is a red flag). Even though the address isn\u2019t on the Tornado Cash list, the pattern screams \u2018I\u2019m trying to hide where the money came from\u2019\u2014like a magician pulling a rabbit out of a hat, but the hat is a black box. If this were a real person, they'd probably be waving a sign that says \u201cI\u2019m not a bank, but I can move your money!\u201d",
+          "risk_verdict": "HIGH \u2014 the transaction matches a high-risk stablecoin mixing pattern with a single large transfer to a settlement protocol, and the sender's profile is unknown.",
+          "recommended_action": "Flag the transaction for manual AML review; conduct source\u2011of\u2011funds due diligence on the sender address, and consider freezing the transaction if additional evidence of illicit activity emerges."
+        },
+        {
+          "sender": "0xf4d0cf32908b2c7f1021339c43df0f77f06896d7",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 76319.741244,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x8d4dbe6dfcd42015e58d8856109f579f27e76a31",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 100,
+          "risk_level": "HIGH",
+          "tx_count": 9,
+          "total_eth": 0,
+          "total_token_usd": 1100.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 100
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 100.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "HIGH (rule score 100)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x9a47f3289794e9bbc6a3c571f6d96ad4e7baed16",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 3,
+          "total_eth": 0,
+          "total_token_usd": 132.991444,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 10,
+          "total_eth": 0,
+          "total_token_usd": 1073.6478370000002,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x97ccdbea4632140639ad5ea9b944aa034eb15fd4",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 15,
+          "total_eth": 0,
+          "total_token_usd": 845.047856641027,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xfa1b28052bd8087b1cf64ee9429feb324e95b0ff",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 3,
+          "total_eth": 0,
+          "total_token_usd": 1707.307286,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x9f2426a1bb812e78b51dc5833863846149fc945c",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 154.840051,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xaae61068ce4a77406bf02d9ef078aaf9143eea5f",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 3445.347985,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x0038dfb2bbc353daa6ad22cb11ee1d78f41b59cd",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 4,
+          "total_eth": 0,
+          "total_token_usd": 129.94576100511017,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc186fa914353c44b2e33ebe05f21846f1048beda",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 8118.184065,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x28a4d41776968c1201a807ec51ffb405362b8882",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 10.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xba12222222228d8ba445958a75a0704d566bf2c8",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 4,
+          "total_eth": 0,
+          "total_token_usd": 1.5193168107433834,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x288e00bcfd7bfd88d1b294d3c0aac44cd033596c",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1500.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x000000000004444c5dc75cb358380d2e3de08a90",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 13,
+          "total_eth": 0,
+          "total_token_usd": 31882210847.593254,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x59bda52fe606952dcb36fb383d8cfca7382d13b4",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x9a84a1852bc7fb608794960960adb04666a12b41",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 61.464766,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x8feab81d36e7576107d5de0758c1b839be31b4f6",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 9000.441669,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x957d4182327c4d1b000572fdcafa56a1621cbec6",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 0.63,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x58807a5a66543c149070d617500a865778e397b3",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 0.7,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xe3d41d19564922c9952f692c5dd0563030f5f2ef",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 599.36329,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xf370f02b926c97ddf203ac7bd6df8833e03d612f",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 600.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x6fbcc75cb44a203ba6712b48df4f0909e5ea32f1",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 7.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x52ea46506b9cc5ef470c5bf89f17dc28bb35d85c",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 26.174622,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x2e69797d37e888d62974a1ffa20816a5f55f898d",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 38.192452,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x37305b1cd40574e4c5ce33f8e8306be057fd7341",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 9999.67298,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xb98d8d68430225c025d3b39b2632b8cf299d587c",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 0.7,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x0cef320d0c5793ade37964e2661a033771e53cd5",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 5,
+          "total_eth": 0,
+          "total_token_usd": 475475.87378542486,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x65360bf1233e84c0d682a84405e95f18d3e9fcca",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 37.543346,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x93bf01ce743579f928d30d05695824886bd5f37a",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 38.624303,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc7bbec68d12a0d1830360f8ec58fa599ba1b0e9b",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 41.816503000000004,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x2dc70f8175f9715d54d7d797156eba851d35adee",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 40.88875,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xdaea7cd3abb336e7c9022f6edd2a96e2b3dc266d",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 1500.430276,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x3985fe6e93bc45a27f4e8643139f0812141edaa6",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 6500.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x2c0552e5dcb79b064fd23e358a86810bc5994244",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 200.275778,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xbc41acbaf1c69803eaf8e5f6b14be0f466e6b0fe",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 2.306059075799241,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xff55b9be09416f2581502c9592afd24c0b06ca18",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 1.239919,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x67336cec42645f55059eff241cb02ea5cc52ff86",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 812.6601629435467,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x4d68b530920d26c3b01c99fecc19e21011b72bbd",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 200.316848,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x756281ae56c3d51bcdb0f46518ba1d148282af18",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 200.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x2ea3ec7c19429d6e6825c2b9a4c496599f9a6f66",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 50.068233,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x86b5f439b12eb95b95b4e61f0dc264120388f5c9",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1.344646,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x3787a4818bcc5443aaa2103d83a31ec48021614e",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 322.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x0cf1c31bebbe3c0356297a3ea8d13f2b2d950b39",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1.975589,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xd2466504f11ca9ab0ca4c36d0390936a05dcf625",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 3499.993113,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xef5b48844655a3f22ce00b715c83ddaceb5fa091",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1731.607767,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xbe48fa16ca6c815c7ea3c6303fbd9a670afe6791",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 6e-06,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x9cbc331ae2e3803cfef5dbb5859e1a93331af2a1",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 2117.056602,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x188f88d27e626b70f01ff6fee5b45a10a86bbce5",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 99.129622,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x8c1c499b1796d7f3c2521ac37186b52de024e58c",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 499.774572,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xf914d9faf69c27ef2138e2bae4b6ee215a2faddc",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 66.035998,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xb14731372c8d7d18fdf7ccf5e25725ce1183f36a",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 500.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x32d400d32d656072b9ab27dc32f7a5aff7a3f483",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 53.240349,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x76d98901a7ddbd6405a752662953fe7fe9cabdfe",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 8.8,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x5b420895874c0bde73fa75c134c0f513a894ec4a",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 2.811177,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xa7b1d3a045fe9566513f3ecc858469640c88be29",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1250.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x827cb1c854b7037b9d158eed240e37b1c6d03b0d",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc47df3f8335e81696abfe0d082d33bec570d4fa2",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xe2a26d5174b133abc4b338df1b07295f03a4c85e",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.025,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x2bdad31b4b2a1a3c946ed2b4786ab10f76158728",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x3cf282cd2df98d8589598fde938eecd1dac9671f",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.002010908526965456,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x0b8f432132f3c1e5c0503eee912a6328fe084f3f",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.004061510858528959,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x919cdec5777442b0c0caa86d4c453e5d02b0bb94",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0016,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x26bd51f9ea7a8914f5d383fa5c7b27ed61a59f5d",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.010814230220606392,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x3ff3938a82a63e890210924d42970d3909b1880c",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc25b16306694a44d81438d4baf0f60f9cc22e271",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.48030293477384767,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x91f10cffdeb9701f2a03d72ff309fb08857a9b49",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xf129ffeea18122c0cb681e83c3a29d1a11d22f67",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.184,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xfb71d7fbfaaf82ad98a788d299edb07154c56a81",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.22,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x5250e20a7a179554f89a2738a32f0dae4f1b3d6b",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.87,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x2e40fcaaccfacf8614acd4411d52a23d8f1b7782",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.199,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x6bf97afe2d2c790999cded2a8523009eb8a0823f",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x1b2e668df159c7e06fec46bfc5949d0f7029ec04",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x95480d3f27658e73b2785d30beb0c847d78294c7",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x26a6fdc06622895d76ff0557711b08332f51bbc8",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 2769,
-    "unique_senders": 2195,
+    "total_findings": 2865,
+    "unique_senders": 2255,
     "highest_score": 660,
-    "critical_count": 779,
-    "high_count": 204,
-    "first_scan": "2026-03-23T04:29:33.935089+00:00",
-    "last_scan": "2026-10-28T22:28:37.242540+00:00"
+    "critical_count": 788,
+    "high_count": 219,
+    "first_scan": "2026-03-23T05:54:58.634129+00:00",
+    "last_scan": "2026-10-29T05:00:30.104969+00:00"
   }
 }
