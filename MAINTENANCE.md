@@ -203,3 +203,22 @@ failures (Etherscan rate-limit and other). A genuine empty history
 still advances the cursor. A failed fetch is counted, does not
 advance `last_scanned` for that address, and the report says coverage
 is incomplete instead of "All quiet".
+
+## 2026-10-28 (lobo): annotations completed, Decision 1 confirmed
+
+Hash confirmed Phase 3 Decision 1 (fix, then release) directly to
+lobo, including the commentary-off interim step. Lobo completed the
+annotation pass the same evening: the false-claims correction now
+also opens `reports/report_2026-10-27_2256.md` (30 claim lines,
+including fabricated rule citations) and
+`reports/report_2026-10-29_0500.md` (55 claim lines; that run
+predated the disable commit by minutes), and a retraction of the
+94.9% figure opens `reports/report_2026-10-27_1900.md` and
+`reports/report_2026-10-27_2021.md`.
+
+The remaining packet fixes (fail-closed cursor behaviour, the
+Tornado Cash label, and the deterministic commentary filter with
+an SDN-match exception) landed through PR #10, reviewed and merged
+by lobo on 2026-10-28. Commentary stays off (cap 0) until one
+scheduled report is inspected and greps clean and Hash approves
+re-enabling.
