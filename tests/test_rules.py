@@ -50,9 +50,17 @@ def test_mixer_interaction_none_on_unknown():
 # ─── Rule 2: sanctioned_entity (OFAC) ────────────────────────────────────
 
 def test_sanctioned_entity_fires_on_ofac_receiver():
-    r = roaster.rule_sanctioned_entity(RANDOM_SENDER, TC_1_ETH_POOL)
+    r = roaster.rule_sanctioned_entity(RANDOM_SENDER, LAZARUS)
     assert r is not None
     assert r["score"] == 200
+
+
+def test_sanctioned_entity_none_on_delisted_tornado():
+    # Tornado Cash was delisted by the US Treasury on 2025-03-21 and
+    # its addresses were removed from OFAC_ADDRESSES on 2026-10-29.
+    # Mixer rules still fire on these addresses; the SDN rule must not.
+    assert roaster.rule_sanctioned_entity(RANDOM_SENDER, TC_1_ETH_POOL) is None
+    assert roaster.rule_sanctioned_entity(RANDOM_SENDER, TC_ROUTER) is None
 
 
 def test_sanctioned_entity_none_on_clean_pair():
@@ -394,9 +402,9 @@ def test_live_sanctions_oracle_skips_known_ofac(monkeypatch):
         return False
 
     monkeypatch.setattr(roaster, "chainalysis_oracle_check", stub_oracle_check)
-    # TC_1_ETH_POOL is already in OFAC_ADDRESSES.
-    roaster.rule_live_sanctions_oracle(RANDOM_SENDER, TC_1_ETH_POOL)
-    assert TC_1_ETH_POOL not in seen
+    # LAZARUS is already in OFAC_ADDRESSES.
+    roaster.rule_live_sanctions_oracle(RANDOM_SENDER, LAZARUS)
+    assert LAZARUS not in seen
 
 
 def test_live_sanctions_oracle_none_when_clean(monkeypatch):

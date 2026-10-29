@@ -244,3 +244,26 @@ are replaced with the deterministic rule-score verdict, and
 sanctions language is allowed only when the finding fired the real
 SDN-match rule (`ofac_hit`). The cap remains a constant: no
 environment variable and no workflow input can change it.
+
+## 2026-10-29 (lobo): Tornado Cash removed from the SDN list
+
+The verification run for the commentary re-enable (run 40924304415,
+report_2026-10-29_1750.md) showed every finding firing `ofac_hit`
+(+200) on Tornado Cash addresses. The matches came from the
+hard-coded `OFAC_ADDRESSES` dict in `roaster.py`, which still listed
+9 Tornado Cash addresses as "(OFAC 2022)". The US Treasury delisted
+Tornado Cash on 2025-03-21, and the vendored `addresses/ofac.json`
+feed already contains no Tornado entries, so the hard-coded dict was
+the stale source. Because the commentary filter allows sanctions
+language when `ofac_hit` fires, a few model sentences in that report
+described Tornado Cash as a current sanctions-list entry.
+
+On Hash's approval, the 9 Tornado entries were removed from
+`OFAC_ADDRESSES`. Tornado addresses remain in `WATCHED_ADDRESSES` as
+mixers and still fire the mixer rules; they no longer fire
+`ofac_hit`, so Tornado findings score 200 points lower and sanctions
+commentary about them is scrubbed by the filter like any other
+non-SDN finding. Tests updated: the SDN positive case now uses the
+Lazarus Group address, a new test asserts no SDN match on Tornado
+pool or router addresses, and the live-oracle skip test uses the
+Lazarus address.

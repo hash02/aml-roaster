@@ -117,20 +117,13 @@ WATCHED_ADDRESSES = {
 }
 
 # OFAC SDN list — known sanctioned wallet addresses
-# Labels corrected: several Tornado pool addresses were previously labelled
-# as "Lazarus Group" here (e.g. 0x47ce...2936 is a TC 1 ETH pool, not a
-# Lazarus wallet). Full OFAC sync is planned via the `addresses/ofac.json`
-# feed in a subsequent change.
+# Tornado Cash entries removed 2026-10-29 (owner decision): the US
+# Treasury delisted Tornado Cash on 2025-03-21, so its addresses no
+# longer belong on the SDN list. They stay in WATCHED_ADDRESSES as
+# mixers and still fire the mixer rules; they just no longer fire
+# ofac_hit. The vendored `addresses/ofac.json` feed (merged by
+# _load_ofac_feed below) already contains no Tornado entries.
 OFAC_ADDRESSES = {
-    "0x8589427373d6d84e98730d7795d8f6f8731fda16": "Tornado Cash (OFAC 2022)",
-    "0x12d66f87a04a9e220743712ce6d9bb1b5616b8fc": "Tornado Cash 0.1 ETH Pool (OFAC 2022)",
-    "0x47ce0c6ed5b0ce3d3a51fdb1c52dc66a7c3c2936": "Tornado Cash 1 ETH Pool (OFAC 2022)",
-    "0x910cbd523d972eb0a6f4cae4618ad62622b39dbf": "Tornado Cash 10 ETH Pool (OFAC 2022)",
-    "0xa160cdab225685da1d56aa342ad8841c3b53f291": "Tornado Cash 100 ETH Pool (OFAC 2022)",
-    "0xd4b88df4d29f5cedd6857912842cff3b20c8cfa3": "Tornado Cash 100 DAI Pool (OFAC 2022)",
-    "0xfd8610d20aa15b7b2e3be39b396a1bc3516c7144": "Tornado Cash 1,000 DAI Pool (OFAC 2022)",
-    "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b": "Tornado Cash Router (OFAC 2022)",
-    "0x722122df12d4e14e13ac3b6895a86e84145b6967": "Tornado Cash deprecated proxy (OFAC 2022)",
     "0xa7e5d5a720f06526557c513402f2e6b5fa20b008": "Lazarus Group (OFAC)",
 }
 

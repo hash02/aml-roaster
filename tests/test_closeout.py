@@ -223,7 +223,12 @@ def test_ofac_sdn_match_only_when_sanctioned_entity_fires():
     pool = "0x47ce0c6ed5b0ce3d3a51fdb1c52dc66a7c3c2936"
     mixer = roaster.rule_mixer_interaction(pool)
     assert "OFAC SDN match" not in mixer["detail"]
-    hit = roaster.rule_sanctioned_entity(SENDER, pool)
+    # Tornado Cash was delisted on 2025-03-21: the pool fires the
+    # mixer rule but must not produce an SDN match.
+    assert roaster.rule_sanctioned_entity(SENDER, pool) is None
+    hit = roaster.rule_sanctioned_entity(
+        SENDER, "0xa7e5d5a720f06526557c513402f2e6b5fa20b008"
+    )
     assert hit is not None
     assert "OFAC SDN match" in hit["detail"]
     assert roaster.rule_sanctioned_entity(SENDER, "0x" + "11" * 20) is None
@@ -385,7 +390,7 @@ def test_sanctions_wording_kept_only_when_sdn_rule_fired(monkeypatch):
         {
             "rule": "ofac_hit",
             "score": 200,
-            "detail": "OFAC SDN match: 0x47ce0c6e... — Tornado Cash 1 ETH Pool (OFAC 2022)",
+            "detail": "OFAC SDN match: 0xa7e5d5a7... — Lazarus Group (OFAC)",
         },
         {
             "rule": "mixer_touch",
