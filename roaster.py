@@ -257,10 +257,15 @@ GROQ_MODEL = "openai/gpt-oss-20b"
 # hundreds of findings, and one call (plus pauses) per finding was
 # most of the report-generation time. Highest scores are analyzed
 # first; findings past the cap keep their rule-based verdict only.
-# Not read from the environment or from workflow inputs: a scheduled
-# run cannot turn commentary back on without changing this constant.
-# Disabled 2026-10-28 by owner: AI commentary produced false sanctions/laundering claims (e.g. FixedFloat). Re-enable only after an output filter exists and one scheduled report greps clean.
-MAX_ANALYSES_PER_RUN = 0
+# Not read from the environment or from workflow inputs: changing
+# commentary on or off requires changing this constant.
+# History: disabled 2026-10-28 by owner after AI commentary produced
+# false sanctions/laundering claims (e.g. FixedFloat). The output
+# filter landed in PR #10, the release gate passed on the scheduled
+# report of 2026-10-29 (report_2026-10-29_1230.md, zero claim terms),
+# and the owner approved re-enabling on 2026-10-29. The deterministic
+# commentary filter stays in force on every model output.
+MAX_ANALYSES_PER_RUN = 25
 
 # Output
 REPORTS_DIR = Path(__file__).parent / "reports"

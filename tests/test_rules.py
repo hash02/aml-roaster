@@ -596,11 +596,11 @@ def _silence_scan_io(monkeypatch, tmp_path):
     monkeypatch.setattr(roaster, "get_block_transactions", lambda _n: [])
 
 
-def test_commentary_cap_is_zero_and_not_env_driven(monkeypatch):
-    monkeypatch.setenv("MAX_ANALYSES_PER_RUN", "25")
+def test_commentary_cap_is_25_and_not_env_driven(monkeypatch):
+    monkeypatch.setenv("MAX_ANALYSES_PER_RUN", "0")
     monkeypatch.setenv("GROQ_API_KEY", "present")
     source = Path(roaster.__file__).read_text()
-    assert roaster.MAX_ANALYSES_PER_RUN == 0
+    assert roaster.MAX_ANALYSES_PER_RUN == 25
     assert 'os.environ.get("MAX_ANALYSES_PER_RUN"' not in source
     assert "os.environ.get('MAX_ANALYSES_PER_RUN'" not in source
     workflow = Path(roaster.__file__).parent / ".github" / "workflows" / "roaster.yml"
@@ -644,7 +644,7 @@ def test_zero_cap_report_is_template_only(monkeypatch):
     assert "Automated analysis error" not in report
 
 
-def test_empty_report_still_states_coverage_and_disabled_commentary():
+def test_empty_report_still_states_coverage_and_commentary_limit():
     roaster._last_partial_scan = None
     roaster._last_fetch_failures = None
     roaster._last_coverage = None
@@ -654,7 +654,7 @@ def test_empty_report_still_states_coverage_and_disabled_commentary():
     report = roaster.generate_report([], 2000.0, {"block_range": "10 — 20"})
     assert report.count("**Coverage:**") == 1
     assert "blocks 10 to 20 checked" in report
-    assert "1 address attempted, 1 address fully scanned, 0 fetch failures (0 Etherscan rate-limit, 0 other). AI commentary is disabled." in report
+    assert "1 address attempted, 1 address fully scanned, 0 fetch failures (0 Etherscan rate-limit, 0 other). AI commentary is limited to 25 highest-scoring findings." in report
     assert report.index("**Coverage:**") < report.index("No Suspicious Activity")
 
 

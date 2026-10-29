@@ -222,3 +222,25 @@ an SDN-match exception) landed through PR #10, reviewed and merged
 by lobo on 2026-10-28. Commentary stays off (cap 0) until one
 scheduled report is inspected and greps clean and Hash approves
 re-enabling.
+
+## 2026-10-29 (lobo): AI commentary re-enabled by owner
+
+The release gate passed on the first scheduled report on the PR #10
+code: run 40873712136 (created 2026-10-29T12:29:45Z) committed
+`reports/report_2026-10-29_1230.md`, whose coverage line states the
+blocks checked, 8 of 49 addresses, the revisit cadence, 0 fetch
+failures, and that AI commentary is disabled. A claim-term grep of
+that report (sanction, blacklist, Treasury, launder, "front for",
+criminal, illegal, Rule N pattern) returned zero hits. That report
+had no findings and no fetch failures, so the fetch-failure
+deferral branch and the SDN-match exception branch were not
+exercised by it.
+
+With the gate met, Hash approved re-enabling commentary on
+2026-10-29. `MAX_ANALYSES_PER_RUN` is restored to 25, its value
+before the 2026-10-28 disable. The deterministic commentary filter
+from PR #10 stays in force: banned claim sentences in model output
+are replaced with the deterministic rule-score verdict, and
+sanctions language is allowed only when the finding fired the real
+SDN-match rule (`ofac_hit`). The cap remains a constant: no
+environment variable and no workflow input can change it.
