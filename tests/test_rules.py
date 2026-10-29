@@ -614,6 +614,8 @@ def test_zero_cap_report_is_template_only(monkeypatch):
     """A configured API key must not produce model text when the cap is 0."""
     _reset_fetch_bookkeeping()
     roaster._last_partial_scan = None
+    roaster._last_fetch_failures = None
+    roaster._last_coverage = None
     roaster._last_scan_coverage.update(
         {"attempted": 8, "fully_scanned": 5, "rate_limit": 2, "other": 1}
     )
@@ -630,7 +632,10 @@ def test_zero_cap_report_is_template_only(monkeypatch):
 
     report = roaster.generate_report([finding], 2000.0, {"block_range": "10 — 20"})
     assert report.startswith("# 🔥 AML Roaster Report")
-    assert "**Coverage:** 8 addresses attempted, 5 addresses fully scanned, 3 fetch failures (2 Etherscan rate-limit, 1 other). AI commentary is disabled." in report
+    assert report.count("**Coverage:**") == 1
+    assert "blocks 10 to 20 checked" in report
+    assert "Activity outside these windows is not checked." in report
+    assert "8 addresses attempted, 5 addresses fully scanned, 3 fetch failures (2 Etherscan rate-limit, 1 other). AI commentary is disabled." in report
     assert report.index("**Coverage:**") < report.index("## Finding #1")
     assert "exit_to_no_kyc_offramp" in report
     assert "CRITICAL — Score 155" in report
@@ -641,16 +646,22 @@ def test_zero_cap_report_is_template_only(monkeypatch):
 
 def test_empty_report_still_states_coverage_and_disabled_commentary():
     roaster._last_partial_scan = None
+    roaster._last_fetch_failures = None
+    roaster._last_coverage = None
     roaster._last_scan_coverage.update(
         {"attempted": 1, "fully_scanned": 1, "rate_limit": 0, "other": 0}
     )
     report = roaster.generate_report([], 2000.0, {"block_range": "10 — 20"})
-    assert "**Coverage:** 1 address attempted, 1 address fully scanned, 0 fetch failures (0 Etherscan rate-limit, 0 other). AI commentary is disabled." in report
+    assert report.count("**Coverage:**") == 1
+    assert "blocks 10 to 20 checked" in report
+    assert "1 address attempted, 1 address fully scanned, 0 fetch failures (0 Etherscan rate-limit, 0 other). AI commentary is disabled." in report
     assert report.index("**Coverage:**") < report.index("No Suspicious Activity")
 
 
 def test_positive_cap_still_calls_model_for_that_many(monkeypatch):
     roaster._last_partial_scan = None
+    roaster._last_fetch_failures = None
+    roaster._last_coverage = None
     roaster._last_scan_coverage.update(
         {"attempted": 2, "fully_scanned": 2, "rate_limit": 0, "other": 0}
     )
@@ -706,9 +717,9 @@ def test_rate_limit_string_counts_once_and_returns_empty(monkeypatch):
         return _HttpResp(200, {"status": "0", "message": "NOTOK", "result": "Max rate limit reached"})
 
     monkeypatch.setattr(roaster.requests, "get", _get)
-    assert roaster.get_normal_transactions("0xabc", 1, 2) == []
-    assert roaster.get_token_transfers("0xabc", 1, 2) == []
-    assert calls["n"] == 2
+    assert roaster.get_normal_transactions("0xabc", 1, 2) is None
+    assert roaster.get_token_transfers("0xabc", 1, 2) is None
+    assert calls["n"] == 2 * roaster._RETRY_ATTEMPTS
     assert roaster._fetch_failures == {"rate_limit": 2, "other": 0}
 
 
@@ -722,7 +733,7 @@ def test_http_429_counts_as_one_rate_limit_after_retries(monkeypatch):
         return _HttpResp(429, {})
 
     monkeypatch.setattr(roaster.requests, "get", _get)
-    assert roaster.get_normal_transactions("0xabc", 1, 2) == []
+    assert roaster.get_normal_transactions("0xabc", 1, 2) is None
     assert calls["n"] == roaster._RETRY_ATTEMPTS
     assert roaster._fetch_failures == {"rate_limit": 1, "other": 0}
 
@@ -732,14 +743,14 @@ def test_http_500_and_network_errors_count_as_other(monkeypatch):
     monkeypatch.setattr(roaster, "_sleep_backoff", lambda _attempt: None)
 
     monkeypatch.setattr(roaster.requests, "get", lambda *_a, **_k: _HttpResp(500, {}))
-    assert roaster.get_token_transfers("0xabc", 1, 2) == []
+    assert roaster.get_token_transfers("0xabc", 1, 2) is None
     assert roaster._fetch_failures == {"rate_limit": 0, "other": 1}
 
     def _boom(*_a, **_k):
         raise roaster.requests.RequestException("offline")
 
     monkeypatch.setattr(roaster.requests, "get", _boom)
-    assert roaster.get_normal_transactions("0xabc", 1, 2) == []
+    assert roaster.get_normal_transactions("0xabc", 1, 2) is None
     assert roaster._fetch_failures == {"rate_limit": 0, "other": 2}
 
 
@@ -770,8 +781,8 @@ def test_block_fetch_counts_only_when_both_sources_fail(monkeypatch):
     assert roaster._fetch_failures == {"rate_limit": 1, "other": 0}
 
 
-def test_fetch_failure_advances_scan_cursor_and_counts(monkeypatch, tmp_path):
-    """Empty error results still advance last_scanned_block, and are counted."""
+def test_fetch_failure_does_not_advance_scan_cursor_and_counts(monkeypatch, tmp_path):
+    """A rate-limit payload is counted and does not advance last_scanned_block."""
     _reset_fetch_bookkeeping()
     addr = "0x" + "11" * 20
     _silence_scan_io(monkeypatch, tmp_path)
@@ -788,10 +799,10 @@ def test_fetch_failure_advances_scan_cursor_and_counts(monkeypatch, tmp_path):
 
     assert findings == []
     state = roaster.load_scan_state()
-    assert state["last_scanned_block"][addr] == 5000
+    assert addr not in state["last_scanned_block"]
     assert roaster._last_scan_coverage == {
         "attempted": 1,
-        "fully_scanned": 1,
+        "fully_scanned": 0,
         "rate_limit": 2,
         "other": 0,
     }

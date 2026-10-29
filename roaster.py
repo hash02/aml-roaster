@@ -10,7 +10,9 @@ Author: HASH (hash02) — Bionic Banker
 """
 
 import json
+import math
 import os
+import re
 import sys
 import time
 from datetime import UTC, datetime
@@ -309,8 +311,13 @@ THRESHOLDS = {
 # Backfill window for addresses we've just started watching.
 # Covers ~7 days at 12s/block so a newly-added Railgun / ChangeNOW entry
 # doesn't miss recent deposits that happened before the first cron run.
+ETH_BLOCK_SECONDS = 12
 BACKFILL_BLOCKS = 50_000
 MAX_WATCHED_PER_RUN = int(os.environ.get("MAX_WATCHED_PER_RUN", "8"))
+# Hours between scheduled scans. Mirrors the cron in
+# .github/workflows/roaster.yml (every 6 hours). Used to describe how
+# often each watched address is revisited; the workflow is not changed.
+SCAN_INTERVAL_HOURS = 6
 # Overall scan time budget in seconds. scan_recent_blocks() checks elapsed
 # time before starting each watched address; once the budget is spent it
 # stops starting new addresses and proceeds to report writing with whatever
@@ -323,6 +330,16 @@ SCAN_STATE_PATH = Path(__file__).parent / "reports" / "scan_state.json"
 # read by generate_report() to add the partial-run note. None = full run.
 _last_partial_scan = None
 
+# Set by scan_recent_blocks() when one or more address fetches failed
+# (rate limit or any other status-0 error besides an empty history).
+# generate_report() states the incomplete coverage and withholds the
+# all-quiet line. None = every attempted fetch succeeded.
+_last_fetch_failures = None
+
+# Set by scan_recent_blocks() from the blocks and addresses actually
+# touched this run. generate_report() prints it in every header.
+_last_coverage = None
+
 # Commentary bookkeeping for generate_report(): how many AI analyses
 # were attempted this run and how many failed. Reset per report. A
 # failed analysis never changes a finding's verdict (rule score only);
@@ -334,9 +351,8 @@ _analysis_stats = {"attempted": 0, "failed": 0}
 # result. Tx-list helpers consume this when they turn a failure into [].
 _etherscan_call_error = {"kind": None}
 
-# Etherscan rate-limit and other errors that tx-list helpers return as
-# []. Counted for the report coverage line only; scan cursors do not
-# branch on these counters.
+# Etherscan rate-limit and other errors. Counted for the coverage line.
+# A failed address fetch also leaves last_scanned unmoved (fail closed).
 _fetch_failures = {"rate_limit": 0, "other": 0}
 
 # Filled in by scan_recent_blocks() and printed near the top of every report.
@@ -394,7 +410,7 @@ def _classify_etherscan_payload(data: dict) -> str:
 
 
 def _record_fetch_failure(kind: str | None, detail: str = "") -> None:
-    """Count one silent empty result. Does not change what the caller returns."""
+    """Count one failed Etherscan call for the coverage line."""
     text = detail.lower()
     if kind != "rate_limit" and ("rate limit" in text or "rate-limit" in text):
         kind = "rate_limit"
@@ -404,39 +420,31 @@ def _record_fetch_failure(kind: str | None, detail: str = "") -> None:
         _fetch_failures["other"] += 1
 
 
-def _list_result_or_empty(data: dict) -> list:
-    """Return a transaction list, or [] when the call failed.
+def _etherscan_status_failure(data: dict) -> bool:
+    """True when an Etherscan body is a failed call.
 
-    A genuine empty result ("No transactions found") is not a failure.
-    Error payloads — including Etherscan rate limits, whose result is a
-    string, and HTTP failures, whose body is an empty dict — used to
-    become [] with no record. Those are counted here. The returned value
-    is otherwise unchanged, so a scan cursor that advances on [] still
-    advances for both a real empty list and a failed fetch.
+    status 0 means the call failed. The one exception is the explicit
+    empty-history message 'No transactions found', which is a successful
+    fetch of zero rows (not a rate limit, and not a reason to defer).
     """
-    error = _etherscan_call_error["kind"]
-    _etherscan_call_error["kind"] = None
-    result = data.get("result", []) if isinstance(data, dict) else None
-    if isinstance(result, list) and not error:
-        return result
-    if isinstance(result, list) and result:
-        return result
-    detail = result if isinstance(result, str) else ""
-    _record_fetch_failure(error, detail)
-    return []
+    if not isinstance(data, dict):
+        return True
+    if str(data.get("status")) != "0":
+        return False
+    return str(data.get("message", "")).strip() != "No transactions found"
 
 
 def etherscan_get(params: dict, timeout: int = 15) -> dict:
     """Call Etherscan V2 with retries.
 
-    Retries with exponential backoff on network errors, HTTP 5xx, and HTTP
-    429. Returns the decoded JSON dict on success. On total failure returns
-    an empty dict — caller is expected to check for an empty/missing result
-    and either fall back to RPC or fail loudly.
+    Retries with exponential backoff on network errors, HTTP 5xx, HTTP
+    429, and any status-0 body other than 'No transactions found' (the
+    usual rate-limit payload is HTTP 200 with status 0). Returns the
+    decoded JSON dict on success. On total failure returns an empty dict
+    so callers can tell a fetch failure from an empty history.
 
     A failed call stashes its kind on _etherscan_call_error ("rate_limit"
-    or "other"). Tx-list helpers consume that when they return []. The
-    return value of this function is unchanged.
+    or "other"). Tx-list helpers consume that when they return None.
     """
     params["chainid"] = ETHERSCAN_CHAINID
     if ETHERSCAN_KEY:
@@ -455,10 +463,16 @@ def etherscan_get(params: dict, timeout: int = 15) -> dict:
                 _etherscan_call_error["kind"] = "rate_limit" if r.status_code == 429 else "other"
                 return {}
             data = r.json()
-            if data.get("status") == "0" and data.get("message") != "No transactions found":
-                print(f"[WARN] Etherscan API error: {data.get('result', data.get('message', 'unknown'))}")
+            if isinstance(data, dict) and _etherscan_status_failure(data):
+                detail = data.get("result", data.get("message", "unknown"))
+                print(f"[WARN] Etherscan API error: {detail} (attempt {attempt + 1}/{_RETRY_ATTEMPTS})")
+                if attempt < _RETRY_ATTEMPTS - 1:
+                    _sleep_backoff(attempt)
+                    continue
                 _etherscan_call_error["kind"] = _classify_etherscan_payload(data)
-            return data
+                return {}
+            _etherscan_call_error["kind"] = None
+            return data if isinstance(data, dict) else {}
         except requests.RequestException as e:
             print(f"[WARN] Etherscan network error (attempt {attempt + 1}/{_RETRY_ATTEMPTS}): {e}")
             if attempt < _RETRY_ATTEMPTS - 1:
@@ -566,8 +580,37 @@ def get_block_transactions(block_num: int) -> list:
     return []
 
 
-def get_normal_transactions(address: str, start_block: int, end_block: int) -> list:
-    """Get normal transactions for an address within a block range."""
+def _tx_list_or_none(data: dict) -> list | None:
+    """Return a transaction list, or None when the fetch failed.
+
+    'No transactions found' is an empty list. Any other status-0 result,
+    an empty failure body, or a non-list result (the rate-limit string)
+    is a fetch failure and is counted once for the coverage line.
+    """
+    failed = (not data) or _etherscan_status_failure(data)
+    if not failed:
+        _etherscan_call_error["kind"] = None
+        result = data.get("result", [])
+        if isinstance(result, list):
+            return result
+        _record_fetch_failure("other", str(result))
+        return None
+    kind = _etherscan_call_error["kind"]
+    _etherscan_call_error["kind"] = None
+    detail = ""
+    if isinstance(data, dict) and isinstance(data.get("result"), str):
+        detail = data["result"]
+    _record_fetch_failure(kind, detail)
+    return None
+
+
+def get_normal_transactions(address: str, start_block: int, end_block: int) -> list | None:
+    """Get normal transactions for an address within a block range.
+
+    Returns a list of transactions. An explicit 'No transactions found'
+    response is an empty list. Any other status-0 result (rate limit,
+    NOTOK, and the rest) is a fetch failure and returns None.
+    """
     data = etherscan_get({
         "module": "account",
         "action": "txlist",
@@ -576,13 +619,17 @@ def get_normal_transactions(address: str, start_block: int, end_block: int) -> l
         "endblock": end_block,
         "sort": "desc",
     })
-    return _list_result_or_empty(data)
+    return _tx_list_or_none(data)
 
 
-def get_token_transfers(address: str, start_block: int, end_block: int) -> list:
+def get_token_transfers(address: str, start_block: int, end_block: int) -> list | None:
     """
     Get ERC-20 token transfers for an address within a block range.
     This catches USDT, DAI, USDC, etc. flowing through mixers — invisible to normal tx scanning.
+
+    Same failure contract as get_normal_transactions: status 0 other than
+    'No transactions found' returns None so a rate limit is not stored as
+    an empty token history.
     """
     data = etherscan_get({
         "module": "account",
@@ -592,7 +639,7 @@ def get_token_transfers(address: str, start_block: int, end_block: int) -> list:
         "endblock": end_block,
         "sort": "desc",
     })
-    return _list_result_or_empty(data)
+    return _tx_list_or_none(data)
 
 
 def get_wallet_info(address: str) -> dict:
@@ -784,7 +831,10 @@ def rule_mixer_interaction(receiver_addr: str) -> dict | None:
         return {
             "rule": "mixer_touch",
             "score": addr_info["risk"],
-            "detail": f"Direct deposit to {addr_info['label']} — OFAC-sanctioned mixer",
+            # OFAC SDN match is added only by rule_sanctioned_entity, and
+            # only when that rule fires. Mixer use on its own is a known
+            # mixer, including Tornado Cash after its 2025-03-21 delisting.
+            "detail": f"Direct deposit to {addr_info['label']} — known mixer",
         }
     return None
 
@@ -1082,8 +1132,8 @@ def rule_privacy_protocol_non_tornado(receiver_addr: str) -> dict | None:
     """RULE: Interaction with privacy protocols beyond Tornado Cash.
 
     Covers Railgun, Aztec Connect, Privacy Pools (0xbow). Lazarus and
-    other threat actors have been observed migrating to these protocols
-    as Tornado Cash became sanctioned (Elliptic Nov 2024).
+    other threat actors have been observed migrating to these protocols.
+    Tornado Cash: sanctioned 2022-08-08, delisted 2025-03-21.
     """
     addr_info = WATCHED_ADDRESSES.get(receiver_addr.lower())
     if addr_info and addr_info["type"] == "privacy_protocol":
@@ -1347,18 +1397,48 @@ def compute_risk_score(rules_triggered: list) -> tuple:
 
 # ─── Scanner (applies all rules to live data) ───────────────────────────────
 
+def _address_revisit_hours() -> int:
+    """Hours until the rotation returns to a given watched address.
+
+    Each run takes a batch of MAX_WATCHED_PER_RUN addresses, and runs are
+    SCAN_INTERVAL_HOURS apart. Rounded up so a partial last batch still
+    counts as its own revisit.
+    """
+    total = len(WATCHED_ADDRESSES)
+    per_run = max(1, MAX_WATCHED_PER_RUN)
+    runs = math.ceil(total / per_run)
+    return runs * SCAN_INTERVAL_HOURS
+
+
+def _approx_chain_duration(num_blocks: int) -> str:
+    """Approximate wall-clock span of `num_blocks` at ETH_BLOCK_SECONDS."""
+    seconds = max(0, num_blocks) * ETH_BLOCK_SECONDS
+    minutes = seconds / 60
+    if minutes < 90:
+        return f"about {max(1, round(minutes))} min"
+    hours = seconds / 3600
+    if hours < 36:
+        return f"about {max(1, round(hours))} hours"
+    days = seconds / 86400
+    return f"about {max(1, round(days))} days"
+
+
 def scan_recent_blocks(num_blocks: int = 200) -> list:
     """
     Scan recent blocks for suspicious transactions.
     Applies the full AML engine rule set to each finding.
 
-    Default 200 blocks (~25-30 min) to match the 30-min cron interval.
+    Default 200 blocks is about 40 minutes of chain time (12 seconds per
+    block). That window does not cover the 6-hour schedule; activity
+    outside it is not checked.
     Scans BOTH native ETH transfers AND ERC-20 token transfers.
     """
-    global _last_partial_scan
+    global _last_partial_scan, _last_fetch_failures, _last_coverage
     _last_partial_scan = None
     _fetch_failures["rate_limit"] = 0
     _fetch_failures["other"] = 0
+    _last_fetch_failures = None
+    _last_coverage = None
     scan_t0 = time.monotonic()
 
     def over_budget() -> bool:
@@ -1394,11 +1474,14 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     deferred_items = []
     addresses_attempted = 0
     addresses_fully_scanned = 0
+    attempted = 0
+    fetch_failed_offsets = []
+    scanned_starts = []
     for item_index, (address, addr_info) in enumerate(selected_items):
         if over_budget():
             # Budget spent: stop starting new addresses and go to report
             # writing with what this run completed. Unstarted addresses
-            # keep their last_scanned state, so they catch up next run.
+            # keep their last_scanned state and are retried next run.
             deferred_items = selected_items[item_index:]
             partial = True
             print(f"[SCAN] Time budget ({TIME_BUDGET_SECONDS}s) reached after "
@@ -1406,6 +1489,7 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                   f"{len(deferred_items)} to the next run")
             break
         addresses_attempted += 1
+        attempted += 1
         label = addr_info["label"]
         print(f"[SCAN] Checking {label} ({address[:10]}...)")
         cut_short = False
@@ -1418,22 +1502,32 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
         else:
             addr_start = max(addr_last + 1, default_start)
             if addr_last + 1 < default_start:
-                print(f"  [CATCHUP] Last scanned at {addr_last}, continuing from {addr_start}")
+                skipped = default_start - (addr_last + 1)
+                print(
+                    f"  [SKIP] Last scanned at {addr_last}; skipping {skipped} block(s) "
+                    f"and continuing from {addr_start}"
+                )
 
-        # Fetch BOTH normal txs and token transfers
+        # Fetch BOTH normal txs and token transfers. A status-0 failure
+        # (rate limit and every other error except an empty history) must
+        # not look like "no transactions": leave the cursor and defer.
         txs = get_normal_transactions(address, addr_start, latest)
         time.sleep(0.5)
         token_txs = get_token_transfers(address, addr_start, latest)
         time.sleep(0.5)
+        if txs is None or token_txs is None:
+            fetch_failed_offsets.append(item_index)
+            print(f"  [DEFER] Fetch failed for {label}; last_scanned not advanced")
+            continue
         last_scanned[address] = latest
+        scanned_starts.append(addr_start)
 
         has_eth = bool(txs)
         has_tokens = bool(token_txs)
 
         if not has_eth and not has_tokens:
-            # Finished this address. An empty list is either no activity
-            # or a counted fetch failure; either way the cursor above
-            # already advanced, same as before the failure counter existed.
+            # Genuine empty history. A failed fetch returned None above
+            # and did not reach this point, so the cursor was not advanced.
             addresses_fully_scanned += 1
             continue
 
@@ -1688,8 +1782,13 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     # Persist per-address scan progress so new additions backfill once and
     # resume from where we left off on subsequent runs.
     # On a partial run, resume at the first deferred address rather than
-    # skipping past the whole batch.
-    next_watch_index = (start_index + batch_size - len(deferred_items)) % len(watched_items)
+    # skipping past the whole batch. A failed fetch is also deferred: the
+    # cursor stays put and the rotation resumes at the earliest failure
+    # so that address is retried next run.
+    resume_offset = batch_size - len(deferred_items)
+    if fetch_failed_offsets:
+        resume_offset = min(resume_offset, min(fetch_failed_offsets))
+    next_watch_index = (start_index + resume_offset) % len(watched_items)
     if partial:
         _last_partial_scan = {
             "budget_seconds": TIME_BUDGET_SECONDS,
@@ -1697,6 +1796,22 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
             "batch_size": batch_size,
             "deferred": [(addr, info["label"]) for addr, info in deferred_items],
         }
+    if fetch_failed_offsets:
+        _last_fetch_failures = {
+            "failed": len(fetch_failed_offsets),
+            "attempted": attempted,
+        }
+    if scanned_starts:
+        block_start = min(scanned_starts)
+    else:
+        block_start = default_start
+    _last_coverage = {
+        "block_start": block_start,
+        "block_end": latest,
+        "addresses_scanned": len(scanned_starts),
+        "addresses_total": len(watched_items),
+        "revisit_hours": _address_revisit_hours(),
+    }
     save_scan_state({
         "last_scanned_block": last_scanned,
         "first_seen": first_seen,
@@ -1722,6 +1837,76 @@ def _capped_commentary(finding: dict) -> dict:
         "risk_verdict": f"{finding['risk_level']} (rule score {finding['risk_score']})",
         "recommended_action": "Flag for manual review.",
     }
+
+
+# Commentary that alleges a crime, a numbered rule citation, or a
+# sanctions/mixer claim the fired rules do not support is dropped after
+# the model replies. The replacement is the deterministic rule-score
+# verdict, which is what the report may claim.
+#
+# Sanctions wording (sanction/sanctions/sanctioned, blacklist/blacklisted,
+# "black-listed"/"black listed", Treasury, OFAC) is allowed only when
+# rule_sanctioned_entity fired (rule id ofac_hit, detail "OFAC SDN match").
+# "mixer" is allowed only when the mixer rule fired. Everything else
+# below is always dropped.
+_ALWAYS_BANNED_COMMENTARY = re.compile(
+    r"launder|crime|criminal|illegal|violat|Rule \d+\(|front\s+for",
+    re.IGNORECASE,
+)
+_SANCTIONS_COMMENTARY = re.compile(
+    r"sanction|blacklist|black[\s\-‐‑–—]+listed|treasury|\bofac\b",
+    re.IGNORECASE,
+)
+_MIXER_COMMENTARY = re.compile(r"\bmixer\b", re.IGNORECASE)
+
+
+def _rule_score_verdict(finding: dict) -> str:
+    return f"{finding['risk_level']} (rule score {finding['risk_score']})"
+
+
+def _rule_fired(finding: dict, rule_name: str) -> bool:
+    return any(
+        r.get("rule") == rule_name
+        for r in finding.get("rules_triggered") or []
+    )
+
+
+def _commentary_sentences(text: str) -> list[str]:
+    """Split commentary on sentence ends, keeping initials like U.S. intact."""
+    protected = re.sub(r"\b([A-Z])\.", r"\1<DOT>", text.strip())
+    chunks = re.split(r"(?<=[.!?])\s+|\n+", protected)
+    return [chunk.replace("<DOT>", ".").strip() for chunk in chunks if chunk.strip()]
+
+
+def _sentence_is_banned(sentence: str, finding: dict) -> bool:
+    if _ALWAYS_BANNED_COMMENTARY.search(sentence):
+        return True
+    # OFAC SDN match is the only basis for sanctions wording.
+    if not _rule_fired(finding, "ofac_hit") and _SANCTIONS_COMMENTARY.search(sentence):
+        return True
+    if not _rule_fired(finding, "mixer_touch") and _MIXER_COMMENTARY.search(sentence):
+        return True
+    return False
+
+
+def _replace_banned_sentences(text: str, verdict: str, finding: dict) -> str:
+    """Drop banned commentary sentences and replace each with the verdict."""
+    replaced = [
+        verdict if _sentence_is_banned(chunk, finding) else chunk
+        for chunk in _commentary_sentences(text)
+    ]
+    return " ".join(replaced).strip()
+
+
+def _scrub_commentary(payload: dict, finding: dict) -> dict:
+    verdict = _rule_score_verdict(finding)
+    cleaned = {}
+    for key, value in payload.items():
+        if isinstance(value, str):
+            cleaned[key] = _replace_banned_sentences(value, verdict, finding)
+        else:
+            cleaned[key] = value
+    return cleaned
 
 
 def generate_roast(finding: dict, eth_price: float) -> dict:
@@ -1778,7 +1963,7 @@ IMPORTANT WRITING RULES:
 
 Generate these 5 fields:
 
-1. WHAT HAPPENED (2-3 sentences, plain English, zero jargon — a non-crypto person should fully understand this. Use real-world analogies like "this is like walking into a known money laundering front" etc.)
+1. WHAT HAPPENED (2-3 sentences, plain English, zero jargon — a non-crypto person should fully understand this. Use real-world analogies like "this is like dropping a package into a slot that hides who sent it" etc.)
 2. ROAST (3-5 sentences, brutally funny, sarcastic — reference specific data but explain technical terms inline the first time)
 3. SAR NARRATIVE (professional suspicious activity report for compliance teams, 3-4 sentences, cite rule names and evidence)
 4. RISK VERDICT ({finding['risk_level']} — one sentence justification)
@@ -1793,7 +1978,7 @@ TRANSACTION DATA:
 - Block range: {finding['block_range']}
 - Token transfers: {', '.join(f"{t['symbol']} {t['value']:,.0f}" for t in token_transfers[:5]) if token_transfers else 'None (ETH only)'}
 
-CONTEXT: Tornado Cash is a crypto mixing service that was sanctioned by the U.S. Treasury (OFAC) in August 2022 for helping launder $7+ billion including funds stolen by North Korea's Lazarus Group. Any interaction with it is a major red flag.
+CONTEXT: Mixer use is a risk pattern, not a sanctions violation, unless the rule output has an SDN match. Tornado Cash was sanctioned on 2022-08-08 and delisted on 2025-03-21. Do not describe mixer use as a sanctions violation, and do not state that a crime occurred. A flag is a reason for human review.
 
 SENDER WALLET PROFILE:
 {wallet_text}
@@ -1832,7 +2017,10 @@ Respond in this EXACT JSON format (no markdown, no code blocks, no backticks):
         end = raw.rfind("}")
         if start != -1 and end > start:
             raw = raw[start:end + 1]
-        return json.loads(raw)
+        parsed = json.loads(raw)
+        if isinstance(parsed, dict):
+            return _scrub_commentary(parsed, finding)
+        return parsed
 
     except json.JSONDecodeError:
         _analysis_stats["failed"] += 1
@@ -1857,8 +2045,40 @@ Respond in this EXACT JSON format (no markdown, no code blocks, no backticks):
 
 # ─── Report Generator ────────────────────────────────────────────────────────
 
-def _coverage_line() -> str:
-    """Addresses attempted, fully scanned, fetch failures, commentary state."""
+def _coverage_for_report(scan_meta: dict) -> dict:
+    """Coverage recorded by the scan, or a fallback from scan_meta."""
+    if _last_coverage:
+        return _last_coverage
+    raw = str(scan_meta.get("block_range", ""))
+    parts = re.split(r"\s*[—–-]\s*", raw)
+    try:
+        start, end = int(parts[0]), int(parts[1])
+    except (ValueError, IndexError):
+        start, end = 0, 0
+    return {
+        "block_start": start,
+        "block_end": end,
+        "addresses_scanned": _last_scan_coverage["fully_scanned"],
+        "addresses_total": len(WATCHED_ADDRESSES),
+        "revisit_hours": _address_revisit_hours(),
+    }
+
+
+def _coverage_line(coverage: dict) -> str:
+    """One header line: block window, revisit cadence, and fetch totals.
+
+    Combines the block-window coverage with the attempted / fully-scanned /
+    fetch-failure totals. Callers print this once.
+    """
+    start = coverage["block_start"]
+    end = coverage["block_end"]
+    span = max(0, end - start + 1)
+    duration = _approx_chain_duration(span)
+    hours = coverage["revisit_hours"]
+    unit = "hour" if hours == 1 else "hours"
+    scanned = coverage["addresses_scanned"]
+    total = coverage["addresses_total"]
+
     cov = _last_scan_coverage
     failures = cov["rate_limit"] + cov["other"]
     if MAX_ANALYSES_PER_RUN <= 0:
@@ -1871,7 +2091,11 @@ def _coverage_line() -> str:
         return f"{count} {singular if count == 1 else plural}"
 
     return (
-        f"**Coverage:** {_n(cov['attempted'], 'address', 'addresses')} attempted, "
+        f"**Coverage:** blocks {start} to {end} checked ({duration}). "
+        f"{scanned} of {total} addresses. "
+        f"Each address is revisited about every {hours} {unit}. "
+        f"Activity outside these windows is not checked. "
+        f"{_n(cov['attempted'], 'address', 'addresses')} attempted, "
         f"{_n(cov['fully_scanned'], 'address', 'addresses')} fully scanned, "
         f"{_n(failures, 'fetch failure', 'fetch failures')} "
         f"({cov['rate_limit']} Etherscan rate-limit, {cov['other']} other). "
@@ -1885,16 +2109,26 @@ def generate_report(findings: list, eth_price: float, scan_meta: dict) -> str:
     _analysis_stats["failed"] = 0
     now = datetime.now(UTC)
     timestamp = now.strftime("%Y-%m-%d %H:%M UTC")
+    coverage = _coverage_for_report(scan_meta)
+    block_range = f"{coverage['block_start']} — {coverage['block_end']}"
 
     report = f"""# 🔥 AML Roaster Report
 **{timestamp}** · Ethereum Mainnet · ETH ${eth_price:,.2f}
-**Blocks:** {scan_meta.get('block_range', 'N/A')} · **Watched Addresses:** {len(WATCHED_ADDRESSES)} · **Detection Rules:** 13
+**Blocks:** {block_range} · **Watched Addresses:** {len(WATCHED_ADDRESSES)} · **Detection Rules:** 13
 **Engine:** NEXUS AML v2 (rule set from aml-detection-engine)
-{_coverage_line()}
+{_coverage_line(coverage)}
 
 ---
 
 """
+
+    if _last_fetch_failures and _last_fetch_failures["failed"]:
+        failed_n = _last_fetch_failures["failed"]
+        failed_m = _last_fetch_failures["attempted"]
+        report += (
+            f"Coverage incomplete: {failed_n} of {failed_m} addresses "
+            f"could not be fetched (rate limit)\n\n---\n\n"
+        )
 
     if _last_partial_scan:
         deferred_list = ", ".join(
@@ -1921,6 +2155,17 @@ This scan reached its {_last_partial_scan['budget_seconds']}s time budget and st
 """
 
     if not findings:
+        # A failed fetch is not a quiet chain. Never print the all-quiet
+        # line when any address could not be fetched.
+        if _last_fetch_failures and _last_fetch_failures["failed"]:
+            report += """## No Suspicious Activity Detected
+
+No suspicious patterns were scored for the addresses fetched this run.
+
+---
+*Report generated by AML Roaster Agent v2 — Automated Run*
+"""
+            return report
         report += """## No Suspicious Activity Detected
 
 All quiet on the Ethereum front. 13 detection rules armed and scanning.
@@ -2121,7 +2366,7 @@ def main():
     print("🔥 AML ROASTER AGENT v2 (NEXUS Engine) — Starting scan")
     print("   Detection rules: 13 active (incl. stablecoin_mixing, contract_interaction)")
     print(f"   Watched addresses: {len(WATCHED_ADDRESSES)}")
-    print("   Scan window: 200 blocks (~25 min)")
+    print("   Scan window: 200 blocks (~40 min of chain time; the 6-hour schedule is wider)")
     print("=" * 60)
 
     eth_price = get_eth_price()
@@ -2132,11 +2377,15 @@ def main():
         eth_price = 2000.0
 
     latest_block = get_latest_block()
-    num_blocks = 200  # ~25-30 min to match 30-min cron interval
+    num_blocks = 200  # ~40 min of chain time at 12s/block; does not cover the 6-hour schedule
     findings = scan_recent_blocks(num_blocks=num_blocks)
 
+    if _last_coverage:
+        block_range = f"{_last_coverage['block_start']} — {_last_coverage['block_end']}"
+    else:
+        block_range = f"{latest_block - num_blocks + 1} — {latest_block}"
     scan_meta = {
-        "block_range": f"{latest_block - num_blocks + 1} — {latest_block}",
+        "block_range": block_range,
     }
 
     print(f"\n[RESULT] Found {len(findings)} suspicious pattern(s)")

@@ -196,12 +196,13 @@ variable and no workflow input can raise it, and `generate_roast()`
 does not call the model while it is 0. Re-enable only after an
 output filter exists and one scheduled report greps clean.
 
-Each new report states, near the top, addresses attempted, addresses
-fully scanned, and fetch failures (Etherscan rate-limit and other
-errors that previously returned an empty transaction list with no
-record). Those errors are counted only. Scan cursors still advance
-on an empty result, whether that empty result is genuine or a failed
-fetch.
+Each new report states, on one coverage line, the blocks checked,
+how many watched addresses were fetched, how often each address is
+revisited, addresses attempted, addresses fully scanned, and fetch
+failures (Etherscan rate-limit and other). A genuine empty history
+still advances the cursor. A failed fetch is counted, does not
+advance `last_scanned` for that address, and the report says coverage
+is incomplete instead of "All quiet".
 
 ## 2026-10-28 (lobo): annotations completed, Decision 1 confirmed
 
@@ -213,13 +214,11 @@ including fabricated rule citations) and
 `reports/report_2026-10-29_0500.md` (55 claim lines; that run
 predated the disable commit by minutes), and a retraction of the
 94.9% figure opens `reports/report_2026-10-27_1900.md` and
-`reports/report_2026-10-27_2021.md`. Full test suite at this head:
-77 passed.
+`reports/report_2026-10-27_2021.md`.
 
-Still open from the packet's five fixes: fail-closed cursor
-behaviour on fetch failure (counted today, not yet blocking),
-the Tornado Cash label correction, and the deterministic
-commentary filter that must exist before commentary is
-re-enabled. A verification run was dispatched after this entry to
-confirm a fresh report carries the coverage line and no AI
-commentary.
+The remaining packet fixes (fail-closed cursor behaviour, the
+Tornado Cash label, and the deterministic commentary filter with
+an SDN-match exception) landed through PR #10, reviewed and merged
+by lobo on 2026-10-28. Commentary stays off (cap 0) until one
+scheduled report is inspected and greps clean and Hash approves
+re-enabling.
