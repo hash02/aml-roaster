@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-23T08:12:23.977734+00:00",
-      "eth_price": 2050.85415304641,
-      "block_range": "24718744 \u2014 24718943",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-23T09:36:34.491563+00:00",
       "eth_price": 2032.54283399819,
       "block_range": "24719162 \u2014 24719361",
@@ -65989,16 +65982,348 @@
       "block_range": "26298206 \u2014 26298405",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-10-29T17:50:22.920607+00:00",
+      "eth_price": 2337.85,
+      "block_range": "26299780 \u2014 26299979",
+      "total_findings": 12,
+      "findings": [
+        {
+          "sender": "0xd13772ef959a4b227c3e9e62a4c971ce8886eeff",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 540,
+          "risk_level": "CRITICAL",
+          "tx_count": 4,
+          "total_eth": 40.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "high_value",
+            "structuring",
+            "peel_chain_linear",
+            "velocity",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "high_value": 30,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "velocity": 50,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A wallet was caught interacting with Tornado Cash Router. Our engine flagged it at score 540.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 540)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x4750bcfcc340aa4b31be7e71fa072716d28c29c5",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 530,
+          "risk_level": "CRITICAL",
+          "tx_count": 3,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "The wallet sent three tiny, zero\u2011value messages to a well\u2011known mixer (Tornado Cash). Think of it like dropping three empty envelopes into a black\u2011box box that scrambles who sent them, even though nothing was actually sent.",
+          "roast": "First, the wallet decided to play a game of \"Where\u2019s the Money?\" by depositing nothing into a mixer\u2014mixer_touch (score: 100) shows the direct hit. Then it got a free OFAC hit (score: 200) because the router address is on the Treasury\u2019s sanctions list, like showing up at a party where the bouncer is on your watchlist. The zero\u2011value contract call (score: 70) is the wallet\u2019s way of pretending to talk to the mixer without actually moving any coins, a classic \u201ctalking to yourself\u201d move. All three deposits were identical (0.0000 ETH) \u2013 structuring (score: 70) \u2013 because even empty packets can be smurfed, and the peel_chain_linear (score: 60) shows a neat little chain of identical moves. CRITICAL (rule score 530)",
+          "risk_verdict": "CRITICAL \u2013 the composite score of 530 with multiple high\u2011risk rules indicates a likely attempt to obfuscate source and destination of funds, warranting immediate human review.",
+          "recommended_action": "Flag the wallet for manual AML review, investigate the source of funds and subsequent activity, and monitor for further suspicious transactions. If additional red flags appear, consider freezing or reporting the wallet per regulatory guidelines."
+        },
+        {
+          "sender": "0x0a5b2bf3ccfb44c1d22f07eed9553ecba752d4ad",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 530,
+          "risk_level": "CRITICAL",
+          "tx_count": 5,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A wallet that has been around for about 490 days just sent five tiny, zero\u2011value ETH deposits into Tornado Cash, a service that mixes coins to hide their origin. Think of it like dropping five empty bottles into a black\u2011hole vending machine: the bottles have no value, but the machine scrambles who sent them. The sender didn\u2019t actually move any money, but the pattern looks like someone trying to use a mixer to avoid detection.",
+          "roast": "Score 100 on [mixer_touch] means the wallet literally hit the mixer doorbell (direct deposit to a known mixer). 200 on [ofac_hit] shows that the address is on the Treasury's hit list (OFAC SDN match to the router), so the mixer is basically a sanctioned party. 70 on [mixer_contract_call] suggests a zero\u2011value prank call to the mixer, maybe a bot or a joke. The structuring score of 70 comes from five identical zero\u2011value deposits, like a toddler trying to smuggle a candy bar by handing over five wrappers. With a total composite score of 530, it's like the AML engine shouted 'red flag' louder than a stadium announcer.",
+          "risk_verdict": "CRITICAL \u2014 the composite AML score of 530 and multiple rule triggers indicate a high\u2011risk layering and obfuscation pattern that requires immediate human review.",
+          "recommended_action": "Flag the account for manual investigation, review the surrounding transaction history, and consider applying a temporary hold pending compliance confirmation. If the source of funds remains unknown, report to the relevant jurisdiction\u2019s regulatory body per internal policy."
+        },
+        {
+          "sender": "0x47a8736452475f9e82098c6364010175c0595c4b",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 403,
+          "risk_level": "CRITICAL",
+          "tx_count": 14,
+          "total_eth": 6.8,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "novel_wallet_dump",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "novel_wallet_dump": 73,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A wallet was caught interacting with Tornado Cash Router. Our engine flagged it at score 403.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 403)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x09efa4777a855eb946df013c8f3e51fc553aa81d",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 2,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A wallet was caught interacting with Tornado Cash Router. Our engine flagged it at score 400.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 400)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x5555555731006f71f121144534ca7c8799f66aa3",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "The sender\u2019s wallet sent a tiny, zero\u2011value Ethereum transaction to the Tornado Cash router, a service that hides where money comes from. It\u2019s like dropping an empty envelope into a post office box that only the sender knows about\u2014no money moved, but the action signals intent to mix or hide activity.",
+          "roast": "So, 0 ETH to a mixer? That\u2019s like sending a postcard with a blank message to a secret mailbox. The AML engine gave it a 100 for \"mixer_touch\" (meaning a direct hit on a known mixer) and a whopping 200 for \"ofac_hit\" (that address is on the U.S. Treasury\u2019s sanctions list, even if the address itself isn\u2019t the culprit). The zero\u2011value contract call got a 70 for \"mixer_contract_call\"\u2014basically a fancy way of saying they\u2019re using the mixer\u2019s smart contract without actually moving any coins. And a 30 for \"exchange_avoidance\"\u2014because they\u2019re bypassing a legitimate exchange to dodge KYC. The whole thing feels like a crypto magician pulling a rabbit out of a hat that never existed.",
+          "risk_verdict": "CRITICAL \u2013 The combination of zero\u2011value mixer interaction with an OFAC\u2011listed address and high transaction volume warrants immediate human review.",
+          "recommended_action": "CRITICAL (rule score 400)"
+        },
+        {
+          "sender": "0xc8bccdda5770c961ceb415de94c9f0e0ae32c181",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "The sender sent a zero\u2011value transaction to the Tornado Cash router, basically dropping a blank envelope into a black\u2011box that scrambles who sent it. No ETH or tokens moved, but the fact that they touched a known mixer raises red flags. It's like checking in a mystery package at a courier that might be a smuggling hub.",
+          "roast": "First, the address sent a zero\u2011value transaction to Tornado Cash, earning a 100 on mixer_touch (meaning they touched a known mixer). Then it got a 200 on the OFAC hit (meaning the router address is on the U.S. Treasury's sanctions blacklist). The zero\u2011eth contract call earned a 70 on mixer_contract_call (meaning they called the mixer with no value, a typical obfuscation move). Finally, 30 on exchange_avoidance (meaning they routed funds to avoid a regulated exchange). So basically, this wallet is like a ninja with a stealth cloak, but the cloak is a known black\u2011listed one.",
+          "risk_verdict": "CRITICAL \u2014 the composite score of 400 with an OFAC hit and mixer engagement indicates a high likelihood of illicit activity requiring immediate review.",
+          "recommended_action": "Open a SAR and investigate the sender's source of funds and potential destination. Flag the wallet in the internal system for ongoing monitoring and consider freezing if further evidence arises."
+        },
+        {
+          "sender": "0x213cfeb89529efc2eae2a502d4a8253fe4ae76ef",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A wallet was caught interacting with Tornado Cash Router. Our engine flagged it at score 400.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 400)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x69ce09ab548ffb0b46978fdabb44beb2344608d5",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "The wallet sent a zero\u2011value Ethereum transaction to the Tornado Cash router, a service that scrambles transaction trails. It\u2019s like dropping a note into a mailbox that hides who mailed it, but no money actually changed hands. The transaction happened on block 26299860 and the sender still keeps 4.337 ETH in their wallet.",
+          "roast": "Score of 200 on the OFAC hit (meaning this address was once on the U.S. Treasury\u2019s sanctions list) shows the system is still playing hardball with a delisted address. Mixer_touch (100) confirms the wallet is playing hide\u2011and\u2011seek with a known mixer. The zero\u2011value contract call (70) is probably a governance vote or a prank, not a legit withdrawal. Exchange_avoidance (30) flags that the sender avoided a regulated exchange, so they\u2019re clearly trying to dodge KYC. Bottom line: this is a perfect recipe for a compliance nightmare.",
+          "risk_verdict": "CRITICAL \u2014 the transaction involves a known mixer and matches a former OFAC sanctioned address, raising significant risk of illicit activity.",
+          "recommended_action": "Flag the transaction for manual review, verify the source of the sender\u2019s funds, and document findings for potential regulatory reporting."
+        },
+        {
+          "sender": "0xc0f12799b8d3fa8810dfe1616095170c72117f8f",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 400,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A wallet was caught interacting with Tornado Cash Router. Our engine flagged it at score 400.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 400)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x581d10f7c0a93f0feb086db3eebfad375f7de0b5",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 360,
+          "risk_level": "CRITICAL",
+          "tx_count": 2,
+          "total_eth": 11.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "high_value",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "high_value": 30,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A user sent 11 ETH, split into two chunks (1 and 10), straight into a service that scrambles who owns the money, like dropping cash into a black hole that hides the source.",
+          "roast": "Looks like someone decided to drop 11 ETH into a secret box that hides who sent it, because who needs a bank when you can play hide-and-seek with money? CRITICAL (rule score 360) The OFAC hit of 200 is basically a red flag that the address was once on the U.S. Treasury's sanctions list (though it was delisted in 2025). With high-value transfer of $25k and avoiding exchange KYC, this is the kind of pattern that makes compliance teams go all Sherlock Holmes on it.",
+          "risk_verdict": "CRITICAL \u2014 the transaction demonstrates mixer usage combined with a sanctioned address and high-value transfer, warranting immediate review.",
+          "recommended_action": "CRITICAL (rule score 360)"
+        },
+        {
+          "sender": "0x756014e45e210fbdd9998822941b3bb17248c1dd",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 330,
+          "risk_level": "CRITICAL",
+          "tx_count": 2,
+          "total_eth": 0.2,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "ofac_hit",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "ofac_hit": 200,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "The sender just dropped 0.20 ETH (about $468) into a Tornado Cash router, which is like sending a package through a courier that hides who sent it. The transaction was split into two equal parts, each 0.10 ETH, and the sender's wallet is brand new\u2014only a day old and hasn't been used much. This kind of move is a classic sign of someone trying to hide the origin of the money.",
+          "roast": "This is like a magician who tried to pull a coin out of a hat, except the hat is a mixer, and the coin was 0.20 ETH. The engine gave it a 100 on the mixer_touch rule, which basically says 'You just touched a known mixer, nice try.' Then it hit a 200 on the OFAC hit\u2014meaning that address is literally on the U.S. Treasury's sanctions blacklist (even though it\u2019s been delisted, the engine still flags it). And a 30 on exchange_avoidance\u2014because instead of going to a regulated exchange, they went straight to the black market. Overall, this guy\u2019s got the right moves for a heist movie, but the director (regulators) didn\u2019t approve.",
+          "risk_verdict": "CRITICAL \u2014 The combination of a known mixer, an OFAC SDN match, and a new, highly active wallet warrants immediate escalation.",
+          "recommended_action": "Flag the transaction for manual AML review, verify the source of funds, and confirm whether the address remains on the OFAC list. Consider freezing the wallet if further evidence of sanctions exposure is found."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 2865,
-    "unique_senders": 2255,
+    "total_findings": 2877,
+    "unique_senders": 2259,
     "highest_score": 660,
-    "critical_count": 788,
+    "critical_count": 800,
     "high_count": 219,
-    "first_scan": "2026-03-23T08:12:23.977734+00:00",
-    "last_scan": "2026-10-29T12:30:12.478519+00:00"
+    "first_scan": "2026-03-23T09:36:34.491563+00:00",
+    "last_scan": "2026-10-29T17:50:22.920607+00:00"
   }
 }
