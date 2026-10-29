@@ -7,6 +7,7 @@ address-lookup rules exercise the actual data we ship.
 
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -537,3 +538,299 @@ def test_gas_funding_none_when_source_not_mixer(monkeypatch):
     assert roaster.rule_gas_funding_from_mixer(
         RANDOM_SENDER, {"wallet_age_days": 10}
     ) is None
+
+
+# ─── Commentary cap and report coverage ──────────────────────────────────
+
+class _HttpResp:
+    def __init__(self, status_code, payload):
+        self.status_code = status_code
+        self._payload = payload
+
+    def json(self):
+        return self._payload
+
+
+def _reset_fetch_bookkeeping():
+    roaster._fetch_failures["rate_limit"] = 0
+    roaster._fetch_failures["other"] = 0
+    roaster._etherscan_call_error["kind"] = None
+
+
+def _sample_finding(**overrides):
+    finding = {
+        "sender": "0xabcdef0000000000000000000000000000000001",
+        "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+        "receiver_label": "FixedFloat 1",
+        "tx_count": 1,
+        "total_eth": 1.5,
+        "individual_values": [1.5],
+        "block_range": "1-2",
+        "risk_score": 155,
+        "risk_level": "CRITICAL",
+        "rules_triggered": [
+            {
+                "rule": "exit_to_no_kyc_offramp",
+                "score": 155,
+                "detail": "Exit to a no-KYC offramp",
+            }
+        ],
+        "wallet_profile": {
+            "age_days": 3,
+            "tx_count": 4,
+            "balance_eth": 0.1,
+            "days_idle": 0,
+        },
+        "token_transfers": [],
+    }
+    finding.update(overrides)
+    return finding
+
+
+def _silence_scan_io(monkeypatch, tmp_path):
+    monkeypatch.setattr(roaster, "SCAN_STATE_PATH", tmp_path / "scan_state.json")
+    monkeypatch.setattr(roaster.time, "sleep", lambda *_a, **_k: None)
+    monkeypatch.setattr(roaster, "_sleep_backoff", lambda _attempt: None)
+    monkeypatch.setattr(roaster, "get_latest_block", lambda: 5000)
+    monkeypatch.setattr(roaster, "get_eth_price", lambda: 2000.0)
+    monkeypatch.setattr(roaster, "get_block_transactions", lambda _n: [])
+
+
+def test_commentary_cap_is_zero_and_not_env_driven(monkeypatch):
+    monkeypatch.setenv("MAX_ANALYSES_PER_RUN", "25")
+    monkeypatch.setenv("GROQ_API_KEY", "present")
+    source = Path(roaster.__file__).read_text()
+    assert roaster.MAX_ANALYSES_PER_RUN == 0
+    assert 'os.environ.get("MAX_ANALYSES_PER_RUN"' not in source
+    assert "os.environ.get('MAX_ANALYSES_PER_RUN'" not in source
+    workflow = Path(roaster.__file__).parent / ".github" / "workflows" / "roaster.yml"
+    workflow_text = workflow.read_text()
+    assert "MAX_ANALYSES" not in workflow_text
+    assert "inputs:" not in workflow_text
+    assert "python roaster.py" in workflow_text
+
+
+def test_zero_cap_report_is_template_only(monkeypatch):
+    """A configured API key must not produce model text when the cap is 0."""
+    _reset_fetch_bookkeeping()
+    roaster._last_partial_scan = None
+    roaster._last_scan_coverage.update(
+        {"attempted": 8, "fully_scanned": 5, "rate_limit": 2, "other": 1}
+    )
+    monkeypatch.setattr(roaster, "GROQ_API_KEY", "present")
+    monkeypatch.setattr(roaster, "MAX_ANALYSES_PER_RUN", 0)
+
+    def _boom(*_a, **_k):
+        raise AssertionError("model client constructed while cap is 0")
+
+    monkeypatch.setattr(roaster, "OpenAI", _boom)
+    finding = _sample_finding()
+    direct = roaster.generate_roast(finding, 2000.0)
+    assert direct == roaster._capped_commentary(finding)
+
+    report = roaster.generate_report([finding], 2000.0, {"block_range": "10 — 20"})
+    assert report.startswith("# 🔥 AML Roaster Report")
+    assert "**Coverage:** 8 addresses attempted, 5 addresses fully scanned, 3 fetch failures (2 Etherscan rate-limit, 1 other). AI commentary is disabled." in report
+    assert report.index("**Coverage:**") < report.index("## Finding #1")
+    assert "exit_to_no_kyc_offramp" in report
+    assert "CRITICAL — Score 155" in report
+    assert "per-run analysis cap" in report
+    assert roaster._analysis_stats["attempted"] == 0
+    assert "Automated analysis error" not in report
+
+
+def test_empty_report_still_states_coverage_and_disabled_commentary():
+    roaster._last_partial_scan = None
+    roaster._last_scan_coverage.update(
+        {"attempted": 1, "fully_scanned": 1, "rate_limit": 0, "other": 0}
+    )
+    report = roaster.generate_report([], 2000.0, {"block_range": "10 — 20"})
+    assert "**Coverage:** 1 address attempted, 1 address fully scanned, 0 fetch failures (0 Etherscan rate-limit, 0 other). AI commentary is disabled." in report
+    assert report.index("**Coverage:**") < report.index("No Suspicious Activity")
+
+
+def test_positive_cap_still_calls_model_for_that_many(monkeypatch):
+    roaster._last_partial_scan = None
+    roaster._last_scan_coverage.update(
+        {"attempted": 2, "fully_scanned": 2, "rate_limit": 0, "other": 0}
+    )
+    monkeypatch.setattr(roaster, "GROQ_API_KEY", "present")
+    monkeypatch.setattr(roaster, "MAX_ANALYSES_PER_RUN", 1)
+    monkeypatch.setattr(roaster.time, "sleep", lambda *_a, **_k: None)
+    calls = {"n": 0}
+
+    class _Message:
+        content = (
+            '{"what_happened":"model-what","roast":"model-roast",'
+            '"sar_narrative":"model-sar","risk_verdict":"model-verdict",'
+            '"recommended_action":"model-action"}'
+        )
+
+    class _Choice:
+        message = _Message()
+
+    class _Response:
+        choices = [_Choice()]
+
+    class _Completions:
+        @staticmethod
+        def create(**_kwargs):
+            calls["n"] += 1
+            return _Response()
+
+    class _Chat:
+        completions = _Completions()
+
+    class _Client:
+        def __init__(self, *_a, **_k):
+            self.chat = _Chat()
+
+    monkeypatch.setattr(roaster, "OpenAI", _Client)
+    low = _sample_finding(risk_score=10, risk_level="LOW")
+    high = _sample_finding(risk_score=400, risk_level="CRITICAL")
+    report = roaster.generate_report([low, high], 2000.0, {"block_range": "1 — 2"})
+    assert calls["n"] == 1
+    assert "model-roast" in report
+    assert "per-run analysis cap" in report
+    assert "AI commentary is limited to 1 highest-scoring finding." in report
+    assert roaster._analysis_stats["attempted"] == 1
+
+
+def test_rate_limit_string_counts_once_and_returns_empty(monkeypatch):
+    _reset_fetch_bookkeeping()
+    monkeypatch.setattr(roaster, "_sleep_backoff", lambda _attempt: None)
+    calls = {"n": 0}
+
+    def _get(*_a, **_k):
+        calls["n"] += 1
+        return _HttpResp(200, {"status": "0", "message": "NOTOK", "result": "Max rate limit reached"})
+
+    monkeypatch.setattr(roaster.requests, "get", _get)
+    assert roaster.get_normal_transactions("0xabc", 1, 2) == []
+    assert roaster.get_token_transfers("0xabc", 1, 2) == []
+    assert calls["n"] == 2
+    assert roaster._fetch_failures == {"rate_limit": 2, "other": 0}
+
+
+def test_http_429_counts_as_one_rate_limit_after_retries(monkeypatch):
+    _reset_fetch_bookkeeping()
+    monkeypatch.setattr(roaster, "_sleep_backoff", lambda _attempt: None)
+    calls = {"n": 0}
+
+    def _get(*_a, **_k):
+        calls["n"] += 1
+        return _HttpResp(429, {})
+
+    monkeypatch.setattr(roaster.requests, "get", _get)
+    assert roaster.get_normal_transactions("0xabc", 1, 2) == []
+    assert calls["n"] == roaster._RETRY_ATTEMPTS
+    assert roaster._fetch_failures == {"rate_limit": 1, "other": 0}
+
+
+def test_http_500_and_network_errors_count_as_other(monkeypatch):
+    _reset_fetch_bookkeeping()
+    monkeypatch.setattr(roaster, "_sleep_backoff", lambda _attempt: None)
+
+    monkeypatch.setattr(roaster.requests, "get", lambda *_a, **_k: _HttpResp(500, {}))
+    assert roaster.get_token_transfers("0xabc", 1, 2) == []
+    assert roaster._fetch_failures == {"rate_limit": 0, "other": 1}
+
+    def _boom(*_a, **_k):
+        raise roaster.requests.RequestException("offline")
+
+    monkeypatch.setattr(roaster.requests, "get", _boom)
+    assert roaster.get_normal_transactions("0xabc", 1, 2) == []
+    assert roaster._fetch_failures == {"rate_limit": 0, "other": 2}
+
+
+def test_genuine_empty_tx_list_is_not_a_fetch_failure(monkeypatch):
+    _reset_fetch_bookkeeping()
+    monkeypatch.setattr(roaster, "_sleep_backoff", lambda _attempt: None)
+    payload = {"status": "0", "message": "No transactions found", "result": []}
+    monkeypatch.setattr(roaster.requests, "get", lambda *_a, **_k: _HttpResp(200, payload))
+    assert roaster.get_normal_transactions("0xabc", 1, 2) == []
+    assert roaster.get_token_transfers("0xabc", 1, 2) == []
+    assert roaster._fetch_failures == {"rate_limit": 0, "other": 0}
+
+
+def test_block_fetch_counts_only_when_both_sources_fail(monkeypatch):
+    _reset_fetch_bookkeeping()
+    monkeypatch.setattr(roaster, "_sleep_backoff", lambda _attempt: None)
+    monkeypatch.setattr(roaster.requests, "get", lambda *_a, **_k: _HttpResp(429, {}))
+    monkeypatch.setattr(
+        roaster,
+        "rpc_call",
+        lambda _method, params=None: {"result": {"transactions": [{"hash": "0x1"}]}},
+    )
+    assert roaster.get_block_transactions(10) == [{"hash": "0x1"}]
+    assert roaster._fetch_failures == {"rate_limit": 0, "other": 0}
+
+    monkeypatch.setattr(roaster, "rpc_call", lambda _method, params=None: {})
+    assert roaster.get_block_transactions(11) == []
+    assert roaster._fetch_failures == {"rate_limit": 1, "other": 0}
+
+
+def test_fetch_failure_advances_scan_cursor_and_counts(monkeypatch, tmp_path):
+    """Empty error results still advance last_scanned_block, and are counted."""
+    _reset_fetch_bookkeeping()
+    addr = "0x" + "11" * 20
+    _silence_scan_io(monkeypatch, tmp_path)
+    monkeypatch.setattr(roaster, "WATCHED_ADDRESSES", {addr: {"label": "Example", "type": "mixer", "risk": 100}})
+    monkeypatch.setattr(roaster, "MAX_WATCHED_PER_RUN", 1)
+    monkeypatch.setattr(roaster, "TIME_BUDGET_SECONDS", 900)
+    monkeypatch.setattr(
+        roaster.requests,
+        "get",
+        lambda *_a, **_k: _HttpResp(200, {"status": "0", "message": "NOTOK", "result": "Max rate limit reached"}),
+    )
+
+    findings = roaster.scan_recent_blocks(num_blocks=5)
+
+    assert findings == []
+    state = roaster.load_scan_state()
+    assert state["last_scanned_block"][addr] == 5000
+    assert roaster._last_scan_coverage == {
+        "attempted": 1,
+        "fully_scanned": 1,
+        "rate_limit": 2,
+        "other": 0,
+    }
+
+
+def test_unstarted_addresses_are_not_counted_as_attempted(monkeypatch, tmp_path):
+    _reset_fetch_bookkeeping()
+    addr_a = "0x" + "ab" * 20
+    addr_b = "0x" + "cd" * 20
+    _silence_scan_io(monkeypatch, tmp_path)
+    monkeypatch.setattr(
+        roaster,
+        "WATCHED_ADDRESSES",
+        {
+            addr_a: {"label": "A", "type": "mixer", "risk": 100},
+            addr_b: {"label": "B", "type": "mixer", "risk": 100},
+        },
+    )
+    monkeypatch.setattr(roaster, "MAX_WATCHED_PER_RUN", 2)
+    monkeypatch.setattr(roaster, "TIME_BUDGET_SECONDS", 0)
+    initial = {
+        "last_scanned_block": {addr_a: 100, addr_b: 200},
+        "first_seen": {},
+        "next_watch_index": 0,
+    }
+    (tmp_path / "scan_state.json").write_text(json.dumps(initial))
+
+    def _unexpected(*_a, **_k):
+        raise AssertionError("fetch ran for an address the budget never started")
+
+    monkeypatch.setattr(roaster.requests, "get", _unexpected)
+    findings = roaster.scan_recent_blocks(num_blocks=5)
+
+    assert findings == []
+    state = roaster.load_scan_state()
+    assert state["last_scanned_block"] == {addr_a: 100, addr_b: 200}
+    assert state["next_watch_index"] == 0
+    assert roaster._last_scan_coverage["attempted"] == 0
+    assert roaster._last_scan_coverage["fully_scanned"] == 0
+    assert roaster._fetch_failures == {"rate_limit": 0, "other": 0}
+    assert roaster._last_partial_scan["scanned_count"] == 0
+    assert roaster._last_partial_scan["batch_size"] == 2

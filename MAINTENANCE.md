@@ -177,3 +177,28 @@ conclusion will be appended here when it lands.
   OFAC-listed entity. The prompt guard reduces but does not
   eliminate overstatement; treat AI commentary as illustrative,
   not evidentiary.
+
+## 2026-10-28: AI commentary disabled
+
+AI commentary produced false sanctions and laundering statements
+(for example FixedFloat and Railgun described as sanctioned, and
+pattern hits described as proven laundering). Rule verdicts were
+not changed. A correction notice now opens the Oct 27 partial
+report, `reports/report_2026-10-27_2114.md` (Partial Run: 3 of 8
+addresses scanned; `reports/report_2026-10-27_2256.md` is a
+completed confirmation run and is not the partial), and the three
+Oct 28 scheduled reports (`report_2026-10-28_0439.md`,
+`report_2026-10-28_1223.md`, `report_2026-10-28_2228.md`).
+
+`MAX_ANALYSES_PER_RUN` is 0. Scheduled reports contain rule verdicts
+and template text only. The cap is a constant: no environment
+variable and no workflow input can raise it, and `generate_roast()`
+does not call the model while it is 0. Re-enable only after an
+output filter exists and one scheduled report greps clean.
+
+Each new report states, near the top, addresses attempted, addresses
+fully scanned, and fetch failures (Etherscan rate-limit and other
+errors that previously returned an empty transaction list with no
+record). Those errors are counted only. Scan cursors still advance
+on an empty result, whether that empty result is genuine or a failed
+fetch.

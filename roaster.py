@@ -255,7 +255,10 @@ GROQ_MODEL = "openai/gpt-oss-20b"
 # hundreds of findings, and one call (plus pauses) per finding was
 # most of the report-generation time. Highest scores are analyzed
 # first; findings past the cap keep their rule-based verdict only.
-MAX_ANALYSES_PER_RUN = 25
+# Not read from the environment or from workflow inputs: a scheduled
+# run cannot turn commentary back on without changing this constant.
+# Disabled 2026-10-28 by owner: AI commentary produced false sanctions/laundering claims (e.g. FixedFloat). Re-enable only after an output filter exists and one scheduled report greps clean.
+MAX_ANALYSES_PER_RUN = 0
 
 # Output
 REPORTS_DIR = Path(__file__).parent / "reports"
@@ -326,6 +329,24 @@ _last_partial_scan = None
 # failures surface as one summary line, not as per-finding error text.
 _analysis_stats = {"attempted": 0, "failed": 0}
 
+# Outcome of the most recent etherscan_get() when that call failed.
+# None means the call succeeded or was a genuine "no transactions"
+# result. Tx-list helpers consume this when they turn a failure into [].
+_etherscan_call_error = {"kind": None}
+
+# Etherscan rate-limit and other errors that tx-list helpers return as
+# []. Counted for the report coverage line only; scan cursors do not
+# branch on these counters.
+_fetch_failures = {"rate_limit": 0, "other": 0}
+
+# Filled in by scan_recent_blocks() and printed near the top of every report.
+_last_scan_coverage = {
+    "attempted": 0,
+    "fully_scanned": 0,
+    "rate_limit": 0,
+    "other": 0,
+}
+
 
 def load_scan_state() -> dict:
     """Read {last_scanned_block, first_seen} state for watched addresses.
@@ -364,6 +385,47 @@ def _sleep_backoff(attempt: int) -> None:
     time.sleep(_RETRY_BASE_SECONDS * (2 ** attempt))
 
 
+def _classify_etherscan_payload(data: dict) -> str:
+    """Rate-limit vs any other Etherscan error body."""
+    blob = f"{data.get('message', '')} {data.get('result', '')}".lower()
+    if "rate limit" in blob or "rate-limit" in blob:
+        return "rate_limit"
+    return "other"
+
+
+def _record_fetch_failure(kind: str | None, detail: str = "") -> None:
+    """Count one silent empty result. Does not change what the caller returns."""
+    text = detail.lower()
+    if kind != "rate_limit" and ("rate limit" in text or "rate-limit" in text):
+        kind = "rate_limit"
+    if kind == "rate_limit":
+        _fetch_failures["rate_limit"] += 1
+    else:
+        _fetch_failures["other"] += 1
+
+
+def _list_result_or_empty(data: dict) -> list:
+    """Return a transaction list, or [] when the call failed.
+
+    A genuine empty result ("No transactions found") is not a failure.
+    Error payloads — including Etherscan rate limits, whose result is a
+    string, and HTTP failures, whose body is an empty dict — used to
+    become [] with no record. Those are counted here. The returned value
+    is otherwise unchanged, so a scan cursor that advances on [] still
+    advances for both a real empty list and a failed fetch.
+    """
+    error = _etherscan_call_error["kind"]
+    _etherscan_call_error["kind"] = None
+    result = data.get("result", []) if isinstance(data, dict) else None
+    if isinstance(result, list) and not error:
+        return result
+    if isinstance(result, list) and result:
+        return result
+    detail = result if isinstance(result, str) else ""
+    _record_fetch_failure(error, detail)
+    return []
+
+
 def etherscan_get(params: dict, timeout: int = 15) -> dict:
     """Call Etherscan V2 with retries.
 
@@ -371,10 +433,16 @@ def etherscan_get(params: dict, timeout: int = 15) -> dict:
     429. Returns the decoded JSON dict on success. On total failure returns
     an empty dict — caller is expected to check for an empty/missing result
     and either fall back to RPC or fail loudly.
+
+    A failed call stashes its kind on _etherscan_call_error ("rate_limit"
+    or "other"). Tx-list helpers consume that when they return []. The
+    return value of this function is unchanged.
     """
     params["chainid"] = ETHERSCAN_CHAINID
     if ETHERSCAN_KEY:
         params["apikey"] = ETHERSCAN_KEY
+
+    _etherscan_call_error["kind"] = None
 
     for attempt in range(_RETRY_ATTEMPTS):
         try:
@@ -384,10 +452,12 @@ def etherscan_get(params: dict, timeout: int = 15) -> dict:
                 if attempt < _RETRY_ATTEMPTS - 1:
                     _sleep_backoff(attempt)
                     continue
+                _etherscan_call_error["kind"] = "rate_limit" if r.status_code == 429 else "other"
                 return {}
             data = r.json()
             if data.get("status") == "0" and data.get("message") != "No transactions found":
                 print(f"[WARN] Etherscan API error: {data.get('result', data.get('message', 'unknown'))}")
+                _etherscan_call_error["kind"] = _classify_etherscan_payload(data)
             return data
         except requests.RequestException as e:
             print(f"[WARN] Etherscan network error (attempt {attempt + 1}/{_RETRY_ATTEMPTS}): {e}")
@@ -395,6 +465,7 @@ def etherscan_get(params: dict, timeout: int = 15) -> dict:
                 _sleep_backoff(attempt)
                 continue
     print("[ERROR] Etherscan API unreachable after retries")
+    _etherscan_call_error["kind"] = "other"
     return {}
 
 
@@ -474,16 +545,25 @@ def get_block_transactions(block_num: int) -> list:
     try:
         txs = data["result"]["transactions"]
         if txs is not None:
+            _etherscan_call_error["kind"] = None
             return txs
     except (KeyError, TypeError):
         pass
 
+    # Etherscan missed. A later RPC hit is a recovered fetch, not a silent [].
+    error = _etherscan_call_error["kind"]
+    _etherscan_call_error["kind"] = None
+
     # Fallback to public RPC
     data = rpc_call("eth_getBlockByNumber", [hex(block_num), True])
     try:
-        return data["result"]["transactions"] or []
+        txs = data["result"]["transactions"]
+        if txs is not None:
+            return txs
     except (KeyError, TypeError):
-        return []
+        pass
+    _record_fetch_failure(error or "other")
+    return []
 
 
 def get_normal_transactions(address: str, start_block: int, end_block: int) -> list:
@@ -496,8 +576,7 @@ def get_normal_transactions(address: str, start_block: int, end_block: int) -> l
         "endblock": end_block,
         "sort": "desc",
     })
-    result = data.get("result", [])
-    return result if isinstance(result, list) else []
+    return _list_result_or_empty(data)
 
 
 def get_token_transfers(address: str, start_block: int, end_block: int) -> list:
@@ -513,8 +592,7 @@ def get_token_transfers(address: str, start_block: int, end_block: int) -> list:
         "endblock": end_block,
         "sort": "desc",
     })
-    result = data.get("result", [])
-    return result if isinstance(result, list) else []
+    return _list_result_or_empty(data)
 
 
 def get_wallet_info(address: str) -> dict:
@@ -1279,6 +1357,8 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     """
     global _last_partial_scan
     _last_partial_scan = None
+    _fetch_failures["rate_limit"] = 0
+    _fetch_failures["other"] = 0
     scan_t0 = time.monotonic()
 
     def over_budget() -> bool:
@@ -1312,6 +1392,8 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
     # ── Strategy 1: Check ETH + token transactions TO watched addresses ──
     partial = False
     deferred_items = []
+    addresses_attempted = 0
+    addresses_fully_scanned = 0
     for item_index, (address, addr_info) in enumerate(selected_items):
         if over_budget():
             # Budget spent: stop starting new addresses and go to report
@@ -1323,6 +1405,7 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
                   f"{item_index}/{batch_size} addresses, deferring "
                   f"{len(deferred_items)} to the next run")
             break
+        addresses_attempted += 1
         label = addr_info["label"]
         print(f"[SCAN] Checking {label} ({address[:10]}...)")
         cut_short = False
@@ -1348,6 +1431,10 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
         has_tokens = bool(token_txs)
 
         if not has_eth and not has_tokens:
+            # Finished this address. An empty list is either no activity
+            # or a counted fetch failure; either way the cursor above
+            # already advanced, same as before the failure counter existed.
+            addresses_fully_scanned += 1
             continue
 
         print(f"  [DATA] {len(txs)} ETH txs, {len(token_txs)} token transfers")
@@ -1542,6 +1629,7 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
             print(f"[SCAN] Time budget ({TIME_BUDGET_SECONDS}s) reached during "
                   f"{label}, deferring {len(deferred_items)} address(es) to the next run")
             break
+        addresses_fully_scanned += 1
 
     # ── Strategy 2: High-value block scanning ──
     # Skipped on a partial run: the time budget is already spent, so the
@@ -1615,13 +1703,37 @@ def scan_recent_blocks(num_blocks: int = 200) -> list:
         "next_watch_index": next_watch_index,
     })
 
+    _last_scan_coverage["attempted"] = addresses_attempted
+    _last_scan_coverage["fully_scanned"] = addresses_fully_scanned
+    _last_scan_coverage["rate_limit"] = _fetch_failures["rate_limit"]
+    _last_scan_coverage["other"] = _fetch_failures["other"]
+
     return unique
 
 
 # ─── Roast Generator (Groq LLM) ─────────────────────────────────────────────
 
+def _capped_commentary(finding: dict) -> dict:
+    """Template text for a finding that does not get a model call."""
+    return {
+        "what_happened": f"A wallet was caught interacting with {finding['receiver_label']}. Our engine flagged it at score {finding['risk_score']}.",
+        "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+        "sar_narrative": "Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.",
+        "risk_verdict": f"{finding['risk_level']} (rule score {finding['risk_score']})",
+        "recommended_action": "Flag for manual review.",
+    }
+
+
 def generate_roast(finding: dict, eth_price: float) -> dict:
-    """Generate roast + SAR narrative using Groq AI, informed by AML engine scoring."""
+    """Generate roast + SAR narrative using Groq AI, informed by AML engine scoring.
+
+    MAX_ANALYSES_PER_RUN is the switch for model commentary. At 0 this
+    returns template text and does not call the API, even when
+    GROQ_API_KEY is set. No environment variable overrides the constant.
+    """
+    if MAX_ANALYSES_PER_RUN <= 0:
+        return _capped_commentary(finding)
+
     if not GROQ_API_KEY:
         return {
             "what_happened": f"A wallet interacted with {finding['receiver_label']}, a flagged address on our watchlist. "
@@ -1745,6 +1857,28 @@ Respond in this EXACT JSON format (no markdown, no code blocks, no backticks):
 
 # ─── Report Generator ────────────────────────────────────────────────────────
 
+def _coverage_line() -> str:
+    """Addresses attempted, fully scanned, fetch failures, commentary state."""
+    cov = _last_scan_coverage
+    failures = cov["rate_limit"] + cov["other"]
+    if MAX_ANALYSES_PER_RUN <= 0:
+        commentary = "AI commentary is disabled."
+    else:
+        noun = "finding" if MAX_ANALYSES_PER_RUN == 1 else "findings"
+        commentary = f"AI commentary is limited to {MAX_ANALYSES_PER_RUN} highest-scoring {noun}."
+
+    def _n(count: int, singular: str, plural: str) -> str:
+        return f"{count} {singular if count == 1 else plural}"
+
+    return (
+        f"**Coverage:** {_n(cov['attempted'], 'address', 'addresses')} attempted, "
+        f"{_n(cov['fully_scanned'], 'address', 'addresses')} fully scanned, "
+        f"{_n(failures, 'fetch failure', 'fetch failures')} "
+        f"({cov['rate_limit']} Etherscan rate-limit, {cov['other']} other). "
+        f"{commentary}"
+    )
+
+
 def generate_report(findings: list, eth_price: float, scan_meta: dict) -> str:
     """Generate a markdown report with AML engine scoring."""
     _analysis_stats["attempted"] = 0
@@ -1756,6 +1890,7 @@ def generate_report(findings: list, eth_price: float, scan_meta: dict) -> str:
 **{timestamp}** · Ethereum Mainnet · ETH ${eth_price:,.2f}
 **Blocks:** {scan_meta.get('block_range', 'N/A')} · **Watched Addresses:** {len(WATCHED_ADDRESSES)} · **Detection Rules:** 13
 **Engine:** NEXUS AML v2 (rule set from aml-detection-engine)
+{_coverage_line()}
 
 ---
 
@@ -1800,12 +1935,14 @@ Check back in a few hours, crime does not sleep, but it does take breaks.
         return report
 
     # Commentary goes to the highest-scoring findings first, capped
-    # per run (MAX_ANALYSES_PER_RUN). Findings past the cap still get
+    # per run (MAX_ANALYSES_PER_RUN). A cap of 0 selects nobody, so the
+    # model is never called. Findings past a positive cap still get
     # their full rule-based verdict, just no AI write-up.
+    analysis_cap = MAX_ANALYSES_PER_RUN if MAX_ANALYSES_PER_RUN > 0 else 0
     analyzed_ids = {
         id(f)
         for f in sorted(findings, key=lambda x: x["risk_score"], reverse=True)[
-            :MAX_ANALYSES_PER_RUN
+            :analysis_cap
         ]
     }
     for i, finding in enumerate(findings, 1):
@@ -1813,13 +1950,7 @@ Check back in a few hours, crime does not sleep, but it does take breaks.
             roast_data = generate_roast(finding, eth_price)
             time.sleep(1)
         else:
-            roast_data = {
-                "what_happened": f"A wallet was caught interacting with {finding['receiver_label']}. Our engine flagged it at score {finding['risk_score']}.",
-                "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
-                "sar_narrative": "Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.",
-                "risk_verdict": f"{finding['risk_level']} (rule score {finding['risk_score']})",
-                "recommended_action": "Flag for manual review.",
-            }
+            roast_data = _capped_commentary(finding)
         # Store roast text on finding dict so save_scan_data() can capture it
         finding["_roast_data"] = roast_data
         token_transfers = finding.get("token_transfers", [])
