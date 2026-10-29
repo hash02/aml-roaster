@@ -202,3 +202,24 @@ errors that previously returned an empty transaction list with no
 record). Those errors are counted only. Scan cursors still advance
 on an empty result, whether that empty result is genuine or a failed
 fetch.
+
+## 2026-10-28 (lobo): annotations completed, Decision 1 confirmed
+
+Hash confirmed Phase 3 Decision 1 (fix, then release) directly to
+lobo, including the commentary-off interim step. Lobo completed the
+annotation pass the same evening: the false-claims correction now
+also opens `reports/report_2026-10-27_2256.md` (30 claim lines,
+including fabricated rule citations) and
+`reports/report_2026-10-29_0500.md` (55 claim lines; that run
+predated the disable commit by minutes), and a retraction of the
+94.9% figure opens `reports/report_2026-10-27_1900.md` and
+`reports/report_2026-10-27_2021.md`. Full test suite at this head:
+77 passed.
+
+Still open from the packet's five fixes: fail-closed cursor
+behaviour on fetch failure (counted today, not yet blocking),
+the Tornado Cash label correction, and the deterministic
+commentary filter that must exist before commentary is
+re-enabled. A verification run was dispatched after this entry to
+confirm a fresh report carries the coverage line and no AI
+commentary.
