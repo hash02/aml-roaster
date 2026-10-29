@@ -196,9 +196,10 @@ variable and no workflow input can raise it, and `generate_roast()`
 does not call the model while it is 0. Re-enable only after an
 output filter exists and one scheduled report greps clean.
 
-Each new report states, near the top, addresses attempted, addresses
-fully scanned, and fetch failures (Etherscan rate-limit and other
-errors that previously returned an empty transaction list with no
-record). Those errors are counted only. Scan cursors still advance
-on an empty result, whether that empty result is genuine or a failed
-fetch.
+Each new report states, on one coverage line, the blocks checked,
+how many watched addresses were fetched, how often each address is
+revisited, addresses attempted, addresses fully scanned, and fetch
+failures (Etherscan rate-limit and other). A genuine empty history
+still advances the cursor. A failed fetch is counted, does not
+advance `last_scanned` for that address, and the report says coverage
+is incomplete instead of "All quiet".
