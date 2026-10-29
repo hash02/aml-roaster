@@ -1423,24 +1423,6 @@ def _approx_chain_duration(num_blocks: int) -> str:
     return f"about {max(1, round(days))} days"
 
 
-def _coverage_line(coverage: dict) -> str:
-    """One header line: window checked, addresses touched, revisit cadence."""
-    start = coverage["block_start"]
-    end = coverage["block_end"]
-    span = max(0, end - start + 1)
-    duration = _approx_chain_duration(span)
-    hours = coverage["revisit_hours"]
-    unit = "hour" if hours == 1 else "hours"
-    scanned = coverage["addresses_scanned"]
-    total = coverage["addresses_total"]
-    return (
-        f"**Coverage:** blocks {start} to {end} checked ({duration}). "
-        f"{scanned} of {total} addresses. "
-        f"Each address is revisited about every {hours} {unit}. "
-        f"Activity outside these windows is not checked."
-    )
-
-
 def scan_recent_blocks(num_blocks: int = 200) -> list:
     """
     Scan recent blocks for suspicious transactions.
@@ -1857,29 +1839,61 @@ def _capped_commentary(finding: dict) -> dict:
     }
 
 
-# Commentary that alleges a crime, a sanctions violation, or a numbered
-# rule citation is dropped after the model replies. The replacement is
-# the deterministic rule-score verdict, which is what the report may claim.
-_BANNED_COMMENTARY = re.compile(
-    r"launder|crime|criminal|illegal|violat|Rule \d+\(",
+# Commentary that alleges a crime, a numbered rule citation, or a
+# sanctions/mixer claim the fired rules do not support is dropped after
+# the model replies. The replacement is the deterministic rule-score
+# verdict, which is what the report may claim.
+#
+# Sanctions wording (sanction/sanctions/sanctioned, blacklist/blacklisted,
+# "black-listed"/"black listed", Treasury, OFAC) is allowed only when
+# rule_sanctioned_entity fired (rule id ofac_hit, detail "OFAC SDN match").
+# "mixer" is allowed only when the mixer rule fired. Everything else
+# below is always dropped.
+_ALWAYS_BANNED_COMMENTARY = re.compile(
+    r"launder|crime|criminal|illegal|violat|Rule \d+\(|front\s+for",
     re.IGNORECASE,
 )
+_SANCTIONS_COMMENTARY = re.compile(
+    r"sanction|blacklist|black[\s\-‐‑–—]+listed|treasury|\bofac\b",
+    re.IGNORECASE,
+)
+_MIXER_COMMENTARY = re.compile(r"\bmixer\b", re.IGNORECASE)
 
 
 def _rule_score_verdict(finding: dict) -> str:
     return f"{finding['risk_level']} (rule score {finding['risk_score']})"
 
 
-def _replace_banned_sentences(text: str, verdict: str) -> str:
-    """Drop sentences matching the banned-commentary pattern.
+def _rule_fired(finding: dict, rule_name: str) -> bool:
+    return any(
+        r.get("rule") == rule_name
+        for r in finding.get("rules_triggered") or []
+    )
 
-    Each dropped sentence is replaced with the rule-score verdict.
-    """
-    chunks = re.split(r"(?<=[.!?])\s+|\n+", text.strip())
+
+def _commentary_sentences(text: str) -> list[str]:
+    """Split commentary on sentence ends, keeping initials like U.S. intact."""
+    protected = re.sub(r"\b([A-Z])\.", r"\1<DOT>", text.strip())
+    chunks = re.split(r"(?<=[.!?])\s+|\n+", protected)
+    return [chunk.replace("<DOT>", ".").strip() for chunk in chunks if chunk.strip()]
+
+
+def _sentence_is_banned(sentence: str, finding: dict) -> bool:
+    if _ALWAYS_BANNED_COMMENTARY.search(sentence):
+        return True
+    # OFAC SDN match is the only basis for sanctions wording.
+    if not _rule_fired(finding, "ofac_hit") and _SANCTIONS_COMMENTARY.search(sentence):
+        return True
+    if not _rule_fired(finding, "mixer_touch") and _MIXER_COMMENTARY.search(sentence):
+        return True
+    return False
+
+
+def _replace_banned_sentences(text: str, verdict: str, finding: dict) -> str:
+    """Drop banned commentary sentences and replace each with the verdict."""
     replaced = [
-        verdict if _BANNED_COMMENTARY.search(chunk) else chunk
-        for chunk in chunks
-        if chunk
+        verdict if _sentence_is_banned(chunk, finding) else chunk
+        for chunk in _commentary_sentences(text)
     ]
     return " ".join(replaced).strip()
 
@@ -1889,7 +1903,7 @@ def _scrub_commentary(payload: dict, finding: dict) -> dict:
     cleaned = {}
     for key, value in payload.items():
         if isinstance(value, str):
-            cleaned[key] = _replace_banned_sentences(value, verdict)
+            cleaned[key] = _replace_banned_sentences(value, verdict, finding)
         else:
             cleaned[key] = value
     return cleaned

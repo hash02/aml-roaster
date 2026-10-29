@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -132,6 +133,9 @@ def _install_llm(monkeypatch, content: str) -> dict:
 
     monkeypatch.setattr(roaster, "OpenAI", _openai)
     monkeypatch.setattr(roaster, "GROQ_API_KEY", "test-key")
+    # The shipped cap is 0. These cases exercise the filter that has to
+    # exist before that cap is raised.
+    monkeypatch.setattr(roaster, "MAX_ANALYSES_PER_RUN", 25)
     return captured
 
 
@@ -278,3 +282,122 @@ def test_generate_roast_keeps_clean_commentary(monkeypatch):
     assert result["roast"] == "That is a loud way to move coins."
     assert "launder" not in json.dumps(result).lower()
     assert "violat" not in json.dumps(result).lower()
+
+
+def _no_kyc_finding() -> dict:
+    finding = _finding()
+    finding["receiver"] = "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f"
+    finding["receiver_label"] = "FixedFloat 1"
+    finding["total_eth"] = 0.0001
+    finding["individual_values"] = [0.0001]
+    finding["risk_score"] = 155
+    finding["risk_level"] = "HIGH"
+    finding["rules_triggered"] = [
+        {
+            "rule": "no_kyc_offramp",
+            "score": 85,
+            "detail": "Deposit to FixedFloat 1 — no-KYC off-ramp",
+        },
+        {"rule": "sybil_fan_in", "score": 70, "detail": "Sybil fan-in pattern"},
+    ]
+    return finding
+
+
+def test_scrub_drops_real_report_sentences_without_an_sdn_match(monkeypatch):
+    """Phrases taken from reports/report_2026-10-28_2228.md."""
+    treasury = (
+        "A brand-new wallet just sent a tiny amount of ETH (0.0001) to "
+        "a known crypto mixing service that the U.S. Treasury has blacklisted."
+    )
+    front = (
+        "A brand-new wallet sent 0.0001 ETH to a FixedFloat 1 address, "
+        "which is basically a front for a known money-laundering mixer."
+    )
+    linked = "FixedFloat is known to be linked to a crypto mixer called Tornado Cash."
+    content = json.dumps({
+        "what_happened": f"The wallet sent 0.0001 ETH today. {treasury} {linked}",
+        "roast": f"{front} The amount was tiny.",
+        "sar_narrative": "The service is black-listed. It is also black listed.",
+        "risk_verdict": "HIGH — sanctions concern.",
+        "recommended_action": "Send this to a human reviewer.",
+    })
+    _install_llm(monkeypatch, content)
+    result = roaster.generate_roast(_no_kyc_finding(), 2000.0)
+    blob = json.dumps(result)
+    verdict = "HIGH (rule score 155)"
+
+    assert "a known crypto mixing service that the U.S. Treasury has blacklisted" not in blob
+    assert "a front for a known money-laundering mixer" not in blob
+    assert "is known to be linked to a crypto mixer called Tornado Cash" not in blob
+    assert "black-listed" not in blob.lower()
+    assert "black listed" not in blob.lower()
+    assert verdict in result["what_happened"]
+    assert "The wallet sent 0.0001 ETH today." in result["what_happened"]
+    assert "The amount was tiny." in result["roast"]
+    lowered = blob.lower()
+    assert not re.search(r"\bmixer\b", lowered)
+    assert "sanction" not in lowered
+    assert "treasury" not in lowered
+    assert "ofac" not in lowered
+    assert "front for" not in lowered
+
+
+def test_no_kyc_offramp_finding_cannot_yield_mixer_or_sanctions_wording(monkeypatch):
+    content = json.dumps({
+        "what_happened": (
+            "FixedFloat is a Treasury-listed mixer. "
+            "OFAC sanctioned the deposit. "
+            "A clean wallet sent 0.0001 ETH."
+        ),
+        "roast": "This blacklist entry is not supported by the rules.",
+        "sar_narrative": "No sanctions wording belongs on a no-KYC off-ramp flag.",
+        "risk_verdict": "HIGH (rule score 155)",
+        "recommended_action": "Review the off-ramp pattern.",
+    })
+    _install_llm(monkeypatch, content)
+    result = roaster.generate_roast(_no_kyc_finding(), 2000.0)
+    blob = json.dumps(result).lower()
+    assert not re.search(r"\bmixer\b", blob)
+    assert "sanction" not in blob
+    assert "treasury" not in blob
+    assert "ofac" not in blob
+    assert "blacklist" not in blob
+    assert "A clean wallet sent 0.0001 ETH." in result["what_happened"]
+    assert result["recommended_action"] == "Review the off-ramp pattern."
+
+
+def test_sanctions_wording_kept_only_when_sdn_rule_fired(monkeypatch):
+    allowed = "The U.S. Treasury has blacklisted this address as an OFAC sanctions match."
+    content = json.dumps({
+        "what_happened": (
+            f"{allowed} "
+            "This is money laundering. "
+            "It is a front for a mixer."
+        ),
+        "roast": "The blacklist entry is the SDN match.",
+        "sar_narrative": "OFAC SDN match is the sanctions basis.",
+        "risk_verdict": "CRITICAL — this remains a violation even with an SDN match.",
+        "recommended_action": "Review the SDN match.",
+    })
+    _install_llm(monkeypatch, content)
+    finding = _finding()
+    finding["rules_triggered"] = [
+        {
+            "rule": "ofac_hit",
+            "score": 200,
+            "detail": "OFAC SDN match: 0x47ce0c6e... — Tornado Cash 1 ETH Pool (OFAC 2022)",
+        },
+        {
+            "rule": "mixer_touch",
+            "score": 100,
+            "detail": "Direct deposit to Tornado Cash (1 ETH Pool) — known mixer",
+        },
+    ]
+    result = roaster.generate_roast(finding, 2000.0)
+    assert allowed in result["what_happened"]
+    assert "The blacklist entry is the SDN match." in result["roast"]
+    assert "OFAC SDN match is the sanctions basis." in result["sar_narrative"]
+    assert "launder" not in result["what_happened"].lower()
+    assert "front for" not in result["what_happened"].lower()
+    # "violat" is still always banned, even on an SDN match.
+    assert result["risk_verdict"] == "CRITICAL (rule score 300)"
