@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-23T17:49:30.862247+00:00",
-      "eth_price": 2147.84799292897,
-      "block_range": "24721612 \u2014 24721811",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-23T18:50:29.127681+00:00",
       "eth_price": 2160.78276325372,
       "block_range": "24721910 \u2014 24722109",
@@ -70268,16 +70261,124 @@
           "recommended_action": "Flag the wallet for enhanced due diligence and monitor any subsequent activity for large or structured transfers. Keep records and consider cross\u2011referencing with internal watchlists to ensure compliance."
         }
       ]
+    },
+    {
+      "timestamp": "2026-10-31T16:59:13.103026+00:00",
+      "eth_price": 2250.7,
+      "block_range": "26313889 \u2014 26314088",
+      "total_findings": 5,
+      "findings": [
+        {
+          "sender": "0x36b0843cf3cfd9b0091c91a9a767c0b1043a8cdd",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 200.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A user sent $200 worth of USDC to a wallet that is known to be used by a service that mixes crypto, like a laundromat for digital money. It's like dropping a package into a box that scrambles the sender's address so nobody knows who really sent it. The transaction happened on a single block and the sender\u2019s history is basically invisible.",
+          "roast": "Looks like someone tried to play hide and seek with their money. MEDIUM (rule score 80) SideShift Hot Wallet is the hot dog stand of mixers, always ready to take orders. MEDIUM (rule score 80)",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Review the source of funds and verify the legitimacy of the sender. Flag the transaction for manual AML review and monitor for subsequent activity."
+        },
+        {
+          "sender": "0x16d6ea94064c1e7219db501e9c897f42ee255597",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1229.5,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "MEDIUM (rule score 80) It\u2019s like dropping a cash envelope into a machine that scrambles the envelope\u2019s origin so nobody can trace where the money actually came from.",
+          "roast": "So this guy decided to use SideShift, the crypto laundromat that says, \"We\u2019ll make your money look like it was never yours.\" He sent 1,230 USDT \u2013 that\u2019s like giving a cashier a $1,230 bill and asking them to print a $1,000 bill in a different color. The engine slapped it a score of 80, basically the crypto equivalent of a red flag that says, \"We\u2019re watching you, buddy!\"",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Manually review the sender\u2019s wallet history and source of USDT. If no legitimate origin is identified, consider freezing the funds and filing a report with the appropriate regulatory body."
+        },
+        {
+          "sender": "0xd324ac9312ab679499426ef87ee040e8c0a3834e",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 89.19651776,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "MEDIUM (rule score 80)",
+          "roast": "Looks like someone tried to hide their $89 DAI in a SideShift hot wallet\u2014like dropping a pizza into a black hole and hoping it never returns. The engine gave it a 80 on the stablecoin_mixing rule (meaning this transaction matches the pattern of a known mixing service). MEDIUM (rule score 80) SideShift is the crypto equivalent of a shady laundromat, and this transaction is basically a slip of paper in that line. MEDIUM (rule score 80)",
+          "risk_verdict": "MEDIUM, because the transaction matches a known stablecoin mixing pattern with a high engine score but no additional red flags.",
+          "recommended_action": "Flag the transaction for manual review, investigate the sender\u2019s source of funds, and monitor the receiver wallet for additional suspicious activity."
+        },
+        {
+          "sender": "0x5e1c343fbbe2c0b954b7889162be4654a9225f59",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 300.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "MEDIUM (rule score 80) Think of it like sending a $300 bill to a dropbox that scrambles who you sent it to. The transaction was a single transfer in one block.",
+          "roast": "Looks like someone wanted their money to disappear faster than a magician\u2019s rabbit. MEDIUM (rule score 80) MEDIUM (rule score 80) If this were a detective show, they'd call it the great USDT shuffle. In short, the money went to the \u201cWhere\u2019s My Money\u201d club and the score says, \u2018you\u2019re up for review.\u2019",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Open a compliance review of the sender\u2019s wallet history and assess any linked addresses. If additional suspicious patterns emerge, consider filing a SAR with the relevant jurisdiction."
+        },
+        {
+          "sender": "0x83c464f7f577d5a8dd9cfccc1a60332fd69a02d4",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 3.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "Someone sent $3 worth of USDT, a digital dollar, to a wallet that belongs to a service called SideShift, which is known for mixing money to hide its source. It's like putting a small cash box into a vending machine that then redistributes the money to an unknown cashier. No other transactions were seen in the same block, so the whole thing is a tiny but suspicious move.",
+          "roast": "Scored 80 on the stablecoin_mixing rule (meaning this is a single USDT transfer to a hot wallet known for mixing). MEDIUM (rule score 80) The sender's wallet has zero ETH balance and no recent activity, so it's like a ghost in the machine. If you thought the transaction was harmless, think again\u2014it's a classic \"sneak\u2011in through the backdoor\" move. Maybe the sender was trying to hide a $3 joke, but the system didn't laugh.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag the transaction for further manual review by the compliance team. MEDIUM (rule score 80)"
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 3069,
-    "unique_senders": 2395,
+    "total_findings": 3074,
+    "unique_senders": 2400,
     "highest_score": 660,
     "critical_count": 827,
     "high_count": 250,
-    "first_scan": "2026-03-23T17:49:30.862247+00:00",
-    "last_scan": "2026-10-31T11:53:11.799327+00:00"
+    "first_scan": "2026-03-23T18:50:29.127681+00:00",
+    "last_scan": "2026-10-31T16:59:13.103026+00:00"
   }
 }
