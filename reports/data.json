@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-23T22:28:49.490316+00:00",
-      "eth_price": 2149.03704583701,
-      "block_range": "24723004 \u2014 24723203",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-23T23:01:07.411275+00:00",
       "eth_price": 2152.28379521786,
       "block_range": "24723164 \u2014 24723363",
@@ -73381,16 +73374,44 @@
           "recommended_action": "Flag the transaction for manual review by the compliance team and monitor the sender for additional suspicious activity. Consider cross\u2011checking the wallet against known risk lists and request further information if the sender is identified in future transactions."
         }
       ]
+    },
+    {
+      "timestamp": "2026-11-02T04:58:50.323604+00:00",
+      "eth_price": 2293.22,
+      "block_range": "26324652 \u2014 26324851",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0xfb97bb357179b24e48ce5a0511187cddc7c4e5de",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "Someone sent a tiny amount of ETH (almost nothing) to a Railgun relay, which is a privacy protocol that mixes transactions to hide the source. Think of it as dropping a small package into a slot that hides who sent it and where it goes. The transaction was essentially a zero-value transfer, so no money moved, but the pattern suggests an attempt to obscure the chain of ownership.",
+          "roast": "So we got a wallet that\u2019s 88 days old, 53 trips, still holding a fraction of an ETH\u2014like a savings account that\u2019s only got a single penny in it. The sender decided to play hide-and-seek with a Railgun Relay, a privacy protocol that\u2019s basically a digital cloak and dagger. The engine gave it a 75, which is like saying the mystery is pretty deep\u2014maybe the wallet\u2019s trying to become a blockchain celebrity. MEDIUM (rule score 75) The score shows we\u2019re not laughing, but we\u2019re not crying either.",
+          "risk_verdict": "MEDIUM (rule score 75)",
+          "recommended_action": "Conduct a manual review of the sender wallet's historical activity and the subsequent transactions to assess for layering or structuring. MEDIUM (rule score 75)"
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 3223,
-    "unique_senders": 2503,
+    "total_findings": 3224,
+    "unique_senders": 2504,
     "highest_score": 660,
     "critical_count": 865,
     "high_count": 258,
-    "first_scan": "2026-03-23T22:28:49.490316+00:00",
-    "last_scan": "2026-11-01T21:49:22.495426+00:00"
+    "first_scan": "2026-03-23T23:01:07.411275+00:00",
+    "last_scan": "2026-11-02T04:58:50.323604+00:00"
   }
 }
