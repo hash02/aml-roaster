@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-23T23:01:07.411275+00:00",
-      "eth_price": 2152.28379521786,
-      "block_range": "24723164 \u2014 24723363",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-23T23:55:05.187173+00:00",
       "eth_price": 2147.90628981621,
       "block_range": "24723432 \u2014 24723631",
@@ -73402,16 +73395,104 @@
           "recommended_action": "Conduct a manual review of the sender wallet's historical activity and the subsequent transactions to assess for layering or structuring. MEDIUM (rule score 75)"
         }
       ]
+    },
+    {
+      "timestamp": "2026-11-02T15:02:54.011297+00:00",
+      "eth_price": 2283.9,
+      "block_range": "26327660 \u2014 26327859",
+      "total_findings": 4,
+      "findings": [
+        {
+          "sender": "0x1c9bdee2de64c06a998ca9336142b898ae11ee15",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0017612632171536,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xa81c1a2a64e40916bd82d884a9fea3aea1b8aa64",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0019883915087735,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "MEDIUM (rule score 85) It was a one\u2011off transfer, and the sender\u2019s wallet is now basically empty, with only a tiny 0.000004 ETH left. The move is like dropping a $5 bill into a slot that hides who sent it and then walking away.",
+          "roast": "Look at this fresh wallet, 0 days old, just like a newborn that only knows how to say \u2018mama\u2019 and \u2018papa\u2019\u2014it made a single $5 transfer and vanished. MEDIUM (rule score 85) It\u2019s the classic \u2018drop it in and disappear\u2019 trick, with no identity checks. If you\u2019re worried, just remember: it\u2019s the same pattern we see when someone is trying to hide the source of a tip jar.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag the transaction for further investigation and consider monitoring the sender wallet for future activity. Notify the compliance team to assess whether additional due diligence is required."
+        },
+        {
+          "sender": "0x67f5328d5a6093cd326614886e8c180b7ef702da",
+          "receiver": "0xe8a8b458bcd1ececc6b6b58f80929b29ccecff40",
+          "receiver_label": "Railgun Treasury",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 0.022612,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Railgun Treasury. Our engine flagged it at score 80.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x387ad8b082c4a81d61056c83903c2613438af7bf",
+          "receiver": "0x6818809eefce719e480a7526d76bd3e561526b46",
+          "receiver_label": "Privacy Pools (0xbow) Entrypoint",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "The sender made a transaction of zero ETH to a privacy pool entrypoint, which is basically a way to hide where the funds came from even though nothing moved. Think of it like putting an empty envelope in a mailbox that scrambles the sender\u2019s address. The wallet was brand new, had only five transactions, and still held some ETH after the move.",
+          "roast": "Looks like someone tried to play hide\u2011and\u2011seek with their wallet. They sent a $0 packet into a privacy pool (think of it as a Black\u2011Berry Messenger that actually deletes the message after you send it). The engine gave it a 75 because even though nothing changed hands, the act of using a privacy protocol is a red flag. It\u2019s like paying $0 for a membership to the \u201cI\u2011don\u2019t\u2011want\u2011people\u2011to\u2011see\u2011me\u201d club. Good luck trying to make that look innocent.",
+          "risk_verdict": "Medium risk due to use of a privacy protocol with high engine score and minimal transaction activity.",
+          "recommended_action": "Flag the wallet for manual review, investigate upstream and downstream activity, and monitor for subsequent movements of ETH from the privacy pool."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 3224,
-    "unique_senders": 2504,
+    "total_findings": 3228,
+    "unique_senders": 2508,
     "highest_score": 660,
     "critical_count": 865,
     "high_count": 258,
-    "first_scan": "2026-03-23T23:01:07.411275+00:00",
-    "last_scan": "2026-11-02T04:58:50.323604+00:00"
+    "first_scan": "2026-03-23T23:55:05.187173+00:00",
+    "last_scan": "2026-11-02T15:02:54.011297+00:00"
   }
 }
