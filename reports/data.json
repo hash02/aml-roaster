@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-24T07:59:24.450705+00:00",
-      "eth_price": 2167.27895492338,
-      "block_range": "24725850 \u2014 24726049",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-24T09:01:14.776541+00:00",
       "eth_price": 2155.32912331132,
       "block_range": "24726155 \u2014 24726354",
@@ -77118,16 +77111,104 @@
           "recommended_action": "Perform a manual review of the sender\u2019s transaction history and associated addresses. Consider submitting a SAR if additional suspicious patterns emerge, and monitor for further activity from the wallet and any linked addresses."
         }
       ]
+    },
+    {
+      "timestamp": "2026-11-04T23:22:37.148656+00:00",
+      "eth_price": 2423.06,
+      "block_range": "26344507 \u2014 26344706",
+      "total_findings": 4,
+      "findings": [
+        {
+          "sender": "0x05839e02ff4e49e5b2a274fb2eaa148adcf52753",
+          "receiver": "0xe8a8b458bcd1ececc6b6b58f80929b29ccecff40",
+          "receiver_label": "Railgun Treasury",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 140.1475,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "MEDIUM (rule score 80) Think of it like dropping a $140 envelope into a secret box that hides who put it there. The transaction happened in one block and nothing else was involved.",
+          "roast": "MEDIUM (rule score 80) MEDIUM (rule score 80) MEDIUM (rule score 80) The wallet\u2019s balance is zero ETH, so it\u2019s basically a dead\u2011end wallet, like a mailbox that never receives a reply. MEDIUM (rule score 80)",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag the transaction for manual review by the compliance team, and consider cross\u2011checking the sender\u2019s address against internal and external watchlists before any further processing."
+        },
+        {
+          "sender": "0x05839e02ff4e49e5b2a274fb2eaa148adcf52753",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "Someone with the digital wallet 0x05839e02ff4e49e5b2a274fb2eaa148adcf52753 sent zero ETH to a Railgun Relay address, which is like dropping a note into a sealed envelope that hides who wrote it. The transaction was recorded on block 26344688 and no tokens were actually transferred. Basically, it looks like a test or placeholder transaction into a privacy service.",
+          "roast": "Well, congratulations, you just dropped a zero\u2011ETH into a Railgun Relay\u2014like sending a postcard with no postage. The [privacy_protocol] rule (meaning the system flagged you for using a privacy protocol that hides transaction details) gave it a 75, as if the engine thinks you\u2019re hiding a rabbit in a hat. The sender\u2019s wallet is only 133 days old with 19 moves, so it\u2019s as mysterious as a toddler with a calculator. MEDIUM (rule score 75) Maybe you\u2019re just messing with the blockchain like a kid with a toy car\u2014just don\u2019t forget the toy car\u2019s wheels!",
+          "risk_verdict": "MEDIUM (rule score 75)",
+          "recommended_action": "MEDIUM (rule score 75) If additional transactions to privacy protocols occur, consider applying stricter due diligence or reporting."
+        },
+        {
+          "sender": "0xccef06b2e82a184e34b118ed81f5ded120f8136c",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 75.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 75)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x9b2d5b96764bca81d448456d4a3a4017b71e3ae8",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A user sent a negligible amount of ETH (virtually zero) into a privacy service that scrambles transaction trails. It's like dropping a note into a black box so no one knows who wrote it. The transaction itself didn't move any money, but the action is a common way to hide the source of funds.",
+          "roast": "Scored a 75 on the privacy protocol radar, meaning this address is basically the blockchain's version of a secret Santa. It's like paying with invisible money\u2014zero value, but the mystery stays. MEDIUM (rule score 75) If you thought 0 ETH was harmless, think again: even a whisper can carry a secret. The Railgun relay is the blockchain's own private club\u2014membership is exclusive, but the entry fee is a joke.",
+          "risk_verdict": "MEDIUM (rule score 75)",
+          "recommended_action": "Review the sender's transaction history for patterns of layering or structuring. MEDIUM (rule score 75)"
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 3407,
-    "unique_senders": 2626,
+    "total_findings": 3411,
+    "unique_senders": 2627,
     "highest_score": 660,
     "critical_count": 879,
     "high_count": 288,
-    "first_scan": "2026-03-24T07:59:24.450705+00:00",
-    "last_scan": "2026-11-04T13:58:21.927186+00:00"
+    "first_scan": "2026-03-24T09:01:14.776541+00:00",
+    "last_scan": "2026-11-04T23:22:37.148656+00:00"
   }
 }
