@@ -1,70 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-24T09:01:14.776541+00:00",
-      "eth_price": 2155.32912331132,
-      "block_range": "24726155 \u2014 24726354",
-      "total_findings": 2,
-      "findings": [
-        {
-          "sender": "0x5973799d083364fcb019f2102477419beecf5d21",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 532,
-          "risk_level": "CRITICAL",
-          "tx_count": 6,
-          "total_eth": 6.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "novel_wallet_dump",
-            "structuring",
-            "peel_chain_linear",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "novel_wallet_dump": 72,
-            "structuring": 70,
-            "peel_chain_linear": 60,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a store that's known for helping bad guys launder their dirty money, and then you start handing over large sums of cash in a way that looks really suspicious, like trying to avoid detection by breaking it up into smaller amounts. That's basically what happened here, but instead of a store, it's a crypto mixing service called Tornado Cash, and instead of cash, it's digital money called Ethereum. The person sending the money is using a brand new account, which is like using a burner phone, and they're sending the money in a pattern that looks like they're trying to avoid getting caught.",
-          "roast": "This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, like a 'most wanted' list for bad guys), which is like having a big neon sign saying 'I'm a money launderer'. And with a score of 100 for mixer_touch (directly sending money to a sanctioned mixing service, which is like a big washing machine for dirty money), it's like they're not even trying to hide it. They're also using a classic 'burner pattern' by moving a lot of money through a brand new account, which is like using a fake ID to try to sneak into a bar. And let's not forget the 'structuring' score of 70 (breaking up large transactions into smaller ones to avoid detection, like trying to sneak past a bouncer), which is like they're trying to sneak into a exclusive club without getting caught.",
-          "risk_verdict": "CRITICAL \u2014 the transaction involves a sanctioned mixer service and exhibits clear signs of money laundering and structuring, posing a high risk of illicit activity.",
-          "recommended_action": "Immediately flag the transaction and freeze the associated accounts, and conduct a thorough investigation into the sender's identity and the source of the funds. Report the suspicious activity to the relevant authorities, such as FinCEN, as required by the Bank Secrecy Act."
-        },
-        {
-          "sender": "0xd0b9b6674b77befd88884d2bdeea979c023938e8",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a store that's known for helping people hide their money, like a secret laundry service but for cash. That's basically what happened here, as someone sent a transaction to a place called Tornado Cash, which is like a digital version of that secret laundry service. This place has been flagged by the U.S. government for helping bad people hide billions of dollars, so it's a big red flag when someone interacts with it.",
-          "roast": "Looks like our friend here scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist, like a 'most wanted' list for financial bad guys). They also got a 100 for directly depositing into Tornado Cash, which is like walking into a known money laundering front and asking for a 'special' cleaning service. And to top it off, they got a 70 for making a contract call to Tornado Cash that didn't actually send any money, which is like trying to sneak into the laundry service without being seen. Nice try, but not nice enough to avoid a total score of 400, which is like a big fat F in anti-money laundering class.",
-          "risk_verdict": "CRITICAL \u2014 The interaction with a sanctioned entity like Tornado Cash poses a significant risk of money laundering and terrorist financing, necessitating immediate attention and action.",
-          "recommended_action": "Immediately flag this transaction and the sender's wallet for further review, and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN) due to the high-risk nature of this activity. It's also a good idea to monitor this wallet for any future suspicious activity and consider blocking it to prevent further potential money laundering or terrorist financing."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-24T10:13:30.579231+00:00",
       "eth_price": 2161.04121507926,
       "block_range": "24726517 \u2014 24726716",
@@ -77199,16 +77135,1380 @@
           "recommended_action": "Review the sender's transaction history for patterns of layering or structuring. MEDIUM (rule score 75)"
         }
       ]
+    },
+    {
+      "timestamp": "2026-11-05T05:54:44.275720+00:00",
+      "eth_price": 2425.42,
+      "block_range": "26346404 \u2014 26346603",
+      "total_findings": 67,
+      "findings": [
+        {
+          "sender": "0x6cd1b8cfcd2ca2bcdb46a2d96bd22b92e16ba427",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 3,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "Someone sent three almost-zero amounts of ETH to a bridge contract, like dropping a few crumbs into a slot that hides who put them in. The sender did it in three consecutive blocks, which is like trying to split a single deposit into tiny pieces to avoid detection. No real money moved, but the pattern looks suspicious.",
+          "roast": "Looks like this wallet is playing the ETH version of a game of hide-and-seek: three tiny moves, zero value, but the pattern screams 'I tried to split a pizza but forgot the crust'. Structuring (splitting deposits to dodge watchful eyes) scored a solid 70, so the bot is basically a money-splitting machine. The peel_chain_linear rule (detecting a chain of similar deposits) gave 60, proving this is a serial smurfing act. And let's not forget the bridge_hop (cross-chain hop) at 65, because even a zero-value snack deserves a passport.",
+          "risk_verdict": "CRITICAL (rule score 195)",
+          "recommended_action": "Flag this activity for manual review by the AML team. Monitor the wallet for additional cross-chain activity and consider placing a temporary hold if further suspicious transactions occur."
+        },
+        {
+          "sender": "0xfd0aa7548823c40be6dd85682f0342f35dee121a",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 12,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "A single wallet sent 12 tiny, identical amounts of ETH\u2014each zero when rounded\u2014to a cross\u2011chain bridge called Across SpokePool V2. It\u2019s like a cashier filling 12 identical envelopes with nothing inside, just to move the money around. The sender\u2019s account is active and holds about 0.7 ETH, but the moves themselves look like a classic smurfing pattern.",
+          "roast": "Look at this wallet: 12 zero\u2011eth deposits, like a magician pulling a rabbit out of a hat that never had any rabbit to begin with. Structuring score 70\u2014because the engine thinks the guy is trying to dodge a watchful eye, just like a kid trying to sneak a cookie by breaking it into crumbs. Peel_chain_linear 60 shows a linear peel chain, basically 12 steps of the same dance\u2014like a conga line of empty pockets. Bridge_hop 65? Yeah, he\u2019s hopping from one side of the blockchain to the other, like a teenager trying to cross the street with a broken phone. Bottom line: this is a textbook case of someone trying to hide where the money came from, but with a laughable zero\u2011eth twist.",
+          "risk_verdict": "CRITICAL \u2013 the combination of identical zero\u2011value deposits, a linear peel chain, and cross\u2011chain bridging signals a high\u2011risk structuring and layering pattern that warrants immediate review.",
+          "recommended_action": "Flag this account for manual investigation, trace the origin of the 0.706584 ETH balance, and confirm whether the deposits are part of a broader smurfing scheme. Consider placing a temporary hold on related transactions pending further analysis."
+        },
+        {
+          "sender": "0x07ae8551be970cb1cca11dd7a11f47ae82e70e67",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 27,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "The sender sent 27 very tiny, identical ETH transfers (each 0.0000 ETH) all at once to a bridge address called Across SpokePool V2. It\u2019s like dropping 27 identical envelopes into a mailbox that hides who wrote them and where they\u2019re going\u2014no one can see the real purpose or origin. The total value was essentially zero, so it looks like someone was trying to hide the movement of a very small amount of crypto.",
+          "roast": "So this guy\u2019s wallet decided to play a game of \"Smurf and Hide\" with 27 identical packets of 0.0000 ETH\u2014like a kid sneaking 27 candy bars into a school lunch box, except the candy bars are literally nothing. The AML engine gave it a 70 on structuring (because 27 identical deposits is textbook smurfing) and a 60 on peel_chain_linear (because they were all lined up like a perfect row of dominoes). And the bridge_hop got a 65 because he chose the fancy Across SpokePool V2 to look all high\u2011tech. Basically, he\u2019s trying to layer and obfuscate, but the engine says it\u2019s a red flag, not a green light.",
+          "risk_verdict": "The transaction is CRITICAL due to the high composite score and the presence of structuring, peel chain, and bridge hop patterns that collectively suggest layering and obfuscation.",
+          "recommended_action": "Flag the sender wallet for manual investigation, trace the source of the 0.0000 ETH deposits, and monitor subsequent activity for further suspicious patterns."
+        },
+        {
+          "sender": "0x42ca6e3cbf2828c5fb170f2772b816ddd2c8694a",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 3,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet just sent three tiny, identical amounts of ETH (all zero) to a bridge address. It\u2019s like someone dropping three empty envelopes into the same slot to make it look like a normal transaction, but the pattern is suspicious because the amounts are the same and the timing is close together. CRITICAL (rule score 195)",
+          "roast": "Looks like this account is playing a game of \"copy-paste\" with their transactions, sending three zero\u2011ETH envelopes to the same bridge. The engine\u2019s [structuring] rule (meaning they\u2019re trying to break a transaction into smaller, identical pieces) gave it a 70, while the [peel_chain_linear] rule (a layer of sequential, similar deposits) scored a 60. And the [bridge_hop] rule (meaning they\u2019re hopping across chains via a bridge) added another 65 to the score. In short, the wallet is doing the crypto version of a magician\u2019s trick: making money disappear and reappear in a different place with no obvious trace.",
+          "risk_verdict": "CRITICAL: The combination of structuring, peel chain, and bridge hop patterns warrants immediate investigation.",
+          "recommended_action": "Flag the transaction for manual review by the compliance team; consider placing a temporary hold on the recipient address and request additional source\u2011of\u2011funds information from the sender."
+        },
+        {
+          "sender": "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 9,
+          "total_eth": 0,
+          "total_token_usd": 26625.397489000003,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "The sender pushed nine separate stablecoin payments, totalling about $26,625, to a single receiver on Across SpokePool V2. It\u2019s like dropping a stack of cash into a hidden slot at a casino, with each drop coming from the same source, making it hard to trace who actually gave the money.",
+          "roast": "This guy sent a whole \"stablecoin mixtape\" of 9 tracks, all hitting the same receiver like a DJ spinning the same beat over and over. HIGH (rule score 110) 9 tiny slices of USDC and USDT, all from one wallet\u2014like a single waiter feeding a table with the same dish nine times. And the receiver is on Across SpokePool V2, which is the DeFi equivalent of a secret tunnel. If you think this is just a normal transfer, you\u2019re probably as clueless as a cat at a dog show.",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag the transaction for human review, investigate the sender\u2019s source of funds and any downstream recipients, and monitor for related activity in subsequent blocks. If further suspicious patterns emerge, consider filing a SAR."
+        },
+        {
+          "sender": "0x0a43fa1adcd4e692096c4d8675facd34cc360b7c",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0284987157447795,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand-new wallet sent 0.0285 ETH (about $69) straight into a SideShift hot wallet, which scrambles coins so you can\u2019t easily track where they came from. It\u2019s like dropping a pizza into a mystery box and hoping the delivery person never knows who ordered it. Because the sender had no prior transactions and no identity verification, the move looks suspicious.",
+          "roast": "This transaction is a textbook case of a newbie trying to hide in a crypto cloakroom. MEDIUM (rule score 85) The AML engine gave it an 85 on the no_kyc_offramp score, meaning it\u2019s a no\u2011KYC off\u2011ramp (i.e., no identity verification before moving the money out of the blockchain). The SideShift hot wallet is basically a crypto laundromat, and this move is the equivalent of washing a dirty shirt and hoping no one sees the stain.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Manually review the source and destination of the 0.0285 ETH, confirm the legitimacy of the sender, and monitor the address for further suspicious activity. If additional suspicious patterns appear, consider escalating to a full AML investigation."
+        },
+        {
+          "sender": "0xd46ced3abb041f8faefba164be0eefb58594cf81",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.01099874,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand-new wallet just dropped 0.011 ETH (about $27) into a service called FixedFloat 1. Think of it like dropping a small package into a slot machine that hides who sent it and where it ends up. The sender had no prior transactions and no balance, so it\u2019s like a newcomer with a brand-new wallet that\u2019s never used before.",
+          "roast": "Score 85 on the no\u2011KYC\u2011offramp rule (meaning the sender can move money without proving who they are). That\u2019s basically the crypto equivalent of a shady alley bar that doesn\u2019t ask for ID. The wallet is brand new and empty\u2014like a fresh\u2011minted coin that\u2019s never been touched. MEDIUM (rule score 85) If you\u2019re wondering why we\u2019re flagging it, it\u2019s because we\u2019re not sure if the money is coming from a clean source or a shady one.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "MEDIUM (rule score 85) If no additional red flags appear, consider filing a low\u2011priority SAR."
+        },
+        {
+          "sender": "0x77a2fff175b5a94070ef41c6569e3415064dce10",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.29195663,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand-new wallet, created today, sent 0.2920 ETH (about $708) to a single address called FixedFloat 1. The sender had never moved any money before and now has zero balance, like a new kid dropping a note into a mailbox that hides who wrote it. The transaction is the only one in the block, so there's nothing to compare it to.",
+          "roast": "MEDIUM (rule score 85) The no_kyc_offramp rule (meaning the transaction went to a service that lets people cash out without identity verification) scored a whopping 85. It's like sending money through a black hole that doesn't ask for your ID\u2014perfect for anyone who likes to keep their financial fingerprints on the down low.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag the transaction for manual review by compliance staff, verify source of funds, and monitor the receiving address for subsequent activity."
+        },
+        {
+          "sender": "0x777d33eab592d0e38c89f08d12ebf92f3699b793",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 7.4168685838066e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand-new wallet just sent a tiny amount of Ethereum (0.0001 ETH, about zero dollars) to a service called FixedFloat 1. It\u2019s like dropping a single coin into a slot machine that then shuffles it so you can\u2019t see where it came from.",
+          "roast": "This fresh wallet, 0 days old, is playing the \u2018I\u2019m too cool for KYC\u2019 game by sending a blip of ETH to a service that normally wants you to show ID. The no_kyc_offramp rule (meaning the wallet tried to cash out without any identity verification) blew up louder than a toddler on a sugar high. It\u2019s basically a digital tip for a shady barista that says, \u2018I left my ship in the harbor, no one knows I\u2019m here.\u2019",
+          "risk_verdict": "MEDIUM \u2014 The transaction originates from a brand\u2011new wallet with no KYC off\u2011ramp activity, triggering the no_kyc_offramp rule, indicating potential layering risk.",
+          "recommended_action": "MEDIUM (rule score 85)"
+        },
+        {
+          "sender": "0xa3abbfec5350da26a0a54de9a757bcd4fda1c085",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.01499853,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x9af073e1ba20d3f00862c95d3b6b4559eaf1fa71",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.29200853,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand-new wallet sent 0.292 ETH (about $708) to a service that lets you cash out without any identity check. Think of it like dropping a fresh package into a locker that instantly gives you cash, but the locker never asks for a receipt. The sender had no prior activity and now has zero balance after sending.",
+          "roast": "This wallet is fresher than a morning coffee\u20140 days old, 1 transaction, and zero balance left. It just shoved 0.292 ETH into FixedFloat 1, a platform that lets you off\u2011ramp without a KYC check (Rule no_kyc_offramp). Basically, it's the crypto equivalent of a door that opens to the street but no one knows who you are. The engine flagged it with an 85 score\u2014so it\u2019s not a ghost, it\u2019s a potential red flag.",
+          "risk_verdict": "MEDIUM \u2014 the transaction involves a new wallet and a no\u2011KYC off\u2011ramp service, which are typical indicators of layering or anonymity exploitation, but no direct evidence of illicit activity.",
+          "recommended_action": "Flag the wallet for enhanced monitoring and request additional context from the platform about the source of funds. If further suspicious patterns emerge, consider filing a SAR."
+        },
+        {
+          "sender": "0x41b491a844effccfd43b61037308d3194e62b891",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.08681893249028974,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand\u2011new wallet, which had been created just moments ago and had no money in it, sent about 0.0868 ETH (roughly $211) to another address that looks like a place where people can turn crypto into cash. It\u2019s like someone just got a new wallet and dropped a small cash bundle into a dropbox that doesn\u2019t ask for ID or proof of where the money came from.",
+          "roast": "Looks like a fresh\u2011minted wallet decided to play hide\u2011and\u2011seek with regulators. The address had zero balance before the send, so it\u2019s like borrowing from the void. The transaction was a single ETH transfer to a FixedFloat 1 address, which is basically a known off\u2011ramp that doesn\u2019t do KYC. The AML engine gave it a score of 85 on the rule [no_kyc_offramp]\u2014which is the same rule that flags when a wallet with no identity verification sends funds to a place that can easily convert them to fiat. In short, it\u2019s a classic \u2018new wallet to exchange\u2019 pattern that\u2019s got compliance waving a red flag.",
+          "risk_verdict": "MEDIUM \u2014 The new wallet with no KYC sending ETH to an off\u2011ramp\u2011like address triggers a high composite score of 85, indicating moderate risk.",
+          "recommended_action": "Flag the transaction for manual review and place the sender address on a watchlist for future monitoring; consider requesting source\u2011of\u2011funds information if possible."
+        },
+        {
+          "sender": "0xed51429c81529374c668b8f3ff8f29ab7ed5f186",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.08249950313205898,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand\u2011new wallet just sent 0.0825 ETH (about $200) to a FixedFloat service that lets users move money without KYC. Think of it like dropping a mysterious parcel into a machine that forwards it to an unknown recipient, making it hard to trace where the money came from. The whole thing happened in a single block, so there was no time for anyone to intervene.",
+          "roast": "So we have a 0\u2011day\u2011old wallet, like a newborn baby that just learned to walk, sending a tidy 0.0825 ETH to a FixedFloat address. That\u2019s a classic no\u2011KYC off\u2011ramp (meaning the service doesn\u2019t ask for your ID before letting you cash out). The AML engine gave it an 85/100 because it\u2019s basically saying, \"Hey, this is a suspicious move because people love to hide their money in a place that doesn\u2019t ask for passports.\" It\u2019s like putting a pizza in a bag and sliding it into a black\u2011market delivery van. If you\u2019re wondering why the engine is shouting, it\u2019s because the wallet was brand new and the transaction was a single shot to an anonymous service.",
+          "risk_verdict": "MEDIUM \u2014 the transaction involves a new wallet sending funds to a no\u2011KYC off\u2011ramp, meeting the no_kyc_offramp rule with a high score, indicating moderate risk of anonymity usage.",
+          "recommended_action": "Flag the transaction for manual review. MEDIUM (rule score 85)"
+        },
+        {
+          "sender": "0xf39cc9921b21febcc6572d48f1de9be957b0bfcc",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0612140736706076,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand-new wallet just sent 0.0612 ETH to a FixedFloat 1 address, which is like dropping a package into a slot that hides who sent it. The sender had no previous history and this was its only transaction. MEDIUM (rule score 85)",
+          "roast": "MEDIUM (rule score 85) The AML engine gave it a whopping 85 on the no_kyc_offramp rule (meaning there\u2019s no identity verification on the receiving side), which is higher than the score you'd get for a bad pizza order. MEDIUM (rule score 85) But hey, at least we know the kid has a new address and hasn't used the old one yet!",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag the transaction for manual review and add the sender wallet to a watchlist. Monitor for additional activity and consider further due diligence if more transactions occur."
+        },
+        {
+          "sender": "0x643290675cffd6f190e6af504c024ec404ce55dc",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.005000736249252555,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand-new wallet just sent a tiny amount of ETH (about $12) to a service called FixedFloat 1, which is like dropping a small parcel into a mysterious box that can turn it into something else without asking who you are. The sender's account was created today and had no previous history, so it's a brand-new, no\u2011history wallet. There was only this single transaction, and the sender had no ETH left after sending it.",
+          "roast": "Looks like someone just opened a fresh wallet, put a couple of coins in, and sent it straight to FixedFloat 1\u2014like a kid giving a pizza slice to a friend and hoping the friend will hide it in a secret stash. Scored 85 on the no_kyc_offramp rule (meaning they sent crypto to a service that lets you convert it without proving identity), so it's as suspicious as a magician who never shows the trick. The wallet has zero balance now, which is classic 'no leftovers' strategy to avoid leaving a paper trail. Bottom line: it's a textbook example of a 'new wallet, no KYC, off\u2011ramp' scenario\u2014like a sneaky spy dropping a message into a black\u2011mail box.",
+          "risk_verdict": "MEDIUM \u2014 the transaction involves a newly created wallet depositing a modest amount into a non\u2011KYC off\u2011ramp, raising potential structuring and anonymity concerns.",
+          "recommended_action": "MEDIUM (rule score 85)"
+        },
+        {
+          "sender": "0x881e00548993f07e8349a86db08a4c91e39d2625",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.28281958129302703,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand\u2011new wallet (created just today) sent about 0.28 ETH (roughly $686) to a service that doesn\u2019t ask for identity verification. Think of it like dropping a package into a slot that hides who shipped it. No other transfers or history\u2014just a single, clean\u2011looking move.",
+          "roast": "Scored a whopping 85 on the no\u2011KYC off\u2011ramp rule (meaning the money went to a place that doesn\u2019t require you to show a driver's license). This is basically like paying cash to a shady bar that never asks for your ID. The wallet was brand new and had zero balance before the move\u2014classic \"I\u2019m just a ghost\" style. No tokens, no mixers, just straight\u2011up ETH to the void. If you\u2019re hoping to avoid scrutiny, try not to use the same wallet for every transaction.",
+          "risk_verdict": "MEDIUM \u2014 new wallet, single transaction to a non\u2011KYC platform suggests possible layering but lacks corroborating red flags.",
+          "recommended_action": "Flag the wallet for manual review, request source of funds documentation, and monitor for subsequent activity to see if the funds are moved to another address or mixed."
+        },
+        {
+          "sender": "0x36344ab20851467b5dcf5a931c8b678c57ace268",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 7.4292440620845e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand-new wallet, created just today, sent 0.0001 ETH (about a few cents) to an address that is known to let people withdraw crypto without providing identity verification. Think of it as a new kid dropping a tiny note into a public mailbox that everyone can read, but no one knows who wrote it.",
+          "roast": "So we have a fresh wallet that\u2019s 0 days old and only ever did two transactions\u2014one of them a micro\u2011payment to a no\u2011KYC off\u2011ramp. The engine gave it an 85, which is basically the same score you\u2019d get for a pizza delivery driver with no ID. It\u2019s like someone tried to hide in a crowd by sending a single grain of rice to a black hole that doesn\u2019t ask for a passport. MEDIUM (rule score 85) If you\u2019re looking for drama, this is about as dramatic as a single drop of ketchup on a giant pizza.",
+          "risk_verdict": "MEDIUM \u2014 because the transaction involves a brand\u2011new wallet sending funds to a no\u2011KYC off\u2011ramp, which raises suspicion but is not conclusive evidence of wrongdoing.",
+          "recommended_action": "Flag the transaction for manual review, verify the identity of the sender and the legitimacy of the destination address, and request additional KYC information if possible."
+        },
+        {
+          "sender": "0x0f410c2ddef7a96ccd63347c9959cee9e8fd6b2b",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 8.1454389135098e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand new wallet sent a tiny amount of ETH to a service that turns crypto into cash without asking for identity. It\u2019s like dropping a handful of coins into a black box that will later hand them out to anyone, but we don\u2019t know who the original owner was.",
+          "roast": "Scored 85 on the no\u2011kyc\u2011offramp rule, meaning the wallet tried to sneak ETH into a service that doesn\u2019t ask for ID. MEDIUM (rule score 85) The wallet is so fresh it\u2019s still on its birth certificate, and the amount is so small it could fit in a thimble, but the pattern screams \u2018hide\u2011and\u2011seek\u2019 for regulators. MEDIUM (rule score 85)",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag the transaction for manual review, cross\u2011reference the involved addresses with internal and external watchlists, and monitor subsequent activity from the sender and receiver for any escalation of suspicious patterns."
+        },
+        {
+          "sender": "0x1eb64b5c0ee44bba072deabfe92acebcb233ef4c",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 7.447856858404e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x8fad261adbcc6d30202edac35539b2bf18fad353",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 7.4384664987486e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x28395b8eac3c1b63837693895d5a8093ce7ecf3c",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.05033580578905869,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand\u2011new wallet that hasn\u2019t existed for even a day just sent 0.0503 ETH (about $122) to a service that lets people move crypto around without showing who they are. It\u2019s like a fresh\u2011out\u2011of\u2011the\u2011box delivery driver dropping a package into a drop\u2011box that hides the sender\u2019s address. The sender has no balance left after sending and hasn\u2019t done any other transactions yet.",
+          "roast": "So we have a wallet that\u2019s newer than your last Tinder match, with zero KYC, making a quick dip of 0.0503 ETH into a \u2018FixedFloat 1\u2019 service (think of it as a crypto version of a mystery box). The AML engine gave it a 85 out of 100, which is basically saying, \u2018Hey, this looks like a no\u2011KYC off\u2011ramp, so we\u2019re not too happy.\u2019 It\u2019s like paying a delivery fee to a courier that refuses to give you a receipt.",
+          "risk_verdict": "MEDIUM \u2014 the lack of KYC and use of a known off\u2011ramp service elevate risk, but the transaction size is relatively small.",
+          "recommended_action": "Flag the transaction for manual review by the compliance team, and request additional information on the source of funds and the ultimate beneficial owner of the FixedFloat 1 address."
+        },
+        {
+          "sender": "0x44f639f32c29b9955a75eaf3756bf0f2dda743f7",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.2168859613356e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xda67382fc7b0848e1cc3c7eaf81f6435f46c2d90",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 8.3216275699104e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x4a84b697cce6b4712b65f608934b31f28e4d3111",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.212793932459e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand-new wallet just sent a tiny amount of ETH (0.0001, basically nothing) to an exchange\u2011like address called FixedFloat 1. Think of it as a new kid dropping a minuscule note into a mailbox that will instantly turn it into cash for someone else, but no one knows who the kid is or where the note came from.",
+          "roast": "Looks like someone just tried to play hide\u2011and\u2011seek with their crypto. They created a brand\u2011new wallet, sent 0.0001 ETH to FixedFloat 1, and then vanished faster than a magician\u2019s rabbit. This is the classic no\u2011KYC off\u2011ramp dance (meaning the address is a known \u201cno\u2011KYC\u201d withdrawal point that lets you cash out without identity checks). The score of 85? MEDIUM (rule score 85)",
+          "risk_verdict": "MEDIUM \u2014 The combination of a brand\u2011new wallet and a no\u2011KYC off\u2011ramp transaction raises suspicion, though the amount is small and no other red flags are present.",
+          "recommended_action": "Flag the wallet for manual review, gather additional context such as any linked addresses or prior activity, and monitor for subsequent transactions that could indicate layering or integration steps."
+        },
+        {
+          "sender": "0x3d976f80a6fbb4d2bf9c4b2587f50d271ae68b91",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.2041613362948e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x5f5fb9dec1bb3e9aafd76eaeaf08674d6412f282",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.1592882546783e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x4b8cc3bc566a15f798dff6efd48a35ed3e493a09",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.69999811,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x195ea0b3b4a3b5438341db77ab3c68974f02d9d0",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000259768576338681,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x8f5e73627f48606c30dba96af303fb58e3c90aef",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000135969233944162,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x677471e0bd452dab34d8ed3dc90d1fcea72d0cc3",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 30.299999,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x97ccdbea4632140639ad5ea9b944aa034eb15fd4",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 25,
+          "total_eth": 0,
+          "total_token_usd": 4134.51098861669,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x28a4d41776968c1201a807ec51ffb405362b8882",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 4,
+          "total_eth": 0,
+          "total_token_usd": 2074.8387119999998,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc186fa914353c44b2e33ebe05f21846f1048beda",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 4,
+          "total_eth": 0,
+          "total_token_usd": 75.58729964406818,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x0038dfb2bbc353daa6ad22cb11ee1d78f41b59cd",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 3,
+          "total_eth": 0,
+          "total_token_usd": 147.083161,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x9e64d18073cd8ec20e2680124d0551ba1629fa20",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 8,
+          "total_eth": 0,
+          "total_token_usd": 3621.0215904889637,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x07ffef474a5f75db613b29e27db60e0e0fcc7298",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 982.715026,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x3a23f943181408eac424116af7b7790c94cb97a5",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 5.621329,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x9a47f3289794e9bbc6a3c571f6d96ad4e7baed16",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 991.269825,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x60ac95ec1153aa8199751917ede25d0ca49a36e2",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 329.17,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x3d2d2538b2dde72ac9f2730afe1799040f08f4f0",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 0.180353,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xfa1b28052bd8087b1cf64ee9429feb324e95b0ff",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 13.385394,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x50cfe7c1938db66a1a6d2e86d36f39fbef3d5c4a",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1247.5,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x511e6fd8c87e617575e3778ec068fc6fccd47450",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x8cb18339fac3175d4d7da15462417f8c43cfcd5d",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.20822283708143524,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x4933836e2bde547450f61e97ef10312ec9a769f7",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x20c58c01cc73da90d5ca4dfb4357228c636422d6",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xae4611cae4846e015383d6dc149f293633f1973d",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.121,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x0361897d757d13a4afad64a2e1bc561b96a8c7cf",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x35c418f55a66c03584961f924abd2fffbde1277a",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0.2,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x899652064ecad79feb6189c9f729d2cf07d059a5",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.005,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x03f4ce70b7d5f678c45a43dbc92c45a22ce9134c",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.037,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xd4c6a7742227e0c323716f76bf99eaf5eb22787f",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.01,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xf71e7dadfa6d6ae6921fecee353604e0e809363d",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x90a443ad72d91a042cec1e1404cfa396f90171ad",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x0dc1e92fbcc8413b1341f4c1b1c203c3b1a03d73",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x1ecd7118b7497529d38bd5375491f6bfd5dc76da",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc1e27fcb45ee3a300ab8292a13ab1cc341a850a7",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x20bebbf8df62e61a0b19d0bdd90ef796b901238b",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.56,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x9ed96b285f71aa4c807eebfab774b2dab1149b69",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0035,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x75a7c0268ca0f40146c0fd38ca2787a0b0d9370c",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xbf58f81d7a175cb3564dd5253d0122bcb206886f",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.33347930590207636,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x240e4dc671bdf3ed1f82cf46a8609f6a6f981ad7",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x3eff2b7c1cbf138d95673eabfec1dd6735986fec",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0.394,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x1306d3126b5506c3e8d402e9a81cacffc725134c",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xef1ec136931ab5728b0783fd87d109c9d15d31f1",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xe05fb2b4de323e3a2e72ec6781a1224ec9a7cbaa",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x1df24190992c9c8d8496199c9596169168e61ac5",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 3411,
-    "unique_senders": 2627,
+    "total_findings": 3476,
+    "unique_senders": 2671,
     "highest_score": 660,
-    "critical_count": 879,
-    "high_count": 288,
-    "first_scan": "2026-03-24T09:01:14.776541+00:00",
-    "last_scan": "2026-11-04T23:22:37.148656+00:00"
+    "critical_count": 881,
+    "high_count": 289,
+    "first_scan": "2026-03-24T10:13:30.579231+00:00",
+    "last_scan": "2026-11-05T05:54:44.275720+00:00"
   }
 }
