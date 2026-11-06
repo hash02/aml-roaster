@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-24T13:55:03.730800+00:00",
-      "eth_price": 2138.20221605809,
-      "block_range": "24727624 \u2014 24727823",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-24T14:55:02.742042+00:00",
       "eth_price": 2132.39616452424,
       "block_range": "24727921 \u2014 24728120",
@@ -80670,16 +80663,46 @@
       "block_range": "26356037 \u2014 26356236",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-11-06T22:50:53.909573+00:00",
+      "eth_price": 2237.8,
+      "block_range": "26358707 \u2014 26358906",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0x56bfaddd608df084b36da89e6dce5def6897c56e",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 130,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0.1,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A brand\u2011new wallet that had never sent or received anything before just pushed 0.1 ETH (about $224) straight into Tornado Cash, a service that shuffles crypto to hide its origin. Think of it like dropping a pizza delivery order into a box that then throws the receipt out the window so no one knows who ordered it. The wallet was empty and only made this single move, so there's no clear purpose other than mixing the funds.",
+          "roast": "This wallet is fresher than a latte on a Monday morning and it just decided to hit a mixer like it was a secret club. The engine slapped it a 100 on [mixer_touch] (meaning it touched a known mixer) and 30 on [exchange_avoidance] (meaning it avoided a legit exchange that would ask for ID). HIGH (rule score 130) Bottom line: this is the crypto equivalent of a one\u2011night stand with no intention to keep the money in the open.",
+          "risk_verdict": "HIGH \u2014 the transaction shows a high\u2011risk pattern of mixer use and exchange avoidance, with a composite score of 130, exceeding the threshold for immediate review.",
+          "recommended_action": "Flag the transaction for manual review by the compliance team. Monitor the wallet for additional activity and cross\u2011reference it with known suspicious addresses in the AML database."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 3584,
-    "unique_senders": 2747,
+    "total_findings": 3585,
+    "unique_senders": 2748,
     "highest_score": 660,
     "critical_count": 886,
-    "high_count": 308,
-    "first_scan": "2026-03-24T13:55:03.730800+00:00",
-    "last_scan": "2026-11-06T13:54:29.278351+00:00"
+    "high_count": 309,
+    "first_scan": "2026-03-24T14:55:02.742042+00:00",
+    "last_scan": "2026-11-06T22:50:53.909573+00:00"
   }
 }
