@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-24T18:33:20.905313+00:00",
-      "eth_price": 2120.26031696644,
-      "block_range": "24729011 \u2014 24729210",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-24T19:52:09.495178+00:00",
       "eth_price": 2115.28784818936,
       "block_range": "24729402 \u2014 24729601",
@@ -84844,16 +84837,48 @@
           "recommended_action": "Flag for manual review."
         }
       ]
+    },
+    {
+      "timestamp": "2026-11-08T05:02:12.341713+00:00",
+      "eth_price": 2232.49,
+      "block_range": "26367727 \u2014 26367926",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0xe04e7eec11b7e1f8a4a84e22ca3f39c6586e3660",
+          "receiver": "0xa160cdab225685da1d56aa342ad8841c3b53f291",
+          "receiver_label": "Tornado Cash (100 ETH Pool)",
+          "risk_score": 200,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "The sender, a brand\u2011new wallet, performed a zero\u2011value transaction that sent a tiny amount of ETH to the Tornado Cash mixer. Think of it like tossing a single coin into a black hole that hides who dropped it and where it goes next. No real money changed hands in this specific transfer, but the action still points to an attempt to obscure ownership.",
+          "roast": "So, you just pressed the 'send' button on a brand\u2011new wallet and hit a mixer that\u2019s basically the crypto world\u2019s version of a secret door. It scored a whopping 100 on mixer_touch (meaning the transaction literally touched a known mixer, like dropping your ID into a black\u2011out box) and 70 on mixer_contract_call (that\u2019s the fancy way of saying you called a contract to hide your tracks, like a covert agent making a silent phone call). The extra 30 on exchange_avoidance shows you\u2019re skipping the front desk (regulated exchange) and going straight to the backroom, which is how shady people like to hide their shoes. Bottom line: you\u2019re basically playing hide\u2011and\u2011seek with the law.",
+          "risk_verdict": "CRITICAL \u2014 the zero\u2011value transaction to a known mixer, combined with the wallet\u2019s newness and avoidance of regulated exchanges, indicates a high likelihood of intent to obscure ownership.",
+          "recommended_action": "Flag this transaction for immediate manual review by the AML team and monitor the wallet for any subsequent activity. Document the findings and consider escalating to the compliance lead if additional suspicious patterns emerge."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 3785,
-    "unique_senders": 2898,
+    "total_findings": 3786,
+    "unique_senders": 2899,
     "highest_score": 660,
-    "critical_count": 953,
+    "critical_count": 954,
     "high_count": 318,
-    "first_scan": "2026-03-24T18:33:20.905313+00:00",
-    "last_scan": "2026-11-07T21:44:37.157970+00:00"
+    "first_scan": "2026-03-24T19:52:09.495178+00:00",
+    "last_scan": "2026-11-08T05:02:12.341713+00:00"
   }
 }
