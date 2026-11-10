@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-25T01:54:21.850205+00:00",
-      "eth_price": 2161.20209306812,
-      "block_range": "24731209 \u2014 24731408",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-25T04:18:59.259211+00:00",
       "eth_price": 2161.14408278613,
       "block_range": "24731928 \u2014 24732127",
@@ -90924,6 +90917,13 @@
           "recommended_action": "Flag for manual review."
         }
       ]
+    },
+    {
+      "timestamp": "2026-11-10T22:57:30.908274+00:00",
+      "eth_price": 2049.14,
+      "block_range": "26387444 \u2014 26387643",
+      "total_findings": 0,
+      "findings": []
     }
   ],
   "stats": {
@@ -90933,7 +90933,7 @@
     "highest_score": 660,
     "critical_count": 1012,
     "high_count": 361,
-    "first_scan": "2026-03-25T01:54:21.850205+00:00",
-    "last_scan": "2026-11-10T14:37:48.462546+00:00"
+    "first_scan": "2026-03-25T04:18:59.259211+00:00",
+    "last_scan": "2026-11-10T22:57:30.908274+00:00"
   }
 }
