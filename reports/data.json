@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-25T05:45:04.603470+00:00",
-      "eth_price": 2171.57981462015,
-      "block_range": "24732349 \u2014 24732548",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-25T06:58:23.837818+00:00",
       "eth_price": 2168.65654337735,
       "block_range": "24732725 \u2014 24732924",
@@ -90950,16 +90943,388 @@
           "recommended_action": "Flag the wallet for manual review, trace the originating source of the 0.1 ETH, and consider adding the address to the internal watchlist pending further due diligence."
         }
       ]
+    },
+    {
+      "timestamp": "2026-11-11T13:51:35.960599+00:00",
+      "eth_price": 2050.88,
+      "block_range": "26391866 \u2014 26392065",
+      "total_findings": 18,
+      "findings": [
+        {
+          "sender": "0xce37ff3b1626fefa89ada9639ac21c8c52cfe3f0",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 205,
+          "risk_level": "CRITICAL",
+          "tx_count": 3,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "privacy_protocol": 75
+          },
+          "what_happened": "The sender made three identical 0.0000 ETH payments to a privacy relay. It's like putting three empty envelopes into a black box that hides who sent them. The sender still has a small ETH balance, but none of that money was actually moved.",
+          "roast": "Looks like someone's trying to do the blockchain version of a paper trail. Three 0.0000 ETH deposits? That's like trying to buy a house with a paperclip. CRITICAL (rule score 205) If you want to hide the fact you sent nothing, congratulations, you just made a very loud, silent noise.",
+          "risk_verdict": "CRITICAL \u2014 the combination of structuring, peel chain linear, and privacy protocol use indicates a high likelihood of layering and obfuscation.",
+          "recommended_action": "Flag the account for manual review, investigate the source of the 0 ETH deposits, and monitor for further activity that may move real value into the privacy channel."
+        },
+        {
+          "sender": "0x03460a2dec0e3dc638bc016cc1d08549bb641388",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A brand-new Ethereum address sent a very small amount of ETH into a Railgun relay, a privacy tool that hides transaction details. The transfer involved only ETH, with a total value of zero dollars, so it\u2019s like dropping a note into a mystery box that no one can trace back to the sender.",
+          "roast": "Looks like someone just created a new wallet and decided to play hide\u2011and\u2011seek with a privacy protocol (privacy_protocol meaning the transaction uses a tool to mask sender and receiver). They sent a token\u2011free, zero\u2011value ETH packet into Railgun, basically a digital \u2018who\u2011did\u2011this\u2019 mystery. The only thing more mysterious than the sender\u2019s identity is the fact that the transaction value is $0\u2014like paying with invisible money. If this were a movie, the plot twist would be the wallet age: 0 days, so it\u2019s brand\u2011new and probably not a seasoned villain. Either we\u2019re witnessing a prank or a stealthy move; we\u2019ll need a human detective to sniff around.",
+          "risk_verdict": "MEDIUM \u2014 the combination of a brand\u2011new wallet, use of a privacy protocol, and zero transaction value raises suspicion.",
+          "recommended_action": "Flag this transaction for manual compliance review, focusing on the sender\u2019s identity and potential source of funds. Monitor the wallet for future activity, especially any large inbound or outbound transfers."
+        },
+        {
+          "sender": "0xccef06b2e82a184e34b118ed81f5ded120f8136c",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "The sender made two tiny Ethereum transfers that carried no value into a Railgun Relay, which is like dropping a package into a slot that hides who sent it, but no money actually moved.",
+          "roast": "Looks like the wallet decided to play hide-and-seek with its ETH, but instead of hiding the money, it hid the fact that it sent nothing at all. The privacy_protocol rule scored 75 (meaning it flagged the use of Railgun Relay, a privacy protocol that scrambles transaction trails). This is the crypto equivalent of someone walking into a bank, opening a safe deposit box, and putting in a paper note that says \u2018nothing\u2019. MEDIUM (rule score 75) But hey, at least the wallet got a gold star for zero-value transfers.",
+          "risk_verdict": "MEDIUM \u2014 the use of a privacy protocol with zero-value transfers signals potential layering activity but lacks direct evidence of illicit funds.",
+          "recommended_action": "Flag the wallet for ongoing monitoring and investigate subsequent transactions for layering or integration patterns. Consider placing a watch on future movements to or from this address."
+        },
+        {
+          "sender": "0x474d88a872a91f2700e0ffe20d2597ad395d53a0",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A new wallet just sent zero ETH into a privacy\u2011enhancing service (Railgun). Think of it like someone sliding a paper into a locked box that hides the sender\u2019s name, even though nothing actually moved.",
+          "roast": "Well, look at that\u2014someone decided to play hide\u2011and\u2011seek with their 0 ETH, because apparently nothing is more exciting than sending nothing to a mystery box. The privacy_protocol rule (meaning the transaction is to a privacy\u2011enhancing service that obscures the sender) scored a 75, which is like saying the box is pretty good at hiding things, even if you\u2019re just tossing in a paper airplane. It\u2019s a classic case of 'no value, big mystery' that even a kid would flag in school. If you\u2019re wondering why this is a flag, just remember that a score above 70 on the privacy_protocol rule means the system thinks the transaction could be a smokescreen. MEDIUM (rule score 75)",
+          "risk_verdict": "MEDIUM \u2014 the transaction involves a privacy protocol with a high score and a newly created wallet that may be attempting to obfuscate activity.",
+          "recommended_action": "MEDIUM (rule score 75)"
+        },
+        {
+          "sender": "0x4a91a536206fbb9242d40ebb713a3244de472e6c",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "The sender's wallet sent a tiny amount of Ethereum through a privacy tool that hides the path of the coins, like slipping a letter into a mail slot that doesn't reveal who mailed it. No real money moved, just a zero\u2011value transaction that still counts as a privacy\u2011enhancing move. The receiver is a relay that forwards the funds to a hidden address.",
+          "roast": "Apparently, a wallet that's only 50 days old decided to play hide\u2011and\u2011seek with a zero\u2011value ETH, slipping it through Railgun\u2014think of it as mailing a postcard through a secret tunnel that no one can trace. MEDIUM (rule score 75) It\u2019s like trying to hide a small bag of cash in a hollowed\u2011out book; the size doesn\u2019t matter if the book is covered in dust. The 0 value might make it look like a harmless prank, but the pattern says otherwise.",
+          "risk_verdict": "MEDIUM \u2014 the use of a privacy protocol and the transaction\u2019s characteristics suggest potential layering, but the zero value and low activity reduce the immediate risk level.",
+          "recommended_action": "Perform a manual review of the sender\u2019s prior and subsequent transactions, and trace the final destination of the mixed funds. If no legitimate source can be established, consider freezing the involved addresses and filing a SAR."
+        },
+        {
+          "sender": "0xdce47110a1c1e23f93648b403c7aa57df96b8b70",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A user sent a tiny, almost invisible amount of ETH to a Railgun Relay, which is like dropping a package into a slot that hides who sent it. The transaction was a single, zero\u2011value move, so it didn\u2019t even move any money. The sender\u2019s wallet is only 72 days old but already has 13 transactions, so it\u2019s been active.",
+          "roast": "Well, looks like someone decided to play hide\u2011and\u2011seek with 0.003525 ETH. They slid a negligible amount into a Railgun Relay (a privacy protocol that scrambles who owns what), because who wants to be traceable? The AML engine gave it a 75 on the privacy_protocol rule\u2014like a gold star in the school of 'I don\u2019t care if anyone knows where this came from'. It\u2019s basically a 'nice try' but not a 'nice deed'. If you\u2019re the compliance squad, maybe just check if that 0.003525 ETH came from a legitimate source.",
+          "risk_verdict": "MEDIUM \u2014 the use of a privacy protocol combined with a relatively new wallet and recent activity warrants moderate scrutiny.",
+          "recommended_action": "Conduct a manual review of the sender\u2019s transaction history and source of funds. Flag the account for ongoing monitoring and consider applying additional AML checks if the source remains unclear."
+        },
+        {
+          "sender": "0x938421fb86eae1702ea49cdb97bcb5e2f5736f7c",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "Imagine putting a small packet of cash into a tamper\u2011proof envelope that gets shuffled through a network before it comes out again. MEDIUM (rule score 75) No other tokens were moved and the total value was $0, so it was just a tiny, silent transfer.",
+          "roast": "MEDIUM (rule score 75) The sender's wallet, only 43 days old, has already done 8 transactions\u2014like a freshman who\u2019s already in the club. Sending 0.0000 ETH through a Railgun Relay is basically a zero\u2011sum game where the only thing you lose is the chance to see who sent it. MEDIUM (rule score 75)",
+          "risk_verdict": "MEDIUM \u2014 the transaction involves a privacy protocol with a moderate score and recent activity, but no illicit value transfer was detected.",
+          "recommended_action": "Request additional source\u2011of\u2011funds information for the sender and monitor the address for any subsequent activity involving Railgun or other privacy protocols."
+        },
+        {
+          "sender": "0xf59ac12a86719361d32023ab75005afa18251d1f",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A user with a 29\u2011day old wallet sent a zero\u2011value ETH transfer to a Railgun Relay, which is a privacy service that hides who sent the funds. Imagine dropping a note into a mailbox that strips the return address\u2014no one can tell who wrote it. The transaction didn\u2019t move any money, but it still used the privacy tool.",
+          "roast": "The engine gave it a 75 on the privacy_protocol rule (that means it used a privacy tool like a cloak-and-dagger). The sender\u2019s wallet is a fresh face with only six moves in the crypto game, and the amount? Zero. That\u2019s like showing up to a potluck with an empty plate\u2014nice try, but nobody\u2019s getting a bite. Even though the amount is nil, the mystery tech still makes the auditors raise an eyebrow.",
+          "risk_verdict": "MEDIUM \u2014 the use of a privacy protocol with a new wallet raises potential layering concerns, but the negligible transaction value reduces immediate risk.",
+          "recommended_action": "Flag the transaction for manual review by the AML team and monitor the wallet for any future large inflows or outflows, cross\u2011referencing with known suspicious addresses."
+        },
+        {
+          "sender": "0x1a12b679a3e32cf654f67009d2c98b2e3561d8c2",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A new wallet sent nothing to a Railgun Relay, which is a privacy tool that hides where the money goes and where it comes from\u2014like putting a package in a drop box that only the sender and the box know about.",
+          "roast": "This guy just dropped $0 into a Railgun Relay, basically playing hide\u2011and\u2011seek with his ETH. He scored 75 on the privacy_protocol rule (meaning he used a privacy\u2011preserving protocol that keeps his transaction details secret). With a wallet only 15 days old and only five tiny transactions, he's basically a crypto toddler trying to hide in a sandbox. The engine thinks he might be layering money, but hey, at least he didn\u2019t try to pay for a pizza with zero dollars!",
+          "risk_verdict": "MEDIUM \u2014 the use of a privacy protocol by a newly created wallet with limited activity raises moderate suspicion for layering.",
+          "recommended_action": "Flag the transaction for manual review of the sender\u2019s source of funds and monitor subsequent activity for signs of layering or structuring. Consider cross\u2011checking the wallet against internal and external watchlists before further transactions."
+        },
+        {
+          "sender": "0x95dd7aae8e1311066aadb387ec1edf100addd4f7",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 75.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 75)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x853c3d54272938385f206a3e4d0bc7a12b4f8dd4",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A user sent a tiny, zero-value Ethereum transaction to a Railgun Relay address. Think of it like leaving a note in a mailbox that hides who wrote it. No actual money moved, but the transaction goes through a privacy tool that scrambles the trail.",
+          "roast": "Congrats on the 75-point privacy score! That means you just gave your transaction a fancy invisibility cloak (privacy_protocol) \u2014 basically the engine thinks you\u2019re hiding from the cops. But hey, you didn't actually move any ETH, so it\u2019s like dropping a paper airplane into a black hole. At least you\u2019re not using the old Tornado Cash (which got delisted in 2025) so the engine's happy. MEDIUM (rule score 75)",
+          "risk_verdict": "MEDIUM (rule score 75)",
+          "recommended_action": "Flag the transaction for manual review, investigate the sender\u2019s broader transaction history, and monitor for subsequent movements of value that may exit the privacy network."
+        },
+        {
+          "sender": "0x53aeb214ca1255707a8efb8e4e02366a3aad5929",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A wallet sent a zero\u2011ETH transfer to a privacy service called Railgun Relay. Think of it like slipping a note into a locked box that hides who wrote it. The transaction happened in a single block and didn't involve any tokens.",
+          "roast": "Scored a solid 75 on the privacy_protocol rule (meaning the wallet tried to hide its moves like a ninja in a blockchain). The sender was only 50 days old, so it's like a teenager with a suspicious habit of sending zero\u2011value gifts to a secret club. The amount was zero, so basically the wallet is practicing the art of giving nothing but still getting a fancy badge. If this was a magic trick, it would be called \"the vanishing transaction\"\u2014no coins, no trace, but still a red flag.",
+          "risk_verdict": "MEDIUM \u2014 the transaction uses a privacy protocol with zero value, indicating possible obfuscation but no definitive evidence of wrongdoing.",
+          "recommended_action": "Initiate a manual review of the sender wallet's source of funds and monitor subsequent transfers. Consider flagging the wallet for enhanced due diligence and cross\u2011referencing with known suspicious addresses."
+        },
+        {
+          "sender": "0xc2037d7a56012de7c00ca3fd085b99a309e96d4a",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "The sender moved a tiny amount of ETH into a privacy-focused relay, but the transfer had no value in stablecoin terms and no tokens were moved. Think of it like someone dropping a very light, invisible package into a box that hides who sent it. No other activity was recorded in that block, so it's a single, quiet move.",
+          "roast": "Looks like this wallet just decided to play hide-and-seek with the blockchain, sliding a blink\u2011tiny ETH into a Railgun relay (meaning it\u2019s using a privacy protocol that scrambles who\u2019s who). The sender is only 15 days old, has done five transactions, and still has a tiny balance \u2013 like a new kid who just got a free pizza but hasn't finished the toppings. With a score of 75 on the privacy_protocol rule, it\u2019s basically saying: we see a privacy protocol, but no red flags yet. If this was a bank, they'd probably ask for ID, but here we\u2019re just staring at a ghost wallet.",
+          "risk_verdict": "MEDIUM \u2014 the use of a privacy protocol by a new wallet with minimal activity suggests potential obfuscation, warranting further review.",
+          "recommended_action": "MEDIUM (rule score 75)"
+        },
+        {
+          "sender": "0x87f4b9f3e75ec288d5776abb5c0eda4a04db5bfa",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "MEDIUM (rule score 75) Think of it like dropping a blank envelope into a machine that scrambles who sent it, but because the envelope has no money, nothing actually moves. The transaction happened in a single block with no other tokens involved.",
+          "roast": "So this wallet just decided to play hide\u2011and\u2011seek with zero ETH, using Railgun, a privacy protocol that\u2019s like a secret tunnel for your coins. Score 75 on the privacy_protocol radar\u2014because the engine thinks the user is trying to stay anonymous, even though they\u2019re just tossing a coin\u2011sized piece of nothing into a black box. It\u2019s like buying a ticket to a mystery box show but never paying for the show. MEDIUM (rule score 75) The wallet is only 15 days old, so it\u2019s probably a new account that\u2019s just messing with the system. Good luck, privacy seeker, your 0.0000 ETH has become a ghost transaction!",
+          "risk_verdict": "MEDIUM \u2014 the use of a privacy protocol by a new wallet with minimal activity raises moderate suspicion, but no illicit activity is proven.",
+          "recommended_action": "Flag the wallet for manual review; monitor subsequent transfers for any large or patterned movements. Consider adding the address to a watchlist pending further investigation."
+        },
+        {
+          "sender": "0xc11c6b45c2376200eeac296e2acabcca5e3f1344",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 75.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 75)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x6cba34b3c3e46a153122c61133bfbb555e2c17b8",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A user sent a zero-value transfer to a Railgun Relay, which is a privacy tool that hides who sent the funds. Think of it like putting a letter in a mailbox that scrambles the sender\u2019s address so nobody can trace it. No actual money moved, but the action still flags privacy protocol usage.",
+          "roast": "MEDIUM (rule score 75) The sender\u2019s wallet is only 40 days old and has just a few tiny moves, like a newbie trying to sneak into a secret club. With a privacy_protocol score of 75, this is the kind of move that would make a detective raise an eyebrow. Railgun Relay? MEDIUM (rule score 75) And let's not forget the transaction happened on block 26391891, the exact moment the blockchain decided to log a zero transaction with all the drama of a cliffhanger episode.",
+          "risk_verdict": "MEDIUM \u2014 The high privacy protocol score combined with recent wallet activity suggests possible layering or obfuscation, warranting review.",
+          "recommended_action": "Flag the wallet for manual investigation, review its transaction history and potential source of funds. Consider adding the address to a watchlist pending further analysis."
+        },
+        {
+          "sender": "0xf07551b0671e35fbba1666341d7f9ed97cd8f605",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "The sender sent a zero\u2011value ETH transaction to a Railgun Relay address. Think of it like dropping an empty envelope into a mail slot that hides who actually opened it. The transaction was recorded in a single block, and the sender\u2019s wallet had about 0.236 ETH left.",
+          "roast": "So someone just decided to play a game of hide\u2011and\u2011seek with their 0.236 ETH. MEDIUM (rule score 75) MEDIUM (rule score 75)",
+          "risk_verdict": "MEDIUM \u2014 the use of a privacy protocol (Railgun) combined with recent activity signals a moderate risk of layering.",
+          "recommended_action": "Flag this wallet for enhanced due\u2011diligence review and monitor subsequent transactions for signs of structuring or integration. Consider cross\u2011checking the wallet against internal watchlists and tracking any large inflows or outflows in future blocks."
+        },
+        {
+          "sender": "0xa63276617727d01d32ae41867206841c6e8dce20",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "The wallet 0xa63276617727d01d32ae41867206841c6e8dce20 sent an almost invisible amount of ETH (essentially nothing) into a Railgun relay, which is like dropping a package into a secret locker that hides who sent it.",
+          "roast": "Looks like someone tried to play hide\u2011and\u2011seek with their crypto, but the \"invisible\" ETH was so small it probably just got lost in the noise. 0 ETH? That's like buying a ticket to a concert and then not showing up. The Railgun relay is a privacy protocol, not a fancy new black market. The AML engine gave it a 75 score\u2014pretty high for a zero\u2011balance move. Maybe the sender is practicing for the \"invisible wallet\" trend.",
+          "risk_verdict": "MEDIUM \u2014 the transaction uses a privacy protocol with no other red flags, but the recent activity and low balance raise some concern.",
+          "recommended_action": "Flag the transaction for manual review and request source of funds documentation. Monitor the sender wallet for future activity and any further privacy protocol usage."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 4082,
-    "unique_senders": 3125,
+    "total_findings": 4100,
+    "unique_senders": 3142,
     "highest_score": 660,
-    "critical_count": 1012,
+    "critical_count": 1013,
     "high_count": 362,
-    "first_scan": "2026-03-25T05:45:04.603470+00:00",
-    "last_scan": "2026-11-11T05:13:50.380208+00:00"
+    "first_scan": "2026-03-25T06:58:23.837818+00:00",
+    "last_scan": "2026-11-11T13:51:35.960599+00:00"
   }
 }
