@@ -1,92 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-25T07:56:14.791791+00:00",
-      "eth_price": 2164.88865121232,
-      "block_range": "24733013 \u2014 24733212",
-      "total_findings": 3,
-      "findings": [
-        {
-          "sender": "0x40656258a6b1ec9e2d1ef509598e35338a54ca36",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "This is like walking into a known money laundering front and handing over cash to be cleaned - someone just sent cryptocurrency to a service called Tornado Cash, which is like a laundry machine for dirty money, and it's been specifically flagged by the U.S. government for helping bad guys like North Korea's hackers. The person sending the money is using a brand new wallet that was just created, which is suspicious because it doesn't have any history. They're also using a special kind of transaction that doesn't actually send any real value, which is like trying to sneak something past the authorities without them noticing.",
-          "roast": "Oh great, another genius who thinks they can outsmart the system by using a sanctioned mixer like Tornado Cash - that's like trying to sneak into a casino with a fake ID and expecting not to get caught. This guy scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm a money launderer'. And with a score of 100 for mixer_touch (directly interacting with a known dirty money service), it's clear they're not even trying to hide it. They're also getting a score of 30 for exchange_avoidance (trying to avoid the normal checks and balances of a legitimate exchange), which is like trying to avoid a Breathalyzer test by saying you're just going to walk home.",
-          "risk_verdict": "CRITICAL - the transaction involves a direct interaction with a sanctioned entity and exhibits multiple high-risk indicators of money laundering and structuring activity.",
-          "recommended_action": "Immediately freeze the sender's wallet and file a Suspicious Activity Report with the Financial Crimes Enforcement Network, and consider escalating the issue to law enforcement for further investigation. It's also recommended to review all previous transactions related to this wallet for potential connections to illicit activity."
-        },
-        {
-          "sender": "0x000000cd6521ed1a65fae0678ea15af4eead74fe",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a shady money-laundering front, but instead of a physical building, it's a digital service called Tornado Cash. This service was explicitly banned by the U.S. government because it helped bad actors like North Korea's hackers hide billions of dollars. Someone just sent a transaction to this banned service, which is like knowingly walking into a den of money launderers.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved with some very bad people.' They also got a score of 100 for directly depositing into Tornado Cash, a mixer service that's essentially a digital washing machine for dirty money. And to top it off, they got a score of 70 for making a zero-value contract call, which is like trying to sneak around without being seen but still getting caught. It's like they're trying to win an award for 'Most Likely to Be Involved in Money Laundering.'",
-          "risk_verdict": "CRITICAL \u2014 The sender's direct interaction with a U.S. Treasury-sanctioned entity poses an imminent risk of facilitating illicit financial activities.",
-          "recommended_action": "Immediately flag this transaction and the involved parties for further investigation, and consider reporting this activity to the relevant financial authorities. It is also advised to monitor the sender's wallet for any future suspicious activities and to take appropriate measures to prevent potential money laundering."
-        },
-        {
-          "sender": "0x09efa4777a855eb946df013c8f3e51fc553aa81d",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "This is like trying to sneak money into a shady, underground bank that's been banned by the government. The sender is essentially using a service that helps hide where the money came from, which is a big red flag. It's like they're trying to cover their tracks, and that's not something you do with legitimate money.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big, fat 'I'm a money launderer' stamp on their forehead. They're also getting a big fat 100 for directly depositing into Tornado Cash, a mixer service that's been banned for helping bad guys like North Korea's Lazarus Group. And let's not forget the 70 points for making a zero-value contract call, which is like trying to sneak in a secret handshake with the shady characters at Tornado Cash.",
-          "risk_verdict": "CRITICAL \u2014 the sender's direct interaction with a sanctioned mixer service and OFAC SDN match pose a significant risk of money laundering and terrorist financing.",
-          "recommended_action": "Immediately freeze the sender's assets and file a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN). Conduct a thorough investigation into the sender's wallet activity and transaction history to determine the source and purpose of the funds."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-25T08:48:34.343458+00:00",
       "eth_price": 2180.03854729835,
       "block_range": "24733274 \u2014 24733473",
@@ -91516,16 +91430,2150 @@
           "recommended_action": "Flag the transaction for manual review, investigate the source address and any linked addresses, and verify whether the sender has valid KYC/AML documentation."
         }
       ]
+    },
+    {
+      "timestamp": "2026-11-12T23:38:50.411382+00:00",
+      "eth_price": 2014.24,
+      "block_range": "26401907 \u2014 26402106",
+      "total_findings": 101,
+      "findings": [
+        {
+          "sender": "0x42e3702949962192d264604a789c4e0357841a8f",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 255,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 28.84999832,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "high_value",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 100,
+            "high_value": 30,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A brand\u2011new wallet, like a freshly opened envelope, suddenly sent out a huge chunk of ETH (about $58,000) to a fixed\u2011float address that doesn\u2019t require you to show your ID. After the transfer the wallet was empty, so it looks like a quick burner: it made the move and vanished.",
+          "roast": "So this new wallet did the classic \u201cburner\u2011wallet\u2011on\u2011the\u2011run\u201d dance: it popped up, dumped a fat 28.85 ETH, and then disappeared faster than a magician\u2019s rabbit (novel_wallet_dump, meaning a brand\u2011new wallet doing a big move). The transfer was hefty (high_value, meaning over $10k in a single shot), and it went straight to a fixed\u2011float address that doesn\u2019t do KYC (no_kyc_offramp, meaning no identity check). Then it drained itself to zero in a flash (exit_rush, meaning the wallet\u2019s balance hit zero right after the move). In short, it\u2019s like someone just bought a new car, took it for a spin, and then left the keys in the trunk. Nice one, buddy!",
+          "risk_verdict": "CRITICAL \u2014 The composite score of 255, driven by a brand\u2011new wallet, high\u2011value transfer, no\u2011KYC off\u2011ramp, and an exit rush, indicates a high risk of illicit activity.",
+          "recommended_action": "CRITICAL (rule score 255) Consider requesting additional source\u2011of\u2011funds evidence if the client is identified."
+        },
+        {
+          "sender": "0xbdc2a780931d7987b9ee71c8d189c225b841d88e",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 254,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 19.99999811,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "high_value",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 99,
+            "high_value": 30,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A brand-new wallet sent 20 ETH (about $40,000) to a service called FixedFloat 1 and then vanished, leaving the wallet empty. It\u2019s like dropping a package into a slot that hides who sent it and then walking away with no receipt. The whole thing happened in a single transaction, and the sender had zero balance afterward.",
+          "roast": "This is a textbook burner wallet move: novel_wallet_dump (meaning the wallet is brand\u2011new and has never moved money before) scored a whopping 99, high_value (a single transfer of $40k) added 30, no_kyc_offramp (the money left through a service with no identity verification) pumped another 85, and exit_rush (the wallet is empty right after the transfer) gave 40. In other words, the sender bought a one\u2011way ticket to the Dark Side and checked out. If this was a party, the host would have been a very shy, anonymous guy who never shows up again. CRITICAL (rule score 254)",
+          "risk_verdict": "CRITICAL \u2014 new wallet, high-value transfer to a non\u2011KYC off\u2011ramp with immediate balance drain.",
+          "recommended_action": "Flag the transaction for manual compliance review. CRITICAL (rule score 254)"
+        },
+        {
+          "sender": "0xfd0aa7548823c40be6dd85682f0342f35dee121a",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 24,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "A single wallet sent 24 tiny transactions of zero ETH to a cross\u2011chain bridge. Think of it like dropping 24 empty envelopes into a mailbox to hide that you actually sent a letter somewhere else. The sender\u2019s account is active, with a decent balance, but the pattern of identical, almost meaningless transfers looks suspicious.",
+          "roast": "Look at this, 24 identical zero\u2011ETH deposits\u2014like a kid dropping empty boxes into a vending machine just to keep the cashier busy. The engine flags it as structuring (meaning the user is breaking a single move into many tiny ones to dodge detection), peel_chain_linear (a straight line of peels on a banana, i.e., a layering chain that keeps the money moving in a predictable pattern), and bridge_hop (the money is hopping across chains like a bad magician\u2019s disappearing trick). CRITICAL (rule score 195)",
+          "risk_verdict": "CRITICAL \u2014 the transaction pattern meets multiple high\u2011risk AML indicators (structuring, peel chain, bridge hop) suggesting potential layering and obfuscation.",
+          "recommended_action": "Flag this address for manual investigation and monitor subsequent activity. CRITICAL (rule score 195)"
+        },
+        {
+          "sender": "0x20c58c01cc73da90d5ca4dfb4357228c636422d6",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 16,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "The sender sent 16 tiny packages of zero value into a bridge that moves funds between blockchains, like dropping a handful of empty envelopes into a mail slot that hides who sent them. Each envelope was exactly the same size, so no one could tell them apart. The receiver is a smart contract that forwards the money to another chain, but nothing actually moved because the amount was $0.",
+          "roast": "So this guy decided to play a game of \u201cWho can send the most zero\u2011eth?\u201d He sent 16 identical packets of nothing into a bridge, which is basically like stuffing 16 empty bottles into a recycling bin that pretends to be a cross\u2011chain drop\u2011box. The AML engine gave him a 70 for structuring (because he\u2019s smurfing with zeros), 60 for peel_chain_linear (because it\u2019s a straight\u2011line chain of empties), and 65 for bridge_hop (because he used Across SpokePool V2 to hop across chains). He\u2019s basically trying to convince regulators he\u2019s doing something fancy, but all he\u2019s doing is moving a bunch of empty envelopes like a bored accountant with a spreadsheet full of zeros.",
+          "risk_verdict": "CRITICAL \u2013 the combination of identical zero\u2011value deposits, sequential layering, and bridge hopping satisfies multiple AML rules and warrants immediate investigation.",
+          "recommended_action": "Flag this transaction for manual compliance review and cross\u2011reference the sender\u2019s address against known high\u2011risk lists. Consider initiating an inquiry into the source of the deposits and the purpose of the bridge hop."
+        },
+        {
+          "sender": "0x07ae8551be970cb1cca11dd7a11f47ae82e70e67",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 34,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet sent 34 tiny, identical amounts of zero ETH into a bridge contract that moves coins between blockchains. It's like someone dropping the same empty bottle into a slot on a vending machine over and over, making it hard to see where the real money came from. The sender did it right now, with no break between the moves.",
+          "roast": "Looks like this wallet decided to play a game of 'Who can send the smallest amount?' with a bridge that takes ETH from one chain to another. 34 identical 0.0000 ETH transfers? That's not smurfing, that's a math teacher's nightmare. The structuring rule (meaning the pattern of splitting money into tiny pieces) gave it a 70. The peel_chain_linear rule (layering by making a chain of similar moves) gave 60, and the bridge_hop rule (moving coins across chains) gave 65. With a composite score of 195, this guy is basically the blockchain's version of a bad prank call.",
+          "risk_verdict": "CRITICAL (rule score 195)",
+          "recommended_action": "Flag the wallet for manual review, cross-reference with internal and external watchlists, and consider placing a temporary hold on future outgoing transfers until a full investigation is completed."
+        },
+        {
+          "sender": "0x6cd1b8cfcd2ca2bcdb46a2d96bd22b92e16ba427",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 10,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "The sender sent ten tiny packets of zero value to a bridge address, like someone dropping empty envelopes into a dropbox to hide that they didn't actually send anything.",
+          "roast": "Looks like someone tried to play hide\u2011and\u2011seek with their money\u201410 identical 0\u2011ETH packets, score 70 on structuring (meaning they tried to break up a transaction into smaller, identical parts to avoid detection). The engine also gave a 60 for peel_chain_linear, which is the crypto equivalent of peeling a banana in a straight line to hide the peel. And a 65 on bridge_hop because the packets hopped over to Across SpokePool V2\u2014so basically a cross\u2011chain bridge to keep the trail fuzzy. Bottom line: they\u2019re trying to make a mess of the audit trail like a kid who\u2019s done a bad prank and left a trail of empty wrappers.",
+          "risk_verdict": "CRITICAL: The transaction pattern meets structuring, peel_chain_linear, and bridge_hop rules, indicating a high risk of layering.",
+          "recommended_action": "Flag the account for manual review, request source of funds documentation, and monitor for future suspicious activity."
+        },
+        {
+          "sender": "0xef1ec136931ab5728b0783fd87d109c9d15d31f1",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 4,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "The sender sent four identical, zero\u2011value transactions into a cross\u2011chain bridge, like dropping four empty envelopes into a mailbox to make it look like a regular mail drop. Even though nothing moved, the pattern of tiny, identical deposits hints at an attempt to disguise the source of funds. The activity happens right before the wallet last used it, so it feels like a quick, sneaky move.",
+          "roast": "Score 70 on structuring (meaning the person is trying to hide the source by breaking up transactions into tiny amounts). Score 60 on peel_chain_linear (the four deposits are like a straight line of smurfing, as if you\u2019re trying to create a chain of breadcrumbs). CRITICAL (rule score 195) Even though the ETH amount is $0, the pattern screams \"I\u2019m trying to stay under the radar while still moving something.\" It\u2019s like putting a bunch of invisible coins into a vault and hoping the security camera doesn\u2019t notice the empty slots.",
+          "risk_verdict": "CRITICAL \u2013 The combination of structuring, peel chain, and cross\u2011chain bridge activity signals a high risk of layering or obfuscation.",
+          "recommended_action": "Flag the transaction for manual review, request source of funds documentation, and monitor the receiving address for further suspicious activity."
+        },
+        {
+          "sender": "0xf4b6e4727701cc3649d88030decc6da4d9b871aa",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 191,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 3.439418786509182,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 66,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 191.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 191)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x70499d83e0d3182a8f156a9e8cfe13537971dad3",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 190,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 2.945458746383083,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 65,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A brand\u2011new crypto address just sent almost $6,000 worth of ETH to a service called FixedFloat 1, then disappeared with no remaining balance. It's like someone drops a suitcase in a hidden slot and then walks away with the cash, leaving no paper trail. The sender had no prior activity and didn't use any KYC (Know\u2011Your\u2011Customer) verification, so there's no obvious identity attached.",
+          "roast": "This wallet scored a whopping 65 on novel_wallet_dump, which basically means it\u2019s a brand\u2011new burner that dumped a big chunk of ETH like a kid with a fresh wallet. No_KYC_Offramp got an 85 because the funds went straight to a FixedFloat 1, which is a no\u2011identity, no\u2011passport, no\u2011KYC off\u2011ramp \u2014 basically a tunnel for the money. Exit_rush scored 40, showing the wallet was empty after the dump, like a magician who pulls all the coins out of the hat and disappears. CRITICAL (rule score 190) If this were a sitcom, the plot twist would be \u201cWhere did the money go?\u201d",
+          "risk_verdict": "CRITICAL \u2014 the transaction exhibits a high\u2011risk pattern of a newly created wallet moving a large amount to a non\u2011KYC off\u2011ramp and immediately draining, indicating a potential attempt to obscure the source of funds.",
+          "recommended_action": "Flag the transaction for manual AML review; request additional information on the origin of the ETH and monitor subsequent activity for any further suspicious patterns."
+        },
+        {
+          "sender": "0xe8fdcf4a7220c11f2d44f464ac99d681ecaa0c97",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 190,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 2.5315455116547123,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 65,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A brand\u2011new wallet that had never been used before just sent a single large amount of 2.5315 ETH (about $5,099) to a service called FixedFloat 1. After the send, the wallet had no money left, so it\u2019s like someone who just dropped a big cash envelope into a slot that hides who sent it and immediately walked away.",
+          "roast": "Looks like a brand\u2011new burner wallet decided to play a game of hide\u2011and\u2011seek with a $5K stash. The AML engine gave it a 65 on novel_wallet_dump (meaning it\u2019s a fresh wallet dumping funds like a new kid in school), 85 on no_kyc_offramp (so it\u2019s going to a place that doesn\u2019t ask for ID\u2014think of it as a shady bar that won\u2019t ask who you are), and 40 on exit_rush (the wallet empties in a heartbeat). CRITICAL (rule score 190)",
+          "risk_verdict": "CRITICAL \u2014 The composite score of 190 exceeds the high\u2011risk threshold due to combined burner wallet, no\u2011KYC off\u2011ramp, and exit rush patterns.",
+          "recommended_action": "CRITICAL (rule score 190)"
+        },
+        {
+          "sender": "0xf799f57ef0c6ef6aeddb05ac5e7faa14247cd9c1",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 190,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 2.9337108746629172,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 65,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A brand\u2011new wallet (just created today) sent about $5,909 worth of ETH straight into a service that instantly turns crypto into cash without asking for any identity proof. The sender had no money left in the wallet after the move, so it looks like a quick, one\u2011time drop to hide where the money came from.",
+          "roast": "So we have a fresh burner wallet (novel_wallet_dump score 65) that decided to play hide\u2011and\u2011seek with 2.9337 ETH. It dumped the coins into FixedFloat 1 (no_kyc_offramp score 85), the crypto equivalent of a no\u2011name ATM that never asks for your ID. And then it vanished, leaving the wallet empty (exit_rush score 40). Basically, the wallet is saying, \"I\u2019m off the grid, but I\u2019m also not leaving any receipts,\" which is exactly the kind of thing we flag for a deeper look.",
+          "risk_verdict": "CRITICAL \u2014 the transaction shows a classic burner wallet pattern with immediate off\u2011ramp conversion and no KYC, requiring urgent human review.",
+          "recommended_action": "Flag the transaction for manual investigation, trace subsequent transfers from the FixedFloat account, and consider adding the sender address to a watchlist for future monitoring."
+        },
+        {
+          "sender": "0x7a5c50b66f91d689250996c2b05328c18d5f3bc4",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 189,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 2.057397432473078,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 64,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A brand\u2011new wallet (created today) sent 2.0574 ETH \u2013 about $4,144 \u2013 to a service that doesn\u2019t ask for identity verification. After the send, the wallet\u2019s balance is zero, so all the money has disappeared in one go. It\u2019s like a fresh delivery truck dropping off a huge shipment and then vanishing into the night.",
+          "roast": "So this new wallet is basically the crypto equivalent of a disposable phone you get from a shady vendor, drop a huge cash package, and then it\u2019s gone. The engine flagged it as a \"novel_wallet_dump\" (meaning a brand\u2011new wallet dumps a big chunk of coins right away) and a \"no_kyc_offramp\" (the coins hit a place that doesn\u2019t care about who\u2019s sending them). And because it\u2019s gone from 2.0574 ETH to zero in one step, it\u2019s got an \"exit_rush\" score too \u2013 like a cashier who empties the till in a single swipe. All told, the composite score of 189 is like a red flag that says, \u201cHey, something fishy is happening here!\u201d",
+          "risk_verdict": "CRITICAL \u2013 the transaction exhibits a classic burner\u2011wallet pattern with a high composite score, indicating a high likelihood of illicit fund movement.",
+          "recommended_action": "Flag the wallet and transaction for manual AML review; investigate the source of the 2.0574 ETH and monitor for additional activity from the same address or related accounts."
+        },
+        {
+          "sender": "0xed5b44e2c4d8864cc39669c6fdd7d42aad58ecd9",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 189,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 2.362051295906621,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 64,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A brand\u2011new wallet, which was just created and has never held any money before, sent about 2.36 ETH (roughly $4,800) to a service called FixedFloat 1. Think of it like someone dropping a large pizza into a new, anonymous box with no way to trace who ordered it.",
+          "roast": "Looks like a classic burner wallet: 0 days old, one transaction, and all the dough (ETH) gone in a single hit. The engine gave it a 64 for novel_wallet_dump (meaning the wallet is brand new and is dumping funds like a teenager dumping cash in a party), a 85 for no_kyc_offramp (no\u2011KYC off\u2011ramp, so the money is moving to a place that doesn\u2019t ask who you are), and a 40 for exit_rush (wallet balance is zero after the move, like a magician pulling the money out of a hat and never looking back). The total score of 189? That\u2019s not just a coincidence, it\u2019s a warning light on a car that\u2019s about to crash.",
+          "risk_verdict": "CRITICAL \u2014 the transaction matches multiple high\u2011risk patterns including a brand\u2011new wallet dumping 2.3621\u202fETH to a no\u2011KYC off\u2011ramp, raising immediate concern.",
+          "recommended_action": "Flag for manual review by the compliance team. Investigate the source address, check for any known associations, and consider requesting additional information or a chain analysis."
+        },
+        {
+          "sender": "0x9e3852320ea0fd9ecf416868a16b38443313b5d0",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 189,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 2.270287195906621,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 64,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A brand\u2011new wallet just sent 2.27 ETH (about $4,573) to a service called FixedFloat\u00a01. The sender\u2019s account was empty before the transfer and stays empty afterward, like dropping a big package into a slot that hides who sent it. This is a classic pattern used when people want to move money quickly without leaving a trace.",
+          "roast": "This brand\u2011new wallet is 0 days old\u2014like a newborn with no history\u2014yet it already moved 2.27 ETH, which is like sending a full\u2011size pizza in one go. The engine gave it a 64 for 'novel_wallet_dump', meaning the wallet just dumped money without a past. Then a 85 for 'no_kyc_offramp', because the money went to FixedFloat\u00a01, a service that doesn\u2019t ask for ID\u2014like a shady bar that only accepts cash. Finally, a 40 for 'exit_rush', because the balance went from full to zero instantly\u2014like a magician who pulls a rabbit out of a hat and never puts it back.",
+          "risk_verdict": "CRITICAL: The transaction demonstrates a new wallet dump to a non\u2011KYC off\u2011ramp with an instant zero balance, matching high\u2011risk AML patterns.",
+          "recommended_action": "Flag the transaction for further investigation and request additional information about the source of funds. Consider monitoring related addresses for repeat activity and report to compliance if suspicious patterns persist."
+        },
+        {
+          "sender": "0xb8d6d96f95626d6b56c239035cfe995c13bb2566",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 188,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 1.9552159624730783,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 63,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A brand\u2011new wallet, just created yesterday, sent about 1.9552 ETH (roughly $3,938) to a service called FixedFloat 1. After the transfer, the wallet\u2019s balance dropped to zero, meaning all the ETH was moved out in one go. It\u2019s like dropping a package into a slot that hides who sent it and then leaving the slot empty afterward.",
+          "roast": "This wallet is brand\u2011new\u2014zero days old, like a freshly opened bottle of wine that never saw the light of day\u2014yet it moved almost $4,000 in one transaction. The engine called it a \u201cnovel_wallet_dump\u201d (meaning the wallet has no history and dumps a large sum), which is the crypto equivalent of a cash\u2011in\u2011the\u2011bank teller with a suspiciously empty wallet. CRITICAL (rule score 188) Finally, the \u201cexit_rush\u201d score (wallet drained to zero right after the dump) shows the classic \u201cI\u2019m out of here\u201d move. Bottom line: it\u2019s like a magician who pulls a rabbit out of a hat and immediately throws the hat away\u2014no one knows where the rabbit came from, and it\u2019s gone in a flash.",
+          "risk_verdict": "CRITICAL (rule score 188)",
+          "recommended_action": "CRITICAL (rule score 188)"
+        },
+        {
+          "sender": "0x143d6048a3b4a623a15caf5157a0e5a10a5c8cd2",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 188,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 1.9709015744946496,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 63,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 188.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 188)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x33eeb97ddce037df33c70219eb9dbdc626d25e20",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 187,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 1.06999853,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "novel_wallet_dump",
+            "no_kyc_offramp",
+            "exit_rush"
+          ],
+          "rule_scores": {
+            "novel_wallet_dump": 62,
+            "no_kyc_offramp": 85,
+            "exit_rush": 40
+          },
+          "what_happened": "A brand-new wallet just sent 1.07 ETH to a service called FixedFloat 1, then disappeared with no balance left. It's like dropping a package into a slot that hides who sent it, only to find the package gone and no receipt. The sender had never been used before and now has zero money left.",
+          "roast": "Looks like someone tried to play hide\u2011and\u2011seek with 1.07 ETH, but the only thing they hid was the wallet age\u20140 days, like a newborn baby. The engine gave this a 62 on [novel_wallet_dump] (meaning the wallet is brand new and dumping funds), 85 on [no_kyc_offramp] (meaning the money is going to a place that doesn't ask for identity, basically a no\u2011KYC off\u2011ramp), and 40 on [exit_rush] (meaning the funds were drained in one go). This is the kind of pattern that makes regulators go \"uh\u2011uh, that looks fishy.\" If you thought this was a clean transaction, think again\u2014it's a textbook burner wallet move.",
+          "risk_verdict": "CRITICAL \u2013 the combination of a brand-new wallet, a single large ETH transfer to a no\u2011KYC off\u2011ramp, and immediate balance drain signals a high\u2011risk burner\u2011wallet pattern requiring immediate review.",
+          "recommended_action": "Flag this transaction for manual investigation, verify the legitimacy of the destination service, and monitor the receiver address for further suspicious activity. Consider cross\u2011checking with known burner wallet lists and apply enhanced due\u2011diligence procedures."
+        },
+        {
+          "sender": "0xedf9bd7803a618f1ed805faa2582286f845e96a4",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000614776284883294,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x1f39e7c1820be3748af6ba14dd775da4c7e4b351",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000650986284883294,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand-new wallet (like a freshly opened bank account) sent a tiny amount of ETH, about $1, to a FixedFloat 1 address, which is known to let people move crypto without verification. The sender\u2019s address only had two transactions and was created today, meaning there's no history to trace.",
+          "roast": "Looks like this newbie wallet tried to slip through a KYC checkpoint with a one\u2011off $1 drop. The engine gave it an 85 for [no_kyc_offramp] (meaning the address accepts deposits but doesn\u2019t let you withdraw without ID), and a 70 for [sybil_fan_in] (think of a fan club where everyone buys the same souvenir). It\u2019s basically a group of kids passing a note in class\u2014everyone\u2019s copying each other, and the teacher is raising an eyebrow. CRITICAL (rule score 155) So, it\u2019s like a secret club that only knows how to stash money, not how to get it out.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag this transaction for manual review by the compliance team; consider conducting a deeper investigation of the FixedFloat 1 address and the associated network activity. CRITICAL (rule score 155)"
+        },
+        {
+          "sender": "0x70becb087bff0eadb733e86e5377f00a665ff848",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000663347927259985,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand\u2011new wallet that has never sent anything before just dropped about $1 worth of ETH into a special smart\u2011contract address that is known to hide where the money goes. Think of it like a mystery box that takes your money and then hands it out to a bunch of strangers, making it hard to see who actually got the cash.",
+          "roast": "So we have a fresh\u2011from\u2011the\u2011oven wallet with zero KYC that decided to play hide\u2011and\u2011seek with $1. CRITICAL (rule score 155) Basically, it\u2019s the blockchain\u2019s version of a suspicious group of kids all dropping identical coins into the same secret jar. CRITICAL (rule score 155) CRITICAL (rule score 155)",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "CRITICAL (rule score 155)"
+        },
+        {
+          "sender": "0x2ff952ef0c9f57e8615976da52f4b02d025d02fe",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000699309891455564,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand\u2011new wallet just dropped a tiny amount of ETH (about $1) into a service called FixedFloat 1, which acts like a vending machine that mixes coins so it\u2019s hard to trace who sent it. The sender had only two transactions and no money left in the account, so it looks like a quick, anonymous transfer. In plain terms, it\u2019s like someone slipping a $1 bill into a slot that hides who handed it to the machine.",
+          "roast": "Looks like a brand\u2011new wallet tried to play hide\u2011and\u2011seek with a $1 coin and slipped it into FixedFloat 1, a mix\u2011and\u2011match service that\u2019s basically a crypto blender. The engine gave it an 85 on the no\u2011KYC off\u2011ramp (meaning the wallet never asked to cash out with identity checks) and a 70 on the sybil fan\u2011in pattern (so it\u2019s one of 17 similar wallets sending the same tiny amount). CRITICAL (rule score 155) CRITICAL (rule score 155) CRITICAL (rule score 155)",
+          "risk_verdict": "CRITICAL \u2013 the combination of a brand\u2011new wallet with no KYC off\u2011ramp and a sybil fan\u2011in pattern indicates high risk for anonymous mixing activity.",
+          "recommended_action": "CRITICAL (rule score 155) Request additional transaction history or KYC data from the sender\u2019s wallet if available, and monitor for subsequent related activity."
+        },
+        {
+          "sender": "0xb5bf78ecea93e68a7e473480e7338622785f720c",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000650566284883294,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand\u2011new wallet, with no prior history, sent about $1 worth of ETH to a FixedFloat 1 address. The sender is basically a fresh anonymous drop, and the amount is tiny, like putting a single candy into a vending machine that hides who bought it. Because the wallet has never been used before and there\u2019s no identity check, it looks like a quick, stealthy move.",
+          "roast": "This is like a new kid in school who just dropped a $1 pizza into the cafeteria trash can and nobody knows who it came from. The wallet is brand new, no KYC (no identity verification), and it\u2019s part of a fan\u2011in Sybil pattern \u2013 1 of 17 identical wallets all doing the same thing. The engine gave it a 85 on the no\u2011KYC off\u2011ramp rule (meaning the recipient is basically a black hole for identity) and a 70 on Sybil fan\u2011in, so the composite is a whopping 155. CRITICAL (rule score 155)",
+          "risk_verdict": "CRITICAL \u2014 the transaction\u2019s composite score of 155 indicates high risk due to no\u2011KYC off\u2011ramp and Sybil fan\u2011in patterns.",
+          "recommended_action": "Flag for manual review by the AML team; request source\u2011of\u2011funds details if possible and monitor subsequent activity for additional suspicious patterns."
+        },
+        {
+          "sender": "0xb0e1c6d84adf0b5c05dc34aad4f0653c50172a36",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000623566284883294,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand\u2011new wallet just sent a tiny amount of ETH\u2014about a dollar\u2014to a service that forwards money to other people without requiring identity checks. Imagine someone dropping a $1 bill into a slot that instantly sends it to a random stranger; you can\u2019t tell who it came from or who it goes to.",
+          "roast": "This wallet is fresher than a pizza crust\u20140 days old and already making a move. The transaction is a textbook \u201cno\u2011kyc off\u2011ramp\u201d (meaning the money goes to a service that doesn\u2019t ask for ID) and scored a solid 85 points. Add in the sybil fan\u2011in (several wallets sending almost the same amount to the same place) and the engine flags it as a \u201cfan\u2011in Sybil pattern\u201d \u2013 like a choir of copy\u2011cats humming the same $1 tune. Bottom line: a composite score of 155 turns this into a red\u2011flag that deserves a human detective\u2019s attention.",
+          "risk_verdict": "CRITICAL \u2014 the combination of a fresh no\u2011KYC off\u2011ramp and a fan\u2011in Sybil pattern indicates a high likelihood of illicit layering.",
+          "recommended_action": "Flag the transaction for manual review, investigate the source wallet\u2019s activity and the destination service\u2019s compliance posture, and consider placing a hold or reporting to the AML team."
+        },
+        {
+          "sender": "0xed01eafe0db9dfe293ddd1448257f1006e763758",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000650776284883294,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x2d8e991e9add1a7987cad53521ae1c6c15577496",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000623783164433302,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand-new wallet just dropped a tiny bundle of 0.0006 ETH (about $1) into a service called FixedFloat 1, which is like handing your money to a friend who promises to give you cash back later, but you never see their face. The sender has only made two transactions ever and has zero balance now, so it\u2019s basically a fresh account doing a single move. CRITICAL (rule score 155)",
+          "roast": "So, we\u2019ve got a newborn wallet that\u2019s already tried to off\u2011load its $1 to a no\u2011KYC service (scored 85 on the no_KYC_offramp rule, meaning no ID required to cash out). The same little amount shows up in 1 of 17 similar deposits\u2014sybil_fan_in score 70\u2014so it\u2019s basically the crypto equivalent of a group of teenagers all sending money to the same anonymous charity. If you think this is a harmless tip, just remember: even a single $1 can be a key to a bigger scam. The wallet is so new, it\u2019s like a teenager who just got a credit card and is already making purchases\u2014easy target for bad actors.",
+          "risk_verdict": "CRITICAL \u2013 The combination of a brand\u2011new wallet, a no\u2011KYC off\u2011ramp deposit, and fan\u2011in Sybil pattern indicates a high\u2011risk activity that requires immediate human review.",
+          "recommended_action": "Flag the transaction for manual investigation, request source\u2011of\u2011funds information from the sender, and monitor any related addresses for further suspicious activity."
+        },
+        {
+          "sender": "0x8bad95c6e6139171d7eac843d4b6b3a0131960f3",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000761682129735484,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xa02083af824061177d8eea94e7cd33813a3ae8c5",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.00076169898619872,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc4553abec5a2b0e1f21622fb30c640236281b81b",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.00075273559554392,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x614dade404559315505ce1c6e46f44bd68129ad1",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.00064116005464758,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xba842d2139f45a28dd1e914baeda81d1c32fdec7",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000716017847278621,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x39a498264a7b6774d4b742eaff756293d0e0a4ca",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000609931949757005,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x3907121926177ffaf05bd39ffae053156d758e9e",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000508750669777674,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xf6e62f97fc09c41e23f615ac5b0fa4cafe988c5b",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000589621527613416,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xeb3bd5e603683a934c04d7d3cf2fac02d0ad5ab3",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000565725396096599,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xe6c5de9e6e0b78d1e211318b579fb61bab1ed810",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.05974133721493969,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x39221ef4c791ba25f637bcfa17f16c7e5c3cb1d5",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00088225560625,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc9e085d8e6677b5b1dee5f9b85ab0c8f02afb15a",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 8.7664434701646e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc237afdfef35d2a71511390ccbda9719038c193d",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 8.7360918927888e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x47b1affcf5e9da4f3f8716e2ea7dd068071a4851",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.613256645756e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x5f6d33bf7202eac36278441c6b9d3d19269513b1",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.5871698632407e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xec5c59d4e5f3f8ea1ae3d07af2430ed117fa2c5a",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 8.6841825871164e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xab348814dafb2f6341d23082435969d60af03e04",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 8.6631133648908e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x1df4268f77fbe61f3c2920003be33861d14ab042",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00077053608587294,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xee056e3662f37fb8dccc1d020598ae18e805765f",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00081165604859224,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x2c75e84cc029e13d5e539d4d3f07d7a810f7d912",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000104273713437318,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x13984609f53d2a7859bf5f517ef2c3d48a7a76f1",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000104183499082418,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xfebb07f8a6b5d858feaf3641c1e4f5f79ecada0a",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 8.5987987877609e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x1c95a481feae8a38de7d1b8857191a081c351273",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.516515166956e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x25de607044bda2f0e01060908cb96e11608b1059",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000776531795235582,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xefffc272ae057e508645f60dbad1b94e433808e7",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00546088,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x74e7463f6faa586619bb412cfffdfec294aaf9e4",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 7.7209254493716e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x2b16b8b5213382f3c121134140e03a52a969c86b",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 8.633227395396e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x5f68b38f32ef4df2c67c64c668423713b09ff2ae",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000104750021147627,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x0d40bbade4cc9ec3fff6c9282117de38f04d2d2c",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000114072421791943,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xda3940735dbafc8d170a19bb12b04543832f33bb",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00010532702723372,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x6a6cfb58060ac9ea3f21360a16624f4a1f137781",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000105511857114796,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x8249de919035d5aa7385db89cbdef56e2d18c654",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 8.5697710212856e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x4b407ea2950b439c669958064caed825d4074046",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000114242149852246,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xf401db84d18d05fc99b6d3b909d1f9562c62031e",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.4932045124853e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x1bdda8ab4fa17bc14f01de511747e9b7173d7537",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 8.5653794715976e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x7936116fdace1fe345d38ca3470bdbd870022694",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 8.551103073232e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x074f781a10ca305f84dd0ea1f66e4a9e36c77168",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.2615536069696903,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x1429168c25bf91ebb7b0f0b924975e7c2cac7899",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.5092159393605e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xe76addc18e711f6422ad9878905fb62684c2be22",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.5588287723424e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xa9b4d0efc4b2616fdbd76d320988473b226982e1",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.5473145147722e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xa436d3943c5536dec7c7481a6e43e86ca9818e6f",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.574151789288e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x4a4d5aa622560226b4c38e4a17d30dc373cd405d",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.5742256009784e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x5b82a5dfa56e93c127af2f166d16dbbd7c2ed46e",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 8.6553955631118e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x85b84b09d219bba0e904a542fdf20e73195dd868",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 8.6821186542696e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x2ffb8bbb7f6b96a4e70635c84547e3cc628aef34",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00549511,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x528ab51a98fd75b27519c8be536899f78bd27738",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 8.660295912888e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xa7067472c32e871ed24ea92db7d6be3b8ef3bda4",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.070663554846806,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xe0faee3e18fea2e3845989206f16d9031cc16c0a",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.577326718952e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xbc6962ea020ecbc9bf486b0a4b7cf319bd7dbb60",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 9.5677377669902e-05,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x921cfc5755c05fcdb2e084da9e45d790ee81be41",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.026083124853930908,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc58a25bf11256b813fecd1c761ebc0afff1439cf",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00010473611352744,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x4b27b144e23b2320bcc7d0636af77cdd7a8dbdd2",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.5477377153368468,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x32df1606e6c466a71dad2c8d21834cda3c4a2308",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.529718686361378,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc90ed6a1f3533063512ab2166c9eff3a819b4966",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00974911,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x62394f456fc3b6455c407521ad0955625622a109",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.11203933253535922,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc39342b851f7534665fc47c32ccea83f2f84656c",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00012228923983988,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x13b8ea0703ea2c6a21bf9fed3dfe305e49958b46",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000112634059185539,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x3f2d2711fbccbbf37b0e056a14b83a6b58f25ce4",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000112634059185539,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x00008c45d53f49acef03c8f5e6ad305d2bb1b79b",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000103602706806852,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x1ee9742d192be00646b40b804b5da7bc3c19fcdf",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000112275005517608,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xa19a81b2a1bd061f99f7a548ab585d6a5cb7357c",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000103273156179512,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x8db694789232b0fbb28a28ad7da7dc14f7bd8a82",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0343979,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xf40f19d0800bdad0994ddd7c8dc57b88cd669646",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.010002900047385691,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x5759f80b372e84c467ba720b8d681c73c53788f1",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000112432243448546,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x8180ba20a2575ad82dac4d9479d07a2f446415e4",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000103797239925576,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xba18bd74b892f772340e01e0d38c6cda7075f612",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00012165222701004,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x4e871a3c0a8dde7c03ea89cd2c8cfa8756b78a3c",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.02599769,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xbc6d84f24507f87a5ddb1a54ef2afecf56f25b21",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.000121564430554877,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x515c8317554c769dcf5b83c725375263c6d16bd2",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0119979,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x1ac6adc8283b8fa3b54be314305d83d9d179b989",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 454.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xd48ccdbfebb75fb16917f782267ff9a6216aa916",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x511e6fd8c87e617575e3778ec068fc6fccd47450",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x37aa2a55f13d1807678139a801351f5d0fd2e27c",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xa831c19219952e79f5e45a52a9156fc650044577",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00066,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xe87abdc200c1ed397be737fdb1a98d99c6093886",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.009927135475834747,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x0cb2db9ad17a9fbc68555c9586616a16603fc3b1",
+          "receiver": "0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5",
+          "receiver_label": "Across SpokePool V2",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 4110,
-    "unique_senders": 3151,
+    "total_findings": 4208,
+    "unique_senders": 3244,
     "highest_score": 660,
-    "critical_count": 1013,
+    "critical_count": 1044,
     "high_count": 362,
-    "first_scan": "2026-03-25T07:56:14.791791+00:00",
-    "last_scan": "2026-11-12T00:15:09.978222+00:00"
+    "first_scan": "2026-03-25T08:48:34.343458+00:00",
+    "last_scan": "2026-11-12T23:38:50.411382+00:00"
   }
 }
