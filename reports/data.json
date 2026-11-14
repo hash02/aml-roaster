@@ -1,40 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-25T13:01:38.077483+00:00",
-      "eth_price": 2182.212226114,
-      "block_range": "24734532 \u2014 24734731",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0x09efa4777a855eb946df013c8f3e51fc553aa81d",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 2,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a store that's known for helping bad people hide their money, and then giving them some cash. That's basically what happened here, but with cryptocurrency. The person sending the money is using a service that's like a money launderer, and it's been flagged by the government as a no-go zone.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved with some shady stuff'. They also got a score of 100 for directly depositing into Tornado Cash (a crypto mixing service that's like a washing machine for dirty money), and it looks like they're trying to avoid the usual checks and balances by using this service instead of a legitimate exchange. It's like they're trying to sneak into a party without getting their name on the guest list.",
-          "risk_verdict": "CRITICAL \u2014 The sender's interaction with a sanctioned entity and attempts to circumvent AML controls pose a significant risk of money laundering and illicit activity.",
-          "recommended_action": "Immediately flag this transaction and the sender's wallet for further review, and consider reporting this activity to the relevant authorities, such as the Financial Crimes Enforcement Network (FinCEN), as it may be indicative of a larger pattern of illicit activity."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-25T14:40:18.316872+00:00",
       "eth_price": 2179.78591990941,
       "block_range": "24735016 \u2014 24735215",
@@ -97361,16 +97327,48 @@
           "recommended_action": "Flag the wallet for manual review, request source of funds, and monitor for any subsequent transactions. If additional suspicious activity emerges, consider reporting to the relevant regulatory authorities."
         }
       ]
+    },
+    {
+      "timestamp": "2026-11-14T13:10:15.199493+00:00",
+      "eth_price": 1892.43,
+      "block_range": "26413232 \u2014 26413431",
+      "total_findings": 1,
+      "findings": [
+        {
+          "sender": "0xcc624597de2061e60c9048ebee57eeb29cf11d85",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 205,
+          "risk_level": "CRITICAL",
+          "tx_count": 3,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "privacy_protocol": 75
+          },
+          "what_happened": "A very new wallet sent three identical tiny amounts of 0 ETH to a privacy relay. It\u2019s like dropping three identical empty envelopes into a mailbox that hides who sent them. No real money moved, but the pattern looks suspicious.",
+          "roast": "This wallet is trying to be a stealthy ninja, but the engine says \u2018Not so fast, champ!\u2019 with a 205\u2011point score\u2014more suspicious than a college student with a bad credit report. Structuring 70, peel_chain 60, privacy 75\u2014the numbers add up like a bad pizza order: all the same toppings, same size, same price, and nobody knows who ordered. Railgun is a privacy protocol, but even a magician knows the trick is a trick.",
+          "risk_verdict": "CRITICAL \u2014 the transaction exhibits a classic structuring and layering pattern with privacy protocol use, warranting immediate human review.",
+          "recommended_action": "Flag the sender wallet for manual investigation, request source of funds and beneficiary details, and consider adding it to the watchlist."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
     "total_findings": 4397,
-    "unique_senders": 3366,
+    "unique_senders": 3367,
     "highest_score": 660,
     "critical_count": 1054,
     "high_count": 395,
-    "first_scan": "2026-03-25T13:01:38.077483+00:00",
-    "last_scan": "2026-11-14T05:28:46.945572+00:00"
+    "first_scan": "2026-03-25T14:40:18.316872+00:00",
+    "last_scan": "2026-11-14T13:10:15.199493+00:00"
   }
 }
