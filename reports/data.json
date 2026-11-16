@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-25T19:44:24.789516+00:00",
-      "eth_price": 2173.32316112327,
-      "block_range": "24736531 \u2014 24736730",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-25T20:35:29.434502+00:00",
       "eth_price": 2161.94001761346,
       "block_range": "24736785 \u2014 24736984",
@@ -101121,16 +101114,100 @@
       "block_range": "26423233 \u2014 26423432",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-11-16T05:25:13.200538+00:00",
+      "eth_price": 1820.94,
+      "block_range": "26425275 \u2014 26425474",
+      "total_findings": 3,
+      "findings": [
+        {
+          "sender": "0x4afe2e2f24aafbba789e61c11cc15da0bb04065e",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 385,
+          "risk_level": "CRITICAL",
+          "tx_count": 12,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "machine_cadence",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "machine_cadence": 55,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A wallet was caught interacting with Tornado Cash Router. Our engine flagged it at score 385.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 385)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xd04e9f0945dea8373d882c730e2c93a74b591796",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 200,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A wallet sent a zero\u2011value transaction to a service that scrambles the origin of funds, like dropping a package into a mysterious box that hides who sent it. The transaction happened today and involved no money, just a click to the mixer. The sender's account still has about half an ETH, but it just tried to hide its trail.",
+          "roast": "Looks like someone decided to play hide\u2011and\u2011seek with their coins, but forgot the game is called \u2018mixer\u2019 and the referee is us. The composite score of 200? That\u2019s like a 10/10 on the \u2018I tried to be a ghost\u2019 scale. The mixer_touch rule flagged the move (meaning the wallet directly deposited into a known anonymizing service). The mixer_contract_call rule was also high (meaning a zero\u2011value contract call to the mixer, the digital equivalent of waving a magic wand to make the transaction vanish). And the exchange_avoidance rule (meaning the wallet routed funds to a mixer instead of a regulated exchange to dodge KYC) gave us the final 30 points of suspicion. Bottom line: this wallet is trying to hide like a squirrel in a hedge maze.",
+          "risk_verdict": "CRITICAL \u2014 the transaction exhibits suspicious mixer activity and potential KYC evasion, warranting immediate review.",
+          "recommended_action": "Flag the wallet for manual investigation, request additional transaction history and source of funds, and consider adding to the watchlist if further red flags arise."
+        },
+        {
+          "sender": "0x655e0912256c3f6830dd8b4a8be25efd6cfe5cbb",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 130,
+          "risk_level": "HIGH",
+          "tx_count": 2,
+          "total_eth": 2.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "The sender sent 2 ETH, split into two 1\u2011ETH chunks, straight into a service called Tornado Cash, which is like dropping money into a vending machine that hides who you are. The transaction happened in three consecutive blocks, so it was done quickly and in one go.",
+          "roast": "Looks like the wallet decided to play hide\u2011and\u2011seek with its cash, sending 2 ETH into a mixer\u2014so the only thing that\u2019s safe is the mystery. HIGH (rule score 130) The engine gave it a 100 on mixer_touch (meaning it landed in a known mixer) and 30 on exchange_avoidance (meaning it skipped the regular, KYC\u2011friendly exchanges). So it\u2019s got a composite score of 130\u2014higher than a latte, lower than a tax audit. If this was a movie, the plot twist would be \u201cthey used a mixer to avoid the cops.\u201d",
+          "risk_verdict": "HIGH \u2013 the combination of mixer use and bypassing of regulated exchanges indicates a strong risk of illicit activity.",
+          "recommended_action": "Flag the transaction for manual review by the compliance team, and consider placing a temporary hold on the sender\u2019s wallet pending further investigation. Document the findings and monitor for additional suspicious activity."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 4583,
-    "unique_senders": 3507,
+    "total_findings": 4586,
+    "unique_senders": 3509,
     "highest_score": 660,
-    "critical_count": 1076,
-    "high_count": 404,
-    "first_scan": "2026-03-25T19:44:24.789516+00:00",
-    "last_scan": "2026-11-15T22:36:01.477882+00:00"
+    "critical_count": 1078,
+    "high_count": 405,
+    "first_scan": "2026-03-25T20:35:29.434502+00:00",
+    "last_scan": "2026-11-16T05:25:13.200538+00:00"
   }
 }
