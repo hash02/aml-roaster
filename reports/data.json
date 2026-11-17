@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-25T21:35:42.698937+00:00",
-      "eth_price": 2163.52475695614,
-      "block_range": "24737039 \u2014 24737238",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-25T22:33:23.440090+00:00",
       "eth_price": 2162.98695293422,
       "block_range": "24737370 \u2014 24737569",
@@ -101348,16 +101341,656 @@
           "recommended_action": "MEDIUM (rule score 75)"
         }
       ]
+    },
+    {
+      "timestamp": "2026-11-17T01:52:23.924701+00:00",
+      "eth_price": 1819.45,
+      "block_range": "26431352 \u2014 26431551",
+      "total_findings": 30,
+      "findings": [
+        {
+          "sender": "0x784ce13de05f9ec4e3b62197a3e7d25146d28b52",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.00021231745775904,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand\u2011new wallet just sent a tiny amount of ETH (0.0002) to a fixed exchange address that hides the sender\u2019s identity, like dropping a package into a slot that hides who sent it. The transaction is the first activity from a wallet that has never existed before and has no balance. Because it\u2019s a one\u2011off tiny send, the system flags it as potentially suspicious.",
+          "roast": "Well, congratulations to the wallet that just hit 0 days old and already trying to play hide\u2011and\u2011seek with the blockchain. It scored a whopping 85 on the no_KYC_offramp rule (meaning it\u2019s a deposit to a FixedFloat 1 address that doesn\u2019t require identity verification), and 70 on the sybil_fan_in rule (so it\u2019s one of 16 identical little coins doing the same thing, like a group of identical twins who all decided to send the same amount at the same time). If you think this is a harmless tip, think again \u2013 it\u2019s like a magician pulling a rabbit out of a hat that\u2019s actually a smoke\u2011and\u2011mirrors trick. The engine is screaming louder than a toddler in a toy store: \u201cDon\u2019t let this go unchecked!\u201d",
+          "risk_verdict": "CRITICAL \u2014 the transaction exhibits high\u2011risk features including no\u2011KYC off\u2011ramp and Sybil fan\u2011in pattern, resulting in a composite score above the threshold.",
+          "recommended_action": "Flag the transaction for manual review by the compliance team. Consider requesting additional information on the source of funds and the identity of the sender, and monitor the wallet for further activity."
+        },
+        {
+          "sender": "0x37797bcd088cdc8e690ab5aefcedeff0802cb766",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000230254226775546,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand-new wallet just dropped a tiny amount of ETH (about $0) into a FixedFloat address. Think of it like a kid slipping a note into a locked box that nobody can trace back to them. The wallet only ever made two transactions, has no balance, and was created yesterday.",
+          "roast": "This guy's wallet is fresher than a fresh batch of bread, 0 days old, and just sent 0.0002 ETH to a FixedFloat account\u2014like dropping a handful of confetti into a black hole that no one can see where it came from. Scored 85 on no_kyc_offramp (meaning this address is literally sending to a place that doesn't verify identity). And a 70 on sybil_fan_in (so he's part of a crowd of 16 other newbies who are all sending similar amounts\u2014classic fan\u2011in Sybil pattern). CRITICAL (rule score 155)",
+          "risk_verdict": "CRITICAL \u2014 the combination of a brand\u2011new wallet, no\u2011KYC off\u2011ramp destination, and fan\u2011in Sybil pattern signals high risk of illicit activity.",
+          "recommended_action": "Flag the transaction for manual review by compliance. Consider placing a temporary hold on the FixedFloat address and request additional information or source\u2011of\u2011funds verification from the sender."
+        },
+        {
+          "sender": "0x77069bbc8fd1c48d45788d7dd212986b8d27a126",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.00020242706746198,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand\u2011new wallet just dropped a tiny amount of ETH into a service that forwards it to another address. Think of it as a brand new parcel being slid into a dropbox that hides who dropped it, then the parcel is forwarded to a random locker. The whole thing took place in a single block, so it looks like a quick, anonymous transfer.",
+          "roast": "First off, this new wallet is so fresh it probably still has its birth certificate in the drawer. It sent 0.0002 ETH to a FixedFloat 1 address (a type of off\u2011ramp that doesn\u2019t ask for ID \u2013 no_kyc_offramp) and that\u2019s basically the crypto version of giving your cash to a shady pawn shop that never asks who you are. Then, it was part of a fan\u2011in Sybil pattern (sybil_fan_in) where 16 different wallets are all sending roughly the same minuscule amount \u2013 like a choir of toddlers all shouting the same tiny song at the same time. CRITICAL (rule score 155)",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag the transaction for manual review, request source\u2011of\u2011funds documentation, and monitor the wallet for additional suspicious activity."
+        },
+        {
+          "sender": "0x3d63ae9d019b84ae6bd129bd72f2c77129abce47",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000221351984730591,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand\u2011new wallet just sent a tiny amount of ETH (0.0002, basically nothing) to a service called FixedFloat 1. Think of it like someone dropping a very small parcel into a locked box that only the service can open, and no one has verified who sent it.",
+          "roast": "So we\u2019ve got a fresh wallet that\u2019s literally 0 days old, sending a minuscule amount of crypto to a no\u2011KYC off\u2011ramp\u2014like a kid slipping a handful of coins into a piggy bank that doesn\u2019t ask for a receipt. The engine\u2019s shouting \"no_kyc_offramp\" (meaning the user never proved who they are before cashing out) and \"sybil_fan_in\" (so this is part of a bunch of wallets all sending similar tiny amounts, like a fan club of micro\u2011spammers). With a composite score of 155, this is the crypto version of a red flag that says, \"Hey, we\u2019re not sure who you are and you\u2019re in a group that looks suspiciously coordinated.\"",
+          "risk_verdict": "CRITICAL: The transaction meets high\u2011risk criteria from both no\u2011KYC off\u2011ramp and sybil fan\u2011in patterns, requiring immediate review.",
+          "recommended_action": "CRITICAL (rule score 155)"
+        },
+        {
+          "sender": "0x47a787dde009abdd5a0ba1a6f2c8c12eeb037718",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000212047094113712,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand-new wallet just sent a tiny 0.0002 ETH (about $0) to a service called FixedFloat 1. It's like a freshly opened envelope slipping a few coins into a hidden box with no record of who the sender is.",
+          "roast": "So this newbie wallet, fresh out of the womb, just dropped a handful of crypto into a no-KYC off-ramp. Score of 85 on the no_kyc_offramp rule means the engine thinks this is a shady move (because there's no identity check). Add a 70 from sybil_fan_in (meaning 16 other wallets are doing the same thing), and you get a composite score of 155 - like a red flag on a toddler's first bike ride. Basically, it's the crypto equivalent of a kid with a backpack full of candy slipping it into a school's lunchbox without anyone noticing.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "CRITICAL (rule score 155)"
+        },
+        {
+          "sender": "0xda725e1fbda0ba1aa1aeeec3e21bc67ddb309dad",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000212527289291942,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand\u2011new wallet just sent a tiny 0.0002 ETH (about $0) to a special address that lets people move money around without showing who they are. Think of it like dropping a small, anonymous package into a locker that hides the sender. The wallet only had this one transaction and now holds no ETH.",
+          "roast": "CRITICAL (rule score 155) The engine also flagged a sybil_fan_in (many new wallets depositing almost identical amounts, like a fan club of the same tiny pizza slice). With a composite score of 155, this is like the red flag that says, \u201cHey, somebody\u2019s trying to hide in plain sight.\u201d",
+          "risk_verdict": "CRITICAL: The high composite score and presence of no\u2011KYC off\u2011ramp and Sybil fan\u2011in patterns indicate a significant risk of anonymous money movement requiring immediate review.",
+          "recommended_action": "CRITICAL (rule score 155)"
+        },
+        {
+          "sender": "0x1ece97f80c6ec4b6a795157e1312c61f4fe68f68",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0002119509639762,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x7770556aa839105d60976e30ca1c69968b0094c1",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000212067893611667,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "CRITICAL (rule score 155) The transfer is tiny, but because it\u2019s the first move from a fresh wallet and goes straight to an off\u2011ramp that doesn\u2019t require KYC, it looks suspicious\u2014like dropping a parcel into a slot that hides who sent it.",
+          "roast": "This newbie wallet is like the kid who just got a new phone and immediately sends all the cash to the same anonymous friend. The engine gave it a whopping 85 on the no\u2011KYC off\u2011ramp rule (meaning the money is going to a place that doesn\u2019t ask for identity verification, a classic hide\u2011and\u2011seek move). Then it added 70 on the sybil_fan_in rule (meaning 1 of 16 similar wallets sent almost the same amount, which is a sign of a Sybil attack\u2014think of a bunch of clones all pushing the same button). So the composite score is 155\u2014more than a high\u2011school bully\u2019s score on a dodgeball match. Bottom line: this is a red flag, not a green light.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag the transaction for manual review by compliance. CRITICAL (rule score 155)"
+        },
+        {
+          "sender": "0xd722f32e87a312500cb9da12f8c0b56b841176d8",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.00022119309475904,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand\u2011new wallet, created the same day it sent money, slipped 0.0002 ETH (essentially nothing in dollar terms) into a FixedFloat address, which is like dropping a coin into a slot machine that hides who put it in. The transaction was the only one in that block and the sender had only one other move in its history, so it\u2019s a very quiet, fresh activity.",
+          "roast": "Looks like someone tried to sneak a micro\u2011coin into a FixedFloat address without a KYC passport, scoring a solid 85 on the no_kyc_offramp rule (meaning the wallet is trying to hide its exit route). The engine also gave it a 70 for sybil_fan_in, so it\u2019s part of a choir of 16 tiny wallets all sending similar low\u2011value amounts\u2014like a choir of tiny choir members singing the same off\u2011beat tune. If you\u2019re looking for drama, this is about as dramatic as watching a snail cross the finish line, but the AML engine knows better than that.",
+          "risk_verdict": "CRITICAL \u2014 the transaction exhibits high risk due to a new wallet depositing into a FixedFloat address without KYC, combined with a Sybil fan\u2011in pattern indicating possible layering.",
+          "recommended_action": "Manually review the source wallet and the destination FixedFloat address to confirm the legitimacy of the funds; if suspicious, consider freezing the wallet and reporting to relevant authorities."
+        },
+        {
+          "sender": "0x7f745987bd1bc769e07eed51fde6629a3b758270",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.00022103701876448,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x2915dbc640917256ab3ae93f1e85f4e4364b3d07",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000212417259101348,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand\u2011new wallet (just created this block) sent 0.0002 ETH\u2014about the same as a few pennies\u2014to a service called FixedFloat 1. Think of it like dropping a tiny package into a vending machine that doesn\u2019t ask who you are before letting you take the item. The whole thing happened in a single block, so it was a quick, one\u2011off move.",
+          "roast": "Looks like someone just tried to play hide\u2011and\u2011seek with their crypto. They dropped 0.0002 ETH into FixedFloat 1, a place that\u2019s basically a 'no\u2011ID, no\u2011questions\u2011asked' off\u2011ramp (think a shady gas station that doesn\u2019t check your driver's license). On top of that, the AML engine flagged a 'sybil fan\u2011in' pattern (meaning 1 of 16 similar addresses sent almost the same tiny amount\u2014like a choir of identical twins all shouting the same song). The score of 155 is basically the system's way of saying, 'I think you\u2019re up to something.'",
+          "risk_verdict": "CRITICAL \u2014 The combination of a new wallet depositing into a no\u2011KYC off\u2011ramp and a fan\u2011in Sybil pattern indicates a high risk of illicit activity.",
+          "recommended_action": "Flag this transaction for manual AML review and request additional source\u2011of\u2011funds information. Monitor the wallet for further activity, especially any subsequent withdrawals or transfers to other addresses."
+        },
+        {
+          "sender": "0x1a06b51007b5470db279f0c42a3b488fac5044fc",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000229690303860741,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand\u2011new wallet that has never sent a single transaction before just pushed a tiny amount of ETH (0.0002, practically nothing) into an address that is part of a service called FixedFloat 1. Think of it like dropping a single grain of rice into a vending machine that then hides who put it in. Because the sender is brand new and the amount is almost zero, it looks suspiciously like the wallet might be trying to hide its trail.",
+          "roast": "So this new wallet just decided to play hide\u2011and\u2011seek with 0.0002 ETH, like a kid tossing a paperclip into a black hole. The engine gave it a 155 score, which is like a red flag on a driver's licence. The 'no_kyc_offramp' rule (meaning the wallet sent money to an address that lets you cash out without any identity verification) scored 85, and the 'sybil_fan_in' rule (meaning many similar tiny deposits from a swarm of new wallets) hit 70. Basically, this is the crypto equivalent of a group of strangers all handing a single penny into a stranger\u2019s pocket to make it look like a community donation. If anyone thinks this is legit, they\u2019re probably the first to know what a \u201cfan\u2011in Sybil pattern\u201d is.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag the transaction for manual review by AML analysts. CRITICAL (rule score 155)"
+        },
+        {
+          "sender": "0xbae3543ed60831b5b55ff1577f503c2ed2c6a74e",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000229823065001652,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand\u2011new wallet just sent a tiny 0.0002 ETH to a FixedFloat contract, which is like dropping a single coin into a slot machine that hides who put it in. The sender has zero history and no identity on record, so nobody knows who actually owns that tiny amount. The transaction is so small that it looks like a drop in a big pool of coins, making it hard to track back to a single source.",
+          "roast": "Scored 85 on no\u2011kyc\u2011offramp (meaning the sender is basically a ghost with no ID), and a 70 on sybil_fan_in (so it's one of 16 identical little wallets dumping similar amounts \u2013 like a bunch of kids each dropping a coin into the same pot). The wallet is brand new (0 days old) and has only two tiny transactions, so it\u2019s probably a burner. CRITICAL (rule score 155) CRITICAL (rule score 155)",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag the transaction for manual review, investigate the source wallet\u2019s origin, and monitor for additional activity to or from the same FixedFloat contract."
+        },
+        {
+          "sender": "0xf3626082fbff334aa004712d2ccf093f2c885a4f",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000211613065001652,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x95c7ca0a7fbdec61ec9991c53f71504aae556f3b",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.000211978105768266,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand\u2011new wallet just dropped a tiny amount of ETH (about 0.0002, practically nothing in dollars) into a FixedFloat 1 address. Think of it like someone tossing a single coin into a piggy bank that doesn\u2019t let you see who put it in. The whole transaction is a single, almost negligible, move.",
+          "roast": "So we have a fresh wallet that\u2019s literally brand\u2011new (0 days old) and it just sent 0.0002 ETH to a FixedFloat 1 address. That\u2019s like a kid handing a single penny to a vending machine that claims to be a \u201cno\u2011KYC\u201d off\u2011ramp\u2014because, hey, why not let the IRS do the work? The engine gave it a 155 score, with 85 from [no_kyc_offramp] (meaning the wallet can move money out without any identity check) and 70 from [sybil_fan_in] (so it looks like one of 16 other wallets doing the same tiny trick). Basically, it\u2019s a textbook case of a Sybil fan\u2011in on a no\u2011KYC off\u2011ramp. If this were a party, it\u2019d be the guy who keeps bringing the same cheap bottle to the potluck and nobody knows who he is. Watch out!",
+          "risk_verdict": "CRITICAL \u2014 the combination of a no\u2011KYC off\u2011ramp and a Sybil fan\u2011in pattern signals a high risk of illicit layering.",
+          "recommended_action": "Flag the transaction for manual review by the compliance team, and request additional context such as the source of the funds and any related wallet activity. If further suspicious activity is identified, consider placing a temporary hold or reporting to the relevant authorities."
+        },
+        {
+          "sender": "0xc2294dac1e204f7d093b6562019c6f2e7c9c0562",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 155,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.00020268132358216,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp",
+            "sybil_fan_in"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85,
+            "sybil_fan_in": 70
+          },
+          "what_happened": "A brand\u2011new wallet (just created today) sent a tiny amount of ETH\u2014about the size of a grain of sand\u2014to a service that acts like a vending machine for crypto. The money disappeared into a \u201cFixedFloat 1\u201d address, which is a type of off\u2011ramp that doesn't ask for your ID. It\u2019s like dropping a package into a slot that hides the sender, then watching it vanish.",
+          "roast": "So, this fresh wallet just opened its bank account and decided to play hide\u2011and\u2011seek with 0.0002 ETH. It hit the no\u2011KYC off\u2011ramp (meaning it went to a place that doesn\u2019t require you to show your ID) and the engine gave it a solid 85 points for that. Then it joined a Sybil fan\u2011in (meaning 1 of 16 wallets sending similar amounts) and got another 70 points. In total, it scored 155\u2014more points than a bad karaoke night. Looks like someone\u2019s trying to hide a tiny bit of digital cash like a squirrel hiding acorns.",
+          "risk_verdict": "CRITICAL (rule score 155)",
+          "recommended_action": "Flag the wallet for manual review and consider adding it to the watchlist. Verify the source of funds and monitor subsequent activity for any further suspicious patterns."
+        },
+        {
+          "sender": "0x40c2a7ac9d234cba1c76b28aacc43ab68e565f43",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.10787097891251901,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand\u2011new wallet (just created) sent about 0.1079 ETH, roughly $196, to a service called FixedFloat 1. The sender had never sent or received anything before, and now its balance is zero because it just emptied the wallet. Think of it as a fresh pizza delivery order that disappears right after the tip is dropped.",
+          "roast": "So we have a wallet that\u2019s 0 days old, 0 balance, and it just dumped 0.1079 ETH into FixedFloat 1. That\u2019s like a new kid at school who walks into the cafeteria and immediately throws their lunch into the trash\u2014no KYC (Know Your Customer) check, no off\u2011ramps, just a clean swipe. The engine gave it a score of 85 on the no_kyc_offramp rule (meaning the wallet is sending money to a place that can\u2019t verify who\u2019s actually behind it). If this were a bank, we\u2019d be yelling at the teller to put a lock on that drawer. MEDIUM (rule score 85)",
+          "risk_verdict": "MEDIUM \u2013 high engine score combined with a new, KYC\u2011less wallet and a single outbound transfer to an off\u2011ramp service suggests a moderate risk of layering or obfuscation.",
+          "recommended_action": "MEDIUM (rule score 85)"
+        },
+        {
+          "sender": "0xd7572e8ee729b58d4c56993f89b6e9a4218979e4",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00609601,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand\u2011new wallet just sent about $11 worth of ETH to a FixedFloat 1 address. Think of it as someone dropping a small package into a slot that hides who sent it, then walking away. Since the sender had never used the network before, there\u2019s no history to explain where the money came from.",
+          "roast": "So, we have a fresh wallet that just tried to play hide\u2011and\u2011seek with a FixedFloat 1 address. The engine gave it an 85, which is like a high score on a video game \u2013 but that just means the game thinks it\u2019s a potential fraudster. No KYC? That\u2019s like showing up to a fancy dinner with a pizza delivery box. And the wallet\u2019s balance is zero \u2013 it\u2019s like someone just finished a pizza and left the box open. Basically, the engine is saying, \u2018Hey, this is a new kid who just tried to buy a ticket to the secret club with no ID.\u2019",
+          "risk_verdict": "MEDIUM \u2014 The transaction is flagged due to new wallet activity, absence of KYC, and transfer to a known off\u2011ramp service, but no direct evidence of illicit activity.",
+          "recommended_action": "Flag this transaction for manual review, request source\u2011of\u2011funds verification, and monitor the receiving address for further suspicious activity."
+        },
+        {
+          "sender": "0x8edb21a8cd7fd97f4113e1d0944ee56b199d7e3b",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.006607961179657541,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xaff5eeb15f9cd4f133ce293747f477702abc5851",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.06539559,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "MEDIUM (rule score 85) This is like dropping a package into a slot that hides who sent it. The sender had no previous activity and no identity verification, so it's a textbook example of a fresh, unverified transfer to an anonymity service.",
+          "roast": "So we have a 0\u2011day wallet that just decided to play the big spender game with $119 and drop it into FixedFloat 1. No KYC? That's like showing up to a bank with a blank ID and a bag of cash and saying, \"I'm just here for a quick deposit.\" The no_kyc_offramp rule (meaning the transaction goes to an off\u2011ramp that doesn't verify you) gave it a solid 85 score, which is basically a red flag waving at compliance. MEDIUM (rule score 85)",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag the transaction for manual review by the compliance team, and consider requesting additional source\u2011of\u2011funds information or monitoring subsequent activity from the same addresses."
+        },
+        {
+          "sender": "0x5b94b559186db9d1b009b68aabcf623f5b956688",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.02799601,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand-new crypto wallet, with no transaction history, just created and immediately sent 0.028 ETH (about $51) to a FixedFloat 1 address. It's like dropping a small parcel into a locker that hides who dropped it, making it hard for anyone to trace the sender.",
+          "roast": "Well, looks like someone's trying to hide their money like a kid hiding a cookie jar. The new wallet is fresh out of the block factory (0 days old) and just used to dump 0.028 ETH into a FixedFloat 1 address, which is basically the crypto equivalent of a cash machine with no ID check. MEDIUM (rule score 85) If this were a real person, they'd be the kind who buys a lottery ticket with a stranger's credit card and never says a word.",
+          "risk_verdict": "MEDIUM \u2014 the high score on the no_kyc_offramp rule and the fresh wallet profile suggest a moderate risk of anonymous money movement.",
+          "recommended_action": "Flag the wallet for manual review, request additional source\u2011of\u2011funds information, and monitor for subsequent transactions to the same or related addresses."
+        },
+        {
+          "sender": "0x7e29eadeecd43ebcf09a6caadaa60c8c787465ba",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.99999559,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x7260a29d2d2dd4d7bc9d74c29eb02e2572de7913",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.01390421,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand-new wallet sent 0.0139 ETH (about $25) to a service called FixedFloat 1. The sender had never used the network before and has no balance after sending. It\u2019s like dropping a small package into a dropbox that doesn\u2019t reveal who sent it.",
+          "roast": "So the newbie wallet just decided to play a game of hide\u2011and\u2011seek with 25 bucks. No KYC, no history, just a one\u2011off drop. It\u2019s like a kid doing a one\u2011time prank: \u201cHey, I got a new phone number, send me some crypto!\u201d and the receiver is like, \u201cSure, no problem, you\u2019re on the no\u2011KYC list now.\u201d The engine gave it a 85, which means it\u2019s a \u2018no\u2011KYC off\u2011ramp\u2019 flag (meaning the wallet is sending money to a service that lets you withdraw without verifying identity).",
+          "risk_verdict": "Medium risk due to a new wallet with no KYC sending funds to a service that facilitates unverified withdrawals.",
+          "recommended_action": "Manually review the transaction and the receiving service\u2019s compliance status; flag the wallet for ongoing monitoring and consider reporting to the exchange if suspicious activity persists."
+        },
+        {
+          "sender": "0x7e22f2ffe0c26d9a1fffda57ea5601ec928c2a6f",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0095892,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand new wallet (just created today) sent a tiny amount of about $17 worth of ETH to a service called FixedFloat 1. Think of it like dropping a small package into a mystery box that will forward it without asking who you are.",
+          "roast": "This fresh wallet just dropped 0.0096 ETH into a no\u2011KYC off\u2011ramp, scoring a solid 85 on the 'no_kyc_offramp' rule. Basically, it's like a new kid at the playground handing over their lunch to a shady vendor who never asks for ID. The engine thinks this is a red flag because the wallet has no history and the receiver is a known anonymous service. If you want to keep your money safe, maybe check if the wallet knows you before sending it to the 'no\u2011identity' club.",
+          "risk_verdict": "MEDIUM risk due to a new wallet sending funds to a no\u2011KYC off\u2011ramp with a high composite score of 85.",
+          "recommended_action": "Flag this transaction for manual compliance review to verify source of funds and confirm the legitimacy of the destination service. Monitor the wallet for any future activity that could indicate layering or further suspicious patterns."
+        },
+        {
+          "sender": "0xfe2f577cee5d30e0561a7f8abc18436f8fb81965",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.20063869522816444,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand-new wallet, which had never been used before, just sent 0.2006 ETH (about $365) to a service called FixedFloat 1. Think of it as a fresh envelope that drops money into a bank that doesn\u2019t ask for ID, leaving no paper trail.",
+          "roast": "Looks like someone just opened a fresh wallet, tossed 0.2006 ETH into a non\u2011KYC piggy bank called FixedFloat 1, and vanished. The AML engine gave it a 85 because the \"no_kyc_offramp\" rule (meaning the money is going to a place that doesn\u2019t verify who owns it) fired. It\u2019s like sending a pizza order to a place that never asks for your address\u2014no one knows where it\u2019s going. If you\u2019re hoping to keep it anonymous, you\u2019ve just handed your money to a magician who doesn\u2019t keep receipts.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Review the origin of the 0.2006 ETH for ties to known illicit sources and monitor the destination address FixedFloat 1 for subsequent activity. Consider flagging the wallet for ongoing surveillance."
+        },
+        {
+          "sender": "0xd600bf6672d81a4b8f4eaca279bcb4cc38686be5",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00550462,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x0b5df5c950f519821f974bfa8388ae9b816d80cb",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.1799958,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x59849e78717b131ae9325bbd8738c55b5315d05a",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.1394414,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc6314096cf8bf0023d8eee37d92be670da679792",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 21.29,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x52aa9c26f334078afde8570ac61d8b42fe69e5f2",
+          "receiver": "0x4e5b2e1dc63f6b91cb6cd759936495434c7e972f",
+          "receiver_label": "FixedFloat 1",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 43.51,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 4594,
-    "unique_senders": 3512,
+    "total_findings": 4624,
+    "unique_senders": 3542,
     "highest_score": 660,
-    "critical_count": 1076,
+    "critical_count": 1092,
     "high_count": 406,
-    "first_scan": "2026-03-25T21:35:42.698937+00:00",
-    "last_scan": "2026-11-16T15:11:34.975701+00:00"
+    "first_scan": "2026-03-25T22:33:23.440090+00:00",
+    "last_scan": "2026-11-17T01:52:23.924701+00:00"
   }
 }
