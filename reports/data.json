@@ -1,36 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-26T06:12:26.072175+00:00",
-      "eth_price": 2118.60897349766,
-      "block_range": "24739653 \u2014 24739852",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0x61d7cc832f967e78ba2d167358899ec11622193b",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 150,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 100.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "whale_transfer",
-            "mixer_touch"
-          ],
-          "rule_scores": {
-            "whale_transfer": 50,
-            "mixer_touch": 100
-          },
-          "what_happened": "Imagine walking into a known money laundering front and handing over a briefcase full of cash, that's basically what happened here. Someone sent a huge amount of cryptocurrency, worth over $200,000, to a service called Tornado Cash, which is like a digital laundry machine for dirty money. This service was actually banned by the U.S. government last year because it helped bad actors, like North Korean hackers, clean their stolen funds.",
-          "roast": "Looks like someone just tried to wash their dirty crypto clothes in a sanctioned laundry machine, scoring 100 on the mixer_touch (meaning they directly interacted with a banned crypto mixing service, think of it like trying to sneak into a closed nightclub). And to make matters worse, they threw in a whale of a transfer, 100 ETH to be exact, which is like trying to sneak an elephant through a revolving door, earning them a 50 on the whale_transfer (basically, a huge transaction that raises eyebrows). This is like a neon sign screaming 'I'm hiding something', and with a composite score of 150, it's a crypto compliance nightmare.",
-          "risk_verdict": "CRITICAL \u2014 the transaction poses a high risk due to the involvement of a sanctioned entity and the significant value transferred.",
-          "recommended_action": "Immediately flag this transaction for further review and consider filing a Suspicious Activity Report (SAR) with the Financial Crimes Enforcement Network (FinCEN), as it may indicate an attempt to launder funds or evade sanctions. Additionally, the involved parties should be subject to enhanced due diligence to assess the legitimacy of their activities."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-26T07:41:22.046224+00:00",
       "eth_price": 2120.24313895206,
       "block_range": "24740106 \u2014 24740305",
@@ -105464,16 +105434,84 @@
       "block_range": "26445198 \u2014 26445397",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-11-19T07:13:26.181719+00:00",
+      "eth_price": 1805.56,
+      "block_range": "26447351 \u2014 26447550",
+      "total_findings": 3,
+      "findings": [
+        {
+          "sender": "0x1ed98663fd1000002e283a0402bd531c54ce6abc",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A user with a wallet that\u2019s been around for 331 days sent a tiny, almost zero\u2011value transaction to a privacy service (Railgun Relay) that hides the origin of funds. Think of it as dropping a note into a locked box that only the sender knows the key to, so no one can trace where the note came from. The transaction didn't move any tokens, so it\u2019s like sending an empty envelope through a secret post office.",
+          "roast": "Looks like someone\u2019s trying to hide their moves in a privacy\u2011filled maze. Scored 75 on the privacy_protocol rule (meaning the address is using a privacy service that obfuscates transaction details). They sent a $0 transaction to a Railgun Relay\u2014talk about putting a lot of effort into a zero\u2011sum game. If you\u2019re playing hide\u2011and\u2011seek with your money, at least bring a map. At least the wallet is old enough to have a history, but still, a 331\u2011day\u2011old account with 2,568 transactions can\u2019t be too clean.",
+          "risk_verdict": "MEDIUM \u2014 the use of a privacy protocol with a moderately active wallet raises concerns about potential layering, but no direct evidence of illicit activity.",
+          "recommended_action": "Flag the transaction for manual review; request additional context on the sender\u2019s source of funds and monitor for subsequent activity to the same or related addresses."
+        },
+        {
+          "sender": "0x282d8b141c4e325fadc81154aa94f63f2cb27185",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "The user sent a tiny amount of nothing\u2014zero ETH\u2014to a privacy service called Railgun. Think of it like dropping a blank envelope into a locked box that hides who mailed it. The transaction was recorded on the blockchain but carried no value, so it looks like a test or a prank.",
+          "roast": "So this wallet decided to play hide and seek with the blockchain, sending a zero\u2011value packet to Railgun (a privacy protocol that obfuscates transaction details) because who needs money when you can have mystery? The privacy_protocol rule flagged this with a 75 score, which is like giving a gold star to the most suspicious \u2018no money, just vibes\u2019 transaction. It\u2019s almost like the wallet is trying to get a free privacy upgrade for the price of a snack. If you think zero ETH is nothing, just remember that a zero is still a number, and in crypto, numbers can be as mysterious as your grandma\u2019s attic. Basically, the wallet is acting like a cat that only comes out at midnight to check on the neighbor\u2019s fence.",
+          "risk_verdict": "MEDIUM (rule score 75)",
+          "recommended_action": "Conduct a manual review of the wallet\u2019s recent and future activity, monitor for subsequent transactions to privacy protocols or large transfers, and consider adding the address to a high\u2011risk watchlist."
+        },
+        {
+          "sender": "0xccef06b2e82a184e34b118ed81f5ded120f8136c",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A wallet was caught interacting with Railgun Relay. Our engine flagged it at score 75.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 75)",
+          "recommended_action": "Flag for manual review."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 4794,
+    "total_findings": 4796,
     "unique_senders": 3627,
     "highest_score": 660,
-    "critical_count": 1112,
+    "critical_count": 1111,
     "high_count": 437,
-    "first_scan": "2026-03-26T06:12:26.072175+00:00",
-    "last_scan": "2026-11-19T00:00:03.262985+00:00"
+    "first_scan": "2026-03-26T07:41:22.046224+00:00",
+    "last_scan": "2026-11-19T07:13:26.181719+00:00"
   }
 }
