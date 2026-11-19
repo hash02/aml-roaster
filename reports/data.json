@@ -1,40 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-26T07:41:22.046224+00:00",
-      "eth_price": 2120.24313895206,
-      "block_range": "24740106 \u2014 24740305",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0x0a5b2bf3ccfb44c1d22f07eed9553ecba752d4ad",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 400,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.0,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "mixer_contract_call",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "mixer_contract_call": 70,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a shady money laundering front, where people go to hide the source of their cash. This is basically what happened here, but with cryptocurrency. Someone sent a transaction to a sanctioned crypto mixing service called Tornado Cash, which is like a digital laundry for dirty money.",
-          "roast": "This sender scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big red flag waving over their head saying 'I'm involved in some shady stuff'. They also got a score of 100 for directly depositing into Tornado Cash, a mixer (think of it like a big blender that mixes all the transactions together to hide the source), and another 70 for making a zero-value contract call to Tornado Cash, which is like trying to sneak in a secret handshake. It's like they're trying to hide something, but really, they're just making it obvious.",
-          "risk_verdict": "CRITICAL \u2014 the transaction poses a high risk of money laundering and sanctions evasion due to its involvement with a sanctioned crypto mixing service.",
-          "recommended_action": "Immediately freeze the sender's assets and conduct a thorough investigation into the source of their funds. Report this suspicious activity to the relevant authorities, such as the Financial Crimes Enforcement Network (FinCEN)."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-26T08:50:24.713058+00:00",
       "eth_price": 2118.17214280767,
       "block_range": "24740420 \u2014 24740619",
@@ -105502,16 +105468,406 @@
           "recommended_action": "Flag for manual review."
         }
       ]
+    },
+    {
+      "timestamp": "2026-11-19T20:13:04.062594+00:00",
+      "eth_price": 1762.31,
+      "block_range": "26451226 \u2014 26451425",
+      "total_findings": 19,
+      "findings": [
+        {
+          "sender": "0x4b98363885ebf124018e5d779aea033d9d04c95b",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 150,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 100.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "whale_transfer",
+            "mixer_touch"
+          ],
+          "rule_scores": {
+            "whale_transfer": 50,
+            "mixer_touch": 100
+          },
+          "what_happened": "A user sent 100 ETH (about $176,000) to a service that scrambles transactions, like dropping a package into a box that then randomly gives it to other people so no one knows who started it. The sender's wallet had no balance after the transfer and no recent activity, so it looks like a cold wallet that just made one big move. The transaction was the only one in its block, so it stands out as a single, large transfer.",
+          "roast": "So this guy just dropped a 100\u2011ETH pizza into the Tornado Cash mixer, hoping the service would hide his pizza bill. The engine gave him a 150\u2011point score: 50 for being a whale (big transfer) and 100 for the mixer hit (meaning he literally used a service that anonymizes transactions). It\u2019s like a crypto version of a secret Santa\u2014no one knows who gave the gift. He might think he\u2019s playing hide\u2011and\u2011seek, but the compliance squad is like \"Nice try, but we see you.\"",
+          "risk_verdict": "CRITICAL \u2014 the combination of a large transfer to a known mixer triggers a high\u2011risk flag for potential layering and anonymity abuse.",
+          "recommended_action": "Flag the transaction for manual review, request source\u2011of\u2011funds documentation, and monitor downstream addresses for suspicious activity."
+        },
+        {
+          "sender": "0xe859c0bd25f260baee534fb52e307d3b64d24572",
+          "receiver": "0x6818809eefce719e480a7526d76bd3e561526b46",
+          "receiver_label": "Privacy Pools (0xbow) Entrypoint",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 14115.527078,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "The sender moved about $14,116 worth of USDT into a privacy pool entry point, splitting the money into two transfers of roughly $6,600 and $7,500. Think of it like dropping two packages into a mail slot that scrambles the sender\u2019s identity before the packages get forwarded elsewhere. No one can easily tell who sent the money or where it will end up.",
+          "roast": "So, we\u2019ve got a wallet that decided to play hide-and-seek with its cash, tossing $14K into a privacy pool (the blockchain\u2019s version of a secret Santa). That\u2019s what the engine calls a stablecoin_mixing hit (meaning the coins are being mixed to hide their trail). The score? 110\u2014like a detective who\u2019s seen too many red herrings. In plain English: this guy just hid his $14,000 in a blender and sent it off, hoping no one notices. If you\u2019re looking for a clean audit trail, this is about as good as a paper trail left in a hurricane.",
+          "risk_verdict": "HIGH \u2013 the transaction matches a high\u2011risk stablecoin mixing pattern with no mitigating contextual information.",
+          "recommended_action": "Flag the sender wallet for manual review and request additional provenance data. HIGH (rule score 110)"
+        },
+        {
+          "sender": "0x821dbdb1bc7671bff0f1246c0f2b43bbfb00133a",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 10449.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "Someone sent $10,449 worth of USDT to a wallet that is known to be part of a money\u2011mixing service. Think of it like dropping a pizza box into a slot that scrambles who put it there. The original sender's identity is now hidden in a pile of other coins.",
+          "roast": "HIGH (rule score 110) The engine gave it a 110 score, which is like a high school report card saying \"you need to explain yourself\". If you think that's a good score, just remember the rule is \"stablecoin_mixing\" (meaning the coins were moved through a service that blends transactions to hide origin). No need to call the police; just call the compliance team. This is the kind of transaction that makes auditors do a double take.",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag this transaction for manual review by the compliance team. Consider tracing the origin of the USDT and monitoring the sender's future activity for additional suspicious patterns."
+        },
+        {
+          "sender": "0x26f73220037cdf9ba859caa1c87dafbb0a6c2937",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.00393558382618584,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 85.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x4f69fcbe16e2a6a234a734ab6e4ac1b9b8b12f22",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.2533562036622383,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "A brand\u2011new crypto wallet, which had never sent or received anything before, just sent 0.2534 ETH (about $446) straight into a SideShift hot wallet. MEDIUM (rule score 85) This move basically hides the origin of the money without any identity check.",
+          "roast": "Picture a toddler who just learned to walk dropping a handful of dollars into a mystery box. The wallet, fresh out of the womb, sent the money to a SideShift Hot Wallet \u2013 a crypto equivalent of a shady ATM that says \u2018no\u2011ID, no\u2011questions\u2019. The engine gave it a whopping 85 because it\u2019s a no\u2011KYC off\u2011ramp, which is basically the red flag for a \u201cI\u2019m not telling anyone who I am\u201d transaction. If you\u2019re looking for drama, this is the kind of thing that would make a detective\u2019s heart race \u2013 and a comedian\u2019s punchline.",
+          "risk_verdict": "MEDIUM risk due to high composite score and no\u2011KYC off\u2011ramp activity.",
+          "recommended_action": "Flag this transaction for manual review and monitor the wallet for additional activity. Consider cross\u2011checking with other known mixers and applying enhanced due diligence if the wallet continues to transact."
+        },
+        {
+          "sender": "0x55c19882c36076b20c7faeead888effe527254df",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 85,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.6177792646756601,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "no_kyc_offramp"
+          ],
+          "rule_scores": {
+            "no_kyc_offramp": 85
+          },
+          "what_happened": "The sender\u2019s brand\u2011new wallet just sent 0.6178 ETH to a hot wallet that mixes transactions\u2014think of it like dropping a package into a blender that hides where it came from. The wallet was created the same day it was used and has never sent any funds before, so there\u2019s no history to explain why this money is being moved.",
+          "roast": "Looks like someone just built a new wallet and did a one\u2011stop shop: a fresh address, a fresh transaction, and a fresh mystery\u2014like buying a pizza and immediately putting it in a blender. 0.6178 ETH is about the size of a small pizza, and sending it straight to SideShift is like handing that pizza to a shady kitchen that promises you\u2019ll never see the toppings again. No KYC? That\u2019s like driving a car with no license plate\u2014totally untraceable. The engine gave it an 85 on no_kyc_offramp, which is basically the crypto world\u2019s version of a \u201cred flag\u201d emoji. Bottom line: this is the kind of move that makes auditors raise an eyebrow and say, \u201cHold my coffee, we\u2019ve got a suspect.\u201d",
+          "risk_verdict": "MEDIUM (rule score 85)",
+          "recommended_action": "Conduct a manual review of the sender\u2019s wallet and any subsequent transactions, and file a SAR if further suspicious patterns emerge."
+        },
+        {
+          "sender": "0x9bdd18d3115c05b7b091c67e196d12afacf6d57f",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 50.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A person sent 50 USDC, which is a digital dollar, to a wallet that belongs to a service called SideShift that helps people hide where their money came from. It\u2019s like dropping a $50 bill into a slot machine that then rewrites the receipt so the original owner can\u2019t be traced. This single move is all the evidence we have.",
+          "roast": "MEDIUM (rule score 80) The wallet\u2019s name suggests it\u2019s a hot spot for mixing, meaning the coins are probably getting shuffled with others to hide their trail. MEDIUM (rule score 80)",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag the transaction for manual review, request additional context on the source of the USDC, and monitor the wallet for further suspicious activity."
+        },
+        {
+          "sender": "0x612bc47545e11f9415e0d56f6679c7fec921bfdf",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1000.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A person sent $1,000 worth of USDT (a stablecoin that behaves like a digital dollar) to a wallet that is known to be used for mixing transactions. MEDIUM (rule score 80) The sender's wallet has no recent activity and no balance, so it's unclear where the money came from.",
+          "roast": "Looks like someone tried to play hide-and-seek with their $1,000. They sent it straight to a SideShift Hot Wallet\u2014think of it as the Bitcoin equivalent of a laundromat that only accepts cash, but no receipt. The transaction is a perfect 1,000 USDT, like a banker who insists on writing checks in round numbers because decimals are too much hassle. MEDIUM (rule score 80) If you ask me, it's like sending a pizza to a stranger's address and then hoping nobody notices.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag the transaction for manual review. Verify source of funds and consider additional due diligence on the sender's wallet."
+        },
+        {
+          "sender": "0xdd8528a6acd01b4a131a3faa245ff40364c1185e",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 4.887478,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xf788c8f8897d9fca11e417e88f2696c6e8a6bdf0",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 155.178455,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x42363c07ef6b89f178ed1fde3c790315eb8974db",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 150.165181,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A single $150 USDT transfer was sent to a SideShift Hot Wallet, a service that scrambles the trail of who owns the money\u2014think of it like dropping a package into a vending machine that hides the sender\u2019s name. The sender\u2019s address has no visible history, and the transfer was the only transaction in that block.",
+          "roast": "So this guy decided to play hide\u2011and\u2011seek with his $150, tossing it into SideShift\u2019s hot wallet. MEDIUM (rule score 80) He\u2019s basically trying to make his money as anonymous as a celebrity at a pizza joint, but the audit trail is still there. If only he\u2019d paid more attention to the obvious red flag\u2014like a cashier spotting a counterfeit bill\u2014he\u2019d have saved himself the trouble. This is the kind of move that makes compliance teams go \u201cuh\u2011uh, we\u2019re not having a party with this.\u201d",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag the transaction for manual review, request additional sender context, and consider placing a hold on the wallet for further monitoring."
+        },
+        {
+          "sender": "0x3cb7308f4bc64a8b9d3da3c1a0dc4519941da276",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 17.24,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xe2185448cd73297a9d19282447d2b06fb411252d",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 31.212484,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A user sent 31 USDT (a stablecoin that keeps its value close to the US dollar) to a hot wallet belonging to a service called SideShift. Think of it like dropping a small envelope into a vending machine that then throws the money into a different slot so you can\u2019t tell where it came from. The transaction was the only one in that block, and it was just one single transfer of about $31.",
+          "roast": "MEDIUM (rule score 80) The engine flagged it with a stablecoin_mixing score of 80 (meaning the transaction looks like a classic 'laundry' operation that hides the source). It\u2019s like putting a $31 bill in a coin machine that turns it into a bunch of tiny coins you can\u2019t trace. MEDIUM (rule score 80) If you\u2019re wondering what \u2018stablecoin\u2019 means, it\u2019s just a digital dollar that doesn\u2019t swing wildly like Bitcoin.",
+          "risk_verdict": "MEDIUM \u2014 the transaction triggers a stablecoin mixing pattern with a composite score of 80, indicating moderate risk but not definitive evidence of illicit activity.",
+          "recommended_action": "Flag the transaction for manual review and monitor the sender and receiver addresses for additional suspicious activity. MEDIUM (rule score 80)"
+        },
+        {
+          "sender": "0x2498ac162bd1cc662b2f28031c2728e4c8ed7d62",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1000.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A user sent $1,000 worth of USDC to a hot wallet that belongs to SideShift, a service that mixes coins. This is like dropping a package into a mailbox that hides who mailed it; the sender\u2019s identity is obscured. MEDIUM (rule score 80)",
+          "roast": "MEDIUM (rule score 80) 1,000 USDC to a SideShift hot wallet\u2014looks like someone tried to hide their money like a magician with a disappearing coin trick. The sender\u2019s wallet has zero ETH and no visible activity\u2014like a ghost with a bank account. MEDIUM (rule score 80) If you think this is a big deal, you might want to ask the person for a receipt.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Perform a manual review of the sender\u2019s transaction history and source of funds. If no legitimate explanation is found, consider reporting to relevant authorities."
+        },
+        {
+          "sender": "0xd70990885beffeadba786ef1294231312d8ec337",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 6400.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A single payment of $6,400 in USDC was sent from a wallet with no history to a SideShift Hot Wallet, which is a type of online mixing service that shuffles funds to hide their origin. It\u2019s like dropping a money envelope into a vending machine that then hands it out to someone else without showing who paid for it. The transaction happened in one block, so it was a quick one\u2011time move.",
+          "roast": "So this wallet just decided to send $6,400 to a SideShift Hot Wallet\u2014yes, the same one that pretends to be a regular address but is basically a crypto version of a secret Santa. MEDIUM (rule score 80) The sender has a zero ETH balance, so they\u2019re basically a paper wallet that can\u2019t even pay gas. MEDIUM (rule score 80) Bottom line: this is the kind of transaction that makes compliance folks raise an eyebrow and say, \"Hold the phone!\"",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Initiate a manual review of the sender and receiver addresses, track any subsequent activity, and consider flagging the transaction for additional compliance investigation."
+        },
+        {
+          "sender": "0x6a000f20005980200259b80c5102003040001068",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 8.123306,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A user sent about $8 worth of USDC to a wallet that belongs to SideShift, a service that mixes coins to hide where they came from. It\u2019s like dropping a package into a mail slot that scrambles the sender\u2019s address so nobody knows who actually mailed it.",
+          "roast": "Scored 80 on the stablecoin_mixing rule (meaning a single stablecoin transfer to a hot wallet that probably scrambles the source) \u2013 basically a classic \u201cI\u2019m sending money and nobody knows where it came from\u201d move. MEDIUM (rule score 80) The sender\u2019s wallet is basically a ghost with zero balance and unknown history \u2013 perfect for a magician\u2019s disappearing act.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "MEDIUM (rule score 80)"
+        },
+        {
+          "sender": "0xa3e8c8007b4b227a6cf1e9ed061a78cb14521e05",
+          "receiver": "0xcdd37ada79f589c15bd4f8fd2083dc88e34a2af2",
+          "receiver_label": "SideShift Hot Wallet",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1000.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with SideShift Hot Wallet. Our engine flagged it at score 80.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x78a57679a434a2caa3046335195130af6c5a5179",
+          "receiver": "0x6818809eefce719e480a7526d76bd3e561526b46",
+          "receiver_label": "Privacy Pools (0xbow) Entrypoint",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "The wallet 0x78a57679a434a2caa3046335195130af6c5a5179 just dropped a $0 ETH packet into a privacy pool entry point (think of it as tossing an empty envelope into a mailbox that hides who you are). MEDIUM (rule score 75)",
+          "roast": "So we have a wallet that\u2019s been around for 213 days, made 1,722 trips, and now decides to play hide\u2011and\u2011seek with a $0 ETH packet. That\u2019s like showing up at a party, ordering a free drink, and then pretending you never left. The privacy protocol hit (score 75) means it\u2019s using a non\u2011Tornado privacy pool \u2013 basically a new\u2011age cloak\u2011room for crypto. If this were a bank, we\u2019d be saying, \u201cHey, you just tried to hide a $0 bill in a vault. Are you a magician or just messing with us?\u201d",
+          "risk_verdict": "Medium risk due to the use of a privacy protocol without any value transfer, indicating a possible attempt to obscure transaction intent.",
+          "recommended_action": "Flag the wallet for monitoring and investigate any subsequent transactions that may flow through the same privacy pool entry point. Consider cross\u2011checking with other AML rules for potential layering or structuring patterns."
+        },
+        {
+          "sender": "0x6c5816afbe2c0cda91742651e3bb63f80d25a59c",
+          "receiver": "0x6818809eefce719e480a7526d76bd3e561526b46",
+          "receiver_label": "Privacy Pools (0xbow) Entrypoint",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "The sender made a transaction that looks like they slipped a zero\u2011dollar envelope into a privacy box\u2014no real money moved, just a placeholder entry in a secret mixing pool.",
+          "roast": "Got a 75 on the privacy_protocol score (that means this address is basically a secret box where you hide your coins, like a hidden sock drawer for crypto). MEDIUM (rule score 75) MEDIUM (rule score 75) The engine flags it because privacy protocols can be a cover for illicit activity, even if nothing actually changed hands.",
+          "risk_verdict": "The activity is flagged as medium risk because it involves a privacy protocol transaction, even though no value was transferred.",
+          "recommended_action": "MEDIUM (rule score 75)"
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 4796,
-    "unique_senders": 3627,
+    "total_findings": 4814,
+    "unique_senders": 3644,
     "highest_score": 660,
     "critical_count": 1111,
-    "high_count": 437,
-    "first_scan": "2026-03-26T07:41:22.046224+00:00",
-    "last_scan": "2026-11-19T07:13:26.181719+00:00"
+    "high_count": 439,
+    "first_scan": "2026-03-26T08:50:24.713058+00:00",
+    "last_scan": "2026-11-19T20:13:04.062594+00:00"
   }
 }
