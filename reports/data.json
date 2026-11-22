@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-26T13:06:19.139586+00:00",
-      "eth_price": 2072.11401161117,
-      "block_range": "24741721 \u2014 24741920",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-26T14:47:58.255796+00:00",
       "eth_price": 2073.20624477573,
       "block_range": "24742203 \u2014 24742402",
@@ -110076,16 +110069,84 @@
           "recommended_action": "Flag the wallet for manual review, trace subsequent activity for any downstream movements, and consider adding the address to a watchlist for ongoing monitoring."
         }
       ]
+    },
+    {
+      "timestamp": "2026-11-22T05:41:42.330196+00:00",
+      "eth_price": 1647.46,
+      "block_range": "26468424 \u2014 26468623",
+      "total_findings": 3,
+      "findings": [
+        {
+          "sender": "0x9b2d5b96764bca81d448456d4a3a4017b71e3ae8",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A user sent a tiny, zero-dollar amount of Ethereum into a special privacy system called Railgun, which scrambles the trail of who sent it. Think of it like dropping a note into a locked box that hides the sender\u2019s name. The transaction was basically a test run, as nothing of value moved.",
+          "roast": "Looks like someone tried to make their wallet look like a magician\u2019s assistant. They sent a *zero* ETH to the Railgun Relay (a privacy protocol that hides transaction details), which is like giving a magician a blank card and hoping the audience thinks something mysterious happened. The AML engine gave it a 75, because apparently the privacy protocol is as suspicious as a magician's hat. It\u2019s like sending a message to a friend but telling everyone you used a secret code\u2014just not a very secret one. MEDIUM (rule score 75)",
+          "risk_verdict": "MEDIUM \u2014 the use of a privacy protocol for a zero-value transaction raises moderate concern for possible layering or obfuscation, warranting review.",
+          "recommended_action": "Flag the account for enhanced monitoring, request additional context from the sender, and cross\u2011reference with other accounts using Railgun. If further suspicious activity is observed, consider filing a SAR with the compliance team."
+        },
+        {
+          "sender": "0xf8280902176a8486a1be2b61239b558e64a39ffd",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A user sent a transaction of zero ETH to a privacy service called Railgun. Think of it like dropping a letter into a mailbox that hides the sender's address, but the letter itself is empty. The wallet is about 197 days old and has made 135 transactions, with a small remaining balance.",
+          "roast": "Looks like someone tried to play hide and seek with their crypto, but forgot to bring any money to the party. They hit up Railgun Relay, the fancy privacy club, with a $0 ticket. The AML engine gave it a 75 because privacy protocols always raise eyebrows, even if you\u2019re just sending a blank check. If you\u2019re hoping to stay invisible, just remember: zero value doesn't mean zero risk\u2014it's like putting a note in a mailbox but hoping the postal service never reads it.",
+          "risk_verdict": "MEDIUM \u2014 the high privacy protocol score signals a risk of fund obfuscation, but the transaction value is negligible.",
+          "recommended_action": "Flag the wallet for manual review and monitor for subsequent high\u2011value or suspicious activity. MEDIUM (rule score 75)"
+        },
+        {
+          "sender": "0x1ed98663fd1000002e283a0402bd531c54ce6abc",
+          "receiver": "0xfa7093cdd9ee6932b4eb2c9e1cde7ce00b1fa4b9",
+          "receiver_label": "Railgun Relay",
+          "risk_score": 75,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "privacy_protocol"
+          ],
+          "rule_scores": {
+            "privacy_protocol": 75
+          },
+          "what_happened": "A wallet with 0.011314 ETH sent a tiny amount (essentially nothing) to a Railgun Relay address. Think of it like dropping a note into a locked box that only the box owner can open, but no money changed hands. The transaction was recorded in a single block and the sender was active just that day.",
+          "roast": "So, this person decided to play hide-and-seek with their ETH, but forgot to bring any coins to the party. MEDIUM (rule score 75) It\u2019s like paying a friend to hold your snack while you wait for it to magically appear elsewhere. The AML engine gave it a 75 score on privacy_protocol, which basically means \u2018this is a privacy trick that might be used to hide the real source of funds.\u2019",
+          "risk_verdict": "MEDIUM (rule score 75)",
+          "recommended_action": "MEDIUM (rule score 75) Consider flagging the address for ongoing surveillance."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 5025,
-    "unique_senders": 3776,
+    "total_findings": 5028,
+    "unique_senders": 3777,
     "highest_score": 660,
     "critical_count": 1133,
     "high_count": 503,
-    "first_scan": "2026-03-26T13:06:19.139586+00:00",
-    "last_scan": "2026-11-21T18:52:02.345918+00:00"
+    "first_scan": "2026-03-26T14:47:58.255796+00:00",
+    "last_scan": "2026-11-22T05:41:42.330196+00:00"
   }
 }
