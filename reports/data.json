@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-26T17:34:41.399683+00:00",
-      "eth_price": 2067.99158051711,
-      "block_range": "24743056 \u2014 24743255",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-26T19:00:58.471873+00:00",
       "eth_price": 2045.55332417816,
       "block_range": "24743486 \u2014 24743685",
@@ -111918,16 +111911,1468 @@
           "recommended_action": "Flag for manual review."
         }
       ]
+    },
+    {
+      "timestamp": "2026-11-23T06:30:48.008874+00:00",
+      "eth_price": 1724.46,
+      "block_range": "26475819 \u2014 26476018",
+      "total_findings": 70,
+      "findings": [
+        {
+          "sender": "0xa7842153fde380a864726d0e91f14f6ffab7d46c",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 87,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "The sender made 87 identical tiny ETH deposits (each essentially zero) to a decentralized exchange settlement contract. It's like dropping the same empty envelope into a mailbox 87 times in a row, hoping to hide a pattern. The total value was zero, but the sheer number of identical moves flags potential structuring.",
+          "roast": "Looks like our friend decided to play a game of \"who can send the smallest amount without getting caught.\" 87 identical zero\u2011ETH packets to CoW Protocol? That\u2019s like a magician pulling a rabbit out of a hat, only the rabbit is a ghost. CRITICAL (rule score 195)",
+          "risk_verdict": "CRITICAL: The combination of structuring, peel chain layering, and bridge hop to a decentralized settlement contract indicates high risk of illicit activity.",
+          "recommended_action": "Flag the wallet for detailed human investigation and consider placing a temporary hold on further transactions until the pattern is clarified. Notify the compliance team to cross\u2011check with internal watchlists and monitor for any subsequent large transfers."
+        },
+        {
+          "sender": "0xb5e5ba15a5aa58df03d91549496d8cd67a15f858",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 53,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "The sender's wallet sent 53 tiny, identical zero\u2011value Ethereum messages to a smart contract that handles trades, but each message was basically a blank envelope. Think of it like a person dropping 53 empty envelopes into a mailbox in a single day\u2014no money, but still a suspicious pattern. The goal might be to hide the true flow of funds or to test the contract without moving value.",
+          "roast": "So this guy is basically trying to make a big splash by sending zero ETH 53 times, because obviously nothing is better than nothing. It's like a prankster dropping 53 empty pizza boxes into a delivery truck to confuse the GPS. The engine flagged it with a 70 on structuring (that\u2019s when you do a bunch of identical tiny deposits to hide real money), 60 on peel_chain_linear (meaning those deposits are a straight line of similar moves, like a marching band), and 65 on bridge_hop (because the target is a cross\u2011chain bridge). Basically, he's trying to layer the money by using a bridge, but he's only moving the air. If you want to see if this is a legit test, ask him to actually send some ETH.",
+          "risk_verdict": "CRITICAL (rule score 195)",
+          "recommended_action": "Flag the wallet for manual review and request transaction history beyond the current block range. Consider placing a temporary hold or monitoring for subsequent large transfers to assess whether the pattern continues."
+        },
+        {
+          "sender": "0x5ed864e8f37dcb4f79c5172a815d1b3a9147eaab",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 37,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "A user sent 37 tiny, identical ETH payments of 0.0000 to a smart contract that moves money around. It's like a bunch of people dropping identical envelopes into a slot that hides who sent them, and then the slot moves them to another box. The total value was zero, so no cash actually changed hands, but the pattern looks suspicious.",
+          "roast": "Looks like someone tried to play the 'copy\u2011paste' game with ETH, scoring a solid 70 on the structuring rule (meaning every deposit was the same, like a choir singing the same note). Then, the engine gave a 60 on peel_chain_linear, because the 37 deposits were in a straight line\u2014like a line of dominoes falling one after another. And a 65 on bridge_hop, because they bounced the money through the CoW Protocol, a cross\u2011chain bridge\u2014think of it as sending a letter via a courier that changes the address mid\u2011route. With a composite score of 195, this is the crypto equivalent of a red flag on a detective's radar.",
+          "risk_verdict": "CRITICAL (rule score 195)",
+          "recommended_action": "Flag the wallet for manual review, investigate the origin of funds, monitor future activity, and consider adding the address to the watchlist if further suspicious patterns emerge."
+        },
+        {
+          "sender": "0x5c3593481cba011737e36ded62f1797c9f6afce1",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 6,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "Someone sent six tiny, identical amounts of ETH (each 0.0000, basically nothing) into a smart\u2011contract settlement address. It's like someone dropping a handful of pennies into a slot machine that hides who put them in. The sender's account is active and holds about 1.2 ETH, so the activity isn't due to a sudden burst of new funds.",
+          "roast": "This guy's wallet is doing the \"six\u2011pack\" trick, but the pack is all zeroes. Structuring (sending many small amounts to avoid detection) score 70? Yeah, he tried to play a game of \"who can send the smallest amount\" and the system gave him a gold star. Peel chain linear (a chain of identical small deposits that look like a conga line) score 60? He\u2019s lining up tiny coins like a conga line hoping nobody notices. Bridge hop (moving funds across chains via a bridge) score 65? He dropped those pennies into the CoW settlement and called it a cross\u2011chain hop\u2014like moving money from a piggy bank to a bank account just to change the name. The composite score of 195 tells us he\u2019s playing with the system, not a hero.",
+          "risk_verdict": "CRITICAL \u2014 the combination of structuring, peel chain, and bridge hop patterns indicates a high risk of layering and obfuscation.",
+          "recommended_action": "Flag this transaction for manual review by the AML team; consider further inquiry into the source of the funds and any potential links to known suspicious addresses."
+        },
+        {
+          "sender": "0x38e59dcce64ea3ddece4d98f77e70990fc8f430c",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 6,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 195.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 195)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xa883710b6dbf008a1cc25722c54583e35884a209",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 30,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 195.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 195)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xa60ded4c899e7560dc4ca56b57fbab25c90addeb",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 6,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "The wallet made six tiny deposits of 0.0000 ETH to the same smart contract, like dropping a dozen empty envelopes into the same mailbox. None of the money changed hands, but the pattern looks suspicious because it\u2019s all the same size and time\u2011aligned, which is a red flag for structuring. Think of it as someone trying to hide the fact that they\u2019re moving a single item by sending many empty packets.",
+          "roast": "This wallet is playing the 'six\u2011pack of zero' game, scoring 70 on structuring (meaning it\u2019s trying to split a single transaction into six identical tiny ones to avoid detection). The peel chain linear rule gave it 60, because it\u2019s like a row of dominoes all set to fall the same way. Bridge hop scored 65, which is basically the wallet saying 'I\u2019m just hopping over a bridge to a smart contract that looks like a fancy playground for trades.' The composite score of 195? That\u2019s like getting a perfect score on a test you never studied for.",
+          "risk_verdict": "CRITICAL \u2014 the transaction pattern demonstrates high\u2011risk structuring and layering with a bridge hop, warranting immediate review.",
+          "recommended_action": "Flag the wallet for manual compliance review, investigate the source of the ETH balance, and monitor for any subsequent suspicious activity or attempts to move funds through mixers. Consider freezing the account if additional red flags arise."
+        },
+        {
+          "sender": "0x4c5213672f972ae8e3d39d7e3e83d47d39e2f739",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 4,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "A user with a 242\u2011day\u2011old wallet sent four identical, zero\u2011value ETH transfers to a DeFi settlement contract. Even though each transfer was 0.0000 ETH, the pattern looks like someone trying to break a big amount into many tiny moves to hide it. Think of it like putting four identical coins into a slot machine so the bank can\u2019t see a large deposit.",
+          "roast": "The engine gave it a 70 on structuring (meaning the sender is trying to avoid detection by sending tiny amounts) and a 60 on peel_chain_linear (a peeling chain, like peeling a banana in four equal slices). It also hit bridge_hop with a 65 (the user is hopping across chains, like a secret agent using a tunnel to avoid the front desk). In plain English, it\u2019s like someone dropping four 0.0000 ETH coins into the same slot to make the bank think it\u2019s nothing. CRITICAL (rule score 195)",
+          "risk_verdict": "CRITICAL (rule score 195)",
+          "recommended_action": "CRITICAL (rule score 195)"
+        },
+        {
+          "sender": "0x80a68197d96f832ec658847510b231bc1f9375f9",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 3,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet sent three tiny amounts of ETH (each 0.0000, essentially zero) to a smart contract that settles trades. The sender still has about 0.14 ETH in the account and the wallet is a bit under three months old, so it looks like a fresh account doing a series of almost identical, very small deposits that might be trying to hide where the money came from.",
+          "roast": "Looks like someone tried to play hide\u2011and\u2011seek with their money, but forgot to actually hide it at all. Three identical zero\u2011value deposits? That\u2019s the blockchain\u2019s version of copy\u2011paste spam. The engine flagged it for structuring (the classic smurfing trick of splitting money into tiny parts), peel_chain_linear (the deposits line up like a domino chain, a layering pattern), and bridge_hop (the money bounced through a settlement contract like a bad DJ). If you want to avoid a red flag, just send a real amount once and maybe add a dash of randomness.",
+          "risk_verdict": "CRITICAL \u2014 the wallet\u2019s identical zero\u2011value deposits, sequential pattern, and bridge hop trigger high\u2011risk indicators that warrant immediate manual review.",
+          "recommended_action": "Flag the wallet for manual review, request source of funds and transaction purpose, and monitor subsequent activity for additional structuring or layering patterns."
+        },
+        {
+          "sender": "0x1b2e668df159c7e06fec46bfc5949d0f7029ec04",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 3,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "Three tiny deposits of 0.0000 ETH were sent from the same wallet to a decentralized protocol that moves funds across blockchains. It\u2019s like someone dropping three identical coins into a slot machine that then shuffles them around, making it hard to see where they started. The sender\u2019s wallet, while only a few months old, has been very active, suggesting a possible attempt to hide the origin of those little amounts.",
+          "roast": "Looks like someone tried the \"Zero ETH\" trick: three zero\u2011eth deposits, like a magician pulling a rabbit from a hat, but the hat was actually a cross\u2011chain bridge. The structuring score of 70 (meaning the engine sees the same amount repeated like a kid putting the same marble in a slot) shows they\u2019re trying to avoid detection by breaking a single transaction into identical parts. The peel_chain_linear score of 60 (a pattern where each deposit is a relay to the next) indicates a layering attempt. The bridge_hop score of 65 (meaning the funds hop across chains, like a passport stamp) adds another layer of obfuscation. Bottom line: the engine thinks this is a classic smurfing & layering combo.",
+          "risk_verdict": "CRITICAL (rule score 195)",
+          "recommended_action": "Flag the account for enhanced due diligence and request additional transaction context from the sender. Consider initiating a formal investigation per AML policy."
+        },
+        {
+          "sender": "0xb1ca4a18aff443656f407fa8be3533ff27dde911",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 195,
+          "risk_level": "CRITICAL",
+          "tx_count": 4,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "structuring",
+            "peel_chain_linear",
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "bridge_hop": 65
+          },
+          "what_happened": "The wallet sent four identical, practically empty ETH transfers\u2014think of it as dropping four empty paper cups into a slot that hides who\u2019s handing them over. The total value is zero, so no money actually moved, but the pattern looks like someone trying to shuffle tiny pieces of a puzzle through a chain of exchanges. The final destination is a CoW Protocol settlement contract, which is like a digital escrow service that can hide the original source of funds.",
+          "roast": "Score 70 on structuring: that\u2019s the same as a magician who keeps putting empty coins in a hat\u2014every trick is the same, no surprise! Score 60 on peel_chain_linear: four back\u2011to\u2011back \u201czero\u2011ETH\u201d moves, like a drummer playing the same beat over and over\u2014layering, but not a real drum solo. Score 65 on bridge_hop: the wallet hops to a cross\u2011chain settlement, which is the blockchain equivalent of a passport with a one\u2011way ticket. In short, this is a textbook case of smurfing and layering with a sprinkle of cross\u2011chain flair\u2014like a kid trying to hide a pizza in a backpack that only holds empty boxes.",
+          "risk_verdict": "CRITICAL: The combination of structuring, peel chain, and bridge hop patterns presents a high likelihood of layering and obfuscation, necessitating immediate human review.",
+          "recommended_action": "Flag the transaction for manual investigation; request source\u2011of\u2011funds documentation and transaction context from the sender. Consider placing a temporary hold on the wallet\u2019s balance pending further analysis."
+        },
+        {
+          "sender": "0x7249c6f7434dd3d884a2e1eb19b57076d5af6f67",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 130,
+          "risk_level": "HIGH",
+          "tx_count": 41,
+          "total_eth": 0,
+          "total_token_usd": 17811.755338,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 130
+          },
+          "what_happened": "A single wallet sent 41 small payments, mostly $100 or $500 in USDC and USDT, to a decentralized trading protocol that settles trades. Think of it like a person sending a bunch of identical envelopes to a mailbox that hides who sent them, so no one can trace the original sender easily. The total amount was about $17,800 worth of stablecoins, which are basically digital versions of the US dollar.",
+          "roast": "This address is basically playing a game of \"Hide and Seek\" with your money. It hit a 130 on stablecoin_mixing (meaning the pattern looks like someone is trying to hide their money by layering stablecoins). 41 transfers, 21 round numbers\u2014it's like a math teacher's nightmare: 100, 100.1480, 500, etc. The CoW Protocol GPv2Settlement is just a fancy way of saying \"let's shuffle these coins around\" and nobody knows where they came from. If this was a bank, they'd be asking for a passport, a birth certificate, and a confession.",
+          "risk_verdict": "HIGH \u2014 the transaction pattern triggers the stablecoin_mixing rule with a composite score of 130, indicating potential layering activity.",
+          "recommended_action": "Flag the transaction for manual compliance review. Investigate the source of the stablecoins and the sender's wallet history, and consider requesting additional KYC information if available."
+        },
+        {
+          "sender": "0x1a6a47f4080eaa48ee66aaa8893c3ae9edd0553d",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 74,
+          "total_eth": 0,
+          "total_token_usd": 14846.870323612402,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "Someone sent a bunch of stablecoins (USDT and USDC) in many small chunks to a decentralized exchange settlement contract. Think of it like dropping a pizza box into a slot that hides who bought it, then the pizza is delivered to the kitchen. HIGH (rule score 110)",
+          "roast": "Looks like the sender decided to play hide\u2011and\u2011seek with a $15k pizza, but forgot the rules of the game. The wallet's empty ETH balance is the perfect cover for a \"no\u2011eth\" identity, like a secret agent who only talks in USDT. The CoW Protocol is basically the pizza delivery guy, and the sender is just sending the pizza to the kitchen in 74 tiny slices\u2014like a bad magician who can't keep the audience from seeing the trick. HIGH (rule score 110)",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag the transaction for manual compliance review and request additional provenance information from the sender or associated accounts. HIGH (rule score 110)"
+        },
+        {
+          "sender": "0xb5378cf59f35e6e8bf5679ec6c22d1c5ff912433",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 57,
+          "total_eth": 0,
+          "total_token_usd": 36543.349213664726,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xebef2aed95a5219ad2da2942ad27df26c68620df",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 60,
+          "total_eth": 0,
+          "total_token_usd": 11898.547802999996,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A single wallet moved almost $12,000 worth of USDT and USDC into a decentralized exchange settlement address in 60 separate transfers, each less than $250. It's like dropping a stack of coins into a vending machine that doesn't keep a record of who paid. The transfers are evenly split between two stablecoins, making the total look like a jumble of small deposits.",
+          "roast": "Looks like this wallet decided to play the blockchain version of a coin\u2011toss game, sending 60 little coins into a settlement address that acts like a cash\u2011only cashier who never asks for ID. The AML engine gave it a 110 on the stablecoin_mixing rule (which means the system thinks this is a classic mixing pattern to hide the source). With a total of $11,899, it\u2019s not a billionaire, but it\u2019s big enough to get the compliance team\u2019s attention. The receiver, 0x9008..., is a settlement address for the CoW Protocol GPv2Settlement\u2014think of it as the blockchain\u2019s version of a drop\u2011box that keeps your identity under wraps. If you thought this was a normal trade, think again\u2014this pattern screams \"let's keep the source a secret.\"",
+          "risk_verdict": "HIGH \u2014 the pattern of multiple small stablecoin transfers to a settlement address is a classic indicator of potential mixing activity.",
+          "recommended_action": "Flag the transaction for manual review. HIGH (rule score 110)"
+        },
+        {
+          "sender": "0x8f10b468b06c6fd214b65f87778827f7d113f996",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 21,
+          "total_eth": 0,
+          "total_token_usd": 364519.368273135,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A single wallet sent 21 little packets of stablecoins (like $USDC and $USDT) to a fancy settlement service that combines trades for other people, adding up to about $364,000. The transfers were split into many tiny chunks, maybe to make the trail harder to follow\u2014think of it as putting money in a bunch of different envelopes before dropping them into a drop box that hides the sender.",
+          "roast": "So this guy tried to play hide\u2011and\u2011seek with his $364K by sending it in 21 tiny envelopes to CoW Protocol\u2019s settlement box. He scored a whopping 110 on the stablecoin_mixing radar (which basically says, \u201chey, someone is shuffling stablecoins like a magician\u2019s card trick\u201d). That\u2019s higher than a regular grocery trip, so the bot\u2019s raising its eyebrows. The only thing missing is a real identity\u2014just a bunch of addresses and a lot of small amounts. He\u2019s basically the crypto version of a cashier who splits a bill into quarters to avoid the cashier\u2019s eye.",
+          "risk_verdict": "HIGH \u2014 the composite score of 110 and the pattern of numerous stablecoin transfers to a settlement protocol indicate a high risk of mixing activity.",
+          "recommended_action": "Flag the sender\u2019s wallet for enhanced monitoring and request source\u2011of\u2011funds documentation. Consider placing a temporary hold on further large stablecoin transfers until a human review confirms legitimacy."
+        },
+        {
+          "sender": "0x749c9cc5909583663efc517ef83b8739622e121e",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 42676.630914,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A single batch of 42,677 USDT (a type of stablecoin that behaves like U.S. dollars on the blockchain) was sent to a smart\u2011contract address that handles trade settlements. Think of it like dropping a big cash package into a lockbox that only the settlement system can open, but you don\u2019t know who actually dropped it in. The sender\u2019s wallet is basically empty of ETH and has no visible history, so it\u2019s hard to trace where the money came from.",
+          "roast": "So this address is playing hide\u2011and\u2011seek with a $42k cash\u2011box, and the only clue is a stablecoin transfer to a settlement protocol that\u2019s as mysterious as a secret handshake at a crypto club. HIGH (rule score 110) It\u2019s like someone used a blender to mix your cash and then poured it into a vending machine that only the settlement system can open. If you\u2019re hoping for a clean audit trail, you\u2019ll need to dig deeper than the blockchain\u2019s front\u2011door photo. This is a classic red flag for layering, not a legit payment to a merchant.",
+          "risk_verdict": "HIGH \u2013 the transaction matches the stablecoin mixing pattern with a composite score of 110, exceeding the high\u2011risk threshold.",
+          "recommended_action": "Flag the transaction for manual compliance review; investigate the sender\u2019s source of funds and any subsequent transactions to assess potential layering or structuring."
+        },
+        {
+          "sender": "0xaddc26a3854feabfd20d6bf658254088d83a425a",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 3,
+          "total_eth": 0,
+          "total_token_usd": 1749463.9909981142,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "HIGH (rule score 110) Think of it like dropping a huge envelope of cash into a box that splits it into smaller envelopes before sending them on. The transfer included one big batch of VERIDIA tokens and two tiny USDT amounts, all ending up at the CoW Protocol settlement address.",
+          "roast": "HIGH (rule score 110) The AML engine gave it a 110, which is the same score you\u2019d get for putting a hundred-dollar bill in a slot and watching the slot machine spin. He\u2019s basically doing a crypto version of a bank\u2011run: dumping a big stack into a black hole and hoping the exit looks clean. HIGH (rule score 110)",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Initiate a manual review of the sender\u2019s source of funds, request transaction metadata, and consider filing a SAR if further red flags emerge."
+        },
+        {
+          "sender": "0xe1baeb65617cad39d23d5d80c50ae3d734ba6fdc",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 7,
+          "total_eth": 0,
+          "total_token_usd": 54903.182676,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A wallet sent about $55,000 worth of stablecoins (USDT and USDC) to a decentralized trading protocol in a very neat, almost identical sequence, like dropping a set of coins into a vending machine slot one by one to make it look like random purchases. The transfers were split into 7 almost identical amounts, each about $7,800, which makes it look like someone is trying to hide where the money came from.",
+          "roast": "Looks like someone tried to make their stablecoins look like a polite dance troupe, sending 7 identical steps to the CoW Protocol. The engine gave it a 110, which is basically a red flag saying \u2018we see a pattern, buddy.\u2019 It\u2019s like watching a magician shuffle the same deck over and over. If this was a real person, they'd be better off using a paper trail than a blockchain. HIGH (rule score 110)",
+          "risk_verdict": "HIGH \u2014 the uniform transfer amounts to a settlement contract and the engine's composite score of 110 indicate a high likelihood of suspicious mixing activity.",
+          "recommended_action": "Flag the transaction for manual review by compliance. Verify the source of the funds, assess whether the sender has a legitimate business purpose for using the CoW Protocol, and consider additional due diligence such as KYC checks or asset tracing."
+        },
+        {
+          "sender": "0x51c72848c68a965f66fa7a88855f9f7784502a7f",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 11,
+          "total_eth": 0,
+          "total_token_usd": 49019.87714544653,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A single wallet sent about $49,000 worth of various tokens to a smart contract that settles trades. It split the money into 11 smaller pieces, like a mailman dropping packages into a hidden mailbox so no one can easily trace the original sender.",
+          "roast": "This wallet tried to play hide\u2011and\u2011seek with $49k, sending 11 tiny packages like a kid dropping candy in a box to avoid the parents' watchful eye. The biggest candy bar was 32k WETH, because obviously someone thought ETH should be counted in the candy box. The rest? 14.5k ENA, 800 USDC, 635 USDT, 338 LINK, and a handful of fractions that look like they came from a vending machine that accidentally swallowed your change. The CoW Protocol GPv2Settlement (intent settlement) is a smart contract that finalizes trades (like a bank clearing house), but it\u2019s being used as a mixing stage.",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag the transaction for manual review, request source and destination wallet details, and monitor for further related activity. HIGH (rule score 110)"
+        },
+        {
+          "sender": "0x52aa899454998be5b000ad077a46bbe360f4e497",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 12,
+          "total_eth": 0,
+          "total_token_usd": 15312.502780535158,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A person (or a bot) sent a bunch of stablecoins\u2014USDT and USDC\u2014through 10 different little transfers that all ended up in a decentralized trading platform called CoW Protocol. Think of it as putting cash into a series of ATMs, each time making a slightly different change, and then dropping the money into a black box where you can\u2019t see who originally handed it to you. The total amount moved was about $15,300 worth of digital coins.",
+          "roast": "So, the wallet decided to play hide\u2011and\u2011seek with 10 tiny cash drops, each one a little different, and then tossed them into a smart\u2011contract \u2018black hole\u2019 (CoW Protocol) that\u2019s basically a fancy, invisible vending machine. HIGH (rule score 110) HIGH (rule score 110)",
+          "risk_verdict": "HIGH \u2014 the transaction pattern triggers the stablecoin_mixing rule with a composite score of 110, indicating a high likelihood of illicit structuring.",
+          "recommended_action": "HIGH (rule score 110)"
+        },
+        {
+          "sender": "0x991cec65a906b5727b32d175cfc550673a20ed17",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 20000.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A user sent $20,000 worth of USDT (a stablecoin that pretends to be the U.S. dollar) to a smart contract on the CoW Protocol. This is like dropping a package into a slot that hides who sent it, because the contract receives the funds and then distributes them without revealing the original sender. The transaction was the only one in that block and involved a single sender.",
+          "roast": "So this wallet, which apparently has no record of how old it is or how many times it sent money, just decided to throw $20k into a settlement contract like it's a secret club membership fee. HIGH (rule score 110) HIGH (rule score 110) Basically, the engine is waving a red flag like a traffic cop in a blackout.",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag the transaction for manual review, request source of funds documentation, and consider additional due diligence on the sender's wallet and any related addresses."
+        },
+        {
+          "sender": "0x000000000004444c5dc75cb358380d2e3de08a90",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 13,
+          "total_eth": 0,
+          "total_token_usd": 2507167.1933326866,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A user sent a bunch of stablecoins into a settlement smart contract that acts like a vending machine, making it hard to see where the money originally came from. HIGH (rule score 110) In short, it\u2019s like dropping a stack of envelopes into a slot that hides who wrote the checks.",
+          "roast": "So this wallet decided to throw $2.5 million of stablecoins into the CoW Protocol GPv2Settlement, which is basically the blockchain\u2019s version of a secret sauce that hides the origin of funds. The engine gave it a 110 score on the stablecoin_mixing rule (meaning the pattern looks like someone is trying to wash money by sending it to a settlement contract). 13 little hops, 11 of them stablecoins, and the whole thing looks like a high\u2011stakes game of hide\u2011and\u2011seek. If you\u2019re looking for a good mystery, this is the one\u2014just don't forget to bring your magnifying glass!",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag the activity for internal review, request additional transaction context from the wallet owner, and consider notifying the compliance team for possible escalation to regulatory authorities if warranted."
+        },
+        {
+          "sender": "0xffd3d054713b568d91c76d4bed5f4bd376faecc5",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 11625.757814,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xda0c1131cbfea2194ae5a64c41cb990170094482",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 6,
+          "total_eth": 0,
+          "total_token_usd": 75348.269279,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A single wallet sent about $75,000 worth of stablecoins\u2014USDC and USDT\u2014in six separate transactions to a smart contract that settles trades. Think of it like someone dropping a bunch of identical envelopes into a box that hides who actually mailed them. The smart contract then splits the money into different trade orders, so the original sender's identity is blurred across multiple trades.",
+          "roast": "So, this guy just tried to play hide-and-seek with his $75k in stablecoins, sending them to a settlement contract that\u2019s basically the blockchain\u2019s version of a Swiss bank. He used the stablecoin_mixing rule (meaning the engine flagged the pattern of splitting stablecoins across several small transfers to a mixing-like contract) and hit a solid 110 points\u2014like getting a gold star for being the most confusing mover in a room full of accountants. It\u2019s like watching someone try to hide their cash by tossing it into a blender, only to find the smoothie is still made of the same ingredients. If you\u2019re looking for a good way to keep the money\u2019s origin a mystery, congratulations\u2014you\u2019ve just invented a new form of digital paper trail obfuscation.",
+          "risk_verdict": "HIGH \u2014 the transaction meets the high-risk stablecoin mixing pattern with a composite score of 110, indicating potential obfuscation of the source.",
+          "recommended_action": "Flag the wallet for manual investigation and trace the source of the stablecoins. Consider cross-referencing the sender\u2019s address against internal and external watchlists, and request additional information if available."
+        },
+        {
+          "sender": "0x21072fc45e7cb0a8abd98740549421ea7141bb69",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 265665.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xad7147d5e8733d87df5c6920d3521a46d71d5298",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 64762.584791999994,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x7411f667ceb2c7049f38c2b4dd78a9ec3f757cbe",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 15685.413611,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x546c72cb38ddde3a01ee70b1ac40060f04fbdd29",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 25539.238423,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x2e69797d37e888d62974a1ffa20816a5f55f898d",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 13211.693089,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x51497124089abdec0d3749d6db082f66ca03750a",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 110,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 199999.4,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 110
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "HIGH (rule score 110)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x12be7ac011b4c7795dde991f8d3a1df19d653e17",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 4250.283332049248,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xf4792f0c8307634c9f9f9547502f97bb6fc79378",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 11,
+          "total_eth": 0,
+          "total_token_usd": 1604.8174981195264,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xde758db54c1b4a87b06b34b30ef0a710dc35388f",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 266.821684,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x4714ce6d8609f4cf8740f79c72d1947b90d108a8",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 1199.8138800000002,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xe2cd94c812aed174b2e09750ff146f45d845d668",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 199.11199,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x2beb35e78c9427899353c41c96bcc96c5647ec63",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 357.361155,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x25ed652355e89d1b7a877359fdde0a8ca4205a19",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 5011.920393,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xba12222222228d8ba445958a75a0704d566bf2c8",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 3,
+          "total_eth": 0,
+          "total_token_usd": 47.534940459999994,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x397ff1542f962076d0bfe58ea045ffa2d347aca0",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 19.749263,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xba67cd571d8d2f28900f61f4d89ac0449badad8c",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 20.374739,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xa9e3b99d951df6444a799749655fbbb23557277e",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 3.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x8eb7974b5948ccfeb146f8562cb9a95e6f1e9ed1",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 1.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xa361a1246b1d56a0f6cc39b8c0743592b08037f0",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1500.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc7bbec68d12a0d1830360f8ec58fa599ba1b0e9b",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 4,
+          "total_eth": 0,
+          "total_token_usd": 188.32653587048947,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x90f52ed8e2afda5238c50ed48a39140248630f10",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 0.5,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xf43cbdd3c290f55eb01bdfa78c21979accbd93ef",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 74.584186,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xdad2a161f7c8f3e8d4d649c2f07a4bfa239f1148",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 372.43,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x755f7acfb5402fbcc8ac0750a4d2d15c1f7f5592",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 3600.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x02ba86fbcd53bbd37bd688cf658481cbbd42c451",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 7.17279806,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x3416cf6c708da44db2624d63ea0aaef7113527c6",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 8.97775,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xc718dcc4e6bf28c818dbf7243a59311752adf8bc",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 8.99,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x00000000000014aa86c5d3c41765bb24e11bd701",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 50.602972,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x1ac1a8feaaea1900c4166deeed0c11cc10669d36",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 16.200268,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x04571c32a4e1c5f39bc3a238cb95b215058c432c",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 831.977693,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xa6e82811274511fa8f882418b0d6205a2a8abaa3",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 10.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xdb758df00dca843be0c8744629a2e78ad7bbf047",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 3,
+          "total_eth": 0,
+          "total_token_usd": 190.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xe0554a476a092703abdb3ef35c80e0d76d32939f",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 4,
+          "total_eth": 0,
+          "total_token_usd": 610.7852907710158,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x70fbd3b6f82bd3b244e18e5a4beff89c842e60ea",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 19.561411,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xe29771d17e879beae9be4b7127f3d5c7bbd50a36",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 345.68,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x585d44727129b9c69791b10238ca605932938b4f",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1000.191944,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x2507ef467319e195244220f0f236388ff7e5479b",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 1.0,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x941ddc62f8699f448e86c798e62520550616503d",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 244.141941,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xd2ab97f952e380cae3c0840f44f06d17a803eb37",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0,
+          "total_token_usd": 999.982588,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xabcd17a91ea31d643e79e81fe6ee84c49d1aa85e",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 32.792168,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xedb345962d31b511af8f6d3d93105dff74280cc6",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 20.76264,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x31373595f40ea48a7aab6cbcb0d377c6066e2dca",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 80,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0,
+          "total_token_usd": 124.681655,
+          "rules_triggered": [
+            "stablecoin_mixing"
+          ],
+          "rule_scores": {
+            "stablecoin_mixing": 80
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 80)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x664eeb033d68e13d2ad6933a496a62ce9a3060be",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x95480d3f27658e73b2785d30beb0c847d78294c7",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0xf3a3ab25347de13b6955868a88c4b25da6007a1f",
+          "receiver": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "receiver_label": "CoW Protocol GPv2Settlement (intent settlement)",
+          "risk_score": 65,
+          "risk_level": "MEDIUM",
+          "tx_count": 2,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "bridge_hop"
+          ],
+          "rule_scores": {
+            "bridge_hop": 65
+          },
+          "what_happened": "A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 65.",
+          "roast": "No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.",
+          "risk_verdict": "MEDIUM (rule score 65)",
+          "recommended_action": "Flag for manual review."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 5113,
-    "unique_senders": 3847,
+    "total_findings": 5183,
+    "unique_senders": 3873,
     "highest_score": 660,
-    "critical_count": 1171,
-    "high_count": 507,
-    "first_scan": "2026-03-26T17:34:41.399683+00:00",
-    "last_scan": "2026-11-22T23:38:53.177817+00:00"
+    "critical_count": 1182,
+    "high_count": 527,
+    "first_scan": "2026-03-26T19:00:58.471873+00:00",
+    "last_scan": "2026-11-23T06:30:48.008874+00:00"
   }
 }

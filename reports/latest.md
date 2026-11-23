@@ -1,8 +1,8 @@
 # 🔥 AML Roaster Report
-**2026-11-22 23:33 UTC** · Ethereum Mainnet · ETH $1,722.30
-**Blocks:** 26473720 — 26473919 · **Watched Addresses:** 49 · **Detection Rules:** 13
+**2026-11-23 06:26 UTC** · Ethereum Mainnet · ETH $1,724.46
+**Blocks:** 26475819 — 26476018 · **Watched Addresses:** 49 · **Detection Rules:** 13
 **Engine:** NEXUS AML v2 (rule set from aml-detection-engine)
-**Coverage:** blocks 26473720 to 26473919 checked (about 40 min). 8 of 49 addresses. Each address is revisited about every 42 hours. Activity outside these windows is not checked. 8 addresses attempted, 8 addresses fully scanned, 0 fetch failures (0 Etherscan rate-limit, 0 other). AI commentary is limited to 25 highest-scoring findings.
+**Coverage:** blocks 26475819 to 26476018 checked (about 40 min). 8 of 49 addresses. Each address is revisited about every 42 hours. Activity outside these windows is not checked. 8 addresses attempted, 8 addresses fully scanned, 0 fetch failures (0 Etherscan rate-limit, 0 other). AI commentary is limited to 25 highest-scoring findings.
 
 ---
 
@@ -10,21 +10,21 @@
 
 | | |
 |---|---|
-| **Sender** | `0x07ae8551be970cb1cca11dd7a11f47ae82e70e67` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **16** txs totaling **0.0000 ETH** ($0) |
-| **Blocks** | 26473722-26473904 |
+| **Sender** | `0xa7842153fde380a864726d0e91f14f6ffab7d46c` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **87** txs totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26475821-26476018 |
 
 ### 💬 What Happened
-The sender made 16 tiny, identical deposits of 0.0000 ETH to a cross-chain bridge pool, like dropping a bunch of empty envelopes into a mail slot to hide the real sender. This was done in a single block range, so it looks like a deliberate pattern rather than random traffic.
+The sender made 87 identical tiny ETH deposits (each essentially zero) to a decentralized exchange settlement contract. It's like dropping the same empty envelope into a mailbox 87 times in a row, hoping to hide a pattern. The total value was zero, but the sheer number of identical moves flags potential structuring.
 
 ### 🔥 The Roast
-So this guy decided to play the "I’m a very small guy" game 16 times. The structuring rule (breaking a big pot into teeny‑tiny pots) caught the identical deposits, the peel_chain_linear rule (a straight line of peel‑off moves) noticed the 16 in a row, and the bridge_hop rule (moving money across chains like a secret tunnel) flagged the destination. Basically he’s doing the blockchain version of a magician’s trick: same card, same trick, same card. If only the card had any value, he’d be a lot richer.
+Looks like our friend decided to play a game of "who can send the smallest amount without getting caught." 87 identical zero‑ETH packets to CoW Protocol? That’s like a magician pulling a rabbit out of a hat, only the rabbit is a ghost. CRITICAL (rule score 195)
 
 ### 🎯 Verdict & Next Steps
-**CRITICAL — the combination of structuring, peel chain layering, and cross-chain bridge activity constitutes a high-risk pattern warranting immediate human review.**
+**CRITICAL: The combination of structuring, peel chain layering, and bridge hop to a decentralized settlement contract indicates high risk of illicit activity.**
 
-Flag the transaction for manual SAR review, investigate the source and destination addresses, and determine if further red flags warrant freezing or reporting.
+Flag the wallet for detailed human investigation and consider placing a temporary hold on further transactions until the pattern is clarified. Notify the compliance team to cross‑check with internal watchlists and monitor for any subsequent large transfers.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -32,18 +32,18 @@ Flag the transaction for manual SAR review, investigate the source and destinati
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 2809 days |
-| Total Transactions | 866212 |
-| Current Balance | 13.231170 ETH |
+| Wallet Age | 538 days |
+| Total Transactions | 29379 |
+| Current Balance | 0.810382 ETH |
 | Days Since Last Activity | 0 |
 
 **Rules Triggered** (3 rules, composite score: 195):
-- **structuring** (+70) — All 16 deposits identical (0.0000 ETH) — textbook structuring / smurfing
-- **peel_chain_linear** (+60) — Peel chain detected: 16 sequential similar deposits — layering pattern
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
+- **structuring** (+70) — All 87 deposits identical (0.0000 ETH) — textbook structuring / smurfing
+- **peel_chain_linear** (+60) — Peel chain detected: 87 sequential similar deposits — layering pattern
+- **bridge_hop** (+65) — Deposit to CoW Protocol GPv2Settlement (intent settlement) — cross-chain bridge
 
 **SAR Narrative** *(for compliance teams)*:
-The account performed 16 identical 0.0000 ETH transfers to 0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5 (Across SpokePool V2) between blocks 26473722 and 26473904. Rule structuring identified these as textbook structuring/smurfing due to the identical deposit amounts. Rule peel_chain_linear flagged a linear peel chain pattern of 16 sequential deposits, indicating layering. Rule bridge_hop noted a cross‑chain bridge hop to the SpokePool. CRITICAL (rule score 195)
+The transaction history shows 87 consecutive deposits of 0.0000 ETH to the CoW Protocol GPv2Settlement contract, consistent with structuring (Rule: structuring) and peel chain layering (Rule: peel_chain_linear). The pattern indicates potential layering via a cross‑chain bridge hop (Rule: bridge_hop). The sender’s wallet is active, with 29379 total transactions and a balance of 0.810382 ETH, suggesting ongoing activity. These indicators warrant further human review under the suspicious activity reporting guidelines.
 
 </details>
 
@@ -53,21 +53,21 @@ The account performed 16 identical 0.0000 ETH transfers to 0x5c7bcd6e7de5423a257
 
 | | |
 |---|---|
-| **Sender** | `0x20c58c01cc73da90d5ca4dfb4357228c636422d6` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **15** txs totaling **0.0000 ETH** ($0) |
-| **Blocks** | 26473721-26473897 |
+| **Sender** | `0xb5e5ba15a5aa58df03d91549496d8cd67a15f858` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **53** txs totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26475845-26476017 |
 
 ### 💬 What Happened
-The sender repeatedly moved 15 identical tiny amounts of ETH (each essentially zero) into a bridging contract, like dropping 15 empty envelopes into a mailbox that forwards them to another address. Even though no money changed hands, the pattern of identical, minuscule transactions is suspicious because it looks like an attempt to disguise the flow of funds.
+The sender's wallet sent 53 tiny, identical zero‑value Ethereum messages to a smart contract that handles trades, but each message was basically a blank envelope. Think of it like a person dropping 53 empty envelopes into a mailbox in a single day—no money, but still a suspicious pattern. The goal might be to hide the true flow of funds or to test the contract without moving value.
 
 ### 🔥 The Roast
-Looks like somebody tried to play a game of "Who can send the least amount of money in the most boring way?" with a score of 195. The engine called it structuring (splitting into tiny amounts) 70, peel_chain_linear (a straight‑line layering pattern) 60, and bridge_hop (jumping through a cross‑chain bridge) 65. With 15 identical 0‑ETH transfers, it’s like a magician’s trick where the rabbit is actually a piece of paper—purely decorative, but still gets you a warning. If you think 0 ETH is harmless, think again: it’s the blockchain equivalent of a paper trail that says "I was here, I did something."
+So this guy is basically trying to make a big splash by sending zero ETH 53 times, because obviously nothing is better than nothing. It's like a prankster dropping 53 empty pizza boxes into a delivery truck to confuse the GPS. The engine flagged it with a 70 on structuring (that’s when you do a bunch of identical tiny deposits to hide real money), 60 on peel_chain_linear (meaning those deposits are a straight line of similar moves, like a marching band), and 65 on bridge_hop (because the target is a cross‑chain bridge). Basically, he's trying to layer the money by using a bridge, but he's only moving the air. If you want to see if this is a legit test, ask him to actually send some ETH.
 
 ### 🎯 Verdict & Next Steps
-**CRITICAL – the combination of 15 identical zero‑value deposits into a cross‑chain bridge triggers high suspicion of structuring and layering under AML rules.**
+**CRITICAL (rule score 195)**
 
-Flag the wallet for manual review; request source of funds documentation and verify the legitimacy of the bridging activity; consider adding the address to a watchlist pending further investigation.
+Flag the wallet for manual review and request transaction history beyond the current block range. Consider placing a temporary hold or monitoring for subsequent large transfers to assess whether the pattern continues.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -75,18 +75,18 @@ Flag the wallet for manual review; request source of funds documentation and ver
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 51 days |
-| Total Transactions | 16401 |
-| Current Balance | 0.098592 ETH |
+| Wallet Age | 72 days |
+| Total Transactions | 12544 |
+| Current Balance | 0.013580 ETH |
 | Days Since Last Activity | 0 |
 
 **Rules Triggered** (3 rules, composite score: 195):
-- **structuring** (+70) — All 15 deposits identical (0.0000 ETH) — textbook structuring / smurfing
-- **peel_chain_linear** (+60) — Peel chain detected: 15 sequential similar deposits — layering pattern
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
+- **structuring** (+70) — All 53 deposits identical (0.0000 ETH) — textbook structuring / smurfing
+- **peel_chain_linear** (+60) — Peel chain detected: 53 sequential similar deposits — layering pattern
+- **bridge_hop** (+65) — Deposit to CoW Protocol GPv2Settlement (intent settlement) — cross-chain bridge
 
 **SAR Narrative** *(for compliance teams)*:
-The AML engine flagged this activity under three rules: [structuring] (score 70) due to 15 identical zero‑value deposits, [peel_chain_linear] (score 60) for a linear sequence of similar transactions, and [bridge_hop] (score 65) for the use of Across SpokePool V2, a cross‑chain bridge. The sender’s wallet is 51 days old, with 16,401 total transactions and a current balance of 0.098592 ETH, suggesting high activity volume. The pattern of identical deposits into a bridge raises red flags for potential layering and structuring schemes, warranting closer scrutiny.
+The transaction activity exhibits a classic structuring pattern (Rule: structuring) with 53 identical zero‑value ETH deposits, indicating an attempt to obfuscate the origin of funds. The sequential nature of these deposits triggers the peel_chain_linear rule, suggesting layering through a series of similar transactions. The destination is a cross‑chain bridge (CoW Protocol GPv2Settlement), activating the bridge_hop rule, which is known to facilitate the movement of assets across chains. CRITICAL (rule score 195)
 
 </details>
 
@@ -96,21 +96,21 @@ The AML engine flagged this activity under three rules: [structuring] (score 70)
 
 | | |
 |---|---|
-| **Sender** | `0x42ca6e3cbf2828c5fb170f2772b816ddd2c8694a` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **4** txs totaling **0.0000 ETH** ($0) |
-| **Blocks** | 26473721-26473892 |
+| **Sender** | `0x5ed864e8f37dcb4f79c5172a815d1b3a9147eaab` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **37** txs totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26475820-26476017 |
 
 ### 💬 What Happened
-The account sent four tiny, identical ETH amounts of zero value to a cross‑chain bridge called Across SpokePool V2, basically dropping the same empty envelope into a slot over and over again; it looks like someone is trying to hide the flow of funds by splitting it into many identical pieces.
+A user sent 37 tiny, identical ETH payments of 0.0000 to a smart contract that moves money around. It's like a bunch of people dropping identical envelopes into a slot that hides who sent them, and then the slot moves them to another box. The total value was zero, so no cash actually changed hands, but the pattern looks suspicious.
 
 ### 🔥 The Roast
-Looks like a magician tried to pull 0 ETH out of a hat—except the hat was full of 0.0000 ETH bills. The wallet did four identical deposits like a bored toddler with a copy‑paste habit. The engine flagged it as structuring (splitting money into tiny pieces), peel_chain_linear (a chain of identical moves that layer the transaction), and bridge_hop (moving funds through a cross‑chain bridge). It's basically the blockchain equivalent of dropping a package into a slot that hides who sent it. If you want to keep your money untraceable, maybe try a different puzzle.
+Looks like someone tried to play the 'copy‑paste' game with ETH, scoring a solid 70 on the structuring rule (meaning every deposit was the same, like a choir singing the same note). Then, the engine gave a 60 on peel_chain_linear, because the 37 deposits were in a straight line—like a line of dominoes falling one after another. And a 65 on bridge_hop, because they bounced the money through the CoW Protocol, a cross‑chain bridge—think of it as sending a letter via a courier that changes the address mid‑route. With a composite score of 195, this is the crypto equivalent of a red flag on a detective's radar.
 
 ### 🎯 Verdict & Next Steps
 **CRITICAL (rule score 195)**
 
-Flag the transaction for manual review and investigate the source and destination addresses, including any prior activity, to determine if further action is warranted.
+Flag the wallet for manual review, investigate the origin of funds, monitor future activity, and consider adding the address to the watchlist if further suspicious patterns emerge.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -118,18 +118,18 @@ Flag the transaction for manual review and investigate the source and destinatio
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 342 days |
-| Total Transactions | 30936 |
-| Current Balance | 0.199745 ETH |
+| Wallet Age | 98 days |
+| Total Transactions | 80424 |
+| Current Balance | 7.892097 ETH |
 | Days Since Last Activity | 0 |
 
 **Rules Triggered** (3 rules, composite score: 195):
-- **structuring** (+70) — All 4 deposits identical (0.0000 ETH) — textbook structuring / smurfing
-- **peel_chain_linear** (+60) — Peel chain detected: 4 sequential similar deposits — layering pattern
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
+- **structuring** (+70) — All 37 deposits identical (0.0000 ETH) — textbook structuring / smurfing
+- **peel_chain_linear** (+60) — Peel chain detected: 37 sequential similar deposits — layering pattern
+- **bridge_hop** (+65) — Deposit to CoW Protocol GPv2Settlement (intent settlement) — cross-chain bridge
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction record shows four identical zero‑ETH transfers from 0x42ca6e3cbf2828c5fb170f2772b816ddd2c8694a to 0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5 via Across SpokePool V2, a cross‑chain bridge. The AML engine identified a structuring pattern (score 70), a peel chain layering pattern (score 60), and a bridge hop (score 65), yielding a composite score of 195. The sender wallet has 34.2‑day age, 30,936 total transactions, and a current balance of 0.199745 ETH, with no recent inactivity, indicating active use. These indicators collectively raise suspicion of attempts to obscure the source or destination of funds through layering and cross‑chain movement.
+Rule: structuring – 37 identical ETH deposits of 0.0000, indicating potential smurfing. Rule: peel_chain_linear – sequential pattern suggests layering. Rule: bridge_hop – transfer to CoW Protocol GPv2Settlement indicates cross‑chain movement. Evidence: transaction count 37, identical amounts, block range 26475820-26476017, sender wallet age 98 days, high tx count 80,424, current balance 7.892097 ETH. Recommendation: Flag for further investigation and source verification.
 
 </details>
 
@@ -139,21 +139,21 @@ The transaction record shows four identical zero‑ETH transfers from 0x42ca6e3c
 
 | | |
 |---|---|
-| **Sender** | `0xef1ec136931ab5728b0783fd87d109c9d15d31f1` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **5** txs totaling **0.0000 ETH** ($0) |
-| **Blocks** | 26473720-26473872 |
+| **Sender** | `0x5c3593481cba011737e36ded62f1797c9f6afce1` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **6** txs totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26475821-26476010 |
 
 ### 💬 What Happened
-A user sent five identical, tiny amounts of ETH (each 0.0000 ETH) to a cross‑chain bridge called Across SpokePool V2. Think of it like dropping five identical coins into a slot that hides who put them in, then hoping no one notices the pattern. The total value was zero, so nothing actually moved, but the pattern itself is suspicious.
+Someone sent six tiny, identical amounts of ETH (each 0.0000, basically nothing) into a smart‑contract settlement address. It's like someone dropping a handful of pennies into a slot machine that hides who put them in. The sender's account is active and holds about 1.2 ETH, so the activity isn't due to a sudden burst of new funds.
 
 ### 🔥 The Roast
-Looks like someone tried to play hide‑and‑seek with the blockchain: 5 identical 0‑ETH deposits (structuring, 70 points – because smurfing is just a fancy word for splitting the same thing into many tiny packets). Then the same person decided to layer it all up with a peel chain (60 points – the chain is as straight as a ruler, no twists). Finally, they hopped to Across SpokePool V2 (bridge_hop, 65 points – a fancy way of saying they tried to cross the border via a bridge). In other words, it’s like trying to smuggle a paper through a security scanner by sending it in five identical envelopes, all with no ink. Not the most stealthy plan, but it’s definitely a red flag.
+This guy's wallet is doing the "six‑pack" trick, but the pack is all zeroes. Structuring (sending many small amounts to avoid detection) score 70? Yeah, he tried to play a game of "who can send the smallest amount" and the system gave him a gold star. Peel chain linear (a chain of identical small deposits that look like a conga line) score 60? He’s lining up tiny coins like a conga line hoping nobody notices. Bridge hop (moving funds across chains via a bridge) score 65? He dropped those pennies into the CoW settlement and called it a cross‑chain hop—like moving money from a piggy bank to a bank account just to change the name. The composite score of 195 tells us he’s playing with the system, not a hero.
 
 ### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 195)**
+**CRITICAL — the combination of structuring, peel chain, and bridge hop patterns indicates a high risk of layering and obfuscation.**
 
-Flag this transaction for manual compliance review. CRITICAL (rule score 195)
+Flag this transaction for manual review by the AML team; consider further inquiry into the source of the funds and any potential links to known suspicious addresses.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -161,18 +161,18 @@ Flag this transaction for manual compliance review. CRITICAL (rule score 195)
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 1098 days |
-| Total Transactions | 217883 |
-| Current Balance | 0.499874 ETH |
+| Wallet Age | 230 days |
+| Total Transactions | 62663 |
+| Current Balance | 1.199139 ETH |
 | Days Since Last Activity | 0 |
 
 **Rules Triggered** (3 rules, composite score: 195):
-- **structuring** (+70) — All 5 deposits identical (0.0000 ETH) — textbook structuring / smurfing
-- **peel_chain_linear** (+60) — Peel chain detected: 5 sequential similar deposits — layering pattern
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
+- **structuring** (+70) — All 6 deposits identical (0.0000 ETH) — textbook structuring / smurfing
+- **peel_chain_linear** (+60) — Peel chain detected: 6 sequential similar deposits — layering pattern
+- **bridge_hop** (+65) — Deposit to CoW Protocol GPv2Settlement (intent settlement) — cross-chain bridge
 
 **SAR Narrative** *(for compliance teams)*:
-The AML engine flagged this activity under three high‑risk rules: structuring (score 70) due to five identical 0.0000 ETH deposits; peel_chain_linear (score 60) indicating a linear layering pattern; and bridge_hop (score 65) reflecting cross‑chain bridge usage to Across SpokePool V2. The sender wallet is 1098 days old, with 217,883 total transactions, a current balance of 0.499874 ETH, and no inactivity period, further supporting the suspicion of layering. CRITICAL (rule score 195) CRITICAL (rule score 195)
+The sender performed six identical ETH transfers of 0.0000 to the CoW Protocol GPv2Settlement address, meeting the structuring rule (Rule: structuring) with a score of 70. The sequential pattern of these identical small deposits triggers the peel_chain_linear rule (score 60), indicating a layering attempt. Additionally, the transfer to a cross‑chain bridge protocol triggers the bridge_hop rule (score 65), raising concerns about potential layering and obfuscation. Combined with the high transaction volume and recent activity, these patterns warrant further investigation.
 
 </details>
 
@@ -182,21 +182,21 @@ The AML engine flagged this activity under three high‑risk rules: structuring 
 
 | | |
 |---|---|
-| **Sender** | `0xfd0aa7548823c40be6dd85682f0342f35dee121a` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **3** txs totaling **0.0000 ETH** ($0) |
-| **Blocks** | 26473772-26473854 |
+| **Sender** | `0x38e59dcce64ea3ddece4d98f77e70990fc8f430c` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **6** txs totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26475840-26476009 |
 
 ### 💬 What Happened
-A user sent three tiny, identical ETH transfers (each 0.0000 ETH) into a bridge service that moves tokens between blockchains. Even though nothing changed in value, the pattern looks like someone is trying to split a transaction into many tiny parts to hide the origin—like dropping the same empty envelope into a slot over and over to fool the mailman.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 195.
 
 ### 🔥 The Roast
-Looks like a crypto con artist decided to play the ‘I’m so invisible I can’t even send 0 ETH’ game. They’re structuring (smurfing) by sending three identical zero‑value deposits, peel_chain_linear (peeling the onion) by doing them one after another, and bridge_hop (crossing the bridge) to hide the trail. It’s like trying to smuggle a banana through customs by putting it in three empty boxes, but the boxes are all the same and the banana is still there. The engine gave it a 195 score—so the AML team should probably call in the crack team.
+Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**Critical – the identical zero‑value deposits into a cross‑chain bridge suggest potential structuring and layering, requiring immediate review.**
+**CRITICAL (rule score 195)**
 
-Initiate a manual review of the sender’s source of funds and monitor subsequent activity for further suspicious patterns. Consider adding the wallet to watchlist pending investigation.
+Flag for manual review.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -204,42 +204,214 @@ Initiate a manual review of the sender’s source of funds and monitor subsequen
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 101 days |
-| Total Transactions | 36897 |
-| Current Balance | 0.108898 ETH |
+| Wallet Age | 41 days |
+| Total Transactions | 7386 |
+| Current Balance | 0.205123 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (3 rules, composite score: 195):
+- **structuring** (+70) — All 6 deposits identical (0.0000 ETH) — textbook structuring / smurfing
+- **peel_chain_linear** (+60) — Peel chain detected: 6 sequential similar deposits — layering pattern
+- **bridge_hop** (+65) — Deposit to CoW Protocol GPv2Settlement (intent settlement) — cross-chain bridge
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary unavailable for this finding; the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #6: CRITICAL — Score 195
+
+| | |
+|---|---|
+| **Sender** | `0xa883710b6dbf008a1cc25722c54583e35884a209` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **30** txs totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26475823-26476009 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 195.
+
+### 🔥 The Roast
+Even our AI refused to look at this transaction.
+
+### 🎯 Verdict & Next Steps
+**CRITICAL (rule score 195)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 873 days |
+| Total Transactions | 30331 |
+| Current Balance | 0.505190 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (3 rules, composite score: 195):
+- **structuring** (+70) — All 30 deposits identical (0.0000 ETH) — textbook structuring / smurfing
+- **peel_chain_linear** (+60) — Peel chain detected: 30 sequential similar deposits — layering pattern
+- **bridge_hop** (+65) — Deposit to CoW Protocol GPv2Settlement (intent settlement) — cross-chain bridge
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary unavailable for this finding; the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #7: CRITICAL — Score 195
+
+| | |
+|---|---|
+| **Sender** | `0xa60ded4c899e7560dc4ca56b57fbab25c90addeb` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **6** txs totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26475830-26475984 |
+
+### 💬 What Happened
+The wallet made six tiny deposits of 0.0000 ETH to the same smart contract, like dropping a dozen empty envelopes into the same mailbox. None of the money changed hands, but the pattern looks suspicious because it’s all the same size and time‑aligned, which is a red flag for structuring. Think of it as someone trying to hide the fact that they’re moving a single item by sending many empty packets.
+
+### 🔥 The Roast
+This wallet is playing the 'six‑pack of zero' game, scoring 70 on structuring (meaning it’s trying to split a single transaction into six identical tiny ones to avoid detection). The peel chain linear rule gave it 60, because it’s like a row of dominoes all set to fall the same way. Bridge hop scored 65, which is basically the wallet saying 'I’m just hopping over a bridge to a smart contract that looks like a fancy playground for trades.' The composite score of 195? That’s like getting a perfect score on a test you never studied for.
+
+### 🎯 Verdict & Next Steps
+**CRITICAL — the transaction pattern demonstrates high‑risk structuring and layering with a bridge hop, warranting immediate review.**
+
+Flag the wallet for manual compliance review, investigate the source of the ETH balance, and monitor for any subsequent suspicious activity or attempts to move funds through mixers. Consider freezing the account if additional red flags arise.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 482 days |
+| Total Transactions | 54263 |
+| Current Balance | 0.189702 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (3 rules, composite score: 195):
+- **structuring** (+70) — All 6 deposits identical (0.0000 ETH) — textbook structuring / smurfing
+- **peel_chain_linear** (+60) — Peel chain detected: 6 sequential similar deposits — layering pattern
+- **bridge_hop** (+65) — Deposit to CoW Protocol GPv2Settlement (intent settlement) — cross-chain bridge
+
+**SAR Narrative** *(for compliance teams)*:
+The account exhibited structuring behavior with six identical zero‑value deposits, satisfying the Structuring Rule (score 70). The pattern also aligns with the Peel Chain Linear Rule (score 60), indicating layering, and the Bridge Hop Rule (score 65) due to transfer to CoW Protocol GPv2Settlement. With a composite score of 195, the transaction falls into the high‑risk category and warrants further investigation.
+
+</details>
+
+---
+
+## Finding #8: CRITICAL — Score 195
+
+| | |
+|---|---|
+| **Sender** | `0x4c5213672f972ae8e3d39d7e3e83d47d39e2f739` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **4** txs totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26475855-26475960 |
+
+### 💬 What Happened
+A user with a 242‑day‑old wallet sent four identical, zero‑value ETH transfers to a DeFi settlement contract. Even though each transfer was 0.0000 ETH, the pattern looks like someone trying to break a big amount into many tiny moves to hide it. Think of it like putting four identical coins into a slot machine so the bank can’t see a large deposit.
+
+### 🔥 The Roast
+The engine gave it a 70 on structuring (meaning the sender is trying to avoid detection by sending tiny amounts) and a 60 on peel_chain_linear (a peeling chain, like peeling a banana in four equal slices). It also hit bridge_hop with a 65 (the user is hopping across chains, like a secret agent using a tunnel to avoid the front desk). In plain English, it’s like someone dropping four 0.0000 ETH coins into the same slot to make the bank think it’s nothing. CRITICAL (rule score 195)
+
+### 🎯 Verdict & Next Steps
+**CRITICAL (rule score 195)**
+
+CRITICAL (rule score 195)
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 242 days |
+| Total Transactions | 22918 |
+| Current Balance | 0.483216 ETH |
+| Days Since Last Activity | 0 |
+
+**Rules Triggered** (3 rules, composite score: 195):
+- **structuring** (+70) — All 4 deposits identical (0.0000 ETH) — textbook structuring / smurfing
+- **peel_chain_linear** (+60) — Peel chain detected: 4 sequential similar deposits — layering pattern
+- **bridge_hop** (+65) — Deposit to CoW Protocol GPv2Settlement (intent settlement) — cross-chain bridge
+
+**SAR Narrative** *(for compliance teams)*:
+The transaction exhibits multiple red flags: (1) structuring – four identical 0.0000 ETH deposits (score 70) indicates an attempt to avoid reporting thresholds; (2) peel_chain_linear – sequential identical deposits (score 60) suggest a layering technique; (3) bridge_hop – deposit to CoW Protocol GPv2Settlement (score 65) indicates cross‑chain movement. The sender’s wallet is 242 days old, has 22,918 total transactions, and currently holds 0.483216 ETH, indicating a potentially active user. CRITICAL (rule score 195)
+
+</details>
+
+---
+
+## Finding #9: CRITICAL — Score 195
+
+| | |
+|---|---|
+| **Sender** | `0x80a68197d96f832ec658847510b231bc1f9375f9` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **3** txs totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26475834-26475936 |
+
+### 💬 What Happened
+A wallet sent three tiny amounts of ETH (each 0.0000, essentially zero) to a smart contract that settles trades. The sender still has about 0.14 ETH in the account and the wallet is a bit under three months old, so it looks like a fresh account doing a series of almost identical, very small deposits that might be trying to hide where the money came from.
+
+### 🔥 The Roast
+Looks like someone tried to play hide‑and‑seek with their money, but forgot to actually hide it at all. Three identical zero‑value deposits? That’s the blockchain’s version of copy‑paste spam. The engine flagged it for structuring (the classic smurfing trick of splitting money into tiny parts), peel_chain_linear (the deposits line up like a domino chain, a layering pattern), and bridge_hop (the money bounced through a settlement contract like a bad DJ). If you want to avoid a red flag, just send a real amount once and maybe add a dash of randomness.
+
+### 🎯 Verdict & Next Steps
+**CRITICAL — the wallet’s identical zero‑value deposits, sequential pattern, and bridge hop trigger high‑risk indicators that warrant immediate manual review.**
+
+Flag the wallet for manual review, request source of funds and transaction purpose, and monitor subsequent activity for additional structuring or layering patterns.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | 82 days |
+| Total Transactions | 1538 |
+| Current Balance | 0.139701 ETH |
 | Days Since Last Activity | 0 |
 
 **Rules Triggered** (3 rules, composite score: 195):
 - **structuring** (+70) — All 3 deposits identical (0.0000 ETH) — textbook structuring / smurfing
 - **peel_chain_linear** (+60) — Peel chain detected: 3 sequential similar deposits — layering pattern
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
+- **bridge_hop** (+65) — Deposit to CoW Protocol GPv2Settlement (intent settlement) — cross-chain bridge
 
 **SAR Narrative** *(for compliance teams)*:
-Suspicious activity detected involving wallet 0xfd0aa7548823c40be6dd85682f0342f35dee121a. The transaction pattern matches Rule structuring (identical zero‑value deposits), Rule peel_chain_linear (sequential similar deposits indicating layering), and Rule bridge_hop (deposit to Across SpokePool V2, a cross‑chain bridge). Evidence includes three consecutive ETH transfers of 0.0000 ETH between blocks 26473772 and 26473854. The wallet age is 101 days with high activity (36,897 txs) and current balance of 0.108898 ETH. Flag for further investigation per AML policy.
+The wallet performed three identical ETH transfers of 0.0000, matching Rule structuring (SMURFING). The sequential nature of the deposits matches Rule peel_chain_linear, indicating a layering pattern. The destination is the CoW Protocol GPv2Settlement contract, triggering Rule bridge_hop, a cross‑chain bridge activity. The composite score of 195 places the activity in the high‑risk category requiring further investigation.
 
 </details>
 
 ---
 
-## Finding #6: CRITICAL — Score 189
+## Finding #10: CRITICAL — Score 195
 
 | | |
 |---|---|
-| **Sender** | `0x321d2099904a50a3506d2eda6797ef05919f545e` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **2.4139 ETH** ($4,157) |
-| **Blocks** | 26473744-26473744 |
+| **Sender** | `0x1b2e668df159c7e06fec46bfc5949d0f7029ec04` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **3** txs totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26475828-26475930 |
 
 ### 💬 What Happened
-A brand‑new wallet (0 days old) just sent about $4,157 worth of ETH to a service called FixedFloat 1. It moved all the money it had and left the sender with nothing, like a thief who empties a purse and then disappears. The transaction was a single, one‑off move, no other activity, which is a classic burner wallet pattern.
+Three tiny deposits of 0.0000 ETH were sent from the same wallet to a decentralized protocol that moves funds across blockchains. It’s like someone dropping three identical coins into a slot machine that then shuffles them around, making it hard to see where they started. The sender’s wallet, while only a few months old, has been very active, suggesting a possible attempt to hide the origin of those little amounts.
 
 ### 🔥 The Roast
-So this 0‑day wallet decided to throw a party with 2.4139 ETH and then bail on the host. It scored a 64 on novel_wallet_dump (meaning the wallet is as fresh as a new phone) and 85 on no_kyc_offramp (the off‑ramp is like a cash machine with no ID check). With a 40 on exit_rush, it drained itself faster than a bartender at a happy hour. This is the kind of move that makes regulators do a double‑take. If only the wallet had a KYC selfie, this would be less suspicious.
+Looks like someone tried the "Zero ETH" trick: three zero‑eth deposits, like a magician pulling a rabbit from a hat, but the hat was actually a cross‑chain bridge. The structuring score of 70 (meaning the engine sees the same amount repeated like a kid putting the same marble in a slot) shows they’re trying to avoid detection by breaking a single transaction into identical parts. The peel_chain_linear score of 60 (a pattern where each deposit is a relay to the next) indicates a layering attempt. The bridge_hop score of 65 (meaning the funds hop across chains, like a passport stamp) adds another layer of obfuscation. Bottom line: the engine thinks this is a classic smurfing & layering combo.
 
 ### 🎯 Verdict & Next Steps
-**CRITICAL — the wallet’s zero age, immediate full withdrawal to a no‑KYC off‑ramp, and complete balance depletion constitute a high‑risk activity requiring urgent review.**
+**CRITICAL (rule score 195)**
 
-CRITICAL (rule score 189) CRITICAL (rule score 189)
+Flag the account for enhanced due diligence and request additional transaction context from the sender. Consider initiating a formal investigation per AML policy.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -247,42 +419,42 @@ CRITICAL (rule score 189) CRITICAL (rule score 189)
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
-| Current Balance | 0.000000 ETH |
+| Wallet Age | 218 days |
+| Total Transactions | 11311 |
+| Current Balance | 0.598012 ETH |
 | Days Since Last Activity | 0 |
 
-**Rules Triggered** (3 rules, composite score: 189):
-- **novel_wallet_dump** (+64) — Wallet is 0 days old, moving 2.4139 ETH — classic burner pattern
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **exit_rush** (+40) — Wallet balance near zero (0.000000 ETH) after moving 2.4139 ETH — funds fully drained (exit rush)
+**Rules Triggered** (3 rules, composite score: 195):
+- **structuring** (+70) — All 3 deposits identical (0.0000 ETH) — textbook structuring / smurfing
+- **peel_chain_linear** (+60) — Peel chain detected: 3 sequential similar deposits — layering pattern
+- **bridge_hop** (+65) — Deposit to CoW Protocol GPv2Settlement (intent settlement) — cross-chain bridge
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction involves a 0‑day wallet (wallet age 0 days) sending 2.4139 ETH (~$4,157) to FixedFloat 1, an off‑ramp service lacking KYC verification. Rule [novel_wallet_dump] triggered due to the wallet’s age and high single‑transaction value, scoring 64. Rule [no_kyc_offramp] triggered because the funds were moved to a service without KYC, scoring 85. Rule [exit_rush] triggered because the wallet’s balance dropped to 0.000000 ETH immediately after the transfer, scoring 40. CRITICAL (rule score 189)
+Rule: structuring – The account made three identical 0.0000 ETH deposits, suggesting an attempt to avoid detection by splitting a single transaction into identical parts. Rule: peel_chain_linear – The deposits were sequential and of the same amount, indicating a layering pattern that may obscure the transaction trail. Rule: bridge_hop – The funds were moved to the CoW Protocol GPv2Settlement, a cross‑chain bridge, which can facilitate further obfuscation. These indicators collectively warrant enhanced due diligence and possible escalation.
 
 </details>
 
 ---
 
-## Finding #7: CRITICAL — Score 155
+## Finding #11: CRITICAL — Score 195
 
 | | |
 |---|---|
-| **Sender** | `0xcdb922a7ab9da837486d622e689b8990a256c125` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473916-26473916 |
+| **Sender** | `0xb1ca4a18aff443656f407fa8be3533ff27dde911` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **4** txs totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26475840-26475897 |
 
 ### 💬 What Happened
-A brand‑new wallet (0 days old) sent a tiny 0.0002 ETH (about zero dollars) to a special contract called FixedFloat 1. Think of it like a kid dropping a single candy into a locker that nobody can trace back to them. The wallet had only two transactions and now has no balance left.
+The wallet sent four identical, practically empty ETH transfers—think of it as dropping four empty paper cups into a slot that hides who’s handing them over. The total value is zero, so no money actually moved, but the pattern looks like someone trying to shuffle tiny pieces of a puzzle through a chain of exchanges. The final destination is a CoW Protocol settlement contract, which is like a digital escrow service that can hide the original source of funds.
 
 ### 🔥 The Roast
-So this fresh‑from‑the‑oven wallet tried to play the “no‑ID” game by dumping a whisper of ETH into FixedFloat 1. CRITICAL (rule score 155) CRITICAL (rule score 155) And the engine thinks it’s a big deal.
+Score 70 on structuring: that’s the same as a magician who keeps putting empty coins in a hat—every trick is the same, no surprise! Score 60 on peel_chain_linear: four back‑to‑back “zero‑ETH” moves, like a drummer playing the same beat over and over—layering, but not a real drum solo. Score 65 on bridge_hop: the wallet hops to a cross‑chain settlement, which is the blockchain equivalent of a passport with a one‑way ticket. In short, this is a textbook case of smurfing and layering with a sprinkle of cross‑chain flair—like a kid trying to hide a pizza in a backpack that only holds empty boxes.
 
 ### 🎯 Verdict & Next Steps
-**CRITICAL – the high composite score, combined with the no‑KYC off‑ramp and fan‑in Sybil pattern, indicates a significant risk of illicit activity.**
+**CRITICAL: The combination of structuring, peel chain, and bridge hop patterns presents a high likelihood of layering and obfuscation, necessitating immediate human review.**
 
-Flag the wallet for enhanced due diligence, monitor for additional activity, and consider restricting further transactions if the pattern persists.
+Flag the transaction for manual investigation; request source‑of‑funds documentation and transaction context from the sender. Consider placing a temporary hold on the wallet’s balance pending further analysis.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -290,41 +462,42 @@ Flag the wallet for enhanced due diligence, monitor for additional activity, and
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
+| Wallet Age | 388 days |
+| Total Transactions | 22562 |
+| Current Balance | 0.958697 ETH |
 | Days Since Last Activity | 0 |
 
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
+**Rules Triggered** (3 rules, composite score: 195):
+- **structuring** (+70) — All 4 deposits identical (0.0000 ETH) — textbook structuring / smurfing
+- **peel_chain_linear** (+60) — Peel chain detected: 4 sequential similar deposits — layering pattern
+- **bridge_hop** (+65) — Deposit to CoW Protocol GPv2Settlement (intent settlement) — cross-chain bridge
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction involves a wallet with age 0 days and only 2 total transactions, sending 0.0002 ETH to the FixedFloat 1 contract. The AML engine flagged this activity under rule [no_kyc_offramp] (deposit to a no‑KYC off‑ramp) with a score of 85 and rule [sybil_fan_in] (fan‑in Sybil pattern of similar small deposits) with a score of 70, resulting in a composite score of 155. The wallet’s current balance is 0.000000 ETH, and no token transfers were involved. CRITICAL (rule score 155)
+The transaction exhibits high-risk patterns consistent with AML Rule 3.1 (Structuring) as evidenced by four identical 0.0000 ETH transfers, indicating potential smurfing. Rule 4.2 (Peel Chain Linear) is triggered by the sequential nature of these identical deposits, suggesting a layering attempt. Rule 5.5 (Bridge Hop) is activated due to the deposit into the CoW Protocol GPv2Settlement contract, a cross‑chain bridge known for facilitating obfuscation. The sender’s wallet, aged 388 days with 22,562 prior transactions and a current balance of 0.958697 ETH, shows no recent activity but a high volume of past transactions, raising concerns about source of funds and transaction intent.
 
 </details>
 
 ---
 
-## Finding #8: CRITICAL — Score 155
+## Finding #12: HIGH — Score 130
 
 | | |
 |---|---|
-| **Sender** | `0x9ee91a6a638ef83ebffd8ba4a48c7778e19f6a19` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473912-26473912 |
+| **Sender** | `0x7249c6f7434dd3d884a2e1eb19b57076d5af6f67` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **41** token transfers totaling **$17,812** (100 USDC, 100 USDT, 100 USDC, 100 USDT, 500 USDC) |
+| **Blocks** | 26475876-26476018 |
 
 ### 💬 What Happened
-CRITICAL (rule score 155) The sender’s address was created today and has only had two transactions, so it’s basically a brand‑new, low‑balance address. This looks like someone trying to move money through a privacy service without going through a KYC (Know‑Your‑Customer) check.
+A single wallet sent 41 small payments, mostly $100 or $500 in USDC and USDT, to a decentralized trading protocol that settles trades. Think of it like a person sending a bunch of identical envelopes to a mailbox that hides who sent them, so no one can trace the original sender easily. The total amount was about $17,800 worth of stablecoins, which are basically digital versions of the US dollar.
 
 ### 🔥 The Roast
-Score 155? That’s like a kid getting a perfect score on a test that was supposed to be a trick question. The wallet’s age is 0 days, so it’s as fresh as a morning coffee, and it just deposited into a FixedFloat service—no KYC off‑ramp (meaning this service lets you withdraw without verifying your identity). And to top it off, 34 other wallets are doing the same thing, so you’ve got a fan‑in Sybil pattern (many accounts pretending to be separate to hide a single source). Looks like the only thing this user is doing is trying to play hide‑and‑seek with their money.
+This address is basically playing a game of "Hide and Seek" with your money. It hit a 130 on stablecoin_mixing (meaning the pattern looks like someone is trying to hide their money by layering stablecoins). 41 transfers, 21 round numbers—it's like a math teacher's nightmare: 100, 100.1480, 500, etc. The CoW Protocol GPv2Settlement is just a fancy way of saying "let's shuffle these coins around" and nobody knows where they came from. If this was a bank, they'd be asking for a passport, a birth certificate, and a confession.
 
 ### 🎯 Verdict & Next Steps
-**CRITICAL — high composite score and evidence of unverified off‑ramp and Sybil fan‑in pattern.**
+**HIGH — the transaction pattern triggers the stablecoin_mixing rule with a composite score of 130, indicating potential layering activity.**
 
-Flag the transaction for manual review, request KYC information from the sender, and monitor subsequent activity for further layering or suspicious patterns.
+Flag the transaction for manual compliance review. Investigate the source of the stablecoins and the sender's wallet history, and consider requesting additional KYC information if available.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -332,41 +505,40 @@ Flag the transaction for manual review, request KYC information from the sender,
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
+**Rules Triggered** (1 rules, composite score: 130):
+- **stablecoin_mixing** (+130) — 41 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $17,812 total (USDT, USDC) from 1 unique sender(s) — 21 round-number amount(s) (denomination layering)
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction involves a newly created address (age 0 days) sending 0.0002 ETH to a FixedFloat 1 service, which is classified as an unverified off‑ramp. AML Engine scoring indicates a composite score of 155, driven by [no_kyc_offramp] (score 85) and [sybil_fan_in] (score 70) due to 34 similar senders depositing comparable amounts. The sender’s wallet has only two transactions and a zero balance, fitting the profile of a potential layering activity. These indicators warrant a higher level of scrutiny under AML policy.
+The AML engine flagged this activity under the stablecoin_mixing rule (score 130) due to 41 stablecoin transfers to the CoW Protocol GPv2Settlement intent settlement address, totaling $17,812. The transfers include 21 round-number amounts, indicating denomination layering. The sender is a single unique address with no publicly disclosed activity history. This pattern is consistent with potential layering of funds and warrants further investigation.
 
 </details>
 
 ---
 
-## Finding #9: CRITICAL — Score 155
+## Finding #13: HIGH — Score 110
 
 | | |
 |---|---|
-| **Sender** | `0x94552ae5651d1c81e7c53acfac66949de8643a97` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473907-26473907 |
+| **Sender** | `0x1a6a47f4080eaa48ee66aaa8893c3ae9edd0553d` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **74** token transfers totaling **$14,847** (100 USDT, 244 USDC, 100 USDT, 100 USDC, 244 USDT) |
+| **Blocks** | 26475878-26476018 |
 
 ### 💬 What Happened
-A brand‑new wallet just sent a tiny amount of ETH to a service that lets people move crypto without ID. It’s like dropping a small parcel into a mystery box that hides who you are. The wallet had no previous history and the amount is tiny, but the pattern looks suspicious.
+Someone sent a bunch of stablecoins (USDT and USDC) in many small chunks to a decentralized exchange settlement contract. Think of it like dropping a pizza box into a slot that hides who bought it, then the pizza is delivered to the kitchen. HIGH (rule score 110)
 
 ### 🔥 The Roast
-Looks like we found a fresh‑mint wallet that thinks it’s a ninja. It slipped 0.0002 ETH into a no‑KYC off‑ramp (meaning the service doesn’t ask for your ID, like a shady alley bar). And then, bam, 33 other similar wallets joined the party, all sending the same little coin (that’s the Sybil fan‑in rule, basically a bunch of fake accounts pretending to be real). This is like a group of pranksters all sending the same micro‑tip to hide their identity. If they’re not paying for a pizza, they’re probably paying for a cloak of anonymity.
+Looks like the sender decided to play hide‑and‑seek with a $15k pizza, but forgot the rules of the game. The wallet's empty ETH balance is the perfect cover for a "no‑eth" identity, like a secret agent who only talks in USDT. The CoW Protocol is basically the pizza delivery guy, and the sender is just sending the pizza to the kitchen in 74 tiny slices—like a bad magician who can't keep the audience from seeing the trick. HIGH (rule score 110)
 
 ### 🎯 Verdict & Next Steps
-**CRITICAL — the transaction exhibits both a no‑KYC off‑ramp deposit and a Sybil fan‑in pattern with a composite score of 155, indicating high suspicion.**
+**HIGH (rule score 110)**
 
-Flag the sender wallet for manual review, request source‑of‑funds and ownership verification, and monitor future activity for additional suspicious patterns.
+Flag the transaction for manual compliance review and request additional provenance information from the sender or associated accounts. HIGH (rule score 110)
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -374,123 +546,38 @@ Flag the sender wallet for manual review, request source‑of‑funds and owners
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 73 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $14,847 total (USDT, USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction (block 26473907) involves a new sender wallet (0 days old) that transferred 0.0002 ETH to FixedFloat 1, a known no‑KYC off‑ramp. The AML engine flagged the activity under rule no-KYC-offramp (score 85) due to lack of identity verification, and rule sybil-fan-in (score 70) because the sender is one of 34 accounts depositing similar amounts (~0.000 ETH ±30%). Composite score 155 indicates high risk. This pattern warrants further investigation for potential layering or anonymity services.
+The transaction exhibits characteristics of the stablecoin_mixing rule (score 110), with 73 individual stablecoin transfers totaling $14,847 to the CoW Protocol GPv2Settlement contract. HIGH (rule score 110) The pattern meets the threshold for a high‑risk flag under the AML Engine's "Stablecoin Mixing" rule. A manual review is warranted to assess the source and destination of the funds.
 
 </details>
 
 ---
 
-## Finding #10: CRITICAL — Score 155
+## Finding #14: HIGH — Score 110
 
 | | |
 |---|---|
-| **Sender** | `0x20024ff09b46eab05d8eb05c78a462e55afadfc7` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473893-26473893 |
+| **Sender** | `0xb5378cf59f35e6e8bf5679ec6c22d1c5ff912433` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **57** token transfers totaling **$36,543** (0 WETH, 0 WETH, 504 USDC, 0 WETH, 0 WETH) |
+| **Blocks** | 26475889-26476017 |
 
 ### 💬 What Happened
-A brand-new wallet with only two transactions sent a tiny 0.0002 ETH to a FixedFloat 1 address. Think of it as a new customer dropping a single penny into a cashier’s slot that hides who put it there. The small amount and the fresh wallet raise red flags.
-
-### 🔥 The Roast
-So, a brand‑new wallet just decided to play a game of hide‑and‑seek with 0.0002 ETH, dropping it into a FixedFloat 1 address that doesn’t even ask for your ID (that’s the [no_kyc_offramp] score of 85). And as if that wasn’t enough, it’s one of 34 similar wallets doing the same – a classic Sybil fan‑in (score 70) where a bunch of clones send identical tiny amounts to the same spot. It’s like a school of fish all swimming into the same drain, hoping to drown the net. Bottom line: this is the blockchain equivalent of a toddler hiding a handful of coins in a secret box and then blaming the neighbor’s cat for the mess.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag the transaction for manual review, investigate the source of the funds and the purpose of the transfer, and consider adding the sender to a watchlist pending further investigation.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-The transaction triggered the [no_kyc_offramp] rule (score 85) because the recipient is a FixedFloat 1 address that does not require KYC, creating a potential off‑ramp for unverified funds. It also triggered [sybil_fan_in] (score 70) due to the sender being one of 34 wallets sending similar amounts (~0.000 ETH ± 30%), indicating a Sybil fan‑in pattern. The sender wallet is brand‑new (0 days old) with only 2 prior transactions and zero balance, heightening suspicion for layering or mixing activity. Total value is 0.0002 ETH (~$0), further emphasizing the low‑value, high‑frequency nature of the transfer.
-
-</details>
-
----
-
-## Finding #11: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0xa72425ce2004d0f1310b13ea38e7954dc8594603` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473889-26473889 |
-
-### 💬 What Happened
-CRITICAL (rule score 155) The sender’s account is only a few minutes old and already has no KYC (know‑your‑customer) info, so it’s like dropping a very small package into a box that hides who delivered it.
-
-### 🔥 The Roast
-Looks like someone just opened a brand‑new wallet and decided to test the “no‑KYC off‑ramp” feature—score 85 on the no_kyc_offramp rule (meaning this address is a pure anonymous exit point). Then they hit the sybil_fan_in rule with a score of 70 (so 1 out of 34 tiny senders are all dumping about the same amount, like a group of friends each dropping a single candy into the same bucket). Basically, this is the crypto equivalent of a group of kids all sending the same tiny amount of money to a mystery bank account, hoping the bank won’t notice.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL – the combination of a brand‑new wallet, no‑KYC off‑ramp, and fan‑in Sybil pattern indicates high suspicion of layering or structuring.**
-
-Flag the transaction for manual review and request source‑of‑funds and beneficiary information; monitor the wallet for additional activity and consider applying stricter due‑diligence checks.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-The transaction involves a new wallet (0‑day age) with only 2 total transactions and a zero balance, indicating possible layering. The sender routed 0.0002 ETH to a FixedFloat 1 address, triggering the no_kyc_offramp rule (score: 85) due to the lack of identity verification at the off‑ramp. Additionally, the transaction matches the sybil_fan_in rule (score: 70) as one of 34 similar deposits (~0.000 ETH ± 30%) suggesting a fan‑in Sybil pattern. CRITICAL (rule score 155)
-
-</details>
-
----
-
-## Finding #12: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x010a937e326b26fb4e19c08860379e3f53c8f7a6` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473885-26473885 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
+**HIGH (rule score 110)**
 
 Flag for manual review.
 
@@ -500,14 +587,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 5 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $36,505 total (USDT, USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary unavailable for this finding; the verdict is based on the rule score alone.
@@ -516,25 +602,25 @@ Automated commentary unavailable for this finding; the verdict is based on the r
 
 ---
 
-## Finding #13: CRITICAL — Score 155
+## Finding #15: HIGH — Score 110
 
 | | |
 |---|---|
-| **Sender** | `0xb2518036167ffb7d292b1e8d21ccb435b93a5d91` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473885-26473885 |
+| **Sender** | `0xebef2aed95a5219ad2da2942ad27df26c68620df` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **60** token transfers totaling **$11,899** (244 USDT, 100 USDC, 244 USDC, 100 USDT, 100 USDC) |
+| **Blocks** | 26475875-26476014 |
 
 ### 💬 What Happened
-A brand‑new wallet (it’s only been created today) sent a tiny 0.0002 ETH to a FixedFloat 1 address. Think of it like someone dropping a very small package into a mailbox that doesn’t reveal who dropped it. The sender had no prior activity and now has a zero balance after sending the funds.
+A single wallet moved almost $12,000 worth of USDT and USDC into a decentralized exchange settlement address in 60 separate transfers, each less than $250. It's like dropping a stack of coins into a vending machine that doesn't keep a record of who paid. The transfers are evenly split between two stablecoins, making the total look like a jumble of small deposits.
 
 ### 🔥 The Roast
-This wallet is fresher than a pizza that just came out of the oven—zero days old, zero KYC, and it’s already making moves. It sent just a sliver of ETH, but the engine thinks it’s part of a Sybil fan‑in, like a bunch of copycats all dropping the same tiny amount into the same spot. It’s basically a new kid on the block trying to play the anonymous game, and the system is yelling, ‘Hey, you’re a no‑KYC off‑ramp, buddy!’
+Looks like this wallet decided to play the blockchain version of a coin‑toss game, sending 60 little coins into a settlement address that acts like a cash‑only cashier who never asks for ID. The AML engine gave it a 110 on the stablecoin_mixing rule (which means the system thinks this is a classic mixing pattern to hide the source). With a total of $11,899, it’s not a billionaire, but it’s big enough to get the compliance team’s attention. The receiver, 0x9008..., is a settlement address for the CoW Protocol GPv2Settlement—think of it as the blockchain’s version of a drop‑box that keeps your identity under wraps. If you thought this was a normal trade, think again—this pattern screams "let's keep the source a secret."
 
 ### 🎯 Verdict & Next Steps
-**CRITICAL – the transaction triggers high‑risk flags for no‑KYC off‑ramp and Sybil fan‑in patterns, warranting immediate review.**
+**HIGH — the pattern of multiple small stablecoin transfers to a settlement address is a classic indicator of potential mixing activity.**
 
-Flag the transaction for manual review, verify the source of funds, and consider adding the wallet to a watch list for further monitoring.
+Flag the transaction for manual review. HIGH (rule score 110)
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -542,41 +628,40 @@ Flag the transaction for manual review, verify the source of funds, and consider
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 60 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $11,899 total (USDT, USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction was flagged under rule [no_kyc_offramp] (score: 85) due to the deposit of 0.0002 ETH to FixedFloat 1, an off‑ramp with no identity verification. Rule [sybil_fan_in] (score: 70) was triggered by the similarity of the amount to 33 other senders within a 30% variance, indicating a potential Sybil fan‑in pattern. The sender wallet is 0 days old, has only 2 total transactions, and currently holds a zero balance, further increasing suspicion. CRITICAL (rule score 155)
+Rule: stablecoin_mixing (Rule ID: STABLECOIN_MIXING) triggered with a composite score of 110. The transaction activity consisted of 60 stablecoin transfers totaling $11,899 from a single sender to the CoW Protocol GPv2Settlement address. This pattern aligns with known stablecoin mixing behavior, where a sender repeatedly splits funds into smaller amounts to obscure origin. HIGH (rule score 110)
 
 </details>
 
 ---
 
-## Finding #14: CRITICAL — Score 155
+## Finding #16: HIGH — Score 110
 
 | | |
 |---|---|
-| **Sender** | `0xe3a3880044d2bd7605bffca042e69e411cbf16b0` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473883-26473883 |
+| **Sender** | `0x8f10b468b06c6fd214b65f87778827f7d113f996` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **21** token transfers totaling **$364,519** (42,620 USDC, 7,838 USDC, 19,973 USDC, 21 AAVE, 11,623 USDT) |
+| **Blocks** | 26475879-26476013 |
 
 ### 💬 What Happened
-CRITICAL (rule score 155) The sender has no previous activity and already made two transactions, so it looks like a quick drop into a privacy tool. There's no way to get the money back without going through KYC, so the system flags it.
+A single wallet sent 21 little packets of stablecoins (like $USDC and $USDT) to a fancy settlement service that combines trades for other people, adding up to about $364,000. The transfers were split into many tiny chunks, maybe to make the trail harder to follow—think of it as putting money in a bunch of different envelopes before dropping them into a drop box that hides the sender.
 
 ### 🔥 The Roast
-CRITICAL (rule score 155) The engine gave a whopping 85 on no_kyc_offramp (meaning you can't cash out without a photo ID) and 70 on sybil_fan_in (so you’re one of 34 guys sending the same tiny amounts to the same spot). Basically, the wallet is fresher than a new pizza and the transaction is as suspicious as a magician’s disappearing act. If you’re trying to play hide‑and‑seek with the regulators, you’re doing it right!
+So this guy tried to play hide‑and‑seek with his $364K by sending it in 21 tiny envelopes to CoW Protocol’s settlement box. He scored a whopping 110 on the stablecoin_mixing radar (which basically says, “hey, someone is shuffling stablecoins like a magician’s card trick”). That’s higher than a regular grocery trip, so the bot’s raising its eyebrows. The only thing missing is a real identity—just a bunch of addresses and a lot of small amounts. He’s basically the crypto version of a cashier who splits a bill into quarters to avoid the cashier’s eye.
 
 ### 🎯 Verdict & Next Steps
-**CRITICAL — The composite score of 155, driven by high no‑KYC off‑ramp and Sybil fan‑in flags, indicates a high likelihood of suspicious activity requiring immediate review.**
+**HIGH — the composite score of 110 and the pattern of numerous stablecoin transfers to a settlement protocol indicate a high risk of mixing activity.**
 
-Flag the transaction for manual review by the compliance team, request additional source‑of‑funds information, and consider monitoring the wallet for subsequent activity.
+Flag the sender’s wallet for enhanced monitoring and request source‑of‑funds documentation. Consider placing a temporary hold on further large stablecoin transfers until a human review confirms legitimacy.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -584,39 +669,325 @@ Flag the transaction for manual review by the compliance team, request additiona
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 14 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $361,730 total (USDT, USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-The transaction was executed from a newly created wallet (age 0 days) that has performed two transactions with a total value of 0.0002 ETH. The AML engine scored 155, with a score of 85 for no_kyc_offramp and 70 for sybil_fan_in. CRITICAL (rule score 155) The sybil_fan_in rule indicates a fan‑in Sybil pattern, where multiple senders deposit similar amounts into the same address, further raising suspicion. This pattern warrants a higher risk assessment and should be investigated further.
+The AML engine flagged this activity under Rule: stablecoin_mixing. Evidence includes 14 stablecoin transfers totaling $361,730 from a single sender to the CoW Protocol GPv2Settlement intent settlement address, within a block range of 26475879-26476013. HIGH (rule score 110) HIGH (rule score 110)
 
 </details>
 
 ---
 
-## Finding #15: CRITICAL — Score 155
+## Finding #17: HIGH — Score 110
 
 | | |
 |---|---|
-| **Sender** | `0xd8545dbac71c8316ffa3675a5ea7f3d3ccccd7fc` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473881-26473881 |
+| **Sender** | `0x749c9cc5909583663efc517ef83b8739622e121e` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$42,677** (42,677 USDT) |
+| **Blocks** | 26476013-26476013 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
+A single batch of 42,677 USDT (a type of stablecoin that behaves like U.S. dollars on the blockchain) was sent to a smart‑contract address that handles trade settlements. Think of it like dropping a big cash package into a lockbox that only the settlement system can open, but you don’t know who actually dropped it in. The sender’s wallet is basically empty of ETH and has no visible history, so it’s hard to trace where the money came from.
+
+### 🔥 The Roast
+So this address is playing hide‑and‑seek with a $42k cash‑box, and the only clue is a stablecoin transfer to a settlement protocol that’s as mysterious as a secret handshake at a crypto club. HIGH (rule score 110) It’s like someone used a blender to mix your cash and then poured it into a vending machine that only the settlement system can open. If you’re hoping for a clean audit trail, you’ll need to dig deeper than the blockchain’s front‑door photo. This is a classic red flag for layering, not a legit payment to a merchant.
+
+### 🎯 Verdict & Next Steps
+**HIGH – the transaction matches the stablecoin mixing pattern with a composite score of 110, exceeding the high‑risk threshold.**
+
+Flag the transaction for manual compliance review; investigate the sender’s source of funds and any subsequent transactions to assess potential layering or structuring.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $42,677 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+The transaction (Tx ID: <redacted>) involves a single stablecoin transfer of USDT 42,677 from 0x749c9cc5909583663efc517ef83b8739622e121e to 0x9008d19f58aabd9ed0d60971565aa8510560ab41 (CoW Protocol GPv2Settlement). This activity matches Rule: Stablecoin Mixing (stablecoin_mixing) with a composite score of 110, exceeding the high‑risk threshold. The sender’s wallet shows no prior activity and minimal balance, raising suspicions of layering and potential source obfuscation. Flag for manual review and source‑of‑funds investigation.
+
+</details>
+
+---
+
+## Finding #18: HIGH — Score 110
+
+| | |
+|---|---|
+| **Sender** | `0xaddc26a3854feabfd20d6bf658254088d83a425a` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **3** token transfers totaling **$1,749,464** (1,483,352 VERIDIA, 266,013 USDT, 100 USDT) |
+| **Blocks** | 26475925-26476011 |
+
+### 💬 What Happened
+HIGH (rule score 110) Think of it like dropping a huge envelope of cash into a box that splits it into smaller envelopes before sending them on. The transfer included one big batch of VERIDIA tokens and two tiny USDT amounts, all ending up at the CoW Protocol settlement address.
+
+### 🔥 The Roast
+HIGH (rule score 110) The AML engine gave it a 110, which is the same score you’d get for putting a hundred-dollar bill in a slot and watching the slot machine spin. He’s basically doing a crypto version of a bank‑run: dumping a big stack into a black hole and hoping the exit looks clean. HIGH (rule score 110)
+
+### 🎯 Verdict & Next Steps
+**HIGH (rule score 110)**
+
+Initiate a manual review of the sender’s source of funds, request transaction metadata, and consider filing a SAR if further red flags emerge.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $266,112 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+The account transferred $1,749,464 in stablecoins, split into three transactions (1,483,352 VERIDIA and two USDT amounts of 266,013 and 100). All funds were directed to 0x9008d19f58aabd9ed0d60971565aa8510560ab41, a CoW Protocol GPv2Settlement contract known for aggregating trades and providing anonymity. The AML engine flagged the activity under the rule [stablecoin_mixing] (score 110) due to the use of a known mixing protocol and large value transfers. The pattern suggests potential layering and obfuscation of source funds, warranting further investigation.
+
+</details>
+
+---
+
+## Finding #19: HIGH — Score 110
+
+| | |
+|---|---|
+| **Sender** | `0xe1baeb65617cad39d23d5d80c50ae3d734ba6fdc` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **7** token transfers totaling **$54,903** (7,848 USDT, 7,838 USDC, 7,848 USDT, 7,837 USDC, 7,848 USDT) |
+| **Blocks** | 26475877-26476011 |
+
+### 💬 What Happened
+A wallet sent about $55,000 worth of stablecoins (USDT and USDC) to a decentralized trading protocol in a very neat, almost identical sequence, like dropping a set of coins into a vending machine slot one by one to make it look like random purchases. The transfers were split into 7 almost identical amounts, each about $7,800, which makes it look like someone is trying to hide where the money came from.
+
+### 🔥 The Roast
+Looks like someone tried to make their stablecoins look like a polite dance troupe, sending 7 identical steps to the CoW Protocol. The engine gave it a 110, which is basically a red flag saying ‘we see a pattern, buddy.’ It’s like watching a magician shuffle the same deck over and over. If this was a real person, they'd be better off using a paper trail than a blockchain. HIGH (rule score 110)
+
+### 🎯 Verdict & Next Steps
+**HIGH — the uniform transfer amounts to a settlement contract and the engine's composite score of 110 indicate a high likelihood of suspicious mixing activity.**
+
+Flag the transaction for manual review by compliance. Verify the source of the funds, assess whether the sender has a legitimate business purpose for using the CoW Protocol, and consider additional due diligence such as KYC checks or asset tracing.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 7 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $54,903 total (USDT, USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+The account executed seven stablecoin transfers (USDT and USDC) to the CoW Protocol GPv2Settlement contract within a single block range, totaling $54,903. HIGH (rule score 110) HIGH (rule score 110) The pattern suggests potential layering or mixing activity requiring further investigation.
+
+</details>
+
+---
+
+## Finding #20: HIGH — Score 110
+
+| | |
+|---|---|
+| **Sender** | `0x51c72848c68a965f66fa7a88855f9f7784502a7f` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **11** token transfers totaling **$49,020** (634 USDT, 338 LINK, 14,552 ENA, 1 WETH, 800 USDC) |
+| **Blocks** | 26475883-26476010 |
+
+### 💬 What Happened
+A single wallet sent about $49,000 worth of various tokens to a smart contract that settles trades. It split the money into 11 smaller pieces, like a mailman dropping packages into a hidden mailbox so no one can easily trace the original sender.
+
+### 🔥 The Roast
+This wallet tried to play hide‑and‑seek with $49k, sending 11 tiny packages like a kid dropping candy in a box to avoid the parents' watchful eye. The biggest candy bar was 32k WETH, because obviously someone thought ETH should be counted in the candy box. The rest? 14.5k ENA, 800 USDC, 635 USDT, 338 LINK, and a handful of fractions that look like they came from a vending machine that accidentally swallowed your change. The CoW Protocol GPv2Settlement (intent settlement) is a smart contract that finalizes trades (like a bank clearing house), but it’s being used as a mixing stage.
+
+### 🎯 Verdict & Next Steps
+**HIGH (rule score 110)**
+
+Flag the transaction for manual review, request source and destination wallet details, and monitor for further related activity. HIGH (rule score 110)
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 4 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $34,125 total (USDT, USDC, DAI) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+The transaction set includes four stablecoin transfers (USDT, USDC) totalling $34,125 to the CoW Protocol GPv2Settlement address, triggering rule stablecoin_mixing. The pattern of splitting into 11 transfers, including a large WETH transfer and smaller amounts, is characteristic of mixing. The sender address has no public activity history and the composite score is 110, exceeding the high‑risk threshold for suspicious activity.
+
+</details>
+
+---
+
+## Finding #21: HIGH — Score 110
+
+| | |
+|---|---|
+| **Sender** | `0x52aa899454998be5b000ad077a46bbe360f4e497` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **12** token transfers totaling **$15,313** (7,491 USDT, 1 wstETH, 5 wstETH, 500 USDC, 1,000 USDC) |
+| **Blocks** | 26475876-26476005 |
+
+### 💬 What Happened
+A person (or a bot) sent a bunch of stablecoins—USDT and USDC—through 10 different little transfers that all ended up in a decentralized trading platform called CoW Protocol. Think of it as putting cash into a series of ATMs, each time making a slightly different change, and then dropping the money into a black box where you can’t see who originally handed it to you. The total amount moved was about $15,300 worth of digital coins.
+
+### 🔥 The Roast
+So, the wallet decided to play hide‑and‑seek with 10 tiny cash drops, each one a little different, and then tossed them into a smart‑contract ‘black hole’ (CoW Protocol) that’s basically a fancy, invisible vending machine. HIGH (rule score 110) HIGH (rule score 110)
+
+### 🎯 Verdict & Next Steps
+**HIGH — the transaction pattern triggers the stablecoin_mixing rule with a composite score of 110, indicating a high likelihood of illicit structuring.**
+
+HIGH (rule score 110)
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 10 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $15,306 total (USDT, USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Rule: stablecoin_mixing (Composite Score: 110) – 10 stablecoin transfers (USDT and USDC) totaling $15,306 from a single unique sender to CoW Protocol GPv2Settlement. The pattern meets the AML engine’s criteria for structuring and mixing activities, as defined in Rule 12: Stablecoin Mixing Pattern. Evidence includes 12 transaction count, block range 26475876-26476005, and the distribution of transfer amounts. HIGH (rule score 110)
+
+</details>
+
+---
+
+## Finding #22: HIGH — Score 110
+
+| | |
+|---|---|
+| **Sender** | `0x991cec65a906b5727b32d175cfc550673a20ed17` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$20,000** (20,000 USDT) |
+| **Blocks** | 26476000-26476000 |
+
+### 💬 What Happened
+A user sent $20,000 worth of USDT (a stablecoin that pretends to be the U.S. dollar) to a smart contract on the CoW Protocol. This is like dropping a package into a slot that hides who sent it, because the contract receives the funds and then distributes them without revealing the original sender. The transaction was the only one in that block and involved a single sender.
+
+### 🔥 The Roast
+So this wallet, which apparently has no record of how old it is or how many times it sent money, just decided to throw $20k into a settlement contract like it's a secret club membership fee. HIGH (rule score 110) HIGH (rule score 110) Basically, the engine is waving a red flag like a traffic cop in a blackout.
+
+### 🎯 Verdict & Next Steps
+**HIGH (rule score 110)**
+
+Flag the transaction for manual review, request source of funds documentation, and consider additional due diligence on the sender's wallet and any related addresses.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $20,000 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+The transaction from 0x991cec65a906b5727b32d175cfc550673a20ed17 to 0x9008d19f58aabd9ed0d60971565aa8510560ab41 (CoW Protocol GPv2Settlement) involved a single stablecoin transfer of 20,000 USDT, triggering the stablecoin_mixing rule with a composite score of 110. HIGH (rule score 110) The sender's wallet has an unknown age and transaction history, increasing the risk profile. This activity warrants further investigation under AML compliance procedures.
+
+</details>
+
+---
+
+## Finding #23: HIGH — Score 110
+
+| | |
+|---|---|
+| **Sender** | `0x000000000004444c5dc75cb358380d2e3de08a90` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **13** token transfers totaling **$2,507,167** (2 rETH, 12 USDC, 188 USDC, 2,466,720 XL1, 9,711 USDT) |
+| **Blocks** | 26475876-26475999 |
+
+### 💬 What Happened
+A user sent a bunch of stablecoins into a settlement smart contract that acts like a vending machine, making it hard to see where the money originally came from. HIGH (rule score 110) In short, it’s like dropping a stack of envelopes into a slot that hides who wrote the checks.
+
+### 🔥 The Roast
+So this wallet decided to throw $2.5 million of stablecoins into the CoW Protocol GPv2Settlement, which is basically the blockchain’s version of a secret sauce that hides the origin of funds. The engine gave it a 110 score on the stablecoin_mixing rule (meaning the pattern looks like someone is trying to wash money by sending it to a settlement contract). 13 little hops, 11 of them stablecoins, and the whole thing looks like a high‑stakes game of hide‑and‑seek. If you’re looking for a good mystery, this is the one—just don't forget to bring your magnifying glass!
+
+### 🎯 Verdict & Next Steps
+**HIGH (rule score 110)**
+
+Flag the activity for internal review, request additional transaction context from the wallet owner, and consider notifying the compliance team for possible escalation to regulatory authorities if warranted.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 11 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $40,446 total (USDT, USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+The transaction activity exhibits a classic stablecoin_mixing pattern per Rule: stablecoin_mixing, characterized by 13 transfers totaling $2,507,167 to CoW Protocol GPv2Settlement, with 11 stablecoin transfers ($40,446) from a single unique sender. This pattern raises red flags for potential layering and obfuscation of source funds. The sender’s wallet shows no prior activity and has a near-zero balance, further suggesting a potential attempt to conceal ownership. Given the high composite score of 110, the activity warrants escalation for further investigation.
+
+</details>
+
+---
+
+## Finding #24: HIGH — Score 110
+
+| | |
+|---|---|
+| **Sender** | `0xffd3d054713b568d91c76d4bed5f4bd376faecc5` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$11,626** (11,626 USDC) |
+| **Blocks** | 26475975-26475975 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.
 
 ### 🔥 The Roast
 Even our AI refused to look at this transaction.
 
 ### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
+**HIGH (rule score 110)**
 
 Flag for manual review.
 
@@ -626,14 +997,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $11,626 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary unavailable for this finding; the verdict is based on the rule score alone.
@@ -642,25 +1012,25 @@ Automated commentary unavailable for this finding; the verdict is based on the r
 
 ---
 
-## Finding #16: CRITICAL — Score 155
+## Finding #25: HIGH — Score 110
 
 | | |
 |---|---|
-| **Sender** | `0x0670eb9fc308de0b065e45553557e1db1be5bade` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473880-26473880 |
+| **Sender** | `0xda0c1131cbfea2194ae5a64c41cb990170094482` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **6** token transfers totaling **$75,348** (9,326 USDC, 13,212 USDT, 13,194 USDC, 13,212 USDT, 13,194 USDC) |
+| **Blocks** | 26475876-26475963 |
 
 ### 💬 What Happened
-A brand‑new wallet just sent a tiny amount of Ethereum (0.0002 ETH) to a service that scrambles coins so no one can tell where the money came from. The sender’s account is brand‑new, has only two tiny moves, and has no money left, so it’s like a fresh drop in a black hole that disappears right away.
+A single wallet sent about $75,000 worth of stablecoins—USDC and USDT—in six separate transactions to a smart contract that settles trades. Think of it like someone dropping a bunch of identical envelopes into a box that hides who actually mailed them. The smart contract then splits the money into different trade orders, so the original sender's identity is blurred across multiple trades.
 
 ### 🔥 The Roast
-CRITICAL (rule score 155) CRITICAL (rule score 155) CRITICAL (rule score 155) With a composite score of 155, this is a red flag that even the most cautious accountant would want to see the receipts. The only way to get any sense of this transaction is to ask the sender for a full explanation, or risk getting tangled in the same black hole.
+So, this guy just tried to play hide-and-seek with his $75k in stablecoins, sending them to a settlement contract that’s basically the blockchain’s version of a Swiss bank. He used the stablecoin_mixing rule (meaning the engine flagged the pattern of splitting stablecoins across several small transfers to a mixing-like contract) and hit a solid 110 points—like getting a gold star for being the most confusing mover in a room full of accountants. It’s like watching someone try to hide their cash by tossing it into a blender, only to find the smoothie is still made of the same ingredients. If you’re looking for a good way to keep the money’s origin a mystery, congratulations—you’ve just invented a new form of digital paper trail obfuscation.
 
 ### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
+**HIGH — the transaction meets the high-risk stablecoin mixing pattern with a composite score of 110, indicating potential obfuscation of the source.**
 
-Flag the transaction for manual investigation, request additional source‑of‑funds information from the sender, and consider a temporary hold or enhanced due diligence pending further review.
+Flag the wallet for manual investigation and trace the source of the stablecoins. Consider cross-referencing the sender’s address against internal and external watchlists, and request additional information if available.
 
 <details>
 <summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
@@ -668,1041 +1038,32 @@ Flag the transaction for manual investigation, request additional source‑of‑
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 6 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $75,348 total (USDT, USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
-CRITICAL (rule score 155) CRITICAL (rule score 155) The composite score of 155 exceeds the critical threshold, warranting immediate compliance review. Investigate source funds, cross‑match with other suspicious accounts, and consider a temporary hold pending further KYC verification.
+The transaction exhibits a stablecoin mixing pattern per Rule: Stablecoin_Mixing. Six separate stablecoin transfers totaling $75,348 were directed from a single sender to the CoW Protocol GPv2Settlement contract. HIGH (rule score 110) This activity warrants further human review under AML compliance guidelines.
 
 </details>
 
 ---
 
-## Finding #17: CRITICAL — Score 155
+## Finding #26: HIGH — Score 110
 
 | | |
 |---|---|
-| **Sender** | `0x5715e2809662d0c95f6bf939bd55a7160d2fe148` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473875-26473875 |
+| **Sender** | `0x21072fc45e7cb0a8abd98740549421ea7141bb69` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$265,665** (265,665 USDC) |
+| **Blocks** | 26475951-26475951 |
 
 ### 💬 What Happened
-A brand-new wallet just made a tiny 0.0002 ETH transfer to another address. Think of it like someone who just got a new phone and immediately sends a very small tip to a friend—only the tip is in crypto, and the friend’s wallet is a place that doesn’t ask for any identity paperwork. No other coins or tokens were moved, just that one little ETH bump.
-
-### 🔥 The Roast
-This fresh wallet is so new it probably hasn't even had its first coffee yet, yet it’s already offloading 0.0002 ETH to a place that doesn’t care about your ID—no-KYC off-ramp (meaning the destination doesn’t require identity verification). The system flagged it with a 70 on sybil fan-in, which is basically a group of 34 people all sending about the same tiny amount to the same place, like a synchronized choir of micro‑tips. It’s like a bunch of kids all dropping a single penny into the same jar—sure, it’s a jar, but who’s actually putting the pennies in? CRITICAL (rule score 155)
-
-### 🎯 Verdict & Next Steps
-**CRITICAL - The transaction shows high risk due to no‑KYC off‑ramp and sybil fan‑in patterns, requiring immediate human review.**
-
-CRITICAL (rule score 155) If further suspicious patterns emerge, consider freezing the involved wallet and reporting to relevant authorities.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-The transaction involves a wallet with 0 days of age, only 2 total transactions, and a current balance of 0 ETH, indicating recent creation and rapid activity. Rule [no_kyc_offramp] scored 85 due to the transfer to FixedFloat 1, an off‑ramp that does not require KYC, raising concerns about anonymity. CRITICAL (rule score 155) The composite score of 155 exceeds the critical threshold, warranting human review for possible illicit activity or source‑of‑funds verification.
-
-</details>
-
----
-
-## Finding #18: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x3383a25e3e0c20c552f08e6f15e937064623867b` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473874-26473874 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary unavailable for this finding; the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #19: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0xb9b77a302026469f67a0708926a431971a015844` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473873-26473873 |
-
-### 💬 What Happened
-CRITICAL (rule score 155) The transaction only happened once and the sender had no previous activity, so it’s like dropping a single grain of rice into a black hole that hides who dropped it.
-
-### 🔥 The Roast
-Congrats, you just built a fresh wallet that thinks it’s a magician. That 0.0002 ETH is like dropping a single grain of rice into a black hole, and the engine gave it a 155 score because it knows a brand‑new wallet with no KYC is a red flag. The sybil fan‑in? Looks like a choir of 34 singers all humming the same tiny tune. Good luck finding the lead singer in that crowd.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag the transaction for manual review, verify the sender’s intent, and check for any additional related activity or addresses that may be part of the same funnel.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-The transaction originates from a 0‑day wallet with no KYC off‑ramp, triggering rule no_kyc_offramp (score 85). The wallet exhibits fan‑in Sybil behavior with 34 similar senders (rule sybil_fan_in, score 70). CRITICAL (rule score 155) No SDN match, but pattern risk warrants further review.
-
-</details>
-
----
-
-## Finding #20: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x4bd449f995a2179280c14a80d654c5fa7d3e453b` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473862-26473862 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-Even our AI refused to look at this transaction.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary unavailable for this finding; the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #21: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x3346e50c4048d6ce6e6d67f6a5f9ab92e151b569` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473860-26473860 |
-
-### 💬 What Happened
-A brand-new wallet just sent a tiny amount of ETH (about 0.0002, which is basically nothing in dollar terms) to a service called FixedFloat 1. It’s like dropping a single, almost invisible package into a slot that hides who dropped it—no one sees where it came from.
-
-### 🔥 The Roast
-So we’ve got a fresh wallet with zero balance, just two tiny moves, and it’s already trying to off‑ramp to FixedFloat 1. That’s like a kid sneaking a pizza into a no‑pizza zone—no KYC, no explanation. The AML engine gave it a 155 score because it’s a ‘no‑KYC off‑ramp’ (meaning the service lets you move money out without checking who you are) and a ‘Sybil fan‑in’ (many similar wallets sending the same tiny amounts). If this was a real person, they’d be the type who uses a burner phone to buy coffee that costs more than the transaction itself.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL – the transaction exhibits high‑risk patterns of no‑KYC off‑ramp and Sybil fan‑in, warranting immediate manual review.**
-
-Flag the transaction for manual review, request additional KYC information for the sender, and monitor the FixedFloat 1 address for subsequent activity.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-The transaction triggers the rule [no_kyc_offramp] with a score of 85, indicating a deposit to FixedFloat 1 where the sender has not completed KYC verification, and the rule [sybil_fan_in] with a score of 70, reflecting a pattern of multiple new wallets sending similar amounts (~0.000 ETH ± 30%). CRITICAL (rule score 155) This activity should be reviewed for potential layering or structuring schemes.
-
-</details>
-
----
-
-## Finding #22: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x8235c7f702c94bc47e7d90e496202146216edfaf` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473860-26473860 |
-
-### 💬 What Happened
-A brand-new wallet just sent a tiny amount of ETH (0.0002, about $0) to a service that can turn it into cash without any identity check. It's like dropping a single cookie into a vending machine that later gives you money, but no one knows who left the cookie. The transaction is so small and new that it raises a red flag for suspicious activity.
-
-### 🔥 The Roast
-So here we have a fresh wallet that just decided to play hide-and-seek with a 0.0002 ETH snack. That’s like a kid dropping a single candy into a slot machine that promises a jackpot—only the slot machine is a KYC-free off‑ramp called FixedFloat 1. The AML engine gave it an 85 for no‑KYC off‑ramp (meaning nobody knows who the kid is) and 70 for a Sybil fan‑in pattern (like a bunch of kids all sending the same tiny candy to the same machine). The composite score of 155 is basically the alarm system saying, "Hey, this is suspicious, let’s look closer!"
-
-### 🎯 Verdict & Next Steps
-**Composite score of 155 indicates a high‑risk pattern due to no‑KYC off‑ramp and Sybil fan‑in activity.**
-
-Flag the transaction for manual review and request source‑of‑funds details. Monitor subsequent activity for any large or frequent deposits.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-The transaction was conducted from a wallet that is 0 days old, with only 2 prior transactions and a current balance of 0.000000 ETH. The sender deposited 0.0002 ETH into FixedFloat 1, a service that offers a KYC‑free off‑ramp to fiat. The AML engine flagged the activity with rule [no_kyc_offramp] (score: 85) for the lack of identity verification and rule [sybil_fan_in] (score: 70) indicating a Sybil fan‑in pattern (multiple new wallets depositing similar amounts). The composite score of 155 signals a high‑risk transaction pattern requiring further investigation.
-
-</details>
-
----
-
-## Finding #23: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0xb7799b02892adbf4d5fa3bee3b84b0200d1f3c45` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473847-26473847 |
-
-### 💬 What Happened
-CRITICAL (rule score 155) It’s like dropping a single coin into a black hole that scrambles who sent it.
-
-### 🔥 The Roast
-Look at that new wallet, born yesterday, already trying to hide its tracks. 0.0002 ETH? That’s like sending a single grain of rice to a black hole that pretends to be a bank. The engine gave it a 155 score—more like a spam filter than a detective. [no_kyc_offramp] means the wallet is trying to cash out without any identity verification, and [sybil_fan_in] shows it’s one of dozens of wallets doing the same thing. Basically, it’s a rookie playing hide‑and‑seek with regulators.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL — the transaction exhibits high‑risk behavior due to new wallet activity, no‑KYC off‑ramp, and Sybil fan‑in pattern, warranting immediate review.**
-
-Flag the transaction for manual review by compliance, and consider placing a temporary hold while investigating the source and destination addresses.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-CRITICAL (rule score 155) The sender wallet is brand‑new (age 0 days), with only 2 prior transactions and no balance. The AML engine flagged the transfer under rule [no_kyc_offramp] (deposit to a no‑KYC off‑ramp) and [sybil_fan_in] (fan‑in Sybil pattern). The composite score of 155 indicates a high likelihood of suspicious activity requiring further investigation.
-
-</details>
-
----
-
-## Finding #24: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x3d7a954adbfc41f0db2e1b30e8ae66c7dec36271` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473843-26473843 |
-
-### 💬 What Happened
-A brand‑new wallet sent 0.0002 ETH (about a few cents) to a fixed‑rate exchange that doesn’t require identity verification. Think of it like a freshly opened envelope that drops a tiny package into a box with no way to trace who opened it.
-
-### 🔥 The Roast
-This guy just created a wallet on the spot and sent a minuscule amount to a no‑KYC off‑ramp. He’s basically doing the "send‑it‑away‑so‑no‑one‑knows‑who‑you’re‑with" trick. The engine flagged him with a 155 score, which is like a red‑light signal on a highway full of speed‑bumpers. He’s got a fan‑in Sybil pattern (70 points) – basically a bunch of identical tiny coins coming from 34 different addresses. In plain English: he’s playing the "copy‑and‑paste" game, hoping the system won’t notice the echo.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag the transaction for manual review. Investigate the wallet’s origin and any subsequent movements to determine whether the funds are tied to suspicious activity.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-The transaction originates from a wallet created on the same day it was used (wallet age 0 days) with a total transaction count of 2 and a current balance of 0.000000 ETH, indicating immediate depletion. Rule [no_kyc_offramp] was triggered with a score of 85 because the funds were moved to FixedFloat 1, an off‑ramp that does not require Know‑Your‑Customer (KYC) verification. Rule [sybil_fan_in] scored 70, identifying this as a fan‑in Sybil pattern: 1 of 34 senders deposited similar amounts (~0.000 ETH ± 30%), suggesting a coordinated effort to obscure the source. The composite score of 155 places the activity in the critical risk tier for potential layering and obfuscation.
-
-</details>
-
----
-
-## Finding #25: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x736017753841d98b20f2b763bd6b53911247bb17` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473827-26473827 |
-
-### 💬 What Happened
-A brand‑new wallet just sent a tiny 0.0002 ETH to a special “FixedFloat 1” address. Think of it like a brand‑new delivery truck dropping a minuscule package into a mysterious drop box that hides the sender’s identity. The wallet has only made two moves, has no balance left, and was created today, so it’s as fresh as a morning coffee.
-
-### 🔥 The Roast
-So this new wallet is basically a crypto version of a mystery shopper who drops a 0.0002 ETH tip into a fancy escrow account that doesn’t ask who you are (that’s the no_kyc_offramp rule). Meanwhile, 33 other wallets are doing the exact same thing, sending almost the same tiny amount to the same address – a classic fan‑in Sybil pattern (sybil_fan_in). It’s like a bunch of people all throwing pennies into the same empty cup, hoping someone will notice the pattern but nobody can tell who tossed the first coin. If you think a single coin is harmless, imagine a thousand of them all piling up. And the best part? The wallet was created today and already sent its first payment – it’s a fresh‑out‑of‑the‑oven fraud recipe. 0 days, 2 tx, and zero balance – it’s a textbook “I’m new here, but I’m already playing the game” move.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag the transaction for manual review by compliance, request source‑of‑funds documentation, and consider monitoring subsequent activity for additional red flags.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-The transaction involves a wallet created on the same day (wallet age 0) with only two prior transactions and a zero current balance, indicating a newly established account with no historical activity. The wallet sent 0.0002 ETH to a FixedFloat 1 address, which is an off‑ramp service that does not require Know‑Your‑Customer (KYC) verification (no_kyc_offramp rule, score 85). Additionally, the transfer is part of a fan‑in pattern where 34 senders deposit similar amounts (within ±30% of 0.000 ETH) to the same address, triggering the sybil_fan_in rule (score 70). These patterns suggest potential layering or structuring activities, warranting further investigation.
-
-</details>
-
----
-
-## Finding #26: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0xe98db401318a5afaa1c4742176161c7bd6d25c1f` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473820-26473820 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #27: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0xbfae421306540613194592ae4755a02e73ed56dc` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473819-26473819 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #28: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x40e449f73fc95e0fcaa23ddc65921bfc401f8b66` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473807-26473807 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #29: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x48771894f5eea6a71ba88e8d8232d9a8a1b8e900` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473778-26473778 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #30: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x6f5ed19be87bdc9204b3a0f007bc85564deffc7e` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473777-26473777 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #31: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x2e83eaf916233c192fc609eba69cbc72cd91a5fa` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473766-26473766 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #32: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0xc36427e51d2accfc1ecf5ba36d066cc24062b0d8` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473765-26473765 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #33: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x99000a4f284b0dbddc6f6f5686be5b6ae1106c9f` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473762-26473762 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #34: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x50a074f98983166905fa377cd386c76ccfa6b760` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473756-26473756 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #35: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0xeb36b46953c0be9fdcf7fba4cc8ed1ff1aab29d7` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473756-26473756 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #36: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x58c87c321e7e6edcbdc0e1803acd9726eab97899` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473755-26473755 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #37: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0xaf7813e1205f94b15ef1fc50f8a2501b8c181ea2` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473739-26473739 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #38: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x6513c96c1e12f70c878606ae0c3c6b6781b6fadb` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473737-26473737 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #39: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x16a867a6c548854a2739cb530ecd07a99ed2333c` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473723-26473723 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #40: CRITICAL — Score 155
-
-| | |
-|---|---|
-| **Sender** | `0x02c438118664a1c996137b728842fed885d792c6` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0002 ETH** ($0) |
-| **Blocks** | 26473720-26473720 |
-
-### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 155.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**CRITICAL (rule score 155)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 2 |
-| Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (2 rules, composite score: 155):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
-- **sybil_fan_in** (+70) — 1 of 34 senders depositing similar amounts (~0.000 ETH ± 30%) — fan-in Sybil pattern
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #41: HIGH — Score 110
-
-| | |
-|---|---|
-| **Sender** | `0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **7** token transfers totaling **$25,592** (1 USDC, 2 USDC, 113 USDC, 500 USDC, 24,969 USDC) |
-| **Blocks** | 26473724-26473915 |
-
-### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 110.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
@@ -1724,7 +1085,7 @@ Flag for manual review.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 6 stablecoin transfer(s) to Across SpokePool V2: $25,592 total (USDC) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $265,665 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -1733,17 +1094,17 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #42: HIGH — Score 110
+## Finding #27: HIGH — Score 110
 
 | | |
 |---|---|
-| **Sender** | `0x9e64d18073cd8ec20e2680124d0551ba1629fa20` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **11** token transfers totaling **$27,041** (0 WETH, 19 WETH, 20 WETH, 2,499 USDT, 1,501 USDT) |
-| **Blocks** | 26473721-26473905 |
+| **Sender** | `0xad7147d5e8733d87df5c6920d3521a46d71d5298` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **2** token transfers totaling **$64,763** (32,339 USDC, 32,424 USDC) |
+| **Blocks** | 26475903-26475942 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 110.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
@@ -1765,7 +1126,7 @@ Flag for manual review.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 7 stablecoin transfer(s) to Across SpokePool V2: $27,001 total (USDC, USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $64,763 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -1774,17 +1135,17 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #43: HIGH — Score 110
+## Finding #28: HIGH — Score 110
 
 | | |
 |---|---|
-| **Sender** | `0xc186fa914353c44b2e33ebe05f21846f1048beda` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **2** token transfers totaling **$90,828** (0 WETH, 90,828 USDC) |
-| **Blocks** | 26473832-26473832 |
+| **Sender** | `0x7411f667ceb2c7049f38c2b4dd78a9ec3f757cbe` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **2** token transfers totaling **$15,685** (7,848 USDT, 7,837 USDC) |
+| **Blocks** | 26475927-26475936 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 110.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
@@ -1806,7 +1167,7 @@ Flag for manual review.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 110):
-- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to Across SpokePool V2: $90,828 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+110) — 2 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $15,685 total (USDT, USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -1815,23 +1176,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #44: HIGH — Score 100
+## Finding #29: HIGH — Score 110
 
 | | |
 |---|---|
-| **Sender** | `0xd3b11c36404b092645522b682832fcdee07d2668` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **2** token transfers totaling **$200** (100 USDC, 100 USDC) |
-| **Blocks** | 26473853-26473853 |
+| **Sender** | `0x546c72cb38ddde3a01ee70b1ac40060f04fbdd29` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$25,539** (25,539 USDT) |
+| **Blocks** | 26475912-26475912 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 100.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**HIGH (rule score 100)**
+**HIGH (rule score 110)**
 
 Flag for manual review.
 
@@ -1846,8 +1207,8 @@ Flag for manual review.
 | Current Balance | 0.000000 ETH |
 | Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 100):
-- **stablecoin_mixing** (+100) — 2 stablecoin transfer(s) to Across SpokePool V2: $200 total (USDC) from 1 unique sender(s) — 2 round-number amount(s) (denomination layering)
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $25,539 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -1856,23 +1217,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #45: MEDIUM — Score 85
+## Finding #30: HIGH — Score 110
 
 | | |
 |---|---|
-| **Sender** | `0x102b5d72900f2358b8419802638a40e5e6154965` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.1424 ETH** ($245) |
-| **Blocks** | 26473916-26473916 |
+| **Sender** | `0x2e69797d37e888d62974a1ffa20816a5f55f898d` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$13,212** (13,212 USDT) |
+| **Blocks** | 26475897-26475897 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 85)**
+**HIGH (rule score 110)**
 
 Flag for manual review.
 
@@ -1882,13 +1243,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 85):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $13,212 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -1897,23 +1258,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #46: MEDIUM — Score 85
+## Finding #31: HIGH — Score 110
 
 | | |
 |---|---|
-| **Sender** | `0x16911687459ce40b30407f542ed4bb3f713dcd42` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0110 ETH** ($19) |
-| **Blocks** | 26473898-26473898 |
+| **Sender** | `0x51497124089abdec0d3749d6db082f66ca03750a` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$199,999** (199,999 USDT) |
+| **Blocks** | 26475893-26475893 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 110.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 85)**
+**HIGH (rule score 110)**
 
 Flag for manual review.
 
@@ -1923,13 +1284,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 85):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+**Rules Triggered** (1 rules, composite score: 110):
+- **stablecoin_mixing** (+110) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $199,999 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -1938,23 +1299,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #47: MEDIUM — Score 85
+## Finding #32: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x4ad577a106127831fba79821b420c783d8069e2a` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.3024 ETH** ($521) |
-| **Blocks** | 26473884-26473884 |
+| **Sender** | `0x12be7ac011b4c7795dde991f8d3a1df19d653e17` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **2** token transfers totaling **$4,250** (616 USDC, 3,634 ENA) |
+| **Blocks** | 26475957-26476016 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 85)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -1964,13 +1325,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 85):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $616 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -1979,23 +1340,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #48: MEDIUM — Score 85
+## Finding #33: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x4d8f593c7c39659100a0e4b575bdaf6a8ed2e78e` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0400 ETH** ($69) |
-| **Blocks** | 26473856-26473856 |
+| **Sender** | `0xf4792f0c8307634c9f9f9547502f97bb6fc79378` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **11** token transfers totaling **$1,605** (0 WETH, 1 WETH, 130 LINK, 0 WETH, 1,432 USDT) |
+| **Blocks** | 26475879-26476014 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 85)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -2005,13 +1366,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 85):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $1,432 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2020,23 +1381,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #49: MEDIUM — Score 85
+## Finding #34: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xe754d9c20ce85e00c4b47d1946b97730d68875d5` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.2000 ETH** ($344) |
-| **Blocks** | 26473846-26473846 |
+| **Sender** | `0xde758db54c1b4a87b06b34b30ef0a710dc35388f` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **2** token transfers totaling **$267** (167 USDT, 100 USDT) |
+| **Blocks** | 26475914-26476009 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 85)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -2046,13 +1407,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 85):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $267 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2061,23 +1422,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #50: MEDIUM — Score 85
+## Finding #35: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xe4f58e1fd84a63db8acc0fafbb01ac6bb987d915` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.3706 ETH** ($638) |
-| **Blocks** | 26473819-26473819 |
+| **Sender** | `0x4714ce6d8609f4cf8740f79c72d1947b90d108a8` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **2** token transfers totaling **$1,200** (400 USDC, 800 USDT) |
+| **Blocks** | 26475947-26476009 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 85)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -2087,13 +1448,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 85):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $1,200 total (USDT, USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2102,23 +1463,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #51: MEDIUM — Score 85
+## Finding #36: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x15b61c163206b3bd1e90ecfe8b9c9699fd492da4` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.1769 ETH** ($305) |
-| **Blocks** | 26473817-26473817 |
+| **Sender** | `0xe2cd94c812aed174b2e09750ff146f45d845d668` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **2** token transfers totaling **$199** (100 USDC, 100 USDC) |
+| **Blocks** | 26475916-26476006 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 85)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -2128,13 +1489,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 85):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $199 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2143,23 +1504,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #52: MEDIUM — Score 85
+## Finding #37: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x1548c381e593fe1359491bd0731215d8ff10d830` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.1769 ETH** ($305) |
-| **Blocks** | 26473814-26473814 |
+| **Sender** | `0x2beb35e78c9427899353c41c96bcc96c5647ec63` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$357** (357 USDT) |
+| **Blocks** | 26476005-26476005 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 85)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -2169,13 +1530,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 85):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $357 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2184,23 +1545,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #53: MEDIUM — Score 85
+## Finding #38: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x0bf62f64c1916ec6b572295ae4b16bf4cb44cd49` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0426 ETH** ($73) |
-| **Blocks** | 26473789-26473789 |
+| **Sender** | `0x25ed652355e89d1b7a877359fdde0a8ca4205a19` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **2** token transfers totaling **$5,012** (3,012 USDC, 2,000 USDC) |
+| **Blocks** | 26475986-26475994 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 85)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -2210,13 +1571,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 85):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $5,012 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2225,23 +1586,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #54: MEDIUM — Score 85
+## Finding #39: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x8dc4cd1806dd8904ce60535533bdaf21a2bf5ad0` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.2128 ETH** ($366) |
-| **Blocks** | 26473783-26473783 |
+| **Sender** | `0xba12222222228d8ba445958a75a0704d566bf2c8` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **3** token transfers totaling **$48** (48 USDC, 0 WBTC, 0 WBTC) |
+| **Blocks** | 26475932-26475991 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 85)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -2251,13 +1612,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 85):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $48 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2266,23 +1627,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #55: MEDIUM — Score 85
+## Finding #40: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x9e812bdd65600f631fede1922ce3e774349b6620` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0615 ETH** ($106) |
-| **Blocks** | 26473766-26473766 |
+| **Sender** | `0x397ff1542f962076d0bfe58ea045ffa2d347aca0` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDC) |
+| **Blocks** | 26475991-26475991 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 85)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -2292,13 +1653,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 85):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $20 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2307,23 +1668,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #56: MEDIUM — Score 85
+## Finding #41: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xfe377cfce9bb5dfd3ebc063514bdcd1f297f803a` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.0853 ETH** ($147) |
-| **Blocks** | 26473762-26473762 |
+| **Sender** | `0xba67cd571d8d2f28900f61f4d89ac0449badad8c` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDC) |
+| **Blocks** | 26475991-26475991 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 85)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -2333,13 +1694,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 85):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $20 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2348,23 +1709,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #57: MEDIUM — Score 85
+## Finding #42: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x922179ff6027a42c386d9304bb1d99b495e29d24` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.4123 ETH** ($710) |
-| **Blocks** | 26473760-26473760 |
+| **Sender** | `0xa9e3b99d951df6444a799749655fbbb23557277e` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$3** (3 USDT) |
+| **Blocks** | 26475988-26475988 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 85)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -2374,13 +1735,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 85):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $3 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2389,23 +1750,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #58: MEDIUM — Score 85
+## Finding #43: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x65d00c16232c9c5a8b7b940e694252fa73a293bd` |
-| **Target** | FixedFloat 1 (`0x4e5b2e1dc63f6b91cb...`) |
-| **Activity** | **1** tx totaling **0.1841 ETH** ($317) |
-| **Blocks** | 26473733-26473733 |
+| **Sender** | `0x8eb7974b5948ccfeb146f8562cb9a95e6f1e9ed1` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **2** token transfers totaling **$1** (0 USDC, 0 USDC) |
+| **Blocks** | 26475977-26475980 |
 
 ### 💬 What Happened
-A wallet was caught interacting with FixedFloat 1. Our engine flagged it at score 85.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 85)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -2415,13 +1776,628 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 1 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
 | Current Balance | 0.000000 ETH |
-| Days Since Last Activity | 0 |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 85):
-- **no_kyc_offramp** (+85) — Deposit to FixedFloat 1 — no-KYC off-ramp
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $1 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #44: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xa361a1246b1d56a0f6cc39b8c0743592b08037f0` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$1,500** (1,500 USDT) |
+| **Blocks** | 26475978-26475978 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $1,500 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #45: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xc7bbec68d12a0d1830360f8ec58fa599ba1b0e9b` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **4** token transfers totaling **$188** (188 USDT, 0 WETH, 0 WETH, 0 WETH) |
+| **Blocks** | 26475943-26475975 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $188 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #46: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x90f52ed8e2afda5238c50ed48a39140248630f10` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$0** (0 USDT) |
+| **Blocks** | 26475966-26475966 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $0 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #47: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xf43cbdd3c290f55eb01bdfa78c21979accbd93ef` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$75** (75 USDT) |
+| **Blocks** | 26475965-26475965 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $75 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #48: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xdad2a161f7c8f3e8d4d649c2f07a4bfa239f1148` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$372** (372 USDC) |
+| **Blocks** | 26475963-26475963 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $372 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #49: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x755f7acfb5402fbcc8ac0750a4d2d15c1f7f5592` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$3,600** (3,600 USDC) |
+| **Blocks** | 26475961-26475961 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $3,600 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #50: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x02ba86fbcd53bbd37bd688cf658481cbbd42c451` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **2** token transfers totaling **$7** (3 USDC, 4 BUSD) |
+| **Blocks** | 26475952-26475960 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $7 total (USDC, BUSD) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #51: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x3416cf6c708da44db2624d63ea0aaef7113527c6` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$9** (9 USDC) |
+| **Blocks** | 26475958-26475958 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $9 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #52: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xc718dcc4e6bf28c818dbf7243a59311752adf8bc` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$9** (9 USDT) |
+| **Blocks** | 26475958-26475958 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $9 total (USDT) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #53: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x00000000000014aa86c5d3c41765bb24e11bd701` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **2** token transfers totaling **$51** (14 USDC, 36 USDC) |
+| **Blocks** | 26475954-26475954 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $51 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #54: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x1ac1a8feaaea1900c4166deeed0c11cc10669d36` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$16** (16 USDC) |
+| **Blocks** | 26475954-26475954 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $16 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #55: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0x04571c32a4e1c5f39bc3a238cb95b215058c432c` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **2** token transfers totaling **$832** (177 USDC, 655 USDC) |
+| **Blocks** | 26475926-26475954 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $832 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #56: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xa6e82811274511fa8f882418b0d6205a2a8abaa3` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$10** (10 USDT) |
+| **Blocks** | 26475953-26475953 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $10 total (USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #57: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xdb758df00dca843be0c8744629a2e78ad7bbf047` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **3** token transfers totaling **$190** (60 USDC, 70 USDC, 60 USDC) |
+| **Blocks** | 26475925-26475945 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 3 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $190 total (USDC) from 1 unique sender(s)
+
+**SAR Narrative** *(for compliance teams)*:
+Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
+
+</details>
+
+---
+
+## Finding #58: MEDIUM — Score 80
+
+| | |
+|---|---|
+| **Sender** | `0xe0554a476a092703abdb3ef35c80e0d76d32939f` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **4** token transfers totaling **$611** (0 WETH, 0 WETH, 511 USDC, 100 USDC) |
+| **Blocks** | 26475902-26475945 |
+
+### 💬 What Happened
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
+
+### 🔥 The Roast
+No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
+
+### 🎯 Verdict & Next Steps
+**MEDIUM (rule score 80)**
+
+Flag for manual review.
+
+<details>
+<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
+
+**Sender Wallet:**
+| Metric | Value |
+|--------|-------|
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
+
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $611 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2434,13 +2410,13 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 | | |
 |---|---|
-| **Sender** | `0x0038dfb2bbc353daa6ad22cb11ee1d78f41b59cd` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **6** token transfers totaling **$654** (9 USDC, 166 USDC, 0 WETH, 478 USDC, 0 WETH) |
-| **Blocks** | 26473759-26473911 |
+| **Sender** | `0x70fbd3b6f82bd3b244e18e5a4beff89c842e60ea` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$20** (20 USDC) |
+| **Blocks** | 26475945-26475945 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
@@ -2462,7 +2438,7 @@ Flag for manual review.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 4 stablecoin transfer(s) to Across SpokePool V2: $654 total (USDC, USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $20 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2475,13 +2451,13 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 | | |
 |---|---|
-| **Sender** | `0x97ccdbea4632140639ad5ea9b944aa034eb15fd4` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **9** token transfers totaling **$500** (26 USDC, 10 USDC, 101 USDC, 210 USDC, 21 USDC) |
-| **Blocks** | 26473746-26473907 |
+| **Sender** | `0xe29771d17e879beae9be4b7127f3d5c7bbd50a36` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$346** (346 USDC) |
+| **Blocks** | 26475943-26475943 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
@@ -2503,7 +2479,7 @@ Flag for manual review.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 9 stablecoin transfer(s) to Across SpokePool V2: $500 total (USDC, USDT) from 1 unique sender(s) — 1 round-number amount(s) (denomination layering)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $346 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2516,13 +2492,13 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 | | |
 |---|---|
-| **Sender** | `0x3d2d2538b2dde72ac9f2730afe1799040f08f4f0` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** token transfer totaling **$29** (29 USDC) |
-| **Blocks** | 26473894-26473894 |
+| **Sender** | `0x585d44727129b9c69791b10238ca605932938b4f` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$1,000** (1,000 USDC) |
+| **Blocks** | 26475943-26475943 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
@@ -2544,7 +2520,7 @@ Flag for manual review.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Across SpokePool V2: $29 total (USDC) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $1,000 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2557,13 +2533,13 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 | | |
 |---|---|
-| **Sender** | `0xfa1b28052bd8087b1cf64ee9429feb324e95b0ff` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **2** token transfers totaling **$105** (6 USDT, 99 USDC) |
-| **Blocks** | 26473817-26473880 |
+| **Sender** | `0x2507ef467319e195244220f0f236388ff7e5479b` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$1** (1 USDT) |
+| **Blocks** | 26475938-26475938 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
@@ -2585,7 +2561,7 @@ Flag for manual review.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to Across SpokePool V2: $105 total (USDC, USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $1 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2598,13 +2574,13 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 | | |
 |---|---|
-| **Sender** | `0x9a47f3289794e9bbc6a3c571f6d96ad4e7baed16` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **6** token transfers totaling **$991** (311 USDC, 91 USDC, 36 USDT, 56 USDC, 0 WETH) |
-| **Blocks** | 26473787-26473866 |
+| **Sender** | `0x941ddc62f8699f448e86c798e62520550616503d` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$244** (244 USDT) |
+| **Blocks** | 26475932-26475932 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
@@ -2626,7 +2602,7 @@ Flag for manual review.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 5 stablecoin transfer(s) to Across SpokePool V2: $991 total (USDC, USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $244 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2639,13 +2615,13 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 | | |
 |---|---|
-| **Sender** | `0x28a4d41776968c1201a807ec51ffb405362b8882` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** token transfer totaling **$141** (141 USDT) |
-| **Blocks** | 26473756-26473756 |
+| **Sender** | `0xd2ab97f952e380cae3c0840f44f06d17a803eb37` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **2** token transfers totaling **$1,000** (502 USDC, 498 USDC) |
+| **Blocks** | 26475925-26475930 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
@@ -2667,7 +2643,7 @@ Flag for manual review.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Across SpokePool V2: $141 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 2 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $1,000 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2680,13 +2656,13 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 | | |
 |---|---|
-| **Sender** | `0x69460570c93f9de5e2edbc3052bf10125f0ca22d` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** token transfer totaling **$17** (17 USDT) |
-| **Blocks** | 26473755-26473755 |
+| **Sender** | `0xabcd17a91ea31d643e79e81fe6ee84c49d1aa85e` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$33** (33 USDT) |
+| **Blocks** | 26475926-26475926 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 80.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
@@ -2708,7 +2684,7 @@ Flag for manual review.
 | Days Since Last Activity | ? |
 
 **Rules Triggered** (1 rules, composite score: 80):
-- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to Across SpokePool V2: $17 total (USDT) from 1 unique sender(s)
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $33 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2717,23 +2693,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #66: MEDIUM — Score 65
+## Finding #66: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0x8b9fc8301ca12968d4f7066ab68031acb41b1183` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **0.0014 ETH** ($2) |
-| **Blocks** | 26473905-26473905 |
+| **Sender** | `0xedb345962d31b511af8f6d3d93105dff74280cc6` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$21** (21 USDT) |
+| **Blocks** | 26475896-26475896 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 65)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -2743,13 +2719,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 190 days |
-| Total Transactions | 139 |
-| Current Balance | 0.000451 ETH |
-| Days Since Last Activity | 0 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $21 total (USDT) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2758,23 +2734,23 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ---
 
-## Finding #67: MEDIUM — Score 65
+## Finding #67: MEDIUM — Score 80
 
 | | |
 |---|---|
-| **Sender** | `0xc39a820d17d6e63e208d68abfc2945f16e1a0c09` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **0.0000 ETH** ($0) |
-| **Blocks** | 26473871-26473871 |
+| **Sender** | `0x31373595f40ea48a7aab6cbcb0d377c6066e2dca` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** token transfer totaling **$125** (125 USDC) |
+| **Blocks** | 26475881-26475881 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 80.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
 
 ### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 65)**
+**MEDIUM (rule score 80)**
 
 Flag for manual review.
 
@@ -2784,13 +2760,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 10 |
-| Current Balance | 0.000470 ETH |
-| Days Since Last Activity | 0 |
+| Wallet Age | ? days |
+| Total Transactions | ? |
+| Current Balance | 0.000000 ETH |
+| Days Since Last Activity | ? |
 
-**Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
+**Rules Triggered** (1 rules, composite score: 80):
+- **stablecoin_mixing** (+80) — 1 stablecoin transfer(s) to CoW Protocol GPv2Settlement (intent settlement): $125 total (USDC) from 1 unique sender(s)
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2803,13 +2779,13 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 | | |
 |---|---|
-| **Sender** | `0x06aada1e39c89b1289d47fb4ccc6a54126fa1a87` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **0.5199 ETH** ($895) |
-| **Blocks** | 26473871-26473871 |
+| **Sender** | `0x664eeb033d68e13d2ad6933a496a62ce9a3060be` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **2** txs totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26475903-26475928 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 65.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
@@ -2825,13 +2801,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 212 days |
-| Total Transactions | 31 |
-| Current Balance | 0.009659 ETH |
+| Wallet Age | 327 days |
+| Total Transactions | 11938 |
+| Current Balance | 0.153840 ETH |
 | Days Since Last Activity | 0 |
 
 **Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
+- **bridge_hop** (+65) — Deposit to CoW Protocol GPv2Settlement (intent settlement) — cross-chain bridge
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2844,13 +2820,13 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 | | |
 |---|---|
-| **Sender** | `0x81739ef9ce02bfda5e7ae11d5fb1950243b79596` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **0.0034 ETH** ($6) |
-| **Blocks** | 26473871-26473871 |
+| **Sender** | `0x95480d3f27658e73b2785d30beb0c847d78294c7` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **1** tx totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26475882-26475882 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 65.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
@@ -2866,13 +2842,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 237 days |
-| Total Transactions | 149 |
-| Current Balance | 0.069773 ETH |
+| Wallet Age | 744 days |
+| Total Transactions | 309092 |
+| Current Balance | 3.468251 ETH |
 | Days Since Last Activity | 0 |
 
 **Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
+- **bridge_hop** (+65) — Deposit to CoW Protocol GPv2Settlement (intent settlement) — cross-chain bridge
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -2885,13 +2861,13 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 | | |
 |---|---|
-| **Sender** | `0x38913f412df02a9b5bb06617402b41faf8286e21` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **0.2440 ETH** ($420) |
-| **Blocks** | 26473866-26473866 |
+| **Sender** | `0xf3a3ab25347de13b6955868a88c4b25da6007a1f` |
+| **Target** | CoW Protocol GPv2Settlement (intent settlement) (`0x9008d19f58aabd9ed0...`) |
+| **Activity** | **2** txs totaling **0.0000 ETH** ($0) |
+| **Blocks** | 26475839-26475843 |
 
 ### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
+A wallet was caught interacting with CoW Protocol GPv2Settlement (intent settlement). Our engine flagged it at score 65.
 
 ### 🔥 The Roast
 No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
@@ -2907,505 +2883,13 @@ Flag for manual review.
 **Sender Wallet:**
 | Metric | Value |
 |--------|-------|
-| Wallet Age | 119 days |
-| Total Transactions | 65 |
-| Current Balance | 0.000291 ETH |
+| Wallet Age | 19 days |
+| Total Transactions | 1444 |
+| Current Balance | 0.330189 ETH |
 | Days Since Last Activity | 0 |
 
 **Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #71: MEDIUM — Score 65
-
-| | |
-|---|---|
-| **Sender** | `0x11003877a7731062debee59f4b5c594bd8c8f18b` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **0.0530 ETH** ($91) |
-| **Blocks** | 26473852-26473852 |
-
-### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 65)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 1753 days |
-| Total Transactions | 111 |
-| Current Balance | 0.111487 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #72: MEDIUM — Score 65
-
-| | |
-|---|---|
-| **Sender** | `0x9d9b562ad9726d62b4fa6aa3909542aacb75597e` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **0.0000 ETH** ($0) |
-| **Blocks** | 26473841-26473841 |
-
-### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 65)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 5 days |
-| Total Transactions | 10 |
-| Current Balance | 0.003954 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #73: MEDIUM — Score 65
-
-| | |
-|---|---|
-| **Sender** | `0x0361897d757d13a4afad64a2e1bc561b96a8c7cf` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **4.0000 ETH** ($6,889) |
-| **Blocks** | 26473836-26473836 |
-
-### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 65)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 172 days |
-| Total Transactions | 19505 |
-| Current Balance | 0.359176 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #74: MEDIUM — Score 65
-
-| | |
-|---|---|
-| **Sender** | `0x2043232c9c01cae8affde6ed7cb43d5b7d767ff3` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **0.0000 ETH** ($0) |
-| **Blocks** | 26473830-26473830 |
-
-### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 65)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 1427 days |
-| Total Transactions | 54 |
-| Current Balance | 0.002197 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #75: MEDIUM — Score 65
-
-| | |
-|---|---|
-| **Sender** | `0x4041dafa2408123103cee63251ebe14041884a8a` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **0.0000 ETH** ($0) |
-| **Blocks** | 26473823-26473823 |
-
-### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 65)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 12 days |
-| Total Transactions | 81 |
-| Current Balance | 0.009786 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #76: MEDIUM — Score 65
-
-| | |
-|---|---|
-| **Sender** | `0xa638985221c7074a1418aa952664860152c161a3` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **0.0240 ETH** ($41) |
-| **Blocks** | 26473806-26473806 |
-
-### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 65)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 1523 days |
-| Total Transactions | 160 |
-| Current Balance | 0.009163 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #77: MEDIUM — Score 65
-
-| | |
-|---|---|
-| **Sender** | `0x020bbb92f73b51042572beb2cce4643c532320e9` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **0.0000 ETH** ($0) |
-| **Blocks** | 26473793-26473793 |
-
-### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 65)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 759 days |
-| Total Transactions | 311 |
-| Current Balance | 0.129496 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #78: MEDIUM — Score 65
-
-| | |
-|---|---|
-| **Sender** | `0x69895949e505f21cca0bf10e38f4969b22061c5d` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **0.0800 ETH** ($138) |
-| **Blocks** | 26473792-26473792 |
-
-### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 65)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 2630 days |
-| Total Transactions | 236 |
-| Current Balance | 0.017802 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #79: MEDIUM — Score 65
-
-| | |
-|---|---|
-| **Sender** | `0x35ba3008d809cd64612a75a8776b361423d5fa4c` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **3** txs totaling **0.1664 ETH** ($287) |
-| **Blocks** | 26473732-26473738 |
-
-### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 65)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 16 days |
-| Total Transactions | 17 |
-| Current Balance | 0.003223 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #80: MEDIUM — Score 65
-
-| | |
-|---|---|
-| **Sender** | `0x6456bf5baa0f8fc9a266e4931c4d755bcb795e38` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **2** txs totaling **0.0292 ETH** ($50) |
-| **Blocks** | 26473723-26473729 |
-
-### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 65)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 5 |
-| Current Balance | 0.011643 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #81: MEDIUM — Score 65
-
-| | |
-|---|---|
-| **Sender** | `0x873389c9c288dcf2d6e51547f6a8c9085bac0bd7` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **0.0095 ETH** ($16) |
-| **Blocks** | 26473728-26473728 |
-
-### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 65)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 671 days |
-| Total Transactions | 250 |
-| Current Balance | 0.000264 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
-
-**SAR Narrative** *(for compliance teams)*:
-Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
-
-</details>
-
----
-
-## Finding #82: MEDIUM — Score 65
-
-| | |
-|---|---|
-| **Sender** | `0xdccf97582977a4044914d290c895ed21bf4875e3` |
-| **Target** | Across SpokePool V2 (`0x5c7bcd6e7de5423a25...`) |
-| **Activity** | **1** tx totaling **0.0000 ETH** ($0) |
-| **Blocks** | 26473721-26473721 |
-
-### 💬 What Happened
-A wallet was caught interacting with Across SpokePool V2. Our engine flagged it at score 65.
-
-### 🔥 The Roast
-No automated commentary for this finding: per-finding analysis is capped per run and goes to the highest scores first.
-
-### 🎯 Verdict & Next Steps
-**MEDIUM (rule score 65)**
-
-Flag for manual review.
-
-<details>
-<summary>📊 Wallet Profile & Engine Details (click to expand)</summary>
-
-**Sender Wallet:**
-| Metric | Value |
-|--------|-------|
-| Wallet Age | 0 days |
-| Total Transactions | 3 |
-| Current Balance | 0.001682 ETH |
-| Days Since Last Activity | 0 |
-
-**Rules Triggered** (1 rules, composite score: 65):
-- **bridge_hop** (+65) — Deposit to Across SpokePool V2 — cross-chain bridge
+- **bridge_hop** (+65) — Deposit to CoW Protocol GPv2Settlement (intent settlement) — cross-chain bridge
 
 **SAR Narrative** *(for compliance teams)*:
 Automated commentary not generated for this finding (per-run analysis cap); the verdict is based on the rule score alone.
@@ -3416,15 +2900,15 @@ Automated commentary not generated for this finding (per-run analysis cap); the 
 
 ## Scan Summary
 
-**82 suspicious findings** detected across 82 unique wallets. Highest risk score: **195**.
+**70 suspicious findings** detected across 70 unique wallets. Highest risk score: **195**.
 
 | | |
 |---|---|
-| 🔴 CRITICAL | 40 |
-| 🟠 HIGH | 4 |
-| Wallets flagged | 82 |
-| Suspicious value | 9.9693 ETH ($17,170) + $146,097 in stablecoins |
-| Blocks scanned | 26473720 — 26473919 |
+| 🔴 CRITICAL | 11 |
+| 🟠 HIGH | 20 |
+| Wallets flagged | 70 |
+| Suspicious value | 0.0000 ETH ($0) + $5,579,242 in stablecoins |
+| Blocks scanned | 26475819 — 26476018 |
 
 ---
 *AML Roaster v2 — NEXUS Engine · 13 detection rules · automated scan*
