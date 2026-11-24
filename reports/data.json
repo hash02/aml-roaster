@@ -1,13 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-26T20:57:58.164290+00:00",
-      "eth_price": 2062.58171017114,
-      "block_range": "24744070 \u2014 24744269",
-      "total_findings": 0,
-      "findings": []
-    },
-    {
       "timestamp": "2026-03-26T21:35:07.969466+00:00",
       "eth_price": 2069.50921869915,
       "block_range": "24744204 \u2014 24744403",
@@ -113363,16 +113356,146 @@
       "block_range": "26483758 \u2014 26483957",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-11-24T22:03:51.398943+00:00",
+      "eth_price": 1678.62,
+      "block_range": "26487678 \u2014 26487877",
+      "total_findings": 5,
+      "findings": [
+        {
+          "sender": "0x213cfeb89529efc2eae2a502d4a8253fe4ae76ef",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 330,
+          "risk_level": "CRITICAL",
+          "tx_count": 4,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "mixer_contract_call",
+            "structuring",
+            "peel_chain_linear",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "mixer_contract_call": 70,
+            "structuring": 70,
+            "peel_chain_linear": 60,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A wallet was caught interacting with Tornado Cash Router. Our engine flagged it at score 330.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 330)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x36f454cd123b23481d60cc7fba22ea6cbd8d402b",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 300,
+          "risk_level": "CRITICAL",
+          "tx_count": 2,
+          "total_eth": 20.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "novel_wallet_dump",
+            "high_value",
+            "exit_rush",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "novel_wallet_dump": 100,
+            "high_value": 30,
+            "exit_rush": 40,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A wallet was caught interacting with Tornado Cash Router. Our engine flagged it at score 300.",
+          "roast": "Even our AI refused to look at this transaction.",
+          "risk_verdict": "CRITICAL (rule score 300)",
+          "recommended_action": "Flag for manual review."
+        },
+        {
+          "sender": "0x538b868663fc34bca279bfc03a55a48293e2991e",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 130,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0.1,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A brand-new wallet sent 0.1 ETH straight into Tornado Cash\u2019s router. Think of it like dropping a $168 envelope into a vending machine that then hands it out to a random stranger, hiding who paid. The wallet only just existed and hasn't moved any money before, so it's like a brand\u2011new anonymous shop.",
+          "roast": "So this newbie wallet just decided to play hide\u2011and\u2011seek with 0.1 ETH at the same time the blockchain\u2019s version of a cloak of invisibility. The mixer_touch rule (meaning the transaction goes straight to a known mixer) gave it a 100-point score \u2014 basically the system shouted, \u2018Hey, you just used a mixer!\u2019 Then the exchange_avoidance rule (score 30) flagged it for skipping the usual KYC\u2011friendly exchanges. All in all, the engine thinks this is a classic \u2018I\u2019m anonymous, so I\u2019ll hide in a mixer\u2019 scenario.",
+          "risk_verdict": "HIGH (rule score 130)",
+          "recommended_action": "Flag the sender address for internal investigation, request additional context on the origin of the 0.1 ETH, and monitor for subsequent activity."
+        },
+        {
+          "sender": "0x72804ead01b2458768a53476551ecea3c3da6ed4",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 130,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 1.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "The wallet sent 1 ETH to the Tornado Cash Router, which is like dropping a package into a box that scrambles the sender\u2019s identity. This single transaction was the only move in that block, so the activity is very isolated but still suspicious. The sender\u2019s wallet has been active for over six years, but it just used the mixer to hide where the money came from.",
+          "roast": "Look at that, 1 ETH to the Tornado Cash Router. That's like sending a pizza delivery to a secret drop\u2011off spot and hoping the pizza guy forgets where it came from. The engine gave it a 100 on the mixer_touch rule (meaning this address is a known mixer) and 30 on exchange_avoidance (meaning the funds bypassed a legit exchange). Composite score of 130? That's higher than my coffee order when I need to stay awake during a 4\u2011hour audit. If this was a bank, they'd call the cops and the cashier would ask if you\u2019re paying with a shell company. But hey, at least the money isn\u2019t going to a pizza place that takes money from a bank.",
+          "risk_verdict": "HIGH \u2014 The composite score of 130, driven by a 100-point mixer_touch and a 30-point exchange_avoidance, exceeds typical thresholds for suspicious activity.",
+          "recommended_action": "Flag the transaction for manual review and request source\u2011of\u2011funds documentation from the wallet holder. Consider cross\u2011checking with other known mixers and monitor for subsequent transfers that may indicate layering."
+        },
+        {
+          "sender": "0xef73c5975a91aebaec75002dca2b560ba5875a0c",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 130,
+          "risk_level": "HIGH",
+          "tx_count": 1,
+          "total_eth": 0.1,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "A person sent 0.1 ETH (about $168) to a special address that acts like a coin\u2011tossing machine. That address belongs to Tornado Cash, a service that mixes coins to hide their source. The transaction happened in a single block, meaning it was quick and clean.",
+          "roast": "Looks like someone's trying to play hide\u2011and\u2011seek with their money. Tossing 0.1 ETH into Tornado Cash is like dropping a pizza into a slot machine that forgets who ordered it. The engine gave a 130/200, which is like a red flag on a driver\u2019s license: you might be a good driver, but the police are watching. Mixer touch score 100? That\u2019s the equivalent of a detective saying \u2018Yep, that\u2019s a known shady alley.\u2019 Exchange avoidance score 30? That just means the sender is skipping the polite front desk at the bank. The wallet\u2019s only 20 days old, like a toddler who just learned to walk, and still has more coins than it can hold. It\u2019s basically a fresh, suspicious little kid with a shiny new toy.",
+          "risk_verdict": "HIGH \u2014 the combined score of 130 and the presence of a known mixer and exchange avoidance patterns warrants immediate review.",
+          "recommended_action": "Flag the transaction for manual investigation and request additional context from the sender, such as the origin of the funds and intended destination. Monitor the wallet for further activity, especially any movement back to a regulated exchange or any large outgoing transfers."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 5183,
-    "unique_senders": 3873,
+    "total_findings": 5188,
+    "unique_senders": 3877,
     "highest_score": 660,
-    "critical_count": 1182,
-    "high_count": 527,
-    "first_scan": "2026-03-26T20:57:58.164290+00:00",
-    "last_scan": "2026-11-24T08:56:32.749132+00:00"
+    "critical_count": 1184,
+    "high_count": 530,
+    "first_scan": "2026-03-26T21:35:07.969466+00:00",
+    "last_scan": "2026-11-24T22:03:51.398943+00:00"
   }
 }
