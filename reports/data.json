@@ -1,38 +1,6 @@
 {
   "scans": [
     {
-      "timestamp": "2026-03-27T04:44:29.642052+00:00",
-      "eth_price": 2051.66908008176,
-      "block_range": "24746373 \u2014 24746572",
-      "total_findings": 1,
-      "findings": [
-        {
-          "sender": "0x5ddf2d583e908455f0d0e78e475f954445b7b82e",
-          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
-          "receiver_label": "Tornado Cash (0.1 ETH Pool)",
-          "risk_score": 330,
-          "risk_level": "CRITICAL",
-          "tx_count": 1,
-          "total_eth": 0.1,
-          "total_token_usd": 0,
-          "rules_triggered": [
-            "mixer_touch",
-            "ofac_hit",
-            "exchange_avoidance"
-          ],
-          "rule_scores": {
-            "mixer_touch": 100,
-            "ofac_hit": 200,
-            "exchange_avoidance": 30
-          },
-          "what_happened": "Imagine walking into a shady storefront that's known for helping bad guys launder their dirty money, and you just handed them a bunch of cash. That's basically what happened here - someone sent a small amount of cryptocurrency to a service called Tornado Cash, which is like a money blender that helps hide where the money came from. It's a major red flag because Tornado Cash has been sanctioned by the U.S. government for helping launder billions of dollars, including money stolen by North Korean hackers.",
-          "roast": "Wow, great job sending your crypto to a sanctioned mixer, genius move. You scored 200 on the OFAC hit (meaning this address is literally on the U.S. Treasury's sanctions blacklist), which is like having a big fat 'I'm a money launderer' stamp on your forehead. And with a score of 100 for mixer_touch, it's clear you're trying to cover your tracks by using a service that's designed to obscure the origin of funds. And let's not forget the 30 points for exchange_avoidance, because who needs legitimate exchanges with KYC/AML controls when you can just use a shady mixer instead?",
-          "risk_verdict": "CRITICAL - The transaction poses a high risk of money laundering due to the involvement of a sanctioned mixer and circumvention of AML controls.",
-          "recommended_action": "Immediately freeze the sender's account and conduct a thorough investigation into the source of funds and the purpose of the transaction. File a Suspicious Activity Report (SAR) with FinCEN if the investigation confirms suspicious activity."
-        }
-      ]
-    },
-    {
       "timestamp": "2026-03-27T06:11:40.148751+00:00",
       "eth_price": 2061.72740340517,
       "block_range": "24746775 \u2014 24746974",
@@ -117322,16 +117290,96 @@
       "block_range": "26504802 \u2014 26505001",
       "total_findings": 0,
       "findings": []
+    },
+    {
+      "timestamp": "2026-11-27T20:50:44.419233+00:00",
+      "eth_price": 1665.95,
+      "block_range": "26508847 \u2014 26509046",
+      "total_findings": 3,
+      "findings": [
+        {
+          "sender": "0x0a5b2bf3ccfb44c1d22f07eed9553ecba752d4ad",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 200,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "The sender\u2019s wallet sent an invisible amount of ETH to the Tornado Cash Router, a service that scrambles who sent the money, like dropping a letter into a dropbox that hides the sender\u2019s address.",
+          "roast": "So the wallet decided to play hide-and-seek with the blockchain, sending a ghost ETH to Tornado Cash\u2014think of it as paying a friend with an empty envelope. The AML engine gave it a 200 score\u2014like a Michelin-starred chef rating a pizza with no cheese. The rule [mixer_touch] (meaning the wallet touched a known mixer) scored 100, and [mixer_contract_call] (meaning a contract call with no value, probably a trick or a vote) scored 70. Even though the transaction was worth $0, the engine thinks it\u2019s suspicious because it\u2019s using a mixer to dodge KYC, which is exactly what [exchange_avoidance] (meaning routing funds to a mixer instead of a regulated exchange) is about.",
+          "risk_verdict": "CRITICAL \u2014 transaction triggers high\u2011suspicion mixer usage pattern with composite score 200, warranting immediate review.",
+          "recommended_action": "Flag the wallet for manual review, investigate source and destination of funds, and monitor for related activity. Consider adding to watchlist and notifying relevant compliance officers."
+        },
+        {
+          "sender": "0x6170c33ca765fc279287d5002a8976fd2bcae7da",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 200,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "The wallet sent a tiny, empty packet of Ethereum to a known mixer service. It's like dropping an invisible envelope into a black hole that scrambles who sent it and who will get it. Nothing actually changed hands\u2014just a zero\u2011value call that likely triggers a withdrawal or a vote behind the scenes.",
+          "roast": "So this guy decided to send a packet of nothing to Tornado Cash. It's the blockchain equivalent of posting a postcard that says I sent you zero money and hoping someone still thinks it's a big deal. The engine slapped a 100 on [mixer_touch] because the address hit the mixer like a kid hitting the playground slide. Then a 70 on [mixer_contract_call] for that sneaky zero\u2011value contract call\u2014maybe a prank or a secret vote. And a 30 on [exchange_avoidance] because obviously you don't want your ETH to get caught by a legit exchange that knows your name. Total score 200\u2014looks like a classic I tried to be invisible but left a breadcrumb.",
+          "risk_verdict": "CRITICAL (rule score 200)",
+          "recommended_action": "Flag the sender wallet for enhanced due diligence, review any linked transactions, and consider submitting a SAR to the relevant regulatory authority."
+        },
+        {
+          "sender": "0xc49415493eb3ec64a0f13d8aa5056f1cfc4ce35c",
+          "receiver": "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b",
+          "receiver_label": "Tornado Cash Router",
+          "risk_score": 200,
+          "risk_level": "CRITICAL",
+          "tx_count": 1,
+          "total_eth": 0.0,
+          "total_token_usd": 0,
+          "rules_triggered": [
+            "mixer_touch",
+            "mixer_contract_call",
+            "exchange_avoidance"
+          ],
+          "rule_scores": {
+            "mixer_touch": 100,
+            "mixer_contract_call": 70,
+            "exchange_avoidance": 30
+          },
+          "what_happened": "The sender wallet sent a tiny, zero\u2011value transaction straight into the Tornado Cash router, a service that mixes crypto to hide origins, like dropping a parcel into a slot that hides who mailed it. No coins were actually moved\u2014just a call to the mixer that could be a trick or a normal withdrawal. The wallet is active, has been around for 3.6 years, and still holds about 0.57 ETH.",
+          "roast": "So, the sender decided to play the \u2018invisible coin\u2019 game, sending zero ETH into the Tornado Cash router (a mixer service that shuffles coins to hide where they came from). The AML engine gave this a 200 composite score, like a perfect exam in the art of staying anonymous. The [mixer_touch] rule scored 100, because the transaction was a direct deposit to the mixer, a red flag for obfuscation. The [mixer_contract_call] rule scored 70, because the wallet called the mixer contract, a typical sign of withdrawal or governance activity. And [exchange_avoidance] scored 30 because the funds never hit a legitimate exchange, so the engine thinks they\u2019re trying to avoid KYC.",
+          "risk_verdict": "CRITICAL \u2014 the transaction exhibits multiple high\u2011risk mixer and exchange avoidance indicators that warrant immediate investigation.",
+          "recommended_action": "Flag the wallet for manual review and add it to the watchlist; monitor subsequent activity for further suspicious patterns and downstream transfers."
+        }
+      ]
     }
   ],
   "stats": {
     "total_scans": 500,
-    "total_findings": 5374,
+    "total_findings": 5376,
     "unique_senders": 4003,
     "highest_score": 660,
-    "critical_count": 1234,
+    "critical_count": 1236,
     "high_count": 553,
-    "first_scan": "2026-03-27T04:44:29.642052+00:00",
-    "last_scan": "2026-11-27T07:19:00.080405+00:00"
+    "first_scan": "2026-03-27T06:11:40.148751+00:00",
+    "last_scan": "2026-11-27T20:50:44.419233+00:00"
   }
 }
