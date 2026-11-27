@@ -1,8 +1,8 @@
 # 🔥 AML Roaster Report
-**2026-11-26 21:05 UTC** · Ethereum Mainnet · ETH $1,703.22
-**Blocks:** 26501745 — 26501944 · **Watched Addresses:** 49 · **Detection Rules:** 13
+**2026-11-27 07:19 UTC** · Ethereum Mainnet · ETH $1,732.96
+**Blocks:** 26504802 — 26505001 · **Watched Addresses:** 49 · **Detection Rules:** 13
 **Engine:** NEXUS AML v2 (rule set from aml-detection-engine)
-**Coverage:** blocks 26501745 to 26501944 checked (about 40 min). 8 of 49 addresses. Each address is revisited about every 42 hours. Activity outside these windows is not checked. 8 addresses attempted, 8 addresses fully scanned, 0 fetch failures (0 Etherscan rate-limit, 0 other). AI commentary is limited to 25 highest-scoring findings.
+**Coverage:** blocks 26504802 to 26505001 checked (about 40 min). 8 of 49 addresses. Each address is revisited about every 42 hours. Activity outside these windows is not checked. 8 addresses attempted, 8 addresses fully scanned, 0 fetch failures (0 Etherscan rate-limit, 0 other). AI commentary is limited to 25 highest-scoring findings.
 
 ---
 
